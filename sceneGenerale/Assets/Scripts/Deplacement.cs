@@ -27,9 +27,9 @@ public class Deplacement : MonoBehaviour
                 Vector3 newTargetPos = hit.point;
                 agent.SetDestination(newTargetPos);
             }
-            animator.SetFloat("Horizontal", newTargetPos.x);
-            animator.SetFloat("Vertical", newTargetPos.z);
-            animator.SetFloat("Speed", newTargetPos.sqrMagnitude);
+            //animator.SetFloat("Horizontal", newTargetPos.x);
+            //animator.SetFloat("Vertical", newTargetPos.z);
+            //animator.SetFloat("Speed", newTargetPos.sqrMagnitude);
         }
         if (Input.touchCount > 0)
         {
