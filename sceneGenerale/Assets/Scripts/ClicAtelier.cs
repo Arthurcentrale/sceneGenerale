@@ -11,6 +11,7 @@ public class ClicAtelier : MonoBehaviour
     RectTransform rectTransform;
     public Button close;
     public Button close2;
+    new public Camera camera;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class ClicAtelier : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit Hit;
 
         if (Input.GetMouseButtonDown(0))
