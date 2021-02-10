@@ -26,10 +26,17 @@ public class Deplacement : MonoBehaviour
             {
                 Vector3 newTargetPos = hit.point;
                 agent.SetDestination(newTargetPos);
+
+                Vector3 TargetPosition = gameObject.transform.position;
+
+                Vector3 vecteurVitesse = newTargetPos-TargetPosition;
+                Debug.Log(vecteurVitesse.x);
+            
+            animator.SetFloat("Horizontal", vecteurVitesse.x);
+            animator.SetFloat("Vertical", vecteurVitesse.z);
+            animator.SetFloat("Speed", vecteurVitesse.sqrMagnitude);
+
             }
-            //animator.SetFloat("Horizontal", newTargetPos.x);
-            //animator.SetFloat("Vertical", newTargetPos.z);
-            //animator.SetFloat("Speed", newTargetPos.sqrMagnitude);
         }
         if (Input.touchCount > 0)
         {
@@ -39,6 +46,15 @@ public class Deplacement : MonoBehaviour
             {
                 Vector3 newTargetPos = hit2.point;
                 agent.SetDestination(newTargetPos);
+
+                Vector3 TargetPosition = gameObject.transform.position;
+
+                Vector3 vecteurVitesse = newTargetPos-TargetPosition;
+            
+            
+            animator.SetFloat("Horizontal", vecteurVitesse.x);
+            animator.SetFloat("Vertical", vecteurVitesse.z);
+            animator.SetFloat("Speed", vecteurVitesse.sqrMagnitude);
             }
         }
 

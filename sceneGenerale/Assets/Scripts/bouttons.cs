@@ -9,6 +9,7 @@ public class bouttons : MonoBehaviour
     public void Exit()
     {
         transform.parent.GetComponent<Canvas> ().enabled = false;
+        Debug.Log("fait");
     }
 
     public void InventaireOn()

@@ -58,7 +58,7 @@ public class drag2 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	*/
 	
 	if(i>j){
-	if((i>5)&&(j>5)&&(i<12)&&(j<12)){
+	if(((i>4)&&(j>4)&&(i<11)&&(j<11))||((i<5)&&(j<5)&&(i>0)&&(j>0))){
 	if(((transform.parent.GetChild(1).GetComponent<Text>().text!="")&&(collider.transform.parent.GetChild(1).GetComponent<Text>().text!=""))&&(transform.parent.GetChild(1).GetComponent<Text>().text!=collider.transform.parent.GetChild(1).GetComponent<Text>().text))
 	{
 	int k=Inventaire_script.Slot[i].Amount;
@@ -78,7 +78,7 @@ public class drag2 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	//this.transform.parent.position = positionOrigine;
 	}
 	}
-	if((j<6)&&(i>5)){
+	if((j<5)&&(i>4)){
 	//print("test1");
 	if((collider.transform.parent.GetChild(1).GetComponent<Text>().text!="")&&(transform.parent.GetChild(1).GetComponent<Text>().text!=collider.transform.parent.GetChild(1).GetComponent<Text>().text))
 	{
@@ -107,7 +107,7 @@ public class drag2 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	Debug.Log(transform.parent.GetChild(2).GetComponent<Text>().text);
 
 	if(collider.transform.parent.GetChild(1).GetComponent<Text>().text==""){
-	int n = int.Parse(transform.parent.parent.GetChild(11).GetComponent<Text>().text);
+	int n = int.Parse(transform.parent.parent.GetChild(12).GetComponent<Text>().text);
 	int nrSlot = collider.transform.parent.GetSiblingIndex();
 	print(nrSlot);
 	//print(n);
@@ -117,10 +117,10 @@ public class drag2 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 		}
 		print(n);
 
-            Inventaire_script.UpdateN(13, n.ToString());
+            Inventaire_script.UpdateN(12, n.ToString());
 
 
-                for (i = nrSlot; i < 12; i++)
+                for (i = nrSlot; i < 11; i++)
                 {
 
                     Inventaire_script.Slot[i].Amount = Inventaire_script.Slot[i + 1].Amount;
@@ -130,7 +130,7 @@ public class drag2 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
                 }
 		}
 
-	for (i = 0; i < 12; i++) { 
+	for (i = 1; i < 11; i++) { 
         Inventaire_script.UpdateTXT2(i,Inventaire_script.Slot[i].Amount.ToString());
         Inventaire_script.UpdateTXT1(i, transform.parent.parent.GetChild(i).GetChild(1).GetComponent<Text>().text);        
         }
