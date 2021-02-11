@@ -15,6 +15,7 @@ public class Inventaire : MonoBehaviour
     bool activation = false;
     public GameObject Player;
     GameObject P;
+    public Item Vide;
     public ItemAmount[] Slot;
 
 
@@ -23,15 +24,19 @@ public class Inventaire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         GetComponent<Canvas> ().enabled = false;
         P=transform.GetChild (0).gameObject;
-        Slot= new ItemAmount[P.transform.childCount];
+        //Slot= new ItemAmount[P.transform.childCount];
 
     }
 
     // Update is called once per frame
     void Update()
-    {if (Input.GetKeyDown(KeyCode.I)){
+    {
+        updateinventaire();
+
+        if (Input.GetKeyDown(KeyCode.I)){
 
         activation =!activation;
 
@@ -56,6 +61,21 @@ public class Inventaire : MonoBehaviour
         }
         
 
+    }
+
+    void updateinventaire()
+    {
+        Debug.Log("NDI");
+        int i = 0;
+        foreach (ItemAmount ItemAmount in Slot)
+        {
+            Debug.Log("NGUQIN");
+            if (ItemAmount.Item.ItemName != "Vide" && ItemAmount.Amount == 0)
+            {
+                Slot[i].Item = Vide;
+            }
+            i++;
+        }
     }
 
     public void UpdateTXT2 (int nsSlot, string txt)
