@@ -43,13 +43,13 @@ public class Crafting2 : MonoBehaviour
     int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
     {
         int Amount = 0;
-        foreach (ItemAmount ItemAmount in inventaire.Slot)
+        for(int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2;i++)
         {
-            if (ItemAmount.Item.ItemName == itemname)
+            if (inventaire.Slot[i].Item.ItemName == itemname)
             {
-                Amount += ItemAmount.Amount * ItemAmount.Item.Weight;
+                Amount += inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
             }
-            else if (ItemAmount.Item.ItemName == "Vide")
+            else if (inventaire.Slot[i].Item.ItemName == "Vide")
             {
 
             }
@@ -81,9 +81,9 @@ public class Crafting2 : MonoBehaviour
         int Count = 0;
         if (item.Weight == 5) //si l'item est un outil
         {
-            foreach (ItemAmount ItemAmount in inventaire.Slot)
+            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
             {
-                if (ItemAmount.Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
+                if (inventaire.Slot[i].Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
                 {
                     Count++;
                 }
@@ -92,12 +92,12 @@ public class Crafting2 : MonoBehaviour
         }
         else // si l'item n'est pas un outil
         {
-            foreach (ItemAmount ItemAmount in inventaire.Slot)
+            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
             {
-                if (ItemAmount.Item.ItemName == "Vide" || ItemAmount.Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
+                if (inventaire.Slot[i].Item.ItemName == "Vide" || inventaire.Slot[i].Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
                                                                                    // de 64 items
                 {
-                    Count += 5 - ItemAmount.Amount * ItemAmount.Item.Weight;
+                    Count += 5 - inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
                 }
             }
             return Count;
@@ -140,7 +140,7 @@ public class Crafting2 : MonoBehaviour
             {
                 if (inventaire.Slot[i].Item == item) // si on a le bon item dans l'inventaire
                 {
-                    if (x + inventaire.Slot[i].Amount * item.Weight > 64) // si on doit placer trop d'item par rapport a la place qu'il reste dans ce slot
+                    if (x + inventaire.Slot[i].Amount * item.Weight > 5) // si on doit placer trop d'item par rapport a la place qu'il reste dans ce slot
                     {
                         x -= 5 / item.Weight - inventaire.Slot[i].Amount;
                         inventaire.Slot[i].Amount = 5 / item.Weight; // on place ce que l'on peut et on continue de parcourir la liste pour placer le reste

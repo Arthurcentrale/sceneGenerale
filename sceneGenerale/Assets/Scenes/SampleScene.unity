@@ -4967,9 +4967,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015895096}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af594ae6b3862df4db15c631729f1f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fond: {fileID: 840435090}
+  FondaActiver: {fileID: 399908924}
+  inventaire: {fileID: 1205652627}
+  Player: {fileID: 1351583318}
+  recettecraft: {fileID: 11400000, guid: fa23cc773cbe30543a826a23df09a716, type: 2}
+  Inc: {fileID: 445694903}
+  Dec: {fileID: 207113354}
+  text: {fileID: 403071517}
+  bFond: {fileID: 1280854615}
+  Count: 0
+--- !u!114 &1015895102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015895096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21d7e0bd65b1a64f94d027d9b12b589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fond: {fileID: 840435090}
@@ -5380,9 +5402,9 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: 9ff94cd14765b4b419f5dcb6d717cbfe, type: 2}
     Amount: 0
   - Item: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
-    Amount: 5
-  - Item: {fileID: 11400000, guid: 9ff94cd14765b4b419f5dcb6d717cbfe, type: 2}
-    Amount: 0
+    Amount: 30
+  - Item: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
+    Amount: 20
   - Item: {fileID: 11400000, guid: 9ff94cd14765b4b419f5dcb6d717cbfe, type: 2}
     Amount: 0
   - Item: {fileID: 11400000, guid: 9ff94cd14765b4b419f5dcb6d717cbfe, type: 2}

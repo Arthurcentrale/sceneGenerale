@@ -65,11 +65,9 @@ public class Inventaire : MonoBehaviour
 
     void updateinventaire()
     {
-        Debug.Log("NDI");
         int i = 0;
         foreach (ItemAmount ItemAmount in Slot)
         {
-            Debug.Log("NGUQIN");
             if (ItemAmount.Item.ItemName != "Vide" && ItemAmount.Amount == 0)
             {
                 Slot[i].Item = Vide;
