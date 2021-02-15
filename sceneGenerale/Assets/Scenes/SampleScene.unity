@@ -620,7 +620,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -1464,7 +1464,7 @@ PrefabInstance:
     - target: {fileID: 3774863134727549333, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
       propertyPath: m_TargetDisplay
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3774863134727549334, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
@@ -6137,7 +6137,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -10216,7 +10216,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
 --- !u!1001 &1938343953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11264,7 +11264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7695737023842715433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11311,7 +11311,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7695737023842715432}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 72812186}
@@ -11324,7 +11324,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
 --- !u!224 &7695737023842715436
 RectTransform:
   m_ObjectHideFlags: 0
