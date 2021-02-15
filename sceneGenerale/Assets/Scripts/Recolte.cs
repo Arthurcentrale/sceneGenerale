@@ -184,7 +184,7 @@ public class Recolte : MonoBehaviour
 
     private void SpawnBuche(RaycastHit cible, Item item) //fonction qui fait détruit cible et fait spawn spawned
     {
-        Destroy(cible.transform.parent.gameObject); //detruit cible
+        Destroy(cible.transform.gameObject); //detruit cible
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
