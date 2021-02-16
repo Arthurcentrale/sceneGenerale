@@ -121,7 +121,7 @@ public class Recolte : MonoBehaviour
                         if (NbrPlace(fleursdrop) >0)
                         {
                             Destroy(hit.transform.gameObject);
-                            AjouterInventaire(fleursdrop,1); // à changer plus tard selon le fonctionnement de l'inventaire
+                            AjouterInventaire(fleursdrop,3); // à changer plus tard selon le fonctionnement de l'inventaire
                         }
                     }
                 }
