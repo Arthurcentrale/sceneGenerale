@@ -57,7 +57,7 @@ public class Recolte : MonoBehaviour
                             IsCraftArbre = true;
                         }
                     }
-                    if (hit.collider.CompareTag("Untagged"))
+                    if (hit.collider.CompareTag("Untagged")||(hit.collider.CompareTag("Arbre")==false && hit.collider.CompareTag("Roche1") ==false && hit.collider.CompareTag("Roche2")== false && hit.collider.CompareTag("Roche3") ==false && hit.collider.CompareTag("Fleurs") ==false))
                     {
                         IsCraftArbre = false;
                         IsCraftFleur = false;
