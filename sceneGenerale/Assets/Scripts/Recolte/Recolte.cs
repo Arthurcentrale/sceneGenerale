@@ -57,7 +57,7 @@ public class Recolte : MonoBehaviour
                             IsCraftArbre = true;
                         }
                     }
-                    if (hit.collider.CompareTag("Untagged"))
+                    if (hit.collider.CompareTag("Untagged")||(hit.collider.CompareTag("Arbre")==false && hit.collider.CompareTag("Roche1") ==false && hit.collider.CompareTag("Roche2")== false && hit.collider.CompareTag("Roche3") ==false && hit.collider.CompareTag("Fleurs") ==false))
                     {
                         IsCraftArbre = false;
                         IsCraftFleur = false;
@@ -121,7 +121,7 @@ public class Recolte : MonoBehaviour
                         if (NbrPlace(fleursdrop) >0)
                         {
                             Destroy(hit.transform.gameObject);
-                            AjouterInventaire(fleursdrop,1); // à changer plus tard selon le fonctionnement de l'inventaire
+                            AjouterInventaire(fleursdrop,3); // à changer plus tard selon le fonctionnement de l'inventaire
                         }
                     }
                 }
