@@ -62,7 +62,7 @@ public class select : MonoBehaviour
 
             if ((nrSlot < n)&&(nrSlot>4))
             {
-                for (i = nrSlot; i < 12; i++)
+                for (i = nrSlot; i < 11; i++)
                 {
 
                     Inventaire_script.Slot[i].Amount = Inventaire_script.Slot[i + 1].Amount;
@@ -122,7 +122,7 @@ public class select : MonoBehaviour
 
 
 
-        for (i = 1; i < 12; i++) { 
+        for (i = 1; i < 11; i++) { 
         Inventaire_script.UpdateTXT2(i,Inventaire_script.Slot[i].Amount.ToString());
         Inventaire_script.UpdateTXT1(i, transform.parent.parent.GetChild(i).GetChild(1).GetComponent<Text>().text);        
         }
