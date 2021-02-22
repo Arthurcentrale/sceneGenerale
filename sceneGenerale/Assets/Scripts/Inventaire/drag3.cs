@@ -128,7 +128,7 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             Inventaire_script.UpdateN(12, n.ToString());
             */
 
-                for (i = nrSlot; i < 11; i++)
+                for (i = nrSlot; i < 12; i++)
                 {
 
                     Inventaire_script.Slot[i] = Inventaire_script.Slot[i + 1];
@@ -138,7 +138,7 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
                 }
 		}
 
-	for (i = 1; i < 11; i++) { 
+	for (i = 1; i < 12; i++) { 
         Inventaire_script.UpdateTXT2(i,Inventaire_script.Slot[i].Amount.ToString());
         Inventaire_script.UpdateTXT1(i, transform.parent.parent.GetChild(i).GetChild(1).GetComponent<Text>().text);        
         }
