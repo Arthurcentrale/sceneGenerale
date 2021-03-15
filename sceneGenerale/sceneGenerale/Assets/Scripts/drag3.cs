@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Inventaire Inventaire_script;
+
     
     void Start ()
     {
         Inventaire_script = GameObject.Find("Inventory").GetComponent<Inventaire> ();
-
+	
     }
 
     //Transform parentToReturnTo = null;
@@ -50,6 +51,10 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
 	int i=collider.transform.parent.GetSiblingIndex();
 	int j=transform.parent.GetSiblingIndex();
+	Debug.Log("collision");
+	print("collision");
+	Debug.Log(i);
+	Debug.Log(j);
 
 	/*
 	print(i);print(j);
@@ -63,6 +68,8 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	if(((i>4)&&(j>4)&&(i<11)&&(j<11))||((i<5)&&(j<5)&&(i>0)&&(j>0))){ // cas 2 objets non favoris ou 2 favoris
 	if(((transform.parent.GetChild(1).GetComponent<Text>().text!="")&&(collider.transform.parent.GetChild(1).GetComponent<Text>().text!=""))&&(transform.parent.GetChild(1).GetComponent<Text>().text!=collider.transform.parent.GetChild(1).GetComponent<Text>().text))
 	{// empeche les interversions entre 2 objets identiques ou avec une case vide
+
+	/*
 	int k=Inventaire_script.Slot[i].Amount;
 	Item item=Inventaire_script.Slot[i].Item;
 	Sprite Intermediaire0= transform.GetComponent<Image>().sprite;
@@ -80,6 +87,9 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	collider.transform.GetComponent<Image>().sprite=Intermediaire0;
 	collider.transform.parent.GetChild(1).GetComponent<Text>().text=Intermediaire1;
 	collider.transform.parent.GetChild(2).GetComponent<Text>().text=Intermediaire2;
+
+	*/
+
 	//on effectue le changement
 	}
 	}
