@@ -3187,6 +3187,8 @@ GameObject:
   - component: {fileID: 520238108}
   - component: {fileID: 520238107}
   - component: {fileID: 520238110}
+  - component: {fileID: 520238112}
+  - component: {fileID: 520238111}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -3269,6 +3271,46 @@ MonoBehaviour:
   grainePrefab: {fileID: 8915870866124658235, guid: f4fa2e15bcd55bf4982b62eab1867302,
     type: 3}
   longTouchTime: 1
+--- !u!114 &520238111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520238106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83203724696e9b44a9a8856eb7baa45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &520238112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520238106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 520238106}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &533201697
 GameObject:
   m_ObjectHideFlags: 0
