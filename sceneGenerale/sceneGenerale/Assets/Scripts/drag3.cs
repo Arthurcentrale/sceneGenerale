@@ -42,16 +42,18 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         
 
         this.transform.parent.position = positionOrigine;
+
     	}
 	
-    void OnTriggerEnter2D (Collider2D collider) 
+
+    public void OnTriggerEnter2D (Collider2D collider) 
         {
 
 	//Debug.Log(collider.transform.parent.name);
-
+		Debug.Log("collision");
 	int i=collider.transform.parent.GetSiblingIndex();
 	int j=transform.parent.GetSiblingIndex();
-	Debug.Log("collision");
+
 	print("collision");
 	Debug.Log(i);
 	Debug.Log(j);
