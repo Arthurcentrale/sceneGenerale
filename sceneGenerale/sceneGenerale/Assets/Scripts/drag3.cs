@@ -12,12 +12,21 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     void Start ()
     {
         Inventaire_script = GameObject.Find("Inventory").GetComponent<Inventaire> ();
-	
+		/*
+		for (k=1;k<11;k++){ //desactivation collision
+			transform.parent.parent.GetChild(k).GetChild(0).GetComponent<BoxCollider2D> ().enabled = false;
+
+
+		}
+		*/
     }
 
     //Transform parentToReturnTo = null;
     Vector3 positionOrigine;
     int i;
+	int j;
+	int k;
+	int survol;
 
 
 
@@ -26,38 +35,56 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         //Debug.Log("OnBeginDrag");
         //parentToReturnTo = this.transform.parent.parent;
         positionOrigine = this.transform.parent.position;
-        //this.transform.parent.SetParent(this.transform.parent.parent.parent);
+		//survol=0;
+		/*
+		for (k=1;k<11;k++){ //desactivation collision
+			transform.parent.parent.GetChild(k).GetChild(0).GetComponent<BoxCollider2D> ().enabled = false;
+
+
+		}
+		*/
+        //GetComponent<BoxCollider2D> ().enabled = false;
+	
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("OnDrag");
         this.transform.parent.position = eventData.position;
+		//survol=1;
+		//GetComponent<BoxCollider2D> ().enabled = true;
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         //Debug.Log("OnEndDrag");
         //this.transform.parent.SetParent(parentToReturnTo);
-        
+        //GetComponent<BoxCollider2D> ().enabled = true; // on réactive la collision
+		/*for (k=1;k<11;k++){ //desactivation collision
+			transform.parent.parent.GetChild(k).GetChild(0).GetComponent<BoxCollider2D> ().enabled = true;
 
+
+		}
+		*/
+		//survol=0;
+		
+		
         this.transform.parent.position = positionOrigine;
-
-    	}
+    }
 	
-
+	
     public void OnTriggerEnter2D (Collider2D collider) 
         {
-
-	//Debug.Log(collider.transform.parent.name);
-		Debug.Log("collision");
-	int i=collider.transform.parent.GetSiblingIndex();
-	int j=transform.parent.GetSiblingIndex();
+		//Debug.Log(collider.transform.parent.name);
+	Debug.Log("collision");
+	i=collider.transform.parent.GetSiblingIndex();
+	j=transform.parent.GetSiblingIndex();
 
 	print("collision");
 	Debug.Log(i);
 	Debug.Log(j);
-
+	
 	/*
 	print(i);print(j);
 	print(transform.parent.GetChild(1).GetComponent<Text>().text);
