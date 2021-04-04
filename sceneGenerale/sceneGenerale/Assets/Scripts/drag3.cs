@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Inventaire Inventaire_script;
-
+	public Inventaire inventaire; 
     
     void Start ()
     {
         Inventaire_script = GameObject.Find("Inventory").GetComponent<Inventaire> ();
+		inventaire = inventaire.GetComponent<Inventaire>();
 		/*
 		for (k=1;k<11;k++){ //desactivation collision
 			transform.parent.parent.GetChild(k).GetChild(0).GetComponent<BoxCollider2D> ().enabled = false;
@@ -120,13 +121,19 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 	*/
 
 	//on effectue le changement
+	ItemAmount transition=Inventaire_script.Slot[i];
+	Inventaire_script.Slot[i]=Inventaire_script.Slot[j];
+	Inventaire_script.Slot[j]=transition;
+
 	}
 	}
 	if((j<5)&&(i>4)){// un non favoris vers un favoris
 	//print("test1");
+	/*
 	if((collider.transform.parent.GetChild(1).GetComponent<Text>().text!="")&&(transform.parent.GetChild(1).GetComponent<Text>().text!=collider.transform.parent.GetChild(1).GetComponent<Text>().text))
 	{
 	//print("test2");
+
 	int k=Inventaire_script.Slot[i].Amount;
     Item item=Inventaire_script.Slot[i].Item;
 	Sprite Intermediaire0= transform.GetComponent<Image>().sprite;
@@ -165,7 +172,7 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 		print(n);
         
             Inventaire_script.UpdateN(12, n.ToString());
-            */
+            
 
                 for (i = nrSlot; i < 11; i++)
                 {
@@ -181,13 +188,98 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         Inventaire_script.UpdateTXT2(i,Inventaire_script.Slot[i].Amount.ToString());
         Inventaire_script.UpdateTXT1(i, transform.parent.parent.GetChild(i).GetChild(1).GetComponent<Text>().text);        
         }
-	}
+	}*/
+
+
+
+
 	}
 
   	}
 	
 	}
-	
+
+	    void RetirerInventaire2(Item item, int Amount) //On veut retirer Amount items
+    {
+        if (CountItem(item.ItemName) < Amount) // on vérifie qu'il y a bien plus que Amount items dans l'inventaire
+        {
+            Debug.Log("Pas assez pour enlever");
+        }
+        else
+        {
+            int x = Amount; // x représente le total d'items enlevés dans l'inventaire
+            int i = GameObject.Find("Inventory").transform.GetChild(0).childCount-2;
+            int j =i;
+            int k;
+            while (x != 0) // tant qu'on a pas tout enlevé, on parcourt l'inventaire
+            {
+                if (inventaire.Slot[i].Item == item) // si c'est le bon item
+                {
+                    if (inventaire.Slot[i].Amount < x) // Si il y a pas assez d'item dans ce slot pour tout enlever,
+                    {
+                        x -= inventaire.Slot[i].Amount; // et il ne reste plus que x-amount a enlever
+                        inventaire.Slot[i].Amount = 0;
+                        // on enleve tout ce qu'il y a dans ce slot
+                        for (k=i;k<j;k++)
+                        {
+                            inventaire.Slot[k]=inventaire.Slot[k+1];
+                           
+                        }
+                        i--;
+                        
+                    }
+                    else // si il y a assez de place
+                    {
+                        inventaire.Slot[i].Amount -= x; // on enleve tout
+                        x = 0;
+                        GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
+                    }
+                }
+                i--;
+            }
+        }
+    }
+
+	    void AjouterFavoris(Item item, int Amount) //On ajoute Amount items dans l'inventaire
+    {
+            int i = 1; // pour parcourir l'inventaire
+            int x = Amount; // le total d'objet à placer
+            while ((x != 0)||(i<5)) // tant que l'on a pas tout placé
+            {
+                if (inventaire.Slot[i].Item == item) // si on a le bon item dans l'inventaire
+                {
+                    if (x + inventaire.Slot[i].Amount * item.Weight > 5) // si on doit placer trop d'item par rapport a la place qu'il reste dans ce slot
+                    {
+                        x -= 5 / item.Weight - inventaire.Slot[i].Amount;
+                        inventaire.Slot[i].Amount = 5 / item.Weight; // on place ce que l'on peut et on continue de parcourir la liste pour placer le reste
+                        GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
+                    }
+                    else // si on a assez de place , on place tout
+                    {
+                        inventaire.Slot[i].Amount += x;
+                        GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
+                        x = 0;
+
+                    }
+                }
+                if (inventaire.Slot[i].Item.ItemName == "Vide") // Si l'emplacement est vide, on met les items la
+                {
+                    inventaire.Slot[i].Item = item;
+                    inventaire.Slot[i].Amount += x;
+                    x = 0;
+                    // Mise a jour des sprites et textes
+                    /*
+                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite=item.Icon;
+                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text=item.ItemName;
+                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
+                    */
+                }
+                i++;
+
+            }
+        }
+    }
+
 
     
 }

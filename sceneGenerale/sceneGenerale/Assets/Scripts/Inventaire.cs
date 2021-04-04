@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -74,8 +74,12 @@ public class Inventaire : MonoBehaviour
             }
             i++;
 
-            
-
+            }
+        
+        for (i=1;i<11;i++){
+            this.transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite=Slot[i].Item.Icon;
+            this.transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text=Slot[i].Item.ItemName;
+            this.transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=Slot[i].Amount.ToString();
         }
     }
 

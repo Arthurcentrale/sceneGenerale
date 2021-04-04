@@ -484,10 +484,11 @@ public class Recolte : MonoBehaviour
                     inventaire.Slot[i].Amount += x;
                     x = 0;
                     // Mise a jour des sprites et textes
+                    /*
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite = item.Icon;
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text = item.ItemName;
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
-
+                    */
                 }
                 i++;
 

@@ -160,10 +160,11 @@ public class Crafting2 : MonoBehaviour
                     inventaire.Slot[i].Amount += x;
                     x = 0;
                     // Mise a jour des sprites et textes
+                    /*
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite=item.Icon;
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text=item.ItemName;
                     GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
-
+                    */
                 }
                 i++;
 
@@ -195,10 +196,11 @@ public class Crafting2 : MonoBehaviour
                         for (k=i;k<j;k++)
                         {
                             inventaire.Slot[k]=inventaire.Slot[k+1];
+                            /*
                             GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite=GameObject.Find("Inventory").transform.GetChild(0).GetChild(i+1).GetChild(0).GetComponent<Image>().sprite;
                             GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text=GameObject.Find("Inventory").transform.GetChild(0).GetChild(i+1).GetChild(1).GetComponent<Text>().text;
                             GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=GameObject.Find("Inventory").transform.GetChild(0).GetChild(i+1).GetChild(2).GetComponent<Text>().text;                    
-
+                            */
                         }
                         i--;
                         
