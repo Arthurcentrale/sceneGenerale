@@ -12,7 +12,7 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     void Start ()
     {
         Inventaire_script = GameObject.Find("Inventory").GetComponent<Inventaire> ();
-		inventaire = inventaire.GetComponent<Inventaire>();
+		//inventaire = inventaire.GetComponent<Inventaire>();
 		/*
 		for (k=1;k<11;k++){ //desactivation collision
 			transform.parent.parent.GetChild(k).GetChild(0).GetComponent<BoxCollider2D> ().enabled = false;
@@ -198,7 +198,7 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
   	}
 	
 	}
-
+/*
 	    void RetirerInventaire2(Item item, int Amount) //On veut retirer Amount items
     {
         if (CountItem(item.ItemName) < Amount) // on vérifie qu'il y a bien plus que Amount items dans l'inventaire
@@ -267,18 +267,14 @@ public class drag3 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
                     inventaire.Slot[i].Item = item;
                     inventaire.Slot[i].Amount += x;
                     x = 0;
-                    // Mise a jour des sprites et textes
-                    /*
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite=item.Icon;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text=item.ItemName;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text=inventaire.Slot[i].Amount.ToString();
-                    */
+
+                  
                 }
                 i++;
 
             }
         }
-    }
+    }*/
 
 
     
