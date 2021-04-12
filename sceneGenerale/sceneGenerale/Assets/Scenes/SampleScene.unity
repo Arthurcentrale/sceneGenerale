@@ -1114,37 +1114,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208333694}
   m_CullTransparentMesh: 0
---- !u!1 &209544702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 655841494}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 209544703}
-  m_Layer: 0
-  m_Name: chene_OK (Missing Prefab)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &209544703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 655841494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209544702}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2110917784}
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223194555
 GameObject:
   m_ObjectHideFlags: 0
@@ -6302,6 +6271,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1252538520656295855, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252538520656295855, guid: 04e3b2b505cc9864691381829b0dd1eb,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 9.14879e-10
       objectReference: {fileID: 0}
@@ -6314,6 +6288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.00000004840289
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252538520656295855, guid: 04e3b2b505cc9864691381829b0dd1eb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.72300005
       objectReference: {fileID: 0}
     - target: {fileID: 1723852939418642752, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
@@ -6363,17 +6342,17 @@ PrefabInstance:
     - target: {fileID: 3701593164960980374, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.803276
+      value: 69.58
       objectReference: {fileID: 0}
     - target: {fileID: 3701593164960980374, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 3701593164960980374, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.512222
+      value: 16.05
       objectReference: {fileID: 0}
     - target: {fileID: 3701593164960980374, guid: 04e3b2b505cc9864691381829b0dd1eb,
         type: 3}
@@ -9003,7 +8982,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351583318}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 291d8510b4d0bf54d9a64bcbdb655828, type: 3}
   m_Name: 
@@ -12458,28 +12437,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069803341}
   m_CullTransparentMesh: 0
---- !u!1 &2110917782
+--- !u!1 &2110917782 stripped
 GameObject:
-  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: -1314054599238129067, guid: ad92a22ce95b70e4b8e2e34aabe94210,
     type: 3}
   m_PrefabInstance: {fileID: 655841494}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2110917784}
-  - component: {fileID: 2110917788}
-  - component: {fileID: 2110917785}
-  - component: {fileID: 2110917783}
-  - component: {fileID: 2110917786}
-  - component: {fileID: 2110917787}
-  m_Layer: 0
-  m_Name: Missing Prefab (Dummy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!95 &2110917783
 Animator:
   serializedVersion: 3
@@ -12499,20 +12462,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!4 &2110917784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 655841494}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110917782}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 209544703}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2110917785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13142,7 +13091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7695737023842715433
 MonoBehaviour:
   m_ObjectHideFlags: 0

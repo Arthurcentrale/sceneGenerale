@@ -7,57 +7,64 @@ using UnityEngine.AI;
 public class Deplacement : MonoBehaviour
 {
     public Animator animator;
+    int R; //Rayon qui délimite la zone où on peut clicker pour se déplacer ou non
+    private float speed = 10.0f; //vitesse arbitraire du personnage
+    private Vector2 Debut, Fin; //Pour calculer la direction du déplacement
+    private bool Touch, outside; //Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
 
-    private NavMeshAgent agent;
-   
+
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        R = Screen.height / 4;
+        Touch = false;
 
-        agent = GetComponent<NavMeshAgent> ();
-        
     }
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray,out hit))
+            if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > R * R)
             {
-                Vector3 newTargetPos = hit.point;
-                agent.SetDestination(newTargetPos);
-
-                Vector3 TargetPosition = gameObject.transform.position;
-
-                Vector3 vecteurVitesse = newTargetPos-TargetPosition;
-                Debug.Log(vecteurVitesse.x);
-            
-            animator.SetFloat("Horizontal", vecteurVitesse.x);
-            animator.SetFloat("Vertical", vecteurVitesse.z);
-            animator.SetFloat("Speed", vecteurVitesse.sqrMagnitude);
-
+                outside = true;
+                Debut = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            }
+            else
+            {
+                outside = false;
             }
         }
-        if (Input.touchCount > 0)
+        if (Input.GetMouseButton(0) && outside)
         {
-            RaycastHit hit2;
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if (Physics.Raycast(ray, out hit2))
-            {
-                Vector3 newTargetPos = hit2.point;
-                agent.SetDestination(newTargetPos);
+            Touch = true;
+            Fin = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 
-                Vector3 TargetPosition = gameObject.transform.position;
-
-                Vector3 vecteurVitesse = newTargetPos-TargetPosition;
-            
-            
-            animator.SetFloat("Horizontal", vecteurVitesse.x);
-            animator.SetFloat("Vertical", vecteurVitesse.z);
-            animator.SetFloat("Speed", vecteurVitesse.sqrMagnitude);
-            }
+        }
+        else
+        {
+            Touch = false;
         }
 
+        if (Touch && outside)
+        {
+            Vector3 a = Fin - Debut;
+            Debug.Log("a =" + a);
+            Vector3 b = new Vector3(a.x,0,a.y);
+            Debug.Log("b =" + b);
+            Vector3 direction = Vector3.ClampMagnitude(b, 1.0f);
+            //Debug.Log(direction);
+            Move(direction);
 
+        }
+        /*animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.z);
+        animator.SetFloat("Speed", direction.sqrMagnitude);*/
     }
+
+
+    private void Move(Vector3 direction)
+    {
+        transform.Translate(direction * speed * Time.deltaTime);
+    } //Move dans la direction du vecteur direction
 }
