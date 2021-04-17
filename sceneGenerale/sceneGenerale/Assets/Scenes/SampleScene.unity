@@ -1210,7 +1210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &226490522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8592,6 +8592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agriculture
       objectReference: {fileID: 0}
+    - target: {fileID: 8611679016637814650, guid: 96005b984e04d4441849ce8d4819ec79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96005b984e04d4441849ce8d4819ec79, type: 3}
 --- !u!114 &1292856469 stripped
@@ -8969,6 +8974,12 @@ MonoBehaviour:
   pierre: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
   fleursdrop: {fileID: 11400000, guid: 0ea40ef926adb7f47b9fd6f454e8b4e3, type: 2}
   camera: {fileID: 72812186}
+--- !u!95 &1351583322 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8305243963582288559, guid: 04e3b2b505cc9864691381829b0dd1eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 938364651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1351583323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3701593164960980374, guid: 04e3b2b505cc9864691381829b0dd1eb,
@@ -8987,7 +8998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291d8510b4d0bf54d9a64bcbdb655828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1351583322}
 --- !u!195 &1351583325
 NavMeshAgent:
   m_ObjectHideFlags: 0

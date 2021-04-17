@@ -9,7 +9,8 @@ public class Deplacement : MonoBehaviour
     public Animator animator;
     int R; //Rayon qui délimite la zone où on peut clicker pour se déplacer ou non
     private float speed = 10.0f; //vitesse arbitraire du personnage
-    private Vector2 Debut, Fin; //Pour calculer la direction du déplacement
+    private Vector3 Debut, Fin;
+    private Vector3 direction;//Pour calculer la direction du déplacement
     private bool Touch, outside; //Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
 
 
@@ -49,22 +50,24 @@ public class Deplacement : MonoBehaviour
         if (Touch && outside)
         {
             Vector3 a = Fin - Debut;
-            Debug.Log("a =" + a);
             Vector3 b = new Vector3(a.x,0,a.y);
-            Debug.Log("b =" + b);
-            Vector3 direction = Vector3.ClampMagnitude(b, 1.0f);
-            //Debug.Log(direction);
+            direction = Vector3.ClampMagnitude(b, 1.0f);
             Move(direction);
 
         }
-        /*animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.z);
-        animator.SetFloat("Speed", direction.sqrMagnitude);*/
+        animator.SetFloat("Horizontal", direction.x);
+        //animator.SetFloat("Vertical", direction.z);
+        animator.SetFloat("Speed", direction.sqrMagnitude);
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            direction = new Vector3(0, 0, 0);
+        }
     }
 
 
     private void Move(Vector3 direction)
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime,Space.World);
     } //Move dans la direction du vecteur direction
 }
