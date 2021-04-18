@@ -157,7 +157,7 @@ public class Agriculture : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             newTargetPos = hit.point;
-            Debug.Log("Hit " + hit.collider.gameObject.name);
+            //Debug.Log("Hit " + hit.collider.gameObject.name);
         }
         return newTargetPos;
     }
