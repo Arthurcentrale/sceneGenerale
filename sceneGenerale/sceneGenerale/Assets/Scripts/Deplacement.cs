@@ -56,7 +56,7 @@ public class Deplacement : MonoBehaviour
 
         }
         animator.SetFloat("Horizontal", direction.x);
-        //animator.SetFloat("Vertical", direction.z);
+        animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
 
         if (Input.GetMouseButtonUp(0))

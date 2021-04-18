@@ -134,7 +134,7 @@ public class Crafting2 : MonoBehaviour
         }
         else
         {
-            int i = 5; // pour parcourir l'inventaire
+            int i = 0; // pour parcourir l'inventaire
             int x = Amount; // le total d'objet à placer
             while (x != 0) // tant que l'on a pas tout placé
             {
@@ -180,7 +180,7 @@ public class Crafting2 : MonoBehaviour
         }
         else
         {
-            int x = Amount; // x représente le total d'items enlevés dans l'inventaire
+            int x = Amount; // x représente le total d'items a enlevés dans l'inventaire
             int i = GameObject.Find("Inventory").transform.GetChild(0).childCount-2;
             int j =i;
             int k;

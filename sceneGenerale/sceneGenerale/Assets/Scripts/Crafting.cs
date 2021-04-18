@@ -174,7 +174,7 @@ public class Crafting : MonoBehaviour
         else
         {
             int x = Amount; // x représente le total d'items enlevés dans l'inventaire
-            int i = 29;
+            int i = GameObject.Find("Inventory").transform.GetChild(0).childCount - 2;
             while (x != 0) // tant qu'on a pas tout enlevé, on parcourt l'inventaire
             {
                 if (inventaire.Slot[i].Item == item) // si c'est le bon item

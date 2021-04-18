@@ -1580,6 +1580,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3774863133352811493, guid: 9ae11ac0021d84c4babece0adce6be25,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3774863133468503752, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1718,7 +1723,7 @@ PrefabInstance:
     - target: {fileID: 3774863134727549334, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3774863134727549334, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
@@ -7197,7 +7202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015895096}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af594ae6b3862df4db15c631729f1f14, type: 3}
   m_Name: 
@@ -7219,7 +7224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015895096}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b21d7e0bd65b1a64f94d027d9b12b589, type: 3}
   m_Name: 
@@ -8013,6 +8018,28 @@ MonoBehaviour:
   text: {fileID: 927923961}
   bFond: {fileID: 731932930}
   Count: 0
+--- !u!114 &1203781231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203781225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21d7e0bd65b1a64f94d027d9b12b589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fond: {fileID: 840435090}
+  FondaActiver: {fileID: 1830278751}
+  inventaire: {fileID: 1205652627}
+  Player: {fileID: 1351583318}
+  recettecraft: {fileID: 11400000, guid: c1e03b763c8364944a0407dce19c6230, type: 2}
+  Inc: {fileID: 1723719813}
+  Dec: {fileID: 1195597817}
+  text: {fileID: 927923961}
+  bFond: {fileID: 731932930}
+  Count: 0
 --- !u!114 &1205652627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8595,7 +8622,7 @@ PrefabInstance:
     - target: {fileID: 8611679016637814650, guid: 96005b984e04d4441849ce8d4819ec79,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96005b984e04d4441849ce8d4819ec79, type: 3}
@@ -13102,7 +13129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7695737023842715433
 MonoBehaviour:
   m_ObjectHideFlags: 0
