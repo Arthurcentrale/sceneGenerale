@@ -12,6 +12,7 @@ public class Deplacement : MonoBehaviour
     private Vector3 Debut, Fin;
     private Vector3 direction;//Pour calculer la direction du déplacement
     private bool Touch, outside; //Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
+    float c;
 
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class Deplacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > R * R)
@@ -55,8 +57,11 @@ public class Deplacement : MonoBehaviour
             Move(direction);
 
         }
-        animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.y);
+        if (direction.x < 0) {c = -1; }
+        else {c = 1; }
+
+        animator.SetFloat("Horizontal",c);
+        //animator.SetFloat("Vertical", direction.z);
         animator.SetFloat("Speed", direction.sqrMagnitude);
 
         if (Input.GetMouseButtonUp(0))
