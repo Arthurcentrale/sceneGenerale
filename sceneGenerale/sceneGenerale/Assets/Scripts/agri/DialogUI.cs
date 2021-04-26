@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class DialogUI : MonoBehaviour
 {
+    /*
     GraphicRaycaster rc;
     Touch touch;
     PointerEventData pEventData;
@@ -92,4 +93,5 @@ public class DialogUI : MonoBehaviour
         Agriculture.planterGraine = true;
         CloseFarmPanel(3);
     }
+    */
 }

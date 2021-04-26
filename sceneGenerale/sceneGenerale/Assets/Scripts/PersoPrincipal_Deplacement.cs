@@ -23,10 +23,8 @@ public class PersoPrincipal_Deplacement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((Agriculture.playerAbleToMove) && (!DialogUI.panelTouched))
-        {
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-        }
-        DialogUI.panelTouched = false;
+        //if ((Agriculture.playerAbleToMove) && (!DialogUI.panelTouched))
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        //DialogUI.panelTouched = false;
     }
 }
