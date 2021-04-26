@@ -267,7 +267,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(item, NbrPlace(item));
                     for (int i = 0; i < 2 - NbrPlace(item); i++)
                     {
-                        Instantiate(item, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }

@@ -10,8 +10,6 @@ using UnityEngine.UI;
 public class Inventaire : MonoBehaviour
 {
 
-
-
     bool activation = false;
     public GameObject Player;
     GameObject P;

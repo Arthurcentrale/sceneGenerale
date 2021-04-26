@@ -5,6 +5,7 @@ using System.Linq;
 
 public class SelectionBox : MonoBehaviour
 {
+    /*
     public Canvas canvas;
 
     public Image selectionBox;
@@ -109,5 +110,5 @@ public class SelectionBox : MonoBehaviour
         //Debug.Log("taille : " + taille.ToString());
         return (x / taille);
     }
+    */
 }
- 

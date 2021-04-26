@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Agriculture : MonoBehaviour
 {
     public static Camera MainCamera;
-
+    /*
     public GameObject dirtPrefab;
     public GameObject grainePrefab;
 
@@ -29,12 +29,13 @@ public class Agriculture : MonoBehaviour
     float touchBeganTime;
     float timeTouchLasted;
     bool touchFinished;
-
+    */
 
     void Start()
     {
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
 
+        /*
         positionsChamps = new List<Vector3>();
         posChamp = Vector3.zero;
         posGraine = Vector3.zero;
@@ -48,9 +49,10 @@ public class Agriculture : MonoBehaviour
         planterGraine = false;
 
         touchBeganTime = Time.time;
-
+        */
     }
 
+    /*
     void Update()
     {
         if (planterGraine)
@@ -142,6 +144,7 @@ public class Agriculture : MonoBehaviour
         }
     }
 
+    */
 
     public static Vector3 TouchToPos(Touch touch) //Retourne la position sur le plan en 3D à partir du toucher de l'écran
     {
@@ -157,11 +160,13 @@ public class Agriculture : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             newTargetPos = hit.point;
-            Debug.Log("Hit " + hit.collider.gameObject.name);
+            //Debug.Log("Hit " + hit.collider.gameObject.name);
         }
         return newTargetPos;
     }
 
+    /*
+    
     void CreeChamp(Vector3 Coin1,Vector3 Coin2, List<Vector3> liste) //creer un champ entre les 2 coordonnées en ajoutant les postitions à la liste
     {
         float x1 = Coin1.x;
@@ -198,12 +203,7 @@ public class Agriculture : MonoBehaviour
         {
             for (j = y1; j <= y2; j += 1f)
             {
-                /*
-                Debug.Log("i = "+i.ToString()+"  j = "+ j.ToString());
-                Vector3Int coordinate = new Vector3Int(i, j, 0);
-
-                myTilemap.SetTile(coordinate, dirtTile);
-                */
+                
                 Debug.Log("Bloc posé");
                 Vector3 pos = new Vector3(i, 0.01f, j);
                 Instantiate(dirtPrefab, pos, Quaternion.identity);
@@ -236,4 +236,6 @@ public class Agriculture : MonoBehaviour
         }
         return posChamp;
     }
+
+*/
 }
