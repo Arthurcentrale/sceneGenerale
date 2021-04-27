@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381365148148334876}
-  m_LocalRotation: {x: 0.14352731, y: -0, z: -0, w: -0.9896464}
-  m_LocalPosition: {x: 26.75, y: 1.6, z: 14.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.31316397, y: -0, z: -0, w: -0.9496991}
+  m_LocalPosition: {x: 26.75, y: 4.3, z: 14.08}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
   m_Children:
   - {fileID: 6621818110334208793}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 343.496, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 323.5, y: 0, z: 0}
 --- !u!33 &5381365148148334873
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -140,22 +140,32 @@ PrefabInstance:
     - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.062796235
+      value: -0.052795887
       objectReference: {fileID: 0}
     - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.49260032
+      value: 0.49260056
       objectReference: {fileID: 0}
     - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
         type: 3}
       propertyPath: m_Bounds.m_Center.z
-      value: -0.00000014167193
+      value: -0.00000013857843
+      objectReference: {fileID: 0}
+    - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
+        type: 3}
+      propertyPath: m_Bounds.m_Extent.x
+      value: 1.8209156
+      objectReference: {fileID: 0}
+    - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
+        type: 3}
+      propertyPath: m_Bounds.m_Extent.y
+      value: 1.6224008
       objectReference: {fileID: 0}
     - target: {fileID: -371917024835943984, guid: ad92a22ce95b70e4b8e2e34aabe94210,
         type: 3}
       propertyPath: m_Bounds.m_Extent.z
-      value: 0.00000022227431
+      value: 0.0000002275319
       objectReference: {fileID: 0}
     - target: {fileID: 89328998645130876, guid: ad92a22ce95b70e4b8e2e34aabe94210,
         type: 3}
