@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
 
     void SetCamera()
     {
-        transform.LookAt(target.position);
+        //transform.LookAt(target.position);
         cameraOffset = transform.position - target.position;
     }
 

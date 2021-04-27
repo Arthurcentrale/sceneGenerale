@@ -27,7 +27,7 @@ public class Recolte : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, -Input.mousePosition.y + 530))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
+            if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
                                                                                                                                                            //( pour éviter que le personnage ne selectionne un objet derriere le menu)
             {
             }
@@ -38,7 +38,7 @@ public class Recolte : MonoBehaviour
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                 {
-                    mP = new Vector2(Input.mousePosition.x, -Input.mousePosition.y + 530); // on prend les coordonnées du clic pour créer le menu où on clic
+                    mP = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
                     rect = GUIUtility.ScreenToGUIRect(new Rect(mP.x, mP.y, 150, 250)); // on crée le rectangle du menus pour vérifier avec le contains
 
                     if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
@@ -135,11 +135,16 @@ public class Recolte : MonoBehaviour
 
     private void OnGUI() //affichage des menus
     {
+        GUIStyle style = new GUIStyle(GUI.skin.box);
+        GUIStyle styleb = new GUIStyle(GUI.skin.button);
+        style.fontSize = Screen.width / 60;
+        styleb.fontSize = Screen.width / 75;
+
         if (IsCraftArbre) // si le boolen est true : on affiche le menus pour les arbres
         {
-            GUI.Box(new Rect(mP.x,mP.y, 150, 250), "Arbre") ;
+            GUI.Box(new Rect(mP.x, mP.y, Screen.width / 8, 2 * Screen.height / 5), "Arbre", style);
             GUI.enabled = (CountItem("Hache") > 0); // si on a une hache, on peut cliquer sur le bouton
-            if (GUI.Button(new Rect(mP.x + 35, mP.y + 40, 80, 50), "Couper")) //le bouton pour couper l'arbre
+            if (GUI.Button(new Rect(mP.x + Screen.width / 32, mP.y + Screen.height / 10, Screen.width / 16, Screen.height / 10), "Couper", styleb)) //le bouton pour couper l'arbre
             {
                 //Jouer l'animation + Coroutine pour attendre?
                 if (Physics.Raycast(R, out cible))
