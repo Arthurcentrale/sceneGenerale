@@ -94,8 +94,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 246
-      y: 511
+      x: 245
+      y: 390
       width: 166
       height: 59
     spriteID: 45a708e86541b2c408671912aa0f5b72
@@ -573,7 +573,7 @@ ScriptedImporter:
     - {x: 0, y: 24}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 56, y: 238}
+    uvTransform: {x: 53, y: 117}
   - name: feuillage1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -999,7 +999,7 @@ ScriptedImporter:
     - {x: 0, y: 23}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -137, y: -455}
+    uvTransform: {x: -137, y: -456}
   - name: branche2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -1617,8 +1617,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 499
+      x: 98
+      y: 236
       width: 79
       height: 151
     spriteID: 51885149f56c50648a0c31e713d00a00
@@ -2020,7 +2020,7 @@ ScriptedImporter:
     - {x: 12, y: 34}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -278, y: 366}
+    uvTransform: {x: -184, y: 103}
   - name: branche1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2029,7 +2029,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 98
-      y: 335
+      y: 111
       width: 140
       height: 144
     spriteID: 9d1bfaebc6af80a4787f15095cc77acb
@@ -2537,7 +2537,7 @@ ScriptedImporter:
     - {x: 44, y: 13}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -141, y: 61}
+    uvTransform: {x: -142, y: -163}
   - name: tronc
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -2546,7 +2546,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 112
+      y: 111
       width: 86
       height: 379
     spriteID: 46a14dce66ae6ed429412f9d1fd4be83
@@ -3155,7 +3155,7 @@ ScriptedImporter:
     - {x: 52, y: 7}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -244, y: 1}
+    uvTransform: {x: -244, y: 0}
   - name: feuillage3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -3163,8 +3163,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 246
-      y: 428
+      x: 245
+      y: 307
       width: 142
       height: 75
     spriteID: 36493f11a5b745b428f54935da884754
@@ -3642,7 +3642,7 @@ ScriptedImporter:
     - {x: 0, y: 24}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -52, y: 27}
+    uvTransform: {x: -53, y: -94}
   - name: feuillage2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -3650,8 +3650,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 246
-      y: 335
+      x: 245
+      y: 111
       width: 186
       height: 85
     spriteID: 4854b506b230e1242b5da28bae3e685b
@@ -4115,7 +4115,7 @@ ScriptedImporter:
     - {x: 0, y: 25}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 97, y: -39}
+    uvTransform: {x: 95, y: -263}
   - name: feuillage5
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -4123,8 +4123,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 333
-      y: 112
+      x: 245
+      y: 204
       width: 157
       height: 95
     spriteID: fc330d1871326664b854adc5cafe3b52
@@ -4587,65 +4587,21 @@ ScriptedImporter:
     - {x: 0, y: 24}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 46, y: -116}
-  - name: sol
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 98
-      y: 254
-      width: 316
-      height: 73
-    spriteID: adc36abbb8634c041847635509451287
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: -31, y: 199}
-  - name: ombre
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 98
-      y: 112
-      width: 227
-      height: 134
-    spriteID: b14ead313219245489eb4db5a2b88fc0
-    internalID: 0
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    parentGroupIndex: -1
-    uvTransform: {x: -147, y: 112}
+    uvTransform: {x: -42, y: -24}
   platformSettings: []
   mosaicLayers: 1
   documentPivot: {x: 0, y: 0}
   documentAlignment: 7
   importHiddenLayers: 0
   importedTextureWidth: 512
-  importedTextureHeight: 1024
+  importedTextureHeight: 512
   documentSize: {x: 600, y: 600}
   paperDollMode: 0
   keepDupilcateSpriteName: 0
   spriteCategoryList:
     categories: []
   textureActualWidth: 512
-  textureActualHeight: 1024
+  textureActualHeight: 512
   spritePackingTag: 
   resliceFromLayer: 0
   characterMode: 1
@@ -4657,7 +4613,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 45a708e86541b2c408671912aa0f5b72
     layerID: 24
-    mosaicPosition: {x: 246, y: 511}
+    mosaicPosition: {x: 245, y: 390}
   - name: feuillage1
     spriteName: feuillage1
     isGroup: 0
@@ -4678,56 +4634,42 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 51885149f56c50648a0c31e713d00a00
     layerID: 11
-    mosaicPosition: {x: 4, y: 499}
+    mosaicPosition: {x: 98, y: 236}
   - name: branche1
     spriteName: branche1
     isGroup: 0
     parentIndex: -1
     spriteID: 9d1bfaebc6af80a4787f15095cc77acb
     layerID: 10
-    mosaicPosition: {x: 98, y: 335}
+    mosaicPosition: {x: 98, y: 111}
   - name: tronc
     spriteName: tronc
     isGroup: 0
     parentIndex: -1
     spriteID: 46a14dce66ae6ed429412f9d1fd4be83
     layerID: 3
-    mosaicPosition: {x: 4, y: 112}
+    mosaicPosition: {x: 4, y: 111}
   - name: feuillage3
     spriteName: feuillage3
     isGroup: 0
     parentIndex: -1
     spriteID: 36493f11a5b745b428f54935da884754
     layerID: 28
-    mosaicPosition: {x: 246, y: 428}
+    mosaicPosition: {x: 245, y: 307}
   - name: feuillage2
     spriteName: feuillage2
     isGroup: 0
     parentIndex: -1
     spriteID: 4854b506b230e1242b5da28bae3e685b
     layerID: 27
-    mosaicPosition: {x: 246, y: 335}
+    mosaicPosition: {x: 245, y: 111}
   - name: feuillage5
     spriteName: feuillage5
     isGroup: 0
     parentIndex: -1
     spriteID: fc330d1871326664b854adc5cafe3b52
     layerID: 26
-    mosaicPosition: {x: 333, y: 112}
-  - name: sol
-    spriteName: sol
-    isGroup: 0
-    parentIndex: -1
-    spriteID: adc36abbb8634c041847635509451287
-    layerID: 38
-    mosaicPosition: {x: 98, y: 254}
-  - name: ombre
-    spriteName: ombre
-    isGroup: 0
-    parentIndex: -1
-    spriteID: b14ead313219245489eb4db5a2b88fc0
-    layerID: 39
-    mosaicPosition: {x: 98, y: 112}
+    mosaicPosition: {x: 245, y: 204}
   characterData:
     bones:
     - name: trunk1
