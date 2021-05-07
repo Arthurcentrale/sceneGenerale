@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Recolte : MonoBehaviour
@@ -9,26 +8,39 @@ public class Recolte : MonoBehaviour
     public bool IsCraftArbre; //bool pour ouvrir le menu pour couper l'arbre
     public bool IsCraftRoche; //same
     public bool IsCraftFleur; //same
+    public GameObject FondA, FondR, FondF; //panel à activer pour la récolte
+    public Button buttonA1, buttonA2, buttonA3; // boutons sur la panel pour l'arbre
+    public Button buttonR1, buttonR2, buttonR3; // boutons pour roche
+    public Button buttonF1, buttonF2, buttonF3; // boutons pour fleurs
     RaycastHit cible; //pour cibler un gameobject
     public Inventaire inventaire;//script de l'inventaire
     Ray R; //raycast 
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
-    public Item bois, pierre, fleursdrop;// pour faire spawn les objets lors de la destruction de leurs parents
+    public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
-    new public Camera camera;//Pour stocker la position de la souris quand on clic
+    float height, width;
+    new public Camera camera;//longueur et largerur des menus de récolte
 
     // Start is called before the first frame update
     void Start()
     {
         inventaire = inventaire.GetComponent<Inventaire>();
+        buttonA1 = buttonA1.GetComponent<Button>();
+        buttonA1.onClick.AddListener(SpawnBuche); // le boutons A1 servira a Couper l'arbre et récuperer les buches
+        buttonF1 = buttonF1.GetComponent<Button>();
+        buttonF1.onClick.AddListener(SpawnFleurs);
+        buttonR1 = buttonR1.GetComponent<Button>();
+        buttonR1.onClick.AddListener(SpawnRoche);
+        height = FondA.GetComponent<RectTransform>().sizeDelta.y;
+        width = FondA.GetComponent<RectTransform>().sizeDelta.x;
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
-                                                                                                                                                           //( pour éviter que le personnage ne selectionne un objet derriere le menu)
+            if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
+                                                                                                                                                    //( pour éviter que le personnage ne selectionne un objet derriere le menu)
             {
             }
 
@@ -38,8 +50,8 @@ public class Recolte : MonoBehaviour
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                 {
-                    mP = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                    rect = GUIUtility.ScreenToGUIRect(new Rect(mP.x, mP.y, 150, 250)); // on crée le rectangle du menus pour vérifier avec le contains
+                    mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
+                    rect = new Rect(mP.x, mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
 
                     if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                     {
@@ -53,15 +65,11 @@ public class Recolte : MonoBehaviour
                         }
                         else
                         {
+                            cible = hit;
+                            R = ray;
                             IsCraftArbre = false;
                             IsCraftArbre = true;
                         }
-                    }
-                    if (hit.collider.CompareTag("Untagged"))
-                    {
-                        IsCraftArbre = false;
-                        IsCraftFleur = false;
-                        IsCraftRoche = false;
                     }
 
                     if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
@@ -69,7 +77,7 @@ public class Recolte : MonoBehaviour
                         if (NbrPlace(bois) > 0) // a changer lorsque l'inventaire sera fonctionnelle
                         {
                             Destroy(hit.transform.gameObject);
-                            AjouterInventaire(bois,1); // à changer lorsque l'inventaire sera terminé
+                            AjouterInventaire(bois, 1); // à changer lorsque l'inventaire sera terminé
                         }
                     }
 
@@ -85,19 +93,21 @@ public class Recolte : MonoBehaviour
                         }
                         else
                         {
+                            cible = hit;
+                            R = ray;
                             IsCraftRoche = false;
                             IsCraftRoche = true;
                         }
                     }
 
-                    if (hit.collider.CompareTag("Pierre")) // pareil que les buches
+                   /* if (hit.collider.CompareTag("Rocher")) // pareil que les buches
                     {
-                        if (NbrPlace(pierre)> 0)
+                        if (NbrPlace(rocher) > 0)
                         {
                             Destroy(hit.transform.gameObject);
-                            AjouterInventaire(pierre,1) ; // a changer plus tard selon le fonctionnement de l'inventaire
+                            AjouterInventaire(rocher, 1); // a changer plus tard selon le fonctionnement de l'inventaire
                         }
-                    }
+                    }*/
 
                     if (hit.collider.CompareTag("Fleurs")) //same
                     {
@@ -111,6 +121,8 @@ public class Recolte : MonoBehaviour
                         }
                         else
                         {
+                            cible = hit;
+                            R = ray;
                             IsCraftFleur = false;
                             IsCraftFleur = true;
                         }
@@ -118,191 +130,190 @@ public class Recolte : MonoBehaviour
 
                     if (hit.collider.CompareTag("FleursDrop"))//same
                     {
-                        if (NbrPlace(fleursdrop) >0)
+                        if (NbrPlace(fleurs) > 0)
                         {
                             Destroy(hit.transform.gameObject);
-                            AjouterInventaire(fleursdrop,1); // à changer plus tard selon le fonctionnement de l'inventaire
+                            AjouterInventaire(fleurs, 1); // à changer plus tard selon le fonctionnement de l'inventaire
                         }
                     }
+
+                    if (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")
+                    {
+                        IsCraftRoche = false;
+                        IsCraftFleur = false;
+                        IsCraftArbre = false;
+                    }
+
                 }
             }
+        }
+
+        if (IsCraftArbre == true)
+        {
+            FondA.transform.position = new Vector2(mP.x, mP.y - height);
+            if (CountItem("Hache") > 0)
+            {
+                buttonA1.interactable = true;
+            }
+            else
+            {
+                buttonA1.interactable = false;
+            }
+            FondA.SetActive(true);
+        }
+        else
+        {
+            FondA.SetActive(false);
+        }
+
+        if (IsCraftRoche == true)
+        {
+            FondR.transform.position = new Vector2(mP.x, mP.y - height);
+            if (CountItem("Pioche") > 0)
+            {
+                buttonR1.interactable = true;
+            }
+            else
+            {
+                buttonR1.interactable = false;
+            }
+            FondR.SetActive(true);
+        }
+        else
+        {
+            FondR.SetActive(false);
+        }
+
+        if (IsCraftFleur == true)
+        {
+            FondF.transform.position = new Vector2(mP.x, mP.y - height);
+            FondF.SetActive(true);
+        }
+        else
+        {
+            FondF.SetActive(false);
         }
     }
 
-
-
-
-
-    private void OnGUI() //affichage des menus
+    private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
-        GUIStyle style = new GUIStyle(GUI.skin.box);
-        GUIStyle styleb = new GUIStyle(GUI.skin.button);
-        style.fontSize = Screen.width / 60;
-        styleb.fontSize = Screen.width / 75;
-
-        if (IsCraftArbre) // si le boolen est true : on affiche le menus pour les arbres
-        {
-            GUI.Box(new Rect(mP.x, mP.y, Screen.width / 8, 2 * Screen.height / 5), "Arbre", style);
-            GUI.enabled = (CountItem("Hache") > 0); // si on a une hache, on peut cliquer sur le bouton
-            if (GUI.Button(new Rect(mP.x + Screen.width / 32, mP.y + Screen.height / 10, Screen.width / 16, Screen.height / 10), "Couper", styleb)) //le bouton pour couper l'arbre
-            {
-                //Jouer l'animation + Coroutine pour attendre?
-                if (Physics.Raycast(R, out cible))
-                {
-                    SpawnBuche(cible, bois); // on détruit l'arbre et on fait spawn des buches
-                    IsCraftArbre = !IsCraftArbre; // une fois l'arbre détruit, on ferme le menu
-                }
-            }
-            GUI.enabled = true;
-        }
-
-        if (IsCraftRoche) // pareil avec les roches
-        {
-            GUI.Box(new Rect(mP.x, mP.y, 150, 250), "Roche");
-            GUI.enabled = CountItem("Pioche")> 0; // à modifier avec le slot de la pioche
-            if (GUI.Button(new Rect(mP.x + 35, mP.y + 40, 80, 50), "Miner"))
-            {
-                //Jouer l'animation + Coroutine pour attendre?
-                if (Physics.Raycast(R, out cible))
-                {
-                    SpawnRoche(cible, pierre);
-                    IsCraftRoche = !IsCraftRoche;
-                }
-            }
-            GUI.enabled = true;
-        }
-
-        if (IsCraftFleur)
-        {
-            GUI.Box(new Rect(mP.x, mP.y, 150, 250), "Fleurs");
-            if (GUI.Button(new Rect(mP.x + 35, mP.y + 40, 80, 50), "Cueillir"))
-            {
-                //Jouer l'animation + Coroutine pour attendre?
-                if (Physics.Raycast(R, out cible))
-                {
-                    SpawnFleurs(cible, fleursdrop);
-                    IsCraftFleur = !IsCraftFleur;
-                }
-            }
-        }
-    }
-
-    private void SpawnBuche(RaycastHit cible, Item item) //fonction qui fait détruit cible et fait spawn spawned
-    {
-        Destroy(cible.transform.gameObject); //detruit cible
+        Destroy(cible.transform.gameObject);//detruit cible
+        IsCraftArbre = false;
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
-            if (NbrPlace(item) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+            if (NbrPlace(bois) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
             {
-                AjouterInventaire(item, 3);
+                AjouterInventaire(bois, 3);
             }
             else //sinon, on remplit l'inventaire et le reste va par terre
             {
-                AjouterInventaire(item, NbrPlace(item));
-                for (int i = 0; i < 3 - NbrPlace(item); i++)
+                AjouterInventaire(bois, NbrPlace(bois));
+                for (int i = 0; i < 3 - NbrPlace(bois); i++)
                 {
-                    Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                 }
             }
 
         }
         else if (0.25 <= x && x < 0.75) // 4 spawns
         {
-            if (NbrPlace(item) >= 4)
+            if (NbrPlace(bois) >= 4)
             {
-                AjouterInventaire(item,4);
+                AjouterInventaire(bois, 4);
             }
             else
             {
-                AjouterInventaire(item, NbrPlace(item)) ;
-                for (int i = 0; i < 4 - NbrPlace(item); i++)
+                AjouterInventaire(bois, NbrPlace(bois));
+                for (int i = 0; i < 4 - NbrPlace(bois); i++)
                 {
-                    Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                 }
             }
         }
 
         else
         {
-            if (NbrPlace(item)>= 5) // 5 spawns
+            if (NbrPlace(bois) >= 5) // 5 spawns
             {
-                AjouterInventaire(item,5);
+                AjouterInventaire(bois, 5);
             }
             else
             {
-                AjouterInventaire(item,NbrPlace(item));
-                for (int i = 0; i < 5 - NbrPlace(item); i++)
+                AjouterInventaire(bois, NbrPlace(bois));
+                for (int i = 0; i < 5 - NbrPlace(bois); i++)
                 {
-                    Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                 }
             }
         }
     }
-    private void SpawnFleurs(RaycastHit cible, Item item) //Pour les fleurs, on a toujours 3 spawns
+    private void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
-        Destroy(cible.transform.gameObject); //detruit cible
-        if (NbrPlace(item) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+        Destroy(cible.transform.gameObject);
+        IsCraftFleur = false;//detruit cible
+        if (NbrPlace(fleurs) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
         {
-            AjouterInventaire(item,3);
+            AjouterInventaire(fleurs, 3);
         }
         else //sinon, on remplit l'inventaire et le reste va par terre
         {
-            AjouterInventaire(item,NbrPlace(item));
-            for (int i = 0; i < 3 - NbrPlace(item); i++)
+            AjouterInventaire(fleurs, NbrPlace(fleurs));
+            for (int i = 0; i < 3 - NbrPlace(fleurs); i++)
             {
-                Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                Instantiate(fleurs.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
             }
         }
     }
-    private void SpawnRoche(RaycastHit cible, Item item) //fonction qui fait détruit cible et fait spawn spawned
+    private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
-        Destroy(cible.transform.gameObject); //detruit cible
+        Destroy(cible.transform.gameObject);
+        IsCraftRoche = false;//detruit cible
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
             if (cible.collider.CompareTag("Roche1"))
             {
-                if (NbrPlace(item) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item,2);
+                    AjouterInventaire(rocher, 2);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 2 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche2"))
             {
-                if (NbrPlace(item) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    inventaire.Slot[1].Amount += 4;
+                    AjouterInventaire(rocher, 4);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 4 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 4 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche3"))
             {
-                if (NbrPlace(item) >= 6) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 6) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    inventaire.Slot[1].Amount += 6;
+                    AjouterInventaire(rocher, 6);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 6 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 6 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -313,46 +324,46 @@ public class Recolte : MonoBehaviour
         {
             if (cible.collider.CompareTag("Roche1"))
             {
-                if (NbrPlace(item) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    inventaire.Slot[1].Amount += 3;
+                    AjouterInventaire(rocher, 3);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 3 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 3 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche2"))
             {
-                if (NbrPlace(item) >= 5) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 5) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item, 5);
+                    AjouterInventaire(rocher, 5);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 5 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 5 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche3"))
             {
-                if (NbrPlace(item) >= 7) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 7) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item, 7); ;
+                    AjouterInventaire(rocher, 7); ;
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 7 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 7 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -363,46 +374,46 @@ public class Recolte : MonoBehaviour
         {
             if (cible.collider.CompareTag("Roche1"))
             {
-                if (NbrPlace(item) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item, 4);
+                    AjouterInventaire(rocher, 4);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 4 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 4 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche2"))
             {
-                if (NbrPlace(item) >= 6) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 6) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item, 6);
+                    AjouterInventaire(rocher, 6);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 6 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 6 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
             if (cible.collider.CompareTag("Roche2"))
             {
-                if (NbrPlace(item) >= 8) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                if (NbrPlace(rocher) >= 8) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
-                    AjouterInventaire(item, 8);
+                    AjouterInventaire(rocher, 8);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
                 {
-                    AjouterInventaire(item, NbrPlace(item));
-                    for (int i = 0; i < 8 - NbrPlace(item); i++)
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 8 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(item.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -410,16 +421,16 @@ public class Recolte : MonoBehaviour
         }
     }
 
-    int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
+    public int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
     {
         int Amount = 0;
-        for (int i = 0; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
+        foreach (ItemAmount ItemAmount in inventaire.Slot)
         {
-            if (inventaire.Slot[i].Item.ItemName == itemname)
+            if (ItemAmount.Item.ItemName == itemname)
             {
-                Amount += inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
+                Amount += ItemAmount.Amount * ItemAmount.Item.Weight;
             }
-            else if (inventaire.Slot[i].Item.ItemName == "Vide")
+            else if (ItemAmount.Item.ItemName == "Vide")
             {
 
             }
@@ -427,15 +438,14 @@ public class Recolte : MonoBehaviour
         return Amount;
     }
 
-
-    int NbrPlace(Item item) //On compte le nombre de place pour un item
+    public int NbrPlace(Item item) //On compte le nombre de place pour un item
     {
         int Count = 0;
-        if (item.Weight == 5) //si l'item est un outil
+        if (item.Weight == 64) //si l'item est un outil
         {
-            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
+            foreach (ItemAmount ItemAmount in inventaire.Slot)
             {
-                if (inventaire.Slot[i].Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
+                if (ItemAmount.Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
                 {
                     Count++;
                 }
@@ -444,18 +454,19 @@ public class Recolte : MonoBehaviour
         }
         else // si l'item n'est pas un outil
         {
-            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
+            foreach (ItemAmount ItemAmount in inventaire.Slot)
             {
-                if (inventaire.Slot[i].Item.ItemName == "Vide" || inventaire.Slot[i].Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
-                                                                                                   // de 64 items
+                if (ItemAmount.Item.ItemName == "Vide" || ItemAmount.Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
+                                                                                   // de 64 items
                 {
-                    Count += 5 - inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
+                    Count += 64 - ItemAmount.Amount * ItemAmount.Item.Weight;
                 }
             }
             return Count;
         }
     }
-    void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
+
+    public void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
     {
         if (NbrPlace(item) < Amount) // Pas assez de place
         {
@@ -463,42 +474,34 @@ public class Recolte : MonoBehaviour
         }
         else
         {
-            int i = 5; // pour parcourir l'inventaire
+            int i = 0; // pour parcourir l'inventaire
             int x = Amount; // le total d'objet à placer
             while (x != 0) // tant que l'on a pas tout placé
             {
                 if (inventaire.Slot[i].Item == item) // si on a le bon item dans l'inventaire
                 {
-                    if (x + inventaire.Slot[i].Amount * item.Weight > 5) // si on doit placer trop d'item par rapport a la place qu'il reste dans ce slot
+                    if (x + inventaire.Slot[i].Amount * item.Weight > 64) // si on doit placer trop d'item par rapport a la place qu'il reste dans ce slot
                     {
-                        x -= 5 / item.Weight - inventaire.Slot[i].Amount;
-                        inventaire.Slot[i].Amount = 5 / item.Weight; // on place ce que l'on peut et on continue de parcourir la liste pour placer le reste
-                        GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
+                        x -= 64 / item.Weight - inventaire.Slot[i].Amount;
+                        inventaire.Slot[i].Amount = 64 / item.Weight; // on place ce que l'on peut et on continue de parcourir la liste pour placer le reste
                     }
                     else // si on a assez de place , on place tout
                     {
                         inventaire.Slot[i].Amount += x;
-                        GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
                         x = 0;
 
                     }
                 }
-                if (inventaire.Slot[i].Item.ItemName == "Vide") // Si l'emplacement est vide, on met les items la
+                if (inventaire.Slot[i].Item.ItemName == "Vide")// Si l'emplacement est vide, on met les items la
                 {
                     inventaire.Slot[i].Item = item;
                     inventaire.Slot[i].Amount += x;
                     x = 0;
-                    // Mise a jour des sprites et textes
-                    /*
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite = item.Icon;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text = item.ItemName;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
-                    */
+
                 }
                 i++;
 
             }
         }
     }
-
 }

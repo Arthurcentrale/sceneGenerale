@@ -11,7 +11,8 @@ public class Deplacement : MonoBehaviour
     private float speed = 10.0f; //vitesse arbitraire du personnage
     private Vector3 Debut, Fin;
     private Vector3 direction;//Pour calculer la direction du déplacement
-    private bool Touch, outside; //Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
+    private bool Touch, outside;
+    new public Camera camera;//Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
     float c;
 
 
@@ -31,7 +32,7 @@ public class Deplacement : MonoBehaviour
             if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > R * R)
             {
                 outside = true;
-                Debut = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+                Debut = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             }
             else
             {
