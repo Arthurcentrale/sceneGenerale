@@ -412,6 +412,7 @@ public class Recolte : MonoBehaviour
 
     int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
     {
+        /*
         int Amount = 0;
         for (int i = 0; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
         {
@@ -425,11 +426,13 @@ public class Recolte : MonoBehaviour
             }
         }
         return Amount;
+        */
+        return Player.uiInventory.CountItem(itemname);
     }
-
 
     int NbrPlace(Item item) //On compte le nombre de place pour un item
     {
+        /*
         int Count = 0;
         if (item.Weight == 5) //si l'item est un outil
         {
@@ -454,9 +457,13 @@ public class Recolte : MonoBehaviour
             }
             return Count;
         }
+        */
+        return Player.uiInventory.NbrPlace(item);
     }
+
     void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
     {
+        /*
         if (NbrPlace(item) < Amount) // Pas assez de place
         {
             Debug.Log("Il n'y a pas de place dans l'inventaire");
@@ -489,16 +496,16 @@ public class Recolte : MonoBehaviour
                     inventaire.Slot[i].Amount += x;
                     x = 0;
                     // Mise a jour des sprites et textes
-                    /*
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite = item.Icon;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text = item.ItemName;
-                    GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
-                    */
+                    
+                    //GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(0).GetComponent<Image>().sprite = item.Icon;
+                    //GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(1).GetComponent<Text>().text = item.ItemName;
+                    //GameObject.Find("Inventory").transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<Text>().text = inventaire.Slot[i].Amount.ToString();
                 }
                 i++;
 
             }
         }
+        */
+        Player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
-
 }
