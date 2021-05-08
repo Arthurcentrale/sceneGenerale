@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemWolrdSpawner : MonoBehaviour
+public class ItemWorldSpawner : MonoBehaviour
 {
     public Item item;
 }
