@@ -606,10 +606,13 @@ public class BoutonsMenuConstruction : MonoBehaviour
     ////////////////////////////////////////////////////DEBUT PARTIE CONSTRUCTION/////////////////////////////////////////////////////////////////
 
 
-    public void ConstruireChaumière()
+
+
+
+    /////////////////////////////////////////////////////DÉBUT CHAUMIERE/////////////////////////////////////////////////////////////////
+    public void ConstruireChaumièreDepuisMenuInformation()
     {
-        if (PanelInformationTenteEstAffiche == true)
-        {
+        
             nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
             nouvelleChaumière.name = "nouvelleChaumière";
             //print("console");
@@ -623,6 +626,43 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
 
 
-        }
+        
+    }
+
+    public void ConstruireChaumièreDepuisMenuConstruction()
+    {
+        
+        
+            nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+            nouvelleChaumière.name = "nouvelleChaumière";
+            //print("console");
+            //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
+            en_construction = true;
+        //MenuInformationChaumièrestAffiche = false;
+            EnleverMenuConstructionsPage1(); // cette fois on enlève le menu de construction, puisqu'on construit directement depuis le menu
+            boutonMenu.SetActive(true);
+            boutonMenuEstAffiche = true;
+            boutonValiderConstructionChaumière.SetActive(true);
+
+
+
+        
+    }
+
+
+    public void ValiderConstructionChaumière()
+    {
+        ChaumièreDéplaçable = GameObject.Find("nouvelleChaumière");
+        //print(MoulinDéplaçable.transform.position.x);
+        //print(MoulinDéplaçable.transform.position.y);
+        //print(MoulinDéplaçable.transform.position.z);
+        BatiChaumière = Instantiate(prefabBatiChaumière, ChaumièreDéplaçable.transform.position, Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiChaumière.name = ("BatiChaumière");
+        Destroy(nouvelleChaumière); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
+        en_construction = false;
+        boutonValiderConstructionChaumière.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
+
     }
 }
+
+

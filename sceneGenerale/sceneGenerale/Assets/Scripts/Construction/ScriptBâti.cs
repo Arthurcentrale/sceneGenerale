@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScriptBâti : MonoBehaviour
 {
-    public bool menuBâtiPasDéjàAffiché = false;
+    public bool menuBâtiPasDéjàAffiché = true;
     public bool menuConstructionPasDéjàAffiché = false;
     private Vector3 mP;
     private Vector3 position;
@@ -24,12 +24,12 @@ public class ScriptBâti : MonoBehaviour
     private int heures;
     private int minutes;
     private int secondes;
-    private float tempsConstructionMoulin = 10;
-    private int tempsConstructionMoulinEntier = 10; //10 sec pour l'instant, on changera plus tard
+    private float tempsConstructionChaumière = 10;
+    private int tempsConstructionChaumièreEntier = 10; //10 sec pour l'instant, on changera plus tard
     private bool débuterConstruction = false;
-    public GameObject prefabMoulin;
-    public GameObject Moulin;
-    public GameObject BatiMoulin;
+    public GameObject prefabChaumière;
+    public GameObject Chaumière;
+    public GameObject BatiChaumière;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
     //public static BoutonsMenuConstruction BatiMoulin;
@@ -42,7 +42,7 @@ public class ScriptBâti : MonoBehaviour
     void Start()
     {
 
-        inventaire = inventaire.GetComponent<Inventaire>();
+        //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
 
@@ -60,13 +60,23 @@ public class ScriptBâti : MonoBehaviour
                 {
                     OnCliqueDehors = true;
                 }
-                if (hit.collider.CompareTag("Moulin"))
+                if (hit.collider.CompareTag("BatiChaumière"))
                 {
+                   
                     OnCliqueDehors = false;
                     OnAfficheLeMenuDuBâti = true;
                 }
 
             }
+        }
+        if (débuterConstruction)
+        {
+            tempsConstructionChaumièreEntier = (int)tempsConstructionChaumière; // On en a besoin pour faire les divisions entières
+
+            heures = tempsConstructionChaumièreEntier / 3600;
+            minutes = (tempsConstructionChaumièreEntier - heures * 3600) / 60;
+            secondes = (tempsConstructionChaumièreEntier - heures * 3600 - minutes * 60);
+            tempsConstructionChaumière -= Time.deltaTime ;
         }
     }
 
@@ -75,11 +85,12 @@ public class ScriptBâti : MonoBehaviour
 
         if (menuBâtiPasDéjàAffiché)// pour éviter d'avoir plusieurs menus en même temps
         {
+            
             RaycastHit hit;  //même principe que pour la récolte
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             mP = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0); //là j'ai une position en pixels il faut que je la transforme en une position sur l'écran
-            mP.z = Camera.main.transform.position.y;
-            position = Camera.main.ScreenToWorldPoint(mP);
+            mP.z = camera.transform.position.y;
+            position = camera.ScreenToWorldPoint(mP);
             //print(position.x);
             //print(mP.y);
             //print(position.z);
@@ -136,7 +147,7 @@ public class ScriptBâti : MonoBehaviour
             if (menuBâtiPasDéjàAffiché && positionDéfinie)// && boutonsMenuConstruction.boutonMenuEstAffiche) // si ya pas déjà de menu pour éviter les doublons et si on a la position(sinon le menu s'affiche sans qu'on clique c'est chiant)
             {
                 //print("oui");
-                GUI.Box(new Rect(mP.x, Screen.height - mP.y, 150, 250), "Moulin");   // la fonction Screen.height permet 
+                GUI.Box(new Rect(mP.x, Screen.height - mP.y, 150, 250), "Chaumière");   // la fonction Screen.height permet 
 
                 //GUI.enabled = (CountItem("Hache") > 0); // si on a une hache, on peut cliquer sur le bouton (Pour la construction jsp s'il faut des items ou des pnj dispo bref)
                 if (!RessourcesNécessairesDéposées)//tant qu'on a pas encore déposer toutes les ressources, on peut continuer à en déposer
@@ -161,37 +172,37 @@ public class ScriptBâti : MonoBehaviour
                         //    }
                         //}
                         // Et on fait pareil pour les autres ressources nécessaires
-
+                        RessourcesNécessairesDéposées = !RessourcesNécessairesDéposées;
                     }
                 }
 
 
                 if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 100, 150, 50), "Choisir ouvrier")) // chiant de disable un seul bouton avec la commande GUI, donc je le laisse dispo mais quand on clique dessus ça fait rien
                 {
-                    if (NbrBoisNécessaire == 0) // et les autres ressources nécessaires =0
+                    if (RessourcesNécessairesDéposées) // et les autres ressources nécessaires =0
                     {
                         print("Tadaima!");
                         débuterConstruction = true;
                         // Alors on peut choisir le pnj qui va construire tout ce bazar
                     }
                 }
-                if (RessourcesNécessairesDéposées) //si on a déposé toutes les ressources, on peut choisir un ouvrier pour débuter la construction
-                {
-                    if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 160, 150, 50), "Choisir ouvrier")) // d'ouvrier pour l'instant, on se contente de démarrer la construction (si on a toutes les ressources nécessaire ofc)
-                    {
-                        // pour l'instant on va dire qu'il faut 10 sec pour construire la bête
-                        ;
-                    }
-                }
+                //if (RessourcesNécessairesDéposées) //si on a déposé toutes les ressources, on peut choisir un ouvrier pour débuter la construction
+                //{
+                //    if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 160, 150, 50), "Choisir ouvrier")) // d'ouvrier pour l'instant, on se contente de démarrer la construction (si on a toutes les ressources nécessaire ofc)
+                //    {
+                //        // pour l'instant on va dire qu'il faut 10 sec pour construire la bête
+                //        ;
+                //    }
+                //}
                 if (débuterConstruction)
                 {
                     //print("La construction débute");
-                    tempsConstructionMoulinEntier = (int)tempsConstructionMoulin; // On en a besoin pour faire les divisions entières
+                    //tempsConstructionChaumièreEntier = (int)tempsConstructionChaumière; // On en a besoin pour faire les divisions entières
 
-                    heures = tempsConstructionMoulinEntier / 3600;
-                    minutes = (tempsConstructionMoulinEntier - heures * 3600) / 60;
-                    secondes = (tempsConstructionMoulinEntier - heures * 3600 - minutes * 60);
-                    tempsConstructionMoulin -= Time.deltaTime * 0.5f;
+                    //heures = tempsConstructionChaumièreEntier / 3600;
+                    //minutes = (tempsConstructionChaumièreEntier - heures * 3600) / 60;
+                    //secondes = (tempsConstructionChaumièreEntier - heures * 3600 - minutes * 60);
+                    //tempsConstructionChaumière -= Time.deltaTime * 0.5f;
                     if (secondes >= 0)
                     {
                         if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 160, 150, 50), heures.ToString("0") + ":" + minutes.ToString("0") + ":" + secondes.ToString("0")))
@@ -207,10 +218,10 @@ public class ScriptBâti : MonoBehaviour
                     if (secondes < 0 && onAPasEncoreDétruitLeBâti)
                     { //onGUI est une fonction qui s'appelle à chaque frame, donc il faut faire attention à ne construire le moulin qu'une seule fois
 
-                        BatiMoulin = GameObject.Find("BatiMoulin");
+                        BatiChaumière = GameObject.Find("BatiChaumière");
 
-                        Moulin = Instantiate(prefabMoulin, BatiMoulin.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
-                        Destroy(BatiMoulin);
+                        Chaumière = Instantiate(prefabChaumière, BatiChaumière.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        Destroy(BatiChaumière);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;
                     }
