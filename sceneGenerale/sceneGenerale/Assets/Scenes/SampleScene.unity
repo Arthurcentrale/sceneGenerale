@@ -13025,7 +13025,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1370019100}
+      - m_Target: {fileID: 1370019101}
         m_MethodName: "ConstruireChaumi\xE8reDepuisMenuInformation"
         m_Mode: 1
         m_Arguments:
@@ -27297,6 +27297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370019099}
   - component: {fileID: 1370019100}
+  - component: {fileID: 1370019101}
   m_Layer: 5
   m_Name: Empty script constru 2
   m_TagString: Untagged
@@ -27333,6 +27334,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fceebb130880cf641a99b4baecedf00b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1370019101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370019098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e973b27198c396b469ac6721363f667a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   "boutonValiderConstructionChaumi\xE8re": {fileID: 2007031746}
@@ -35138,7 +35151,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1370019100}
+      - m_Target: {fileID: 1370019101}
         m_MethodName: "ConstruireChaumi\xE8reDepuisMenuConstruction"
         m_Mode: 1
         m_Arguments:
@@ -36875,7 +36888,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1370019100}
+      - m_Target: {fileID: 1370019101}
         m_MethodName: "ValiderConstructionChaumi\xE8re"
         m_Mode: 1
         m_Arguments:
