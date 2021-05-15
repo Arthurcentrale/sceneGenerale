@@ -31,8 +31,8 @@ public class Recolte : MonoBehaviour
         buttonF1.onClick.AddListener(SpawnFleurs);
         buttonR1 = buttonR1.GetComponent<Button>();
         buttonR1.onClick.AddListener(SpawnRoche);
-        height = FondA.GetComponent<RectTransform>().sizeDelta.y;
-        width = FondA.GetComponent<RectTransform>().sizeDelta.x;
+        height = FondA.GetComponent<RectTransform>().rect.height ;
+        width = FondA.GetComponent<RectTransform>().rect.width;
     }
     // Update is called once per frame
     void Update()
