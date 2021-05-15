@@ -41,11 +41,13 @@ public class UI_Inventory : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        
         if (Input.GetKeyDown(KeyCode.I))
         {
             activation = !activation;
             C.enabled = activation;
+            Deplacement.enMenu = activation;
         }
 
         RefreshInventoryFavoris();

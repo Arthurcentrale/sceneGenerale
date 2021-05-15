@@ -58,9 +58,10 @@ public class BoutonMenu2 : MonoBehaviour
     
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update(){
+        if ( MenuEstAffiche | MenuConstructionEstAffiche | MenuInformationTenteEstAffiche | PanelInformationTenteEstAffiche){
+            Deplacement.enMenu = true;
+        }
     }
     void AfficherMenuConstructionsPage1()
     {

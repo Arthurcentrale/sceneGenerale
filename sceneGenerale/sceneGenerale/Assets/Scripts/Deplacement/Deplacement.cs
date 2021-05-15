@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Deplacement : MonoBehaviour
 {
     public Animator animator;
+    public static bool enMenu = false;
     int R; //Rayon qui délimite la zone où on peut clicker pour se déplacer ou non
     private float speed = 10.0f; //vitesse arbitraire du personnage
     private Vector3 Debut, Fin;
@@ -60,7 +61,9 @@ public class Deplacement : MonoBehaviour
                 Vector3 a = Fin - Debut;
                 Vector3 b = new Vector3(a.x, 0, a.y);
                 direction = Vector3.ClampMagnitude(b, 1.0f);
-                Move(direction);
+                if (!enMenu){
+                    Move(direction);
+                }
 
             }
             if (direction.x < 0) { c = -1; }

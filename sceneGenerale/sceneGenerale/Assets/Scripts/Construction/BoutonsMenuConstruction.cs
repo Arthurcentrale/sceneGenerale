@@ -62,6 +62,11 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
     /////////////////////////////////////////////////////DEBUT PARTIE MENU/////////////////////////////////////////////////////////////////////////
 
+    void Update(){
+        if (MenuEstAffiche | MenuInformationTenteEstAffiche | MenuInformationTenteEstAffiche | PanelInformationTenteEstAffiche){
+            Deplacement.enMenu = true;
+        }
+    }
     void EnleverMenuPrincipal()             // Des fonctions intermédiaires pour coder les boutons un peu plus vite
     {
         boutonConstruction.SetActive(false);
