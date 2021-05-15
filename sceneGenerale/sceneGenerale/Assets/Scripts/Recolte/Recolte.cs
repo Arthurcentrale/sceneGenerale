@@ -21,6 +21,8 @@ public class Recolte : MonoBehaviour
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
 
+    public Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,8 @@ public class Recolte : MonoBehaviour
         buttonR1.onClick.AddListener(SpawnRoche);
         height = FondA.GetComponent<RectTransform>().sizeDelta.y;
         width = FondA.GetComponent<RectTransform>().sizeDelta.x;
+
+        player = this.GetComponent<Player>();
     }
     // Update is called once per frame
     void Update()
@@ -438,7 +442,7 @@ public class Recolte : MonoBehaviour
         }
         return Amount;
         */
-        return Player.uiInventory.CountItem(itemname);
+        return player.uiInventory.CountItem(itemname);
     }
 
     int NbrPlace(Item item) //On compte le nombre de place pour un item
@@ -469,7 +473,7 @@ public class Recolte : MonoBehaviour
             return Count;
         }
         */
-        return Player.uiInventory.NbrPlace(item);
+        return player.uiInventory.NbrPlace(item);
     }
 
     void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
@@ -515,6 +519,6 @@ public class Recolte : MonoBehaviour
             }
         }
         */
-        Player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
+        player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
 }
