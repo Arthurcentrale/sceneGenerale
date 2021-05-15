@@ -211,7 +211,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 3 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
                 }
             }
 
@@ -227,7 +227,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 4 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0,0, 0));
                 }
             }
         }
@@ -243,7 +243,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 5 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
                 }
             }
         }
