@@ -5807,6 +5807,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 7.699951
       objectReference: {fileID: 0}
+    - target: {fileID: 3774863134328084338, guid: 9ae11ac0021d84c4babece0adce6be25,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.9999695
+      objectReference: {fileID: 0}
     - target: {fileID: 3774863134333804039, guid: 9ae11ac0021d84c4babece0adce6be25,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -26449,6 +26454,7 @@ MonoBehaviour:
   bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
   rocher: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
   fleurs: {fileID: 11400000, guid: 0ea40ef926adb7f47b9fd6f454e8b4e3, type: 2}
+  a: 0
   camera: {fileID: 72812186}
 --- !u!114 &1351583320
 MonoBehaviour:
@@ -30173,22 +30179,22 @@ PrefabInstance:
     - target: {fileID: 1552137552499696452, guid: 8c8467a59a6a2e74e93219b925ee0a40,
         type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 1552137552499696452, guid: 8c8467a59a6a2e74e93219b925ee0a40,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.21960786
+      value: 0.1514774
       objectReference: {fileID: 0}
     - target: {fileID: 1552137552499696452, guid: 8c8467a59a6a2e74e93219b925ee0a40,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.21960786
+      value: 0.1514774
       objectReference: {fileID: 0}
     - target: {fileID: 1552137552499696452, guid: 8c8467a59a6a2e74e93219b925ee0a40,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.21960786
+      value: 0.8679245
       objectReference: {fileID: 0}
     - target: {fileID: 1552137552554517199, guid: 8c8467a59a6a2e74e93219b925ee0a40,
         type: 3}
