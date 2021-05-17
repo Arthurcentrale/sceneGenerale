@@ -41,9 +41,6 @@ public class Recolte : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a)
-            {
-
 
                 if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
                                                                                                                                                         //( pour éviter que le personnage ne selectionne un objet derriere le menu)
@@ -151,13 +148,13 @@ public class Recolte : MonoBehaviour
                         }
 
                     }
-                }
+                
             }
         }
 
         if (IsCraftArbre == true)
         {
-            FondA.transform.position = new Vector2(mP.x, mP.y - height);
+            FondA.transform.position = new Vector2(mP.x, mP.y );
             if (CountItem("Hache") > 0)
             {
                 buttonA1.interactable = true;
@@ -175,7 +172,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftRoche == true)
         {
-            FondR.transform.position = new Vector2(mP.x, mP.y - height);
+            FondR.transform.position = new Vector2(mP.x, mP.y );
             if (CountItem("Pioche") > 0)
             {
                 buttonR1.interactable = true;
@@ -193,7 +190,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftFleur == true)
         {
-            FondF.transform.position = new Vector2(mP.x, mP.y - height);
+            FondF.transform.position = new Vector2(mP.x, mP.y);
             FondF.SetActive(true);
         }
         else
