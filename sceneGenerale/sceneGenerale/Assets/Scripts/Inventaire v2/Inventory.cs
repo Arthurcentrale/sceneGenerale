@@ -10,6 +10,8 @@ public class Inventory
     private List<ItemAmount> itemList;
     private List<ItemAmount> favList;
 
+    public Player player;
+
     public event EventHandler OnItemListChanged;
 
     public int sizeMaxStack;
@@ -32,54 +34,60 @@ public class Inventory
     }
     */
 
-    void Awake()
-    {
-        sizeMaxStack = 5;
-    }
-
-    public Inventory(List<ItemAmount> itemList, List<ItemAmount> favList)
+    public Inventory(List<ItemAmount> itemList, List<ItemAmount> favList,Player player)
     {
         this.itemList = itemList;
         this.favList = favList;
+        this.player = player;
+        this.sizeMaxStack = 5;
     }
 
-    public bool AddItem(ItemAmount item) //retourne un bool qui indique si il avait asser de place dans l'inventaire pour que l'item soit ajouté
+    public bool AddItem(ItemAmount item) //retourne un bool qui indique si il avait assez de place dans l'inventaire pour que l'item soit ajouté
     {
-        bool itemAlreadyInInventory = false;
-        int n = UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; //nombre de slots
-        foreach (ItemAmount inventoryItem in itemList)
-        { 
-            if (inventoryItem.Item.id == item.Item.id)
+        int x = item.Amount; // le total d'objet à placer
+        if (player.uiInventory.NbrPlace(item.Item) < x) // Pas assez de place
+        {
+            return false;
+        }
+        else
+        {
+            int p; // place disponible dans chaque slot
+            foreach (ItemAmount inventoryItem in itemList)
             {
-                itemAlreadyInInventory = true;
-                int i = item.Amount;
-                int j = inventoryItem.Amount;
-                if (i + j <= sizeMaxStack)
-                {
-                    inventoryItem.Amount += item.Amount;
-                }
+                if (x == 0) return true;
                 else
                 {
-                    if (itemList.Count == n) return false;
-                    inventoryItem.Amount = sizeMaxStack;
-                    item.Amount = (i + j) - sizeMaxStack;
-                    itemList.Add(item);
+                    if (inventoryItem.Item.id == item.Item.id)
+                    {
+                        p = (sizeMaxStack / item.Item.Weight) - inventoryItem.Amount;
+                        if (p >= x)
+                        {
+                            inventoryItem.Amount += x;
+                            x = 0;
+                        }
+                        else
+                        {
+                            inventoryItem.Amount += p;
+                            x -= p;
+                        }
+                    }
                 }
             }
-        }
-        if (!itemAlreadyInInventory)
-        {
-            if (itemList.Count < n)
+            if (x > 0) // si il reste des items à placer dans des slots vides
             {
-                itemList.Add(item);
+                p = sizeMaxStack / item.Item.Weight; // on redefinie p comme le nombre d'item plaçable dans un slot
+                for (int i=0; i<x/p; i++)
+                {
+                    itemList.Add(new ItemAmount(Item: item.Item, Amount: p));
+                }
+                if (x%p > 0)
+                {
+                    itemList.Add(new ItemAmount(Item: item.Item, Amount: x % p));
+                }
             }
-            else
-            {
-                return false;
-            }   
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+            return true;
         }
-        OnItemListChanged?.Invoke(this,EventArgs.Empty);
-        return true;
     }
 
     public bool DelItem(ItemAmount item) //supprime un item de l'inventaire et retourne false si il n'était pas présent dans l'inventaire
@@ -94,11 +102,13 @@ public class Inventory
                 if (j > i) 
                 {
                     itemList[n].Amount -= item.Amount;
+                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
                     return true;
                 }
                 else if (j == i)
                 {
                     itemList.RemoveAt(n);
+                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
                     return true;
                 }
                 else
@@ -133,6 +143,13 @@ public class Inventory
         {
             return false;
         }
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
         return true;
+    }
+
+    public void DelFavAtIndex(int i) //supprime un item des favoris
+    {
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        favList.RemoveAt(i);
     }
 }
