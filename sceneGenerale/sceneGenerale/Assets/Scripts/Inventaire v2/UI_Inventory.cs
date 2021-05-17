@@ -13,7 +13,7 @@ public class UI_Inventory : MonoBehaviour
     private GameObject favSlotTemplate;
 
     bool activation = false;
-    Canvas C;
+    GameObject Background;
 
     public Item Bois;
     public Item Marteau;
@@ -30,8 +30,8 @@ public class UI_Inventory : MonoBehaviour
         favSlotContainer = gameObject.transform.GetChild(0).GetChild(1);
         favSlotTemplate = favSlotContainer.GetChild(0).gameObject;
 
-        C = GetComponent<Canvas>();
-        C.enabled = false;
+        Background = transform.GetChild(0).gameObject;
+        Background.SetActive(false);
 
         //WoodIcon = Resources.Load("Wood") as Sprite;
         //BerryIcon = Resources.Load("Berry") as Sprite;
@@ -45,8 +45,14 @@ public class UI_Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             activation = !activation;
-            C.enabled = activation;
+            Background.SetActive(activation);
         }
+    }
+
+    public void UpdateOuverture()
+    {
+        activation = !activation;
+        Background.SetActive(activation);
     }
 
     public void SetInventory(Inventory _inventory)
