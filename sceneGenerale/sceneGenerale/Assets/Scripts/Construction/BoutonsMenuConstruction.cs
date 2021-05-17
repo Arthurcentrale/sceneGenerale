@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,11 +62,7 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
     /////////////////////////////////////////////////////DEBUT PARTIE MENU/////////////////////////////////////////////////////////////////////////
 
-    void Update(){
-        if (MenuEstAffiche | MenuInformationTenteEstAffiche | MenuInformationTenteEstAffiche | PanelInformationTenteEstAffiche){
-            Deplacement.enMenu = true;
-        }
-    }
+    
     void EnleverMenuPrincipal()             // Des fonctions intermédiaires pour coder les boutons un peu plus vite
     {
         boutonConstruction.SetActive(false);
@@ -88,13 +84,14 @@ public class BoutonsMenuConstruction : MonoBehaviour
         boutonMenu.SetActive(false);
         MenuEstAffiche = true;
         boutonMenuEstAffiche = false;
+        Deplacement.enMenu=true;
     }
 
 
 
 
     public void menuPrincipal()                 // Code le bouton menu principal (on affiche le menu, on désaffiche le bouton menu)
-    {
+    {   
         if (MenuEstAffiche == false)
         {
             AfficherMenuPrincipal();
@@ -107,10 +104,11 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
     public void CloseMenuPrincipal()   // le bouton close
     {
+        Deplacement.enMenu=false;
         if (MenuEstAffiche == true)
         {
             EnleverMenuPrincipal();
-
+            
         }
     }
 
@@ -205,7 +203,8 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
 
     public void CloseMenuConstructions()
-    {
+    {   
+        Deplacement.enMenu=false;
         if (MenuConstructionEstAffiche == true && OnEstEnPage1)
         {
             EnleverMenuConstructionsPage1();         // je pourrais faire un bouton retour où on retourne sur le menu principal mais en vrai ça change pas grand chose
@@ -219,7 +218,7 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
 
     public void boutonPageSuivante1()
-    {
+    {   
         if (OnEstEnPage1)
         {
             EnleverMenuConstructionsPage1();
