@@ -18,8 +18,11 @@ public class Recolte : MonoBehaviour
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
     public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
+    public int a;
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
+
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -31,126 +34,130 @@ public class Recolte : MonoBehaviour
         buttonF1.onClick.AddListener(SpawnFleurs);
         buttonR1 = buttonR1.GetComponent<Button>();
         buttonR1.onClick.AddListener(SpawnRoche);
-        height = FondA.GetComponent<RectTransform>().sizeDelta.y;
-        width = FondA.GetComponent<RectTransform>().sizeDelta.x;
+        height = FondA.GetComponent<RectTransform>().rect.height ;
+        width = FondA.GetComponent<RectTransform>().rect.width;
+        a = Screen.height / 3;
+        player = this.GetComponent<Player>();
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
-                                                                                                                                                    //( pour éviter que le personnage ne selectionne un objet derriere le menu)
-            {
-            }
 
-            else
-            {
-                RaycastHit hit;
-                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
+                if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
+                                                                                                                                                        //( pour éviter que le personnage ne selectionne un objet derriere le menu)
                 {
-                    mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                    rect = new Rect(mP.x, mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
-
-                    if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
-                    {
-                        if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftFleur = false;
-                            IsCraftRoche = false;
-                            IsCraftArbre = true;
-                        }
-                        else
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftArbre = false;
-                            IsCraftArbre = true;
-                        }
-                    }
-
-                    if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
-                    {
-                        if (NbrPlace(bois) > 0) // a changer lorsque l'inventaire sera fonctionnelle
-                        {
-                            Destroy(hit.transform.gameObject);
-                            AjouterInventaire(bois, 1); // à changer lorsque l'inventaire sera terminé
-                        }
-                    }
-
-                    if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
-                    {
-                        if (IsCraftRoche == false)
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftArbre = false;
-                            IsCraftFleur = false;
-                            IsCraftRoche = true;
-                        }
-                        else
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftRoche = false;
-                            IsCraftRoche = true;
-                        }
-                    }
-
-                   /* if (hit.collider.CompareTag("Rocher")) // pareil que les buches
-                    {
-                        if (NbrPlace(rocher) > 0)
-                        {
-                            Destroy(hit.transform.gameObject);
-                            AjouterInventaire(rocher, 1); // a changer plus tard selon le fonctionnement de l'inventaire
-                        }
-                    }*/
-
-                    if (hit.collider.CompareTag("Fleurs")) //same
-                    {
-                        if (IsCraftFleur == false)
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftArbre = false;
-                            IsCraftRoche = false;
-                            IsCraftFleur = true;
-                        }
-                        else
-                        {
-                            cible = hit;
-                            R = ray;
-                            IsCraftFleur = false;
-                            IsCraftFleur = true;
-                        }
-                    }
-
-                    if (hit.collider.CompareTag("FleursDrop"))//same
-                    {
-                        if (NbrPlace(fleurs) > 0)
-                        {
-                            Destroy(hit.transform.gameObject);
-                            AjouterInventaire(fleurs, 1); // à changer plus tard selon le fonctionnement de l'inventaire
-                        }
-                    }
-
-                    if (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")
-                    {
-                        IsCraftRoche = false;
-                        IsCraftFleur = false;
-                        IsCraftArbre = false;
-                    }
-
                 }
+
+                else
+                {
+                    RaycastHit hit;
+                    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
+                    {
+                        mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
+                        rect = new Rect(mP.x, mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
+
+                        if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
+                        {
+                            if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftFleur = false;
+                                IsCraftRoche = false;
+                                IsCraftArbre = true;
+                            }
+                            else
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftArbre = false;
+                                IsCraftArbre = true;
+                            }
+                        }
+
+                        if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
+                        {
+                            if (NbrPlace(bois) > 0) // a changer lorsque l'inventaire sera fonctionnelle
+                            {
+                                Destroy(hit.transform.gameObject);
+                                AjouterInventaire(bois, 1); // à changer lorsque l'inventaire sera terminé
+                            }
+                        }
+
+                        if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
+                        {
+                            if (IsCraftRoche == false)
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftArbre = false;
+                                IsCraftFleur = false;
+                                IsCraftRoche = true;
+                            }
+                            else
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftRoche = false;
+                                IsCraftRoche = true;
+                            }
+                        }
+
+                        /* if (hit.collider.CompareTag("Rocher")) // pareil que les buches
+                         {
+                             if (NbrPlace(rocher) > 0)
+                             {
+                                 Destroy(hit.transform.gameObject);
+                                 AjouterInventaire(rocher, 1); // a changer plus tard selon le fonctionnement de l'inventaire
+                             }
+                         }*/
+
+                        if (hit.collider.CompareTag("Fleurs")) //same
+                        {
+                            if (IsCraftFleur == false)
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftArbre = false;
+                                IsCraftRoche = false;
+                                IsCraftFleur = true;
+                            }
+                            else
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftFleur = false;
+                                IsCraftFleur = true;
+                            }
+                        }
+
+                        if (hit.collider.CompareTag("FleursDrop"))//same
+                        {
+                            if (NbrPlace(fleurs) > 0)
+                            {
+                                Destroy(hit.transform.gameObject);
+                                AjouterInventaire(fleurs, 1); // à changer plus tard selon le fonctionnement de l'inventaire
+                            }
+                        }
+
+                        if (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")
+                        {
+                            IsCraftRoche = false;
+                            IsCraftFleur = false;
+                            IsCraftArbre = false;
+                        }
+
+                    }
+                
             }
         }
 
         if (IsCraftArbre == true)
         {
-            FondA.transform.position = new Vector2(mP.x, mP.y - height);
+            FondA.transform.position = new Vector2(mP.x, mP.y );
             if (CountItem("Hache") > 0)
             {
                 buttonA1.interactable = true;
@@ -168,7 +175,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftRoche == true)
         {
-            FondR.transform.position = new Vector2(mP.x, mP.y - height);
+            FondR.transform.position = new Vector2(mP.x, mP.y );
             if (CountItem("Pioche") > 0)
             {
                 buttonR1.interactable = true;
@@ -186,7 +193,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftFleur == true)
         {
-            FondF.transform.position = new Vector2(mP.x, mP.y - height);
+            FondF.transform.position = new Vector2(mP.x, mP.y);
             FondF.SetActive(true);
         }
         else
@@ -211,7 +218,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 3 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
                 }
             }
 
@@ -227,7 +234,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 4 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0,0, 0));
                 }
             }
         }
@@ -243,7 +250,7 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(bois, NbrPlace(bois));
                 for (int i = 0; i < 5 - NbrPlace(bois); i++)
                 {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
                 }
             }
         }
@@ -438,7 +445,7 @@ public class Recolte : MonoBehaviour
         }
         return Amount;
         */
-        return Player.uiInventory.CountItem(itemname);
+        return player.uiInventory.CountItem(itemname);
     }
 
     int NbrPlace(Item item) //On compte le nombre de place pour un item
@@ -469,7 +476,7 @@ public class Recolte : MonoBehaviour
             return Count;
         }
         */
-        return Player.uiInventory.NbrPlace(item);
+        return player.uiInventory.NbrPlace(item);
     }
 
     void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
@@ -515,6 +522,6 @@ public class Recolte : MonoBehaviour
             }
         }
         */
-        Player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
+        player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
 }
