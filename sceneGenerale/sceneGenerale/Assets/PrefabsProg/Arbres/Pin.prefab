@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4159845415367100944}
   - component: {fileID: 4159845415367100947}
   - component: {fileID: 4159845415367100946}
+  - component: {fileID: 1148673336262851148}
   m_Layer: 0
   m_Name: Pin
   m_TagString: Arbre
@@ -89,12 +90,25 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4159845415367100949}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1148673336262851148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159845415367100949}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.556072, y: 4.9999995, z: 1.7055118}
+  m_Center: {x: -0.44517055, y: 0.0000009971429, z: -4.252985}
 --- !u!1001 &4159845415317376172
 PrefabInstance:
   m_ObjectHideFlags: 0

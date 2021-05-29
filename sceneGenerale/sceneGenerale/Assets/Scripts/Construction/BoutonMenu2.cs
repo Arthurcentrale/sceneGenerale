@@ -190,6 +190,6 @@ public class BoutonMenu2 : MonoBehaviour
         Destroy(nouvelleChaumière); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         boutonValiderConstructionChaumière.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
-
+        Deplacement.enMenu=false;
     }
 }

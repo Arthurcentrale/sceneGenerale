@@ -53,6 +53,7 @@ public class UI_Inventory : MonoBehaviour
     public void UpdateOuverture()
     {
         activation = !activation;
+        Deplacement.enMenu = activation;
         Background.SetActive(activation);
     }
 
