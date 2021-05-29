@@ -43,9 +43,7 @@ public class Recolte : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a)
-            {
+        {   
                 if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
                                                                                                                                                         //( pour éviter que le personnage ne selectionne un objet derriere le menu)
                 {
@@ -62,21 +60,25 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {
-                            if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
+                            if(((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
                             {
-                                cible = hit;
-                                R = ray;
-                                IsCraftFleur = false;
-                                IsCraftRoche = false;
-                                IsCraftArbre = true;
+                                if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftFleur = false;
+                                    IsCraftRoche = false;
+                                    IsCraftArbre = true;
+                                }
+                                else
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftArbre = false;
+                                    IsCraftArbre = true;
+                                }
                             }
-                            else
-                            {
-                                cible = hit;
-                                R = ray;
-                                IsCraftArbre = false;
-                                IsCraftArbre = true;
-                            }
+
                         }
 
                         if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
@@ -90,20 +92,23 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
                         {
-                            if (IsCraftRoche == false)
+                            if (((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
                             {
-                                cible = hit;
-                                R = ray;
-                                IsCraftArbre = false;
-                                IsCraftFleur = false;
-                                IsCraftRoche = true;
-                            }
-                            else
-                            {
-                                cible = hit;
-                                R = ray;
-                                IsCraftRoche = false;
-                                IsCraftRoche = true;
+                                if (IsCraftRoche == false)
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftArbre = false;
+                                    IsCraftFleur = false;
+                                    IsCraftRoche = true;
+                                }
+                                else
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftRoche = false;
+                                    IsCraftRoche = true;
+                                }
                             }
                         }
 
@@ -118,21 +123,25 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Fleurs")) //same
                         {
-                            if (IsCraftFleur == false)
+                            if(((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
                             {
-                                cible = hit;
-                                R = ray;
-                                IsCraftArbre = false;
-                                IsCraftRoche = false;
-                                IsCraftFleur = true;
+                                if (IsCraftFleur == false)
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftArbre = false;
+                                    IsCraftRoche = false;
+                                    IsCraftFleur = true;
+                                }
+                                else
+                                {
+                                    cible = hit;
+                                    R = ray;
+                                    IsCraftFleur = false;
+                                    IsCraftFleur = true;
+                                }
                             }
-                            else
-                            {
-                                cible = hit;
-                                R = ray;
-                                IsCraftFleur = false;
-                                IsCraftFleur = true;
-                            }
+                        
                         }
 
                         if (hit.collider.CompareTag("FleursDrop"))//same
@@ -144,8 +153,8 @@ public class Recolte : MonoBehaviour
                             }
                         }
 
-                        if (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")
-                        {
+                        if ((hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > a * a))
+                    {
                             IsCraftRoche = false;
                             IsCraftFleur = false;
                             IsCraftArbre = false;
@@ -154,7 +163,7 @@ public class Recolte : MonoBehaviour
                     }
 
                 }
-            }
+            
         }
 
         if (IsCraftArbre == true)
