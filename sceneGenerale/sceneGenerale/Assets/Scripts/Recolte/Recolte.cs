@@ -44,7 +44,8 @@ public class Recolte : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-
+            if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a)
+            {
                 if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
                                                                                                                                                         //( pour éviter que le personnage ne selectionne un objet derriere le menu)
                 {
@@ -151,7 +152,8 @@ public class Recolte : MonoBehaviour
                         }
 
                     }
-                
+
+                }
             }
         }
 
