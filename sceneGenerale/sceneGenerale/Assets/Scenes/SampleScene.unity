@@ -4190,7 +4190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 90, y: 20}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297680641
@@ -9726,7 +9726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 90, y: 20}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428362999
@@ -15138,7 +15138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &713640625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16925,7 +16925,7 @@ Transform:
   - {fileID: 46424699}
   - {fileID: 1805654036}
   - {fileID: 2131246901}
-  - {fileID: 304142566}
+  - {fileID: 1964494643}
   - {fileID: 1695527492}
   m_Father: {fileID: 1365504351}
   m_RootOrder: 0
@@ -33232,7 +33232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 90, y: 20}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608799247
@@ -38878,6 +38878,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f654517a0cfac4799a2ba6609317aa, type: 3}
+--- !u!4 &1964494643 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8743030503283252245, guid: 48f654517a0cfac4799a2ba6609317aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1964494642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1966321838
 GameObject:
   m_ObjectHideFlags: 0
@@ -38914,7 +38920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 100, y: 10}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966321840
@@ -42477,6 +42483,8 @@ MonoBehaviour:
   Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
   Marteau: {fileID: 11400000, guid: f46c4c5022876974193167111fd7548f, type: 2}
   Hache: {fileID: 11400000, guid: cf6aa088148ee7a409c480d926407cf7, type: 2}
+  stadeAffichage: 0
+  empty: {fileID: 0}
 --- !u!95 &5514885086307765773
 Animator:
   serializedVersion: 3
