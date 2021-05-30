@@ -18,6 +18,8 @@ public class Deplacement : MonoBehaviour
 
     public Recolte recolte;
 
+    public Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class Deplacement : MonoBehaviour
         recolte = recolte.GetComponent<Recolte>();
         canmove = true;
 
+        player = this.GetComponent<Player>();
     }
     // Update is called once per frame
     void Update()
@@ -74,7 +77,7 @@ public class Deplacement : MonoBehaviour
             direction = new Vector3(0, 0, 0);
         }
 
-        if (recolte.IsCraftArbre) //Rajouter tous les booleens de chaque scripts qui doivent désactiver le déplacement
+        if (recolte.IsCraftArbre || player.uiInventory.activation) //Rajouter tous les booleens de chaque scripts qui doivent désactiver le déplacement
         {
             canmove = false;
         }
