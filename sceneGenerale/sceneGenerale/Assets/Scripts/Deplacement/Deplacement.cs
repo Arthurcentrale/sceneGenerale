@@ -36,7 +36,7 @@ public class Deplacement : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > recolte.a * recolte.a)
+                if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1)
                 {
                     outside = true;
                     Debut = new Vector3(Screen.width / 2, Screen.height / 2, 0);

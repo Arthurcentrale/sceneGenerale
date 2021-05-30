@@ -60,8 +60,8 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {
-                            if(((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
-                            {
+                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        {
                                 if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
                                 {
                                     cible = hit;
@@ -92,8 +92,8 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
                         {
-                            if (((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
-                            {
+                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        {
                                 if (IsCraftRoche == false)
                                 {
                                     cible = hit;
@@ -123,8 +123,8 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Fleurs")) //same
                         {
-                            if(((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) < a * a))
-                            {
+                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        {
                                 if (IsCraftFleur == false)
                                 {
                                     cible = hit;
@@ -153,8 +153,8 @@ public class Recolte : MonoBehaviour
                             }
                         }
 
-                        if ((hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| ((Input.mousePosition.x - Screen.width / 2) * (Input.mousePosition.x - Screen.width / 2) + (Input.mousePosition.y - Screen.height / 2) * (Input.mousePosition.y - Screen.height / 2) > a * a))
-                    {
+                        if ((hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
+                        {
                             IsCraftRoche = false;
                             IsCraftFleur = false;
                             IsCraftArbre = false;
