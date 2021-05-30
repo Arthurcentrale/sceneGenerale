@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.Events;
 
 [Serializable]
 public class Inventory
@@ -12,7 +13,8 @@ public class Inventory
 
     public Player player;
 
-    public event EventHandler OnItemListChanged;
+    public delegate void Inventory_OnItemListChanged();
+    public event Inventory_OnItemListChanged OnItemListChanged;
 
     public int sizeMaxStack;
 
@@ -33,6 +35,7 @@ public class Inventory
         return data;
     }
     */
+
 
     public Inventory(List<ItemAmount> itemList, List<ItemAmount> favList,Player player)
     {
@@ -85,7 +88,7 @@ public class Inventory
                     itemList.Add(new ItemAmount(Item: item.Item, Amount: x % p));
                 }
             }
-            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+            OnItemListChanged?.Invoke();
             return true;
         }
     }
@@ -102,13 +105,13 @@ public class Inventory
                 if (j > i) 
                 {
                     itemList[n].Amount -= item.Amount;
-                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                    OnItemListChanged?.Invoke();
                     return true;
                 }
                 else if (j == i)
                 {
                     itemList.RemoveAt(n);
-                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                    OnItemListChanged?.Invoke();
                     return true;
                 }
                 else
@@ -143,13 +146,13 @@ public class Inventory
         {
             return false;
         }
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        OnItemListChanged?.Invoke();
         return true;
     }
 
     public void DelFavAtIndex(int i) //supprime un item des favoris
     {
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
         favList.RemoveAt(i);
+        OnItemListChanged?.Invoke();
     }
 }
