@@ -14,10 +14,7 @@ public class UI_Inventory : MonoBehaviour
     private GameObject favSlotTemplate;
 
     private Transform favSlotContainerDepliement;
-    //private GameObject favSlotTemplate1;
-    //private GameObject favSlotTemplate2;
-    //private GameObject favSlotTemplate3;
-    //private GameObject favSlotTemplate4;
+    private Animator animator;
 
     private GameObject moveToFav;
     private bool boutonFavAffiche;
@@ -46,11 +43,8 @@ public class UI_Inventory : MonoBehaviour
         favSlotContainer = gameObject.transform.GetChild(0).GetChild(1);
         favSlotTemplate = favSlotContainer.GetChild(0).gameObject;
 
-        favSlotContainerDepliement = gameObject.transform.GetChild(0).GetChild(2);
-        //favSlotTemplate1 = favSlotContainerDepliement.GetChild(0).gameObject;
-        //favSlotTemplate2 = favSlotContainerDepliement.GetChild(1).gameObject;
-        //favSlotTemplate3 = favSlotContainerDepliement.GetChild(2).gameObject;
-        //favSlotTemplate4 = favSlotContainerDepliement.GetChild(3).gameObject;
+        favSlotContainerDepliement = gameObject.transform.GetChild(1);
+        animator = gameObject.GetComponent<Animator>();
 
         moveToFav = gameObject.transform.GetChild(0).GetChild(3).gameObject;
         boutonFavAffiche = false;
@@ -89,18 +83,18 @@ public class UI_Inventory : MonoBehaviour
     {
         if (stadeAffichage == 0)
         {
-            Debug.Log("Activation animation des favoris dépliants");
+            animator.SetTrigger("ouvrirInvFavs");
             stadeAffichage += 1;
         }
         else if (stadeAffichage == 1)
         {
-            Debug.Log("Desactivation animation des favoris dépliants");
+            animator.SetTrigger("fermerInvFavs");
             Background.SetActive(true);
             stadeAffichage += 1;
         }
         else
         {
-            Debug.Log("Animation des favoris dépliants");
+            animator.SetTrigger("ouvrirInvFavs");
             Background.SetActive(false);
             stadeAffichage -= 1;
         }
@@ -302,7 +296,6 @@ public class UI_Inventory : MonoBehaviour
     public void CopyToFav()
     {
         inventory.AddToFav(inventory.GetItemList()[slotSelected]);
-        Debug.Log("item ajouté");
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
@@ -310,7 +303,6 @@ public class UI_Inventory : MonoBehaviour
     public void DelFromFav()
     {
         inventory.DelFavAtIndex(slotSelected);
-        Debug.Log("item enlevé");
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
