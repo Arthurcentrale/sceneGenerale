@@ -15123,7 +15123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &713640625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18379,7 +18379,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: UpdateOuverture
+        m_MethodName: BouttonFermeture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -42439,10 +42439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ec2fb86c295ab43a732d901af265d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activation: 0
   Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
   Marteau: {fileID: 11400000, guid: f46c4c5022876974193167111fd7548f, type: 2}
   Hache: {fileID: 11400000, guid: cf6aa088148ee7a409c480d926407cf7, type: 2}
+  stadeAffichage: 0
   empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!223 &5514885086307765774
 Canvas:
@@ -43392,7 +43392,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: UpdateOuverture
+        m_MethodName: BouttonOuverture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -24,7 +24,6 @@ public class UI_Inventory : MonoBehaviour
     private int slotSelected;
     private bool prevoirAffichage;
 
-    public bool activation = false;
     GameObject Background;
 
     public Item Bois;
@@ -34,6 +33,8 @@ public class UI_Inventory : MonoBehaviour
     public static int xSizeMaxInv;
     public static int ySizeMaxInv;
     public static int nbrFavoris;
+
+    public int stadeAffichage;
 
     public Sprite empty;
 
@@ -66,16 +67,8 @@ public class UI_Inventory : MonoBehaviour
         xSizeMaxInv = 8;
         ySizeMaxInv = 3;
         nbrFavoris = 4;
-    }
 
-    void Update()
-    {   
-        
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            activation ^= true;
-            Background.SetActive(activation);
-        }
+        stadeAffichage = 0;
     }
 
     void LateUpdate ()
@@ -92,10 +85,31 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void UpdateOuverture()
+    public void BouttonOuverture()
     {
-        activation ^= true;
-        Background.SetActive(activation);
+        if (stadeAffichage == 0)
+        {
+            Debug.Log("Activation animation des favoris dépliants");
+            stadeAffichage += 1;
+        }
+        else if (stadeAffichage == 1)
+        {
+            Debug.Log("Desactivation animation des favoris dépliants");
+            Background.SetActive(true);
+            stadeAffichage += 1;
+        }
+        else
+        {
+            Debug.Log("Animation des favoris dépliants");
+            Background.SetActive(false);
+            stadeAffichage -= 1;
+        }
+    }
+
+    public void BouttonFermeture()
+    {
+        stadeAffichage = 0;
+        Background.SetActive(false);
     }
 
     public void SetInventory(Inventory _inventory)
