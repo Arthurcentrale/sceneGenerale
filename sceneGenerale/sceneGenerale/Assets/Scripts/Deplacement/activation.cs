@@ -7,6 +7,7 @@ public class activation : MonoBehaviour
     public Recolte recolte;
     public Deplacement deplacement;
     public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -12,7 +13,17 @@ public class UI_Inventory : MonoBehaviour
     private Transform favSlotContainer;
     private GameObject favSlotTemplate;
 
-    bool activation = false;
+    private Transform favSlotContainerDepliement;
+    //private GameObject favSlotTemplate1;
+    //private GameObject favSlotTemplate2;
+    //private GameObject favSlotTemplate3;
+    //private GameObject favSlotTemplate4;
+
+    private GameObject moveToFav;
+    private bool boutonFavAffiche;
+    private int slotSelected;
+    private bool prevoirAffichage;
+
     GameObject Background;
 
     public Item Bois;
@@ -21,6 +32,11 @@ public class UI_Inventory : MonoBehaviour
 
     public static int xSizeMaxInv;
     public static int ySizeMaxInv;
+    public static int nbrFavoris;
+
+    public int stadeAffichage;
+
+    public Sprite empty;
 
     public void Awake()
     {
@@ -30,47 +46,86 @@ public class UI_Inventory : MonoBehaviour
         favSlotContainer = gameObject.transform.GetChild(0).GetChild(1);
         favSlotTemplate = favSlotContainer.GetChild(0).gameObject;
 
+        favSlotContainerDepliement = gameObject.transform.GetChild(0).GetChild(2);
+        //favSlotTemplate1 = favSlotContainerDepliement.GetChild(0).gameObject;
+        //favSlotTemplate2 = favSlotContainerDepliement.GetChild(1).gameObject;
+        //favSlotTemplate3 = favSlotContainerDepliement.GetChild(2).gameObject;
+        //favSlotTemplate4 = favSlotContainerDepliement.GetChild(3).gameObject;
+
+        moveToFav = gameObject.transform.GetChild(0).GetChild(3).gameObject;
+        boutonFavAffiche = false;
+        moveToFav.SetActive(false);
+        slotSelected = 0;
+        prevoirAffichage = false;
+
         Background = transform.GetChild(0).gameObject;
         Background.SetActive(false);
 
         //WoodIcon = Resources.Load("Wood") as Sprite;
         //BerryIcon = Resources.Load("Berry") as Sprite;
 
-        xSizeMaxInv = 6;
-        ySizeMaxInv = 5;
+        xSizeMaxInv = 8;
+        ySizeMaxInv = 3;
+        nbrFavoris = 4;
+
+        stadeAffichage = 0;
     }
 
-    void Update()
-    {   
-        
-        if (Input.GetKeyDown(KeyCode.I))
+    void LateUpdate ()
+    {
+        if (boutonFavAffiche && Input.GetMouseButton(0))
         {
-            activation = !activation;
-            Background.SetActive(activation);
+            prevoirAffichage = true;
+        }
+        else if (prevoirAffichage)
+        {
+            prevoirAffichage = false;
+            boutonFavAffiche = false;
+            moveToFav.SetActive(false);
         }
     }
 
-    public void UpdateOuverture()
+    public void BouttonOuverture()
     {
-        activation = !activation;
-        Background.SetActive(activation);
+        if (stadeAffichage == 0)
+        {
+            Debug.Log("Activation animation des favoris dépliants");
+            stadeAffichage += 1;
+        }
+        else if (stadeAffichage == 1)
+        {
+            Debug.Log("Desactivation animation des favoris dépliants");
+            Background.SetActive(true);
+            stadeAffichage += 1;
+        }
+        else
+        {
+            Debug.Log("Animation des favoris dépliants");
+            Background.SetActive(false);
+            stadeAffichage -= 1;
+        }
+    }
+
+    public void BouttonFermeture()
+    {
+        stadeAffichage = 0;
+        Background.SetActive(false);
     }
 
     public void SetInventory(Inventory _inventory)
     {
         inventory = _inventory;
 
-        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 3));
-        inventory.AddItem(new ItemAmount(Item: Marteau, Amount: 2));
-        inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
-
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
+        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 2));
+        //inventory.AddItem(new ItemAmount(Item: Marteau, Amount: 2));
+        inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
 
         RefreshInventoryItems();
         RefreshInventoryFavoris();
     }
 
-    private void Inventory_OnItemListChanged(object sender,System.EventArgs e)
+    public void Inventory_OnItemListChanged()
     {
         RefreshInventoryItems();
         RefreshInventoryFavoris();
@@ -88,18 +143,18 @@ public class UI_Inventory : MonoBehaviour
         //puis on réaffiche l'inventaire actualisé
         int x = 0;
         int y = 0;
-        float itemSlotSize = 50f;
+        float itemSlotSize = 66.84f;
         foreach(ItemAmount item in inventory.GetItemList())
         {
             //Debug.Log(item.Item.ItemName);
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate,itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
             itemSlotRectTransform.gameObject.name = (x + y*x).ToString();
-            itemSlotRectTransform.anchoredPosition = new Vector2(60 + x * itemSlotSize,-y * itemSlotSize - 40);
+            itemSlotRectTransform.anchoredPosition = new Vector2(43.5f + x * itemSlotSize,-47f -y * itemSlotSize);
             
-            Image image = itemSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Image>();
+            Image image = itemSlotRectTransform.transform.GetChild(0).gameObject.GetComponent<Image>();
             image.sprite = item.Item.Icon;
-            Text amountText = itemSlotRectTransform.transform.GetChild(2).gameObject.GetComponent<Text>();
+            Text amountText = itemSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Text>();
             if (item.Amount > 1)
             {
                 amountText.text = item.Amount.ToString();
@@ -120,7 +175,7 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.anchoredPosition = new Vector2(60 + x * itemSlotSize, -y * itemSlotSize - 40);
+            itemSlotRectTransform.anchoredPosition = new Vector2(43.5f + x * itemSlotSize,-47f -y * itemSlotSize);
 
             x++;
             if (x >= xSizeMaxInv)
@@ -142,17 +197,19 @@ public class UI_Inventory : MonoBehaviour
 
         //puis on réaffiche l'inventaire actualisé
         int x = 0;
-        float itemSlotSize = 50f;
+        float itemSlotSize = 66.84f;
         foreach (ItemAmount item in inventory.GetFavList())
         {
+            // On refresh d'abord les favoris dans l'inventaire principal
+
             RectTransform favSlotRectTransform = Instantiate(favSlotTemplate, favSlotContainer).GetComponent<RectTransform>();
             favSlotRectTransform.gameObject.SetActive(true);
             favSlotRectTransform.gameObject.name = x.ToString();
-            favSlotRectTransform.anchoredPosition = new Vector2(60 + x * itemSlotSize,- 30);
+            favSlotRectTransform.anchoredPosition = new Vector2(46.49f + x * itemSlotSize,- 41.09f);
 
-            Image image = favSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Image>();
+            Image image = favSlotRectTransform.transform.GetChild(0).gameObject.GetComponent<Image>();
             image.sprite = item.Item.Icon;
-            Text amountText = favSlotRectTransform.transform.GetChild(2).gameObject.GetComponent<Text>();
+            Text amountText = favSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Text>();
             if (item.Amount > 1)
             {
                 amountText.text = item.Amount.ToString();
@@ -162,13 +219,37 @@ public class UI_Inventory : MonoBehaviour
                 amountText.text = "";
             }
 
+            // Ensuite on refresh les favoris dans le petit menu depliant
+
+            Transform favSlotTemplate1 = favSlotContainerDepliement.GetChild(x);
+            image = favSlotTemplate1.GetChild(0).gameObject.GetComponent<Image>();
+            image.sprite = item.Item.Icon;
+            amountText = favSlotTemplate1.GetChild(1).gameObject.GetComponent<Text>();
+            if (item.Amount > 1)
+            {
+                amountText.text = item.Amount.ToString();
+            }
+            else
+            {
+                amountText.text = "";
+            }
             x++;
         }
-        while (x < xSizeMaxInv)
+        while (x < nbrFavoris)
         {
+            // On refresh d'abord les favoris dans l'inventaire principal
+
             RectTransform favSlotRectTransform = Instantiate(favSlotTemplate, favSlotContainer).GetComponent<RectTransform>();
             favSlotRectTransform.gameObject.SetActive(true);
-            favSlotRectTransform.anchoredPosition = new Vector2(60 + x * itemSlotSize, -30);
+            favSlotRectTransform.anchoredPosition = new Vector2(46.49f + x * itemSlotSize, -41.09f);
+
+            // Ensuite on refresh les favoris dans le petit menu depliant
+
+            Transform favSlotTemplate1 = favSlotContainerDepliement.GetChild(x);
+            Image image = favSlotTemplate1.GetChild(0).gameObject.GetComponent<Image>();
+            image.sprite = empty;
+            Text amountText = favSlotTemplate1.GetChild(1).gameObject.GetComponent<Text>();
+            amountText.text = "";
 
             x++;
         }
@@ -177,21 +258,61 @@ public class UI_Inventory : MonoBehaviour
     public void AfficheBoutonFav(Transform slotInv)
     {
         //Instantiate(MoveToFav_pref, slotInv).transform.SetSiblingIndex(0);
-        slotInv.GetChild(0).gameObject.SetActive(true);
+        string name = slotInv.gameObject.name;
+        if (name.Length < 3)
+        {
+            Vector3 pos = slotInv.position;
+            //pos.x += 10f;
+            //pos.y += 25f;
+            moveToFav.transform.position = pos;
+            slotSelected = int.Parse(name);
+            moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Mettre en favoris";
+
+            Button button = moveToFav.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(CopyToFav);
+
+            boutonFavAffiche = true;
+            moveToFav.SetActive(true);
+        }
     }
 
-    public void CopyToFav(Transform buttonSlot)
+    public void AfficheBoutonEnleverFav(Transform slotInv)
     {
-        int i = int.Parse(buttonSlot.gameObject.name);
-        inventory.AddToFav(inventory.GetItemList()[i]);
-        buttonSlot.GetChild(2).gameObject.SetActive(false);
+        //Instantiate(MoveToFav_pref, slotInv).transform.SetSiblingIndex(0);
+        string name = slotInv.gameObject.name;
+        if (name.Length < 3)
+        {
+            Vector3 pos = slotInv.position;
+            //pos.x += 10f;
+            //pos.y += 25f;
+            moveToFav.transform.position = pos;
+            slotSelected = int.Parse(name);
+            moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Enlever des favoris";
+
+            Button button = moveToFav.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(DelFromFav);
+
+            boutonFavAffiche = true;
+            moveToFav.SetActive(true);
+        }
     }
 
-    public void DelFromFav(Transform buttonSlot)
+    public void CopyToFav()
     {
-        int i = int.Parse(buttonSlot.gameObject.name);
-        inventory.DelFavAtIndex(i);
-        buttonSlot.GetChild(0).gameObject.SetActive(false);
+        inventory.AddToFav(inventory.GetItemList()[slotSelected]);
+        Debug.Log("item ajouté");
+        //boutonFavAffiche = false;
+        //moveToFav.SetActive(false);
+    }
+
+    public void DelFromFav()
+    {
+        inventory.DelFavAtIndex(slotSelected);
+        Debug.Log("item enlevé");
+        //boutonFavAffiche = false;
+        //moveToFav.SetActive(false);
     }
 
     public int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
