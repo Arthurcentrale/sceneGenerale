@@ -74,7 +74,7 @@ public class Utils : MonoBehaviour
             case 2:
                 return "Pin";
 
-            case 3:
+            /*case 3:
                 return "Platane";
 
             /*
