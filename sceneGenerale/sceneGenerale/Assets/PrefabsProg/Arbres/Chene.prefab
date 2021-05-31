@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 5381365148148334873}
   - component: {fileID: 5381365148148334878}
   - component: {fileID: 5381365148148334879}
+  - component: {fileID: 4126793504678627731}
   m_Layer: 0
   m_Name: Chene
   m_TagString: Arbre
@@ -189,12 +190,25 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381365148148334876}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &4126793504678627731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381365148148334876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.635547, y: 4.9999995, z: 1.0653617}
+  m_Center: {x: 0.30903438, y: 0.00000053670135, z: -4.5342083}
 --- !u!1001 &5381365148745478393
 PrefabInstance:
   m_ObjectHideFlags: 0
