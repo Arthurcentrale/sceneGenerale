@@ -414,6 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7412032487966391309}
   - component: {fileID: 1558073722906425081}
+  - component: {fileID: 4149848409206126319}
   m_Layer: 0
   m_Name: "connif\xE8re_OK"
   m_TagString: Untagged
@@ -429,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4176683313046169536}
   m_LocalRotation: {x: 0.7163019, y: 0, z: 0, w: 0.69779044}
-  m_LocalPosition: {x: 121.5, y: 0, z: 22.564348}
+  m_LocalPosition: {x: 122.95, y: 0, z: 22.564348}
   m_LocalScale: {x: 2.5, y: 3, z: 2}
   m_Children:
   - {fileID: 8443415028689288358}
@@ -460,6 +461,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &4149848409206126319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176683313046169536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1919937, y: 0.69385886, z: 4.4443755}
+  m_Center: {x: 4.9739084, y: 0.15307052, z: -0.343781}
 --- !u!1 &4847899933355178469
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +707,7 @@ MonoBehaviour:
   - {fileID: 7879409609837469060}
   - {fileID: 602767825466656518}
   m_Bounds:
-    m_Center: {x: 4.8097577, y: -0.7731056, z: -0.00000000763776}
-    m_Extent: {x: 0.8350005, y: 0.8724152, z: 0.000000009245874}
+    m_Center: {x: 4.809757, y: -0.7731056, z: -0.00000000763776}
+    m_Extent: {x: 0.8350003, y: 0.8724152, z: 0.000000009245874}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
