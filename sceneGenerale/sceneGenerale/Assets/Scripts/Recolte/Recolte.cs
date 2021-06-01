@@ -12,6 +12,7 @@ public class Recolte : MonoBehaviour
     public Button buttonA1, buttonA2, buttonA3; // boutons sur la panel pour l'arbre
     public Button buttonR1, buttonR2, buttonR3; // boutons pour roche
     public Button buttonF1, buttonF2, buttonF3; // boutons pour fleurs
+    private Sprite boutonInfo; //pour l'anim
     RaycastHit cible; //pour cibler un gameobject
     public Inventaire inventaire;//script de l'inventaire
     Ray R; //raycast 
@@ -23,6 +24,7 @@ public class Recolte : MonoBehaviour
     new public Camera camera;//longueur et largerur des menus de récolte
 
     public Player player;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class Recolte : MonoBehaviour
         width = FondA.GetComponent<RectTransform>().rect.width;
         a = Screen.height / 3;
         player = this.GetComponent<Player>();
+        
+        animator = FondA.transform.GetChild(0).GetComponent<Animator>(); // Pour faire fonctionner les anims
     }
     // Update is called once per frame
     void Update()
@@ -178,6 +182,8 @@ public class Recolte : MonoBehaviour
                 buttonA1.interactable = false;
             }
             FondA.SetActive(true);
+            
+            animator.SetTrigger("ouverture1BulleCouper");
         }
         else
         {

@@ -94,7 +94,7 @@ public class UI_Inventory : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("ouvrirInvFavs");
+            animator.SetTrigger("ouverture1BulleCouper");
             Background.SetActive(false);
             stadeAffichage -= 1;
         }
