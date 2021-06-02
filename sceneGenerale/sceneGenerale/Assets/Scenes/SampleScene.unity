@@ -21361,7 +21361,6 @@ GameObject:
   - component: {fileID: 520238110}
   - component: {fileID: 520238112}
   - component: {fileID: 520238111}
-  - component: {fileID: 520238113}
   - component: {fileID: 520238115}
   - component: {fileID: 520238114}
   m_Layer: 0
@@ -21483,18 +21482,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &520238113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520238106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3146c708eb2e58549944d677cc06f9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &520238114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27722,7 +27709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 38.000732, y: -69.999985}
+  m_AnchoredPosition: {x: 38.000717, y: -69.999985}
   m_SizeDelta: {x: 371.54163, y: 56.09735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713640626
@@ -48935,7 +48922,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1301035919}
-  - component: {fileID: 1301035920}
   m_Layer: 5
   m_Name: Perso principal
   m_TagString: Untagged
@@ -48963,18 +48949,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1301035920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301035918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e7cdabe7c4ab846b15821b52c4918a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1302784525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52764,7 +52738,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370019099}
-  - component: {fileID: 1370019100}
   - component: {fileID: 1370019101}
   m_Layer: 5
   m_Name: Empty script constru 2
@@ -52792,18 +52765,6 @@ RectTransform:
   m_AnchoredPosition: {x: 542, y: 260.625}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1370019100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370019098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fceebb130880cf641a99b4baecedf00b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1370019101
 MonoBehaviour:
   m_ObjectHideFlags: 0
