@@ -159,6 +159,7 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
                         {
+                            animator.SetTrigger("fermetture1BulleCouper");
                             IsCraftRoche = false;
                             IsCraftFleur = false;
                             IsCraftArbre = false;
