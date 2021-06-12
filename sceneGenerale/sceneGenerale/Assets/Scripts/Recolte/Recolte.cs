@@ -60,7 +60,7 @@ public class Recolte : MonoBehaviour
                     if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                     {
                         mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                        rect = new Rect(mP.x, mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
+                        rect = new Rect(mP.x , mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {

@@ -11,6 +11,7 @@ public class Crafting2 : MonoBehaviour
     public GameObject Player; //on veut recuperer le script inventaire sur le joueur
     public RecetteCraft recettecraft; // la recette que l'on veut craft
     public Button Inc, Dec;
+    GameObject BoutonsCrafting;
     public Text text;
     public Button bFond;
     Button button; 
@@ -18,12 +19,13 @@ public class Crafting2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BoutonsCrafting = GameObject.Find("Menus/Crafting/MenuAtelierFabrication/BoutonsCrafting");
         bFond = bFond.GetComponent<Button>();
-        bFond.onClick.AddListener(UpdateFond);
+        bFond.onClick.AddListener(TaskOnClick);
         Count = 1;
         inventaire = inventaire.GetComponent<Inventaire>();
         button = GetComponent<Button>();
-        button.onClick.AddListener(TaskOnClick);
+        button.onClick.AddListener(UpdateFond);
         Inc = Inc.GetComponent<Button>();
         Dec = Dec.GetComponent<Button>();
         Inc.onClick.AddListener(Increment);
@@ -248,6 +250,7 @@ public class Crafting2 : MonoBehaviour
     {
         for (int j = 0; j < Fond.transform.childCount; j++)
         {
+            BoutonsCrafting.SetActive(false);
             Fond.transform.GetChild(j).gameObject.SetActive(false);
             FondaActiver.SetActive(true);
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();

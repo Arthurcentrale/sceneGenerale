@@ -65,7 +65,7 @@ public class UI_Inventory : MonoBehaviour
         stadeAffichage = 0;
     }
 
-    void LateUpdate ()
+    void LateUpdate ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
     {
         if (boutonFavAffiche && Input.GetMouseButton(0))
         {
@@ -79,20 +79,19 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void BouttonOuverture()
+    public void BouttonOuverture()   //on clique sur le bouton inventaire
     {
-        if (stadeAffichage == 0)
+        if (stadeAffichage == 0)   //inventaire fermé
         {
             animator.SetTrigger("ouvrirInvFavs");
             stadeAffichage += 1;
         }
-        else if (stadeAffichage == 1)
+        else if (stadeAffichage == 1)   //favoris dépliés
         {
             animator.SetTrigger("fermerInvFavs");
-            Background.SetActive(true);
-            stadeAffichage += 1;
-        }
-        else
+            StartCoroutine(DelayOuvertureInv(1f));
+        }   
+        else                      //inventaire complet ouvert
         {
             animator.SetTrigger("ouverture1BulleCouper");
             Background.SetActive(false);
@@ -100,13 +99,22 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void BouttonFermeture()
+    IEnumerator DelayOuvertureInv(float delayTime) //ouverture inventaire complet avec un delai
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        Background.SetActive(true);
+        stadeAffichage += 1;
+    }
+
+
+    public void BouttonFermeture()   //clique sur croix avec inventaire complet ouvert
     {
         stadeAffichage = 0;
         Background.SetActive(false);
     }
 
-    public void SetInventory(Inventory _inventory)
+    public void SetInventory(Inventory _inventory)   //initialisation de l'inventaire
     {
         inventory = _inventory;
 
@@ -119,7 +127,7 @@ public class UI_Inventory : MonoBehaviour
         RefreshInventoryFavoris();
     }
 
-    public void Inventory_OnItemListChanged()
+    public void Inventory_OnItemListChanged()   //event qui actionne le refresh de l'inventaire
     {
         RefreshInventoryItems();
         RefreshInventoryFavoris();
@@ -249,11 +257,10 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void AfficheBoutonFav(Transform slotInv)
+    public void AfficheBoutonFav(Transform slotInv)   //on affiche le bouton qui permet d'ajouter un objet aux favoris
     {
-        //Instantiate(MoveToFav_pref, slotInv).transform.SetSiblingIndex(0);
         string name = slotInv.gameObject.name;
-        if (name.Length < 3)
+        if (name.Length < 3) //on vérifie qu'il y avait bien un objet dans ce slot (si il est renommé par un nombre à 1 ou 2 chiffres)
         {
             Vector3 pos = slotInv.position;
             //pos.x += 10f;
@@ -271,9 +278,8 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void AfficheBoutonEnleverFav(Transform slotInv)
+    public void AfficheBoutonEnleverFav(Transform slotInv)   //on affiche le bouton qui permet d'enlever un objet des favoris
     {
-        //Instantiate(MoveToFav_pref, slotInv).transform.SetSiblingIndex(0);
         string name = slotInv.gameObject.name;
         if (name.Length < 3)
         {
@@ -293,14 +299,14 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void CopyToFav()
+    public void CopyToFav()   //ajoute un item à la liste 'inventaire'
     {
         inventory.AddToFav(inventory.GetItemList()[slotSelected]);
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
 
-    public void DelFromFav()
+    public void DelFromFav()     //enleve un item à la liste 'inventaire'
     {
         inventory.DelFavAtIndex(slotSelected);
         //boutonFavAffiche = false;
