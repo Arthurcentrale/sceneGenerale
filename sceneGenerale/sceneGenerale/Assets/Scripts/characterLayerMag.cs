@@ -26,5 +26,33 @@ public class characterLayerMag : MonoBehaviour
             Renderer rend = go.GetComponent<SpriteRenderer>();
             rend.sortingOrder = 868 - z;
         }
+
+        GameObject[] characterForward = GameObject.FindGameObjectsWithTag("characterForward");
+
+        foreach (GameObject go in characterForward)
+        {
+            int z = (int)go.transform.position[2];
+            Renderer rend = go.GetComponent<SpriteRenderer>();
+            rend.sortingOrder = 868 - z+10;
+        }
+
+        GameObject[] characterBack = GameObject.FindGameObjectsWithTag("characterBack");
+
+        foreach (GameObject go in characterBack)
+        {
+            int z = (int)go.transform.position[2];
+            Renderer rend = go.GetComponent<SpriteRenderer>();
+            rend.sortingOrder = 868 - z-3;
+        }
+
+        GameObject[] ombres = GameObject.FindGameObjectsWithTag("ombre");
+
+        foreach (GameObject go in ombres)
+        {
+            int z = (int)go.transform.position[2];
+            Renderer rend = go.GetComponent<SpriteRenderer>();
+            rend.sortingOrder = 868 - z-50;
+        }
+
     }
 }
