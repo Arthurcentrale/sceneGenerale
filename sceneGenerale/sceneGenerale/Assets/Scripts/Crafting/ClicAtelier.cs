@@ -39,6 +39,7 @@ public class ClicAtelier : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     open = true;
                     rectTransform = panel.GetComponent<RectTransform>();
+                    Deplacement.enMenu=true;
                 }
 
             }
@@ -55,9 +56,11 @@ public class ClicAtelier : MonoBehaviour
     {
         panel.gameObject.SetActive(false);
         open = false;
+        Deplacement.enMenu=false;
     }
     void closebigpanel()
     {
         open = false;
+        Deplacement.enMenu=false;
     }
 }
