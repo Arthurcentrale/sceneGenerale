@@ -541,4 +541,12 @@ public class Recolte : MonoBehaviour
         */
         player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
+
+   /* private void OnGUI()
+    {
+        if (IsCraftArbre)
+        {
+            GUI.Box(rect,"cc");
+        }
+    }*/
 }
