@@ -5,9 +5,9 @@ using UnityEngine;
 public class HabitantManager : MonoBehaviour
 {
     //liste de tous les habitants du jeu
-    public GameObject[] habitants;
+    public List<GameObject> habitants;
 
-    public List<GameObject> hierarchyHabitants;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +22,9 @@ public class HabitantManager : MonoBehaviour
 
 
     //fonction qu'on appelle à chaque fois qu'il y a un nouvel habitant qui rejoint la communauté (et dont la variable isVillager vaut true)
-    void modifyHierarchy(GameObject newHabitant)
+    void addHabitant(GameObject newHabitant)
     {
-        hierarchyHabitants.Add(newHabitant);
+        habitants.Add(newHabitant);
     }
 }
 

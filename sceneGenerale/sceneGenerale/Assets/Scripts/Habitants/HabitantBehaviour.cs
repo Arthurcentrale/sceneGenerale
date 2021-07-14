@@ -13,16 +13,17 @@ public class HabitantBehaviour : MonoBehaviour
     public Sprite image;
 
     //besoins et déchets
-    public float food_qty;
-    public float food_vrty;
+    public float foodQuantity;
+    public float foodVariety;
     public float waste;
 
     //niveau d'écosensibilisation
-    public float ecopoints;
+    public float ecoPoints;
+    public int ecoLevel;
+    private int ecoPointsMax = 101;
 
     //statut dans l'aventure
     public bool isVillager = false;
-    public bool readyToWork = false;
 
     //conditions = bâtiments nécessaires pour qu'il puisse travailler et autres
 
@@ -36,16 +37,29 @@ public class HabitantBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goToMairie();
         
     }
 
     //fonction dépalçant un personnage disponible mais pas prêt à travailler près de la mairie
     void goToMairie()
-    {
-        if (isVillager && !readyToWork)
-        {
+    {       
             transform.position = mairiePosition;
+    }
+
+    void levelUp()
+    {
+        if (ecoPoints <30 && ecoPoints >=10)
+        {
+            ecoLevel = 2;
+        } else if (ecoPoints < 60 && ecoPoints >= 30)
+        {
+            ecoLevel = 3;
+        } else if (ecoPoints < 100 && ecoPoints >= 60)
+        {
+            ecoLevel = 4;
+        } else if (ecoPoints == 101)
+        {
+            ecoLevel = 5;
         }
     }
     
