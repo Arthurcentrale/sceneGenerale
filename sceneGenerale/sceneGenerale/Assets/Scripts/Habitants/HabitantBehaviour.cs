@@ -5,7 +5,8 @@ using UnityEngine;
 public class HabitantBehaviour : MonoBehaviour
 {
     //variables générales :
-    public Vector3 mairiePosition = new Vector3(0, 0, 0); //donne l'endroit où les habitants se rendent quand ils sont recrutables et qu'ils ne sont pas encore logés
+    public Vector3 originalPosition;
+    public Vector3 mairiePosition; //donne l'endroit où les habitants se rendent quand ils sont recrutables et qu'ils ne sont pas encore logés
 
     public string nom;
 
