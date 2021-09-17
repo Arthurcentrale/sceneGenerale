@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Recolte : MonoBehaviour
 {
+    //SoundDesign part
+    public AudioClip treeChop;
+
+    //Concrete part
     public bool IsCraftArbre; //bool pour ouvrir le menu pour couper l'arbre
     public bool IsCraftRoche; //same
     public bool IsCraftFleur; //same
