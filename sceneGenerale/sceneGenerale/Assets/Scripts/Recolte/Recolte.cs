@@ -7,6 +7,7 @@ public class Recolte : MonoBehaviour
 {
     //SoundDesign part
     public AudioClip treeChop;
+    private AudioSource audioSource;
 
     //Concrete part
     public bool IsCraftArbre; //bool pour ouvrir le menu pour couper l'arbre
@@ -33,6 +34,8 @@ public class Recolte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         inventaire = inventaire.GetComponent<Inventaire>();
         buttonA1 = buttonA1.GetComponent<Button>();
         buttonA1.onClick.AddListener(SpawnBuche); // le boutons A1 servira a Couper l'arbre et récuperer les buches
@@ -226,6 +229,7 @@ public class Recolte : MonoBehaviour
 
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
+        audioSource.PlayOneShot(treeChop);
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
