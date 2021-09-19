@@ -7,6 +7,7 @@ public class Recolte : MonoBehaviour
 {
     //SoundDesign part
     public AudioClip treeChop;
+    public AudioClip apparitionBulle;
     private AudioSource audioSource;
 
     //Concrete part
@@ -73,6 +74,7 @@ public class Recolte : MonoBehaviour
                         {
                         if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
                         {
+                                audioSource.PlayOneShot(apparitionBulle);
                                 if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
                                 {
                                     cible = hit;
@@ -80,6 +82,7 @@ public class Recolte : MonoBehaviour
                                     IsCraftFleur = false;
                                     IsCraftRoche = false;
                                     IsCraftArbre = true;
+                                
                                 }
                                 else
                                 {
@@ -87,7 +90,8 @@ public class Recolte : MonoBehaviour
                                     R = ray;
                                     IsCraftArbre = false;
                                     IsCraftArbre = true;
-                                }
+                                    
+                            }
                             }
 
                         }
