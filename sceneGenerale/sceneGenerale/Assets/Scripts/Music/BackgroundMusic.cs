@@ -8,8 +8,8 @@ public class BackgroundMusic : MonoBehaviour
     public AudioClip[] musics;
     private AudioSource source;
     private float timebreak = 5.0f;
-    public AudioClip ambiantSound;
     private float volume = 4;
+    private float volumeBeach = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,11 @@ public class BackgroundMusic : MonoBehaviour
             
             yield return (new WaitForSeconds(timebreak));
             source.clip = musics[Random.Range(0, musics.Length)];
-            source.PlayOneShot(source.clip,volume);
+            if (source.clip.name == "Beach")
+            {
+                source.PlayOneShot(source.clip, volumeBeach);
+            }
+            else source.PlayOneShot(source.clip,volume);
             yield return (new WaitForSeconds(source.clip.length + timebreak * 2));
             
         }

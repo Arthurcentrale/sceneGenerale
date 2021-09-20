@@ -2572,8 +2572,7 @@ MonoBehaviour:
   musics:
   - {fileID: 8300000, guid: 29799625e8e28b7448ddbf79332e6907, type: 3}
   - {fileID: 8300000, guid: 7b6a1d125b5838348964c49a3bf447bb, type: 3}
-  - {fileID: 8300000, guid: 7b6a1d125b5838348964c49a3bf447bb, type: 3}
-  ambiantSound: {fileID: 8300000, guid: a38ae269317ffc84699eb3c618d9bd82, type: 3}
+  - {fileID: 8300000, guid: a38ae269317ffc84699eb3c618d9bd82, type: 3}
 --- !u!4 &72894419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5703808696273022303, guid: 4973306639f022247a42c4fa988bd58a,
@@ -37352,6 +37351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301154262608991385, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4301154262656965735, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
         type: 3}
