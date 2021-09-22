@@ -39,7 +39,10 @@ public class Recolte : MonoBehaviour
 
         inventaire = inventaire.GetComponent<Inventaire>();
         buttonA1 = buttonA1.GetComponent<Button>();
-        buttonA1.onClick.AddListener(SpawnBuche); // le boutons A1 servira a Couper l'arbre et récuperer les buches
+        buttonA1.onClick.AddListener(SpawnBuche);
+        buttonA2 = buttonA2.GetComponent<Button>();
+        buttonA2.onClick.AddListener(SpawnBuche);
+        // le boutons A1 servira a Couper l'arbre et récuperer les buches
         buttonF1 = buttonF1.GetComponent<Button>();
         buttonF1.onClick.AddListener(SpawnFleurs);
         buttonR1 = buttonR1.GetComponent<Button>();
@@ -68,7 +71,7 @@ public class Recolte : MonoBehaviour
                     if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                     {
                         mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                        rect = new Rect(mP.x , mP.y - height, width, height); // on crée le rectangle du menus pour vérifier avec le contains
+                        rect = new Rect(mP.x - width /3, mP.y - height/2, width, height); // on crée le rectangle du menus pour vérifier avec le contains
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {
@@ -184,14 +187,16 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftArbre == true)
         {
-            FondA.transform.position = new Vector2(mP.x, mP.y );
+            FondA.transform.position = new Vector2(mP.x - width / 3, mP.y + height / 2);
             if (CountItem("Hache") > 0)
             {
                 buttonA1.interactable = true;
+                buttonA2.interactable = true;
             }
             else
             {
                 buttonA1.interactable = false;
+                buttonA2.interactable = false;
             }
             FondA.SetActive(true);
             
@@ -204,7 +209,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftRoche == true)
         {
-            FondR.transform.position = new Vector2(mP.x, mP.y );
+            FondR.transform.position = new Vector2(mP.x - width/3, mP.y - height/2);
             if (CountItem("Pioche") > 0)
             {
                 buttonR1.interactable = true;
