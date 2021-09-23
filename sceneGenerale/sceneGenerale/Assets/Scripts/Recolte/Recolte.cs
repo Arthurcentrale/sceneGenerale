@@ -38,7 +38,7 @@ public class Recolte : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        onPanel = false;
+        onPanel = true ;
         inventaire = inventaire.GetComponent<Inventaire>();
         buttonA1 = buttonA1.GetComponent<Button>();
         buttonA1.onClick.AddListener(SpawnBuche);
@@ -61,6 +61,7 @@ public class Recolte : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("OnPanel = " + onPanel);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {   
                 if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && onPanel == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
