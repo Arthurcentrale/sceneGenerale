@@ -13,7 +13,8 @@ public class Recolte : MonoBehaviour
     //Concrete part
     public bool IsCraftArbre; //bool pour ouvrir le menu pour couper l'arbre
     public bool IsCraftRoche; //same
-    public bool IsCraftFleur; //same
+    public bool IsCraftFleur;
+    private bool onPanel;//same
     public GameObject FondA, FondR, FondF; //panel à activer pour la récolte
     public Button buttonA1, buttonA2, buttonA3; // boutons sur la panel pour l'arbre
     public Button buttonR1, buttonR2, buttonR3; // boutons pour roche
@@ -37,11 +38,14 @@ public class Recolte : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
+        onPanel = false;
         inventaire = inventaire.GetComponent<Inventaire>();
         buttonA1 = buttonA1.GetComponent<Button>();
         buttonA1.onClick.AddListener(SpawnBuche);
         buttonA2 = buttonA2.GetComponent<Button>();
         buttonA2.onClick.AddListener(SpawnBuche);
+        buttonA3 = buttonA3.GetComponent<Button>();
+        buttonA3.onClick.AddListener(ClickOnPanel);
         // le boutons A1 servira a Couper l'arbre et récuperer les buches
         buttonF1 = buttonF1.GetComponent<Button>();
         buttonF1.onClick.AddListener(SpawnFleurs);
@@ -59,7 +63,7 @@ public class Recolte : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {   
-                if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && (rect.Contains(new Vector2(Input.mousePosition.x, Input.mousePosition.y))) == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
+                if ((IsCraftArbre | IsCraftFleur | IsCraftRoche) && onPanel == true) // si un des menus est ouvert et qu'on clique dedans, on ne crée pas de raycast
                                                                                                                                                         //( pour éviter que le personnage ne selectionne un objet derriere le menu)
                 {
                 }
@@ -71,11 +75,12 @@ public class Recolte : MonoBehaviour
                     if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                     {
                         mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                        rect = new Rect(mP.x - width /3, mP.y - height/2, width, height); // on crée le rectangle du menus pour vérifier avec le contains
+                        //rect = new Rect(mP.x - width /3, mP.y - height/2, width, height);
+                        //rectransform.rect = RectTransformToScreenSpace(rectransform);// on crée le rectangle du menus pour vérifier avec le contains
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {
-                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        if (onPanel == true || IsCraftArbre == false)
                         {
                                 audioSource.PlayOneShot(apparitionBulle);
                                 if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
@@ -187,7 +192,7 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftArbre == true)
         {
-            FondA.transform.position = new Vector2(mP.x - width / 3, mP.y + height / 2);
+            FondA.transform.position = new Vector2(mP.x - width / 3, mP.y + height);
             if (CountItem("Hache") > 0)
             {
                 buttonA1.interactable = true;
@@ -560,11 +565,19 @@ public class Recolte : MonoBehaviour
         player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
 
-   /* private void OnGUI()
+    /* private void OnGUI()
+     {
+         if (IsCraftArbre)
+         {
+             GUI.Box(rect,"cc");
+         }
+     }*/
+
+    void ClickOnPanel()
     {
-        if (IsCraftArbre)
-        {
-            GUI.Box(rect,"cc");
-        }
-    }*/
+        Debug.Log("Je clic sur le panel");
+        onPanel = true;
+    }
+
+
 }
