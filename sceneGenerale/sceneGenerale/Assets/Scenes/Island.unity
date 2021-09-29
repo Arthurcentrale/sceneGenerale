@@ -9888,7 +9888,7 @@ GameObject:
   - component: {fileID: 297680641}
   - component: {fileID: 297680643}
   m_Layer: 5
-  m_Name: FavSlotTemplate
+  m_Name: FavSlotTemplate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9912,8 +9912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: 100}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 92.6, y: 97.4}
+  m_SizeDelta: {x: 47.378563, y: 47.378563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297680641
 MonoBehaviour:
@@ -17697,7 +17697,7 @@ GameObject:
   - component: {fileID: 428363000}
   - component: {fileID: 428362999}
   m_Layer: 5
-  m_Name: FavSlotTemplate (2)
+  m_Name: FavSlotTemplate3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17721,8 +17721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: 100}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 92.6, y: 97.4}
+  m_SizeDelta: {x: 47.378563, y: 47.378563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428362999
 MonoBehaviour:
@@ -23228,7 +23228,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: AfficheBoutonFav
+        m_MethodName: EquiperFav
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 297680640}
@@ -28306,7 +28306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 38.000732, y: -70}
+  m_AnchoredPosition: {x: 21.299988, y: -43.5}
   m_SizeDelta: {x: 371.54163, y: 56.09735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713640626
@@ -40231,7 +40231,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: AfficheBoutonFav
+        m_MethodName: EquiperFav
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 428362998}
@@ -63283,7 +63283,7 @@ GameObject:
   - component: {fileID: 1608799248}
   - component: {fileID: 1608799247}
   m_Layer: 5
-  m_Name: FavSlotTemplate (1)
+  m_Name: FavSlotTemplate2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63307,8 +63307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: 100}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 92.6, y: 97.4}
+  m_SizeDelta: {x: 47.378563, y: 47.378563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608799247
 MonoBehaviour:
@@ -64422,7 +64422,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: AfficheBoutonFav
+        m_MethodName: EquiperFav
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1608799246}
@@ -70609,7 +70609,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5514885086307765772}
-        m_MethodName: AfficheBoutonFav
+        m_MethodName: EquiperFav
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1966321839}
@@ -74898,7 +74898,7 @@ GameObject:
   - component: {fileID: 1966321841}
   - component: {fileID: 1966321840}
   m_Layer: 5
-  m_Name: FavSlotTemplate (3)
+  m_Name: FavSlotTemplate4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74912,7 +74912,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966321838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1833530173}
@@ -74922,8 +74922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: 100}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 92.6, y: 97.4}
+  m_SizeDelta: {x: 47.378563, y: 47.378563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1966321840
 MonoBehaviour:
@@ -85272,10 +85272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ec2fb86c295ab43a732d901af265d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 967425356}
   Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
   Marteau: {fileID: 11400000, guid: f46c4c5022876974193167111fd7548f, type: 2}
   Hache: {fileID: 11400000, guid: cf6aa088148ee7a409c480d926407cf7, type: 2}
   stadeAffichage: 0
+  "slotEquip\xE9": 0
   empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!95 &5514885086307765773
 Animator:
@@ -86685,7 +86687,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6971348720601174703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5514885086307765775}
@@ -86693,8 +86695,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -18, y: 21}
-  m_SizeDelta: {x: 77.318375, y: 81.153725}
+  m_AnchoredPosition: {x: -39.830017, y: 41.859985}
+  m_SizeDelta: {x: 34.708076, y: 36.429756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6971348720601174705
 MonoBehaviour:
@@ -86770,7 +86772,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 052453eb1e97bc9438ababcece0ca989, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
