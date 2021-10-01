@@ -44,13 +44,17 @@ public class Recolte : MonoBehaviour
         buttonA1.onClick.AddListener(SpawnBuche);
         buttonA2 = buttonA2.GetComponent<Button>();
         buttonA2.onClick.AddListener(SpawnBuche);
-        buttonA3 = buttonA3.GetComponent<Button>();
-        buttonA3.onClick.AddListener(ClickOnPanel);
+        //buttonA3 = buttonA3.GetComponent<Button>();
+        //buttonA3.onClick.AddListener(ClickOnPanel);
         // le boutons A1 servira a Couper l'arbre et récuperer les buches
-        buttonF1 = buttonF1.GetComponent<Button>();
-        buttonF1.onClick.AddListener(SpawnFleurs);
-        buttonR1 = buttonR1.GetComponent<Button>();
-        buttonR1.onClick.AddListener(SpawnRoche);
+        buttonF1 = buttonF1.GetComponent<Button>();//Bouton cueillir
+        buttonF1.onClick.AddListener(SpawnFleurs);//Bouton cueillir
+        buttonF2 = buttonF2.GetComponent<Button>();//Bordereau ramasser
+        buttonF2.onClick.AddListener(SpawnFleurs);//Bordereau ramasser
+        buttonR1 = buttonR1.GetComponent<Button>(); //Bouton miner
+        buttonR1.onClick.AddListener(SpawnRoche);//Bouton miner
+        buttonR2 = buttonR2.GetComponent<Button>(); //bordereau miner
+        buttonR2.onClick.AddListener(SpawnRoche); // bordereau miner
         height = FondA.GetComponent<RectTransform>().rect.height ;
         width = FondA.GetComponent<RectTransform>().rect.width;
         a = Screen.height / 3;
