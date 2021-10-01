@@ -120,7 +120,7 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
                         {
-                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        if (onPanel == true || IsCraftRoche == false)
                         {
                                 if (IsCraftRoche == false)
                                 {
@@ -151,7 +151,7 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Fleurs")) //same
                         {
-                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        if (onPanel == true || IsCraftFleur == false)
                         {
                                 if (IsCraftFleur == false)
                                 {
@@ -219,14 +219,16 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftRoche == true)
         {
-            FondR.transform.position = new Vector2(mP.x - width/3, mP.y - height/2);
+            FondR.transform.position = new Vector2(mP.x - width/3, mP.y + height);
             if (CountItem("Pioche") > 0)
             {
                 buttonR1.interactable = true;
+                buttonR2.interactable = true;
             }
             else
             {
                 buttonR1.interactable = false;
+                buttonR2.interactable = false;
             }
             FondR.SetActive(true);
         }
