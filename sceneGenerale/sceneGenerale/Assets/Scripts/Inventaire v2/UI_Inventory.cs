@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UI_Inventory : MonoBehaviour
 {
+    public EventSystem eventSystem;
+
     private Inventory inventory;
     private Transform itemSlotContainer;
     private GameObject itemSlotTemplate;
@@ -22,6 +25,7 @@ public class UI_Inventory : MonoBehaviour
     private bool prevoirAffichage;
 
     GameObject Background;
+    GameObject BouttonOuvertureGO;
 
     public Item Bois;
     public Item Marteau;
@@ -32,6 +36,7 @@ public class UI_Inventory : MonoBehaviour
     public static int nbrFavoris;
 
     public int stadeAffichage;
+    public int slotEquipé;
 
     public Sprite empty;
 
@@ -54,6 +59,7 @@ public class UI_Inventory : MonoBehaviour
 
         Background = transform.GetChild(0).gameObject;
         Background.SetActive(false);
+        BouttonOuvertureGO = transform.GetChild(2).gameObject;
 
         //WoodIcon = Resources.Load("Wood") as Sprite;
         //BerryIcon = Resources.Load("Berry") as Sprite;
@@ -63,6 +69,7 @@ public class UI_Inventory : MonoBehaviour
         nbrFavoris = 4;
 
         stadeAffichage = 0;
+        slotEquipé = 0;
     }
 
     void LateUpdate ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
@@ -77,6 +84,14 @@ public class UI_Inventory : MonoBehaviour
             boutonFavAffiche = false;
             moveToFav.SetActive(false);
         }
+
+        // Regarde si on est au dessus d'un element de l'UI pour voir si on a cliqué en dehors des boutons de l'inventaire
+        if (!eventSystem.IsPointerOverGameObject() && (stadeAffichage == 1) && Input.GetMouseButton(0))
+        {
+            animator.SetTrigger("fermerInvFavs");
+            stadeAffichage -= 1;
+            Debug.Log("On a cliqué en dehors et on ferme le panneau des favoris");
+        }
     }
 
     public void BouttonOuverture()   //on clique sur le bouton inventaire
@@ -89,7 +104,7 @@ public class UI_Inventory : MonoBehaviour
         else if (stadeAffichage == 1)   //favoris dépliés
         {
             animator.SetTrigger("fermerInvFavs");
-            StartCoroutine(DelayOuvertureInv(1f));
+            StartCoroutine(DelayOuvertureInv(0.5f));
         }   
         else                      //inventaire complet ouvert
         {
@@ -103,6 +118,8 @@ public class UI_Inventory : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
+        BouttonOuvertureGO.SetActive(false);
+        favSlotContainerDepliement.gameObject.SetActive(false);
         Background.SetActive(true);
         stadeAffichage += 1;
     }
@@ -112,6 +129,8 @@ public class UI_Inventory : MonoBehaviour
     {
         stadeAffichage = 0;
         Background.SetActive(false);
+        BouttonOuvertureGO.SetActive(true);
+        favSlotContainerDepliement.gameObject.SetActive(true);
     }
 
     public void SetInventory(Inventory _inventory)   //initialisation de l'inventaire
@@ -299,6 +318,22 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
+    public void EquiperFav(Transform slotInv)   //on equipe le favoris sur lequel on a cliqué dans le menu dépliant
+    {
+        Debug.Log("tentative d'équipage d'un item");
+        string name = slotInv.gameObject.name;
+        
+        //on équipe l'objet
+        slotEquipé = name[name.Length - 1] - '0';
+        Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+
+        //on repasse au stade 0 de l'affichage
+        animator.SetTrigger("fermerInvFavs");
+        stadeAffichage -= 1;
+    }
+
+
+
     public void CopyToFav()   //ajoute un item à la liste 'inventaire'
     {
         inventory.AddToFav(inventory.GetItemList()[slotSelected]);
@@ -340,5 +375,11 @@ public class UI_Inventory : MonoBehaviour
         }
         Count += ((xSizeMaxInv * ySizeMaxInv) - itemList.Count) * inventory.sizeMaxStack / item.Weight;
         return Count;
+    }
+
+    public string NomItemEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
+    {
+        if (slotEquipé == 0) return "";
+        else return inventory.GetFavList()[slotEquipé - 1].Item.name;
     }
 }
