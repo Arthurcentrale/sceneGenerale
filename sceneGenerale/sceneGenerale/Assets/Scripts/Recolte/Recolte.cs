@@ -21,7 +21,8 @@ public class Recolte : MonoBehaviour
     public Button buttonF1, buttonF2, buttonF3; // boutons pour fleurs
     private Sprite boutonInfo; //pour l'anim
     RaycastHit cible; //pour cibler un gameobject
-    public Inventaire inventaire;//script de l'inventaire
+    public Inventaire inventaire;
+    public UI_Inventory ui_inventory;//script de l'inventaire
     Ray R; //raycast 
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
     public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
@@ -40,6 +41,7 @@ public class Recolte : MonoBehaviour
 
         onPanel = false ;
         inventaire = inventaire.GetComponent<Inventaire>();
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>() ;
         buttonA1 = buttonA1.GetComponent<Button>();
         buttonA1.onClick.AddListener(SpawnBuche);
         buttonA2 = buttonA2.GetComponent<Button>();
@@ -194,7 +196,7 @@ public class Recolte : MonoBehaviour
         if (IsCraftArbre == true)
         {
             FondA.transform.position = new Vector2(mP.x - width / 3, mP.y + height);
-            if (CountItem("Hache") > 0)
+            if (ui_inventory.NomItemEquip() == "Hache")
             {
                 buttonA1.interactable = true;
                 buttonA2.interactable = true;
