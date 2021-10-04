@@ -31,7 +31,7 @@ public class Recolte : MonoBehaviour
     new public Camera camera;//longueur et largerur des menus de récolte
 
     public Player player;
-    private Animator animator;
+    private Animator animatorA,animatorR,animatorF;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +60,10 @@ public class Recolte : MonoBehaviour
         a = Screen.height / 3;
         player = this.GetComponent<Player>();
         
-        animator = FondA.transform.GetChild(0).GetComponent<Animator>(); // Pour faire fonctionner les anims
+        animatorA = FondA.transform.GetChild(0).GetComponent<Animator>();
+        animatorR = FondR.transform.GetChild(0).GetComponent<Animator>();
+        animatorF = FondF.transform.GetChild(0).GetComponent<Animator>();
+        // Pour faire fonctionner les anims
     }
     // Update is called once per frame
     void Update()
@@ -183,7 +186,9 @@ public class Recolte : MonoBehaviour
 
                     if (onPanel == false && (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
                         {
-                            animator.SetTrigger("fermetture1BulleCouper");
+                            animatorA.SetTrigger("fermetture1BulleCouper");
+                            animatorR.SetTrigger("fermetture1BulleCouper");
+                            animatorF.SetTrigger("fermetture1BulleCouper");
                             IsCraftRoche = false;
                             IsCraftFleur = false;
                             IsCraftArbre = false;
@@ -210,7 +215,7 @@ public class Recolte : MonoBehaviour
             }
             FondA.SetActive(true);
             
-            animator.SetTrigger("ouverture1BulleCouper");
+            animatorA.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -231,6 +236,7 @@ public class Recolte : MonoBehaviour
                 buttonR2.interactable = false;
             }
             FondR.SetActive(true);
+            animatorR.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -239,8 +245,9 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftFleur == true)
         {
-            FondF.transform.position = new Vector2(mP.x, mP.y);
+            FondF.transform.position = new Vector2(mP.x - width/3 , mP.y+ height);
             FondF.SetActive(true);
+            animatorF.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -582,13 +589,11 @@ public class Recolte : MonoBehaviour
 
     public void ClickOnPanel()
     {
-        Debug.Log("Souris dans le panel");
         onPanel = true;
     }
 
     public void ClickOutPanel()
     {
-        Debug.Log("Souris en dehors du panel");
         onPanel = false;
     }
 
