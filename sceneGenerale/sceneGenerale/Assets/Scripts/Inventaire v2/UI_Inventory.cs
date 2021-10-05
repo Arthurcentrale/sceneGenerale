@@ -115,8 +115,9 @@ public class UI_Inventory : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
-        BouttonOuvertureGO.SetActive(false);
-        favSlotContainerDepliement.gameObject.SetActive(false);
+        //BouttonOuvertureGO.SetActive(false);
+        animator.SetTrigger("fermerBouton");
+        //favSlotContainerDepliement.gameObject.SetActive(false);
         Background.SetActive(true);
         stadeAffichage += 1;
     }
@@ -126,8 +127,9 @@ public class UI_Inventory : MonoBehaviour
     {
         stadeAffichage = 0;
         Background.SetActive(false);
-        BouttonOuvertureGO.SetActive(true);
-        favSlotContainerDepliement.gameObject.SetActive(true);
+        //BouttonOuvertureGO.SetActive(true);
+        //favSlotContainerDepliement.gameObject.SetActive(true);
+        animator.SetTrigger("ouvrirBouton");
     }
 
     public void SetInventory(Inventory _inventory)   //initialisation de l'inventaire
