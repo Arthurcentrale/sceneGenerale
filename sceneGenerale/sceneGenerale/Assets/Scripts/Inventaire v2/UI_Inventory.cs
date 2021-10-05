@@ -346,6 +346,8 @@ public class UI_Inventory : MonoBehaviour
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
+
+        Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
 
@@ -404,13 +406,13 @@ public class UI_Inventory : MonoBehaviour
             // 1<=slotEquipé<=4 ; on cherche a retrouver la place dans favList a laquel correspond ce slot equipé
             List<bool> favList = inventory.GetFavList();
             int count = 0;  //on compte le nombre de true qu'on rencontre
-            int slot = -1;   //vraie position de l'item dans favList
+            int slot = 0;   //vraie position de l'item dans favList
             while (count < slotEquipé)
             {
                 if (favList[slot]) count++;
                 slot++;
             }
-            return inventory.GetItemList()[slot].Item.name;
+            return inventory.GetItemList()[slot-1].Item.name;
         }
     }
 }
