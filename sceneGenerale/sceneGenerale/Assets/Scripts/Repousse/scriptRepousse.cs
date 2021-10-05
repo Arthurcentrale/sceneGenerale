@@ -28,10 +28,6 @@ public class scriptRepousse : MonoBehaviour
     public string goTag = "Arbre";
 
 
-
-
-
-
     void Start()
     {
         nbArbreMax = 60;
@@ -42,31 +38,29 @@ public class scriptRepousse : MonoBehaviour
 
 
     // Update is called once per frame
-
     void Update()
-    {
+    {        
         var now = DateTime.UtcNow;
         //if (now.Hour == 23 && now.Minute == 59 && now.Second == 59)
         if (testDebug == 1)
         {
-            //******************************************************************************************************************************//
-            testDebug = 2;
-            //******************************************************************************************************************************//
-
             // On stocke tous les Arbres du terrain dans une liste
             GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
 
             // On compte combien il y en a
-            nbArbresSurTerrain = ListeGO.Length;
+            nbArbresSurTerrain = ListeGO.Length;            
 
             nbArbres = fonctionRepousse(nbArbresSurTerrain);
-
             fairePousserArbre(nbArbres, ListeGO);
 
             nbArbresSurTerrain = 0;
 
             // On met à jour les sorting order des arbres
             treeLayersMag.updateTreeLayers();
+
+            //******************************************************************************************************************************//
+            testDebug = 2;
+            //******************************************************************************************************************************//
         }
     }
 
@@ -85,7 +79,7 @@ public class scriptRepousse : MonoBehaviour
                 x = nbArbreMax - nbArbresSurLeTerrain;
 
             else if (nbArbresSurLeTerrain < 0.6 * nbArbreMax && nbArbresSurLeTerrain >= 0)
-                x = (int)Math.Exp(0.075 * nbArbresSurLeTerrain);
+                x = (int) Math.Exp(0.075 * nbArbresSurLeTerrain);
 
             else return 0; // Cas impossible mais sinon la fonction donnait une erreur et je voulais preciser nbArbre >= 0 sur la condition précédente
 
@@ -116,7 +110,7 @@ public class scriptRepousse : MonoBehaviour
             // On est obligé d'initialiser rand ici sinon le même chiffre sortirait à chaque fois
             var rand = new System.Random();
 
-            Vector2 position = positionAvailable(ListeGO);
+            Vector3 position = positionAvailable(ListeGO);
             Utils.creerGo(goTag, position);
         }
     }
@@ -124,9 +118,9 @@ public class scriptRepousse : MonoBehaviour
 
 
     // Fonction qui renvoie une position aléatoire disponible parmis toutes celles disponible sur le terrain
-    private Vector2 positionAvailable(GameObject[] ListeGO)
+    private Vector3 positionAvailable(GameObject[] ListeGO)
     {
-        Vector2 res = new Vector2();
+        Vector3 res = new Vector3();
 
         // On prend aléatoirement une position sur la carte
         // Pour ce :
@@ -146,12 +140,17 @@ public class scriptRepousse : MonoBehaviour
         // On calcul le nombre de GO ayant le tag arbre
         int lengthListeGO = ListeGO.Length;
 
+        if (lengthListeGO == 0)
+        {
+            return new Vector3(500, 0, 500);
+        }
+
         // Création d'une variable pour éviter une boucle infinie
         int i = 100;
 
         while (test == false && i>0)
         {
-            numProcheObjet = Utils.GetRandom(0, lengthListeGO);
+            numProcheObjet = Utils.GetRandom(0, lengthListeGO - 1);
 
             // Le passage en commentaire suivant résolvait un problème d'une ancienne version
             // Je l'ai gardé au cas ou j'en aurait de nouveau besoin
@@ -191,7 +190,8 @@ public class scriptRepousse : MonoBehaviour
             i--;
         }
         res[0] = x;
-        res[1] = z;
+        res[1] = 0;
+        res[2] = z;
 
         return res;
     }
