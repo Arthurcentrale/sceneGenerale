@@ -26,7 +26,6 @@ public class Recolte : MonoBehaviour
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
     public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
-    public int a;
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
 
@@ -57,7 +56,6 @@ public class Recolte : MonoBehaviour
         buttonR2.onClick.AddListener(SpawnRoche); // bordereau miner
         height = FondA.GetComponent<RectTransform>().rect.height ;
         width = FondA.GetComponent<RectTransform>().rect.width;
-        a = Screen.height / 3;
         player = this.GetComponent<Player>();
         
         animatorA = FondA.transform.GetChild(0).GetComponent<Animator>();
