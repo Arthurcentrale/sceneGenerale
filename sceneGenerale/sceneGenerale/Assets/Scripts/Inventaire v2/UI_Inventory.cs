@@ -40,8 +40,6 @@ public class UI_Inventory : MonoBehaviour
 
     public Sprite empty;
 
-    private List<bool> addedToFav;        //liste de la même taille que inventory.itemList qui indique si chaque item a déja été ajouté aux favoris
-
     public void Awake()
     {
         itemSlotContainer = gameObject.transform.GetChild(0).GetChild(0);
@@ -63,22 +61,12 @@ public class UI_Inventory : MonoBehaviour
         Background.SetActive(false);
         BouttonOuvertureGO = transform.GetChild(2).gameObject;
 
-        //WoodIcon = Resources.Load("Wood") as Sprite;
-        //BerryIcon = Resources.Load("Berry") as Sprite;
-
         xSizeMaxInv = 8;
         ySizeMaxInv = 3;
         nbrFavoris = 4;
 
         stadeAffichage = 0;
         slotEquipé = 0;
-
-        //initialisation addedToFav
-        addedToFav = new List<bool>();
-        for (int i = 0; i<xSizeMaxInv*ySizeMaxInv;i++)
-        {
-            addedToFav.Add(false); 
-        }
     }
 
     void LateUpdate ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
@@ -148,7 +136,6 @@ public class UI_Inventory : MonoBehaviour
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         inventory.AddItem(new ItemAmount(Item: Bois, Amount: 2));
-        //inventory.AddItem(new ItemAmount(Item: Marteau, Amount: 2));
         inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
 
         RefreshInventoryItems();
@@ -225,47 +212,57 @@ public class UI_Inventory : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        //puis on réaffiche l'inventaire actualisé
-        int x = 0;
+        //Puis on réaffiche l'inventaire actualisé
+        int x = 0;     //numéro du favoris pour l'affichage
+        int slot = 0;  //position du favoris dans l'inventaire
+
         float itemSlotSize = 66.84f;
-        foreach (ItemAmount item in inventory.GetFavList())
+        List<bool> favList = inventory.GetFavList();
+        foreach (bool val in favList)
         {
-            // On refresh d'abord les favoris dans l'inventaire principal
-
-            RectTransform favSlotRectTransform = Instantiate(favSlotTemplate, favSlotContainer).GetComponent<RectTransform>();
-            favSlotRectTransform.gameObject.SetActive(true);
-            favSlotRectTransform.gameObject.name = x.ToString();
-            favSlotRectTransform.anchoredPosition = new Vector2(46.49f + x * itemSlotSize,- 41.09f);
-
-            Image image = favSlotRectTransform.transform.GetChild(0).gameObject.GetComponent<Image>();
-            image.sprite = item.Item.Icon;
-            Text amountText = favSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Text>();
-            if (item.Amount > 1)
+            if (val)  //si il y a un favoris à cet emplacement
             {
-                amountText.text = item.Amount.ToString();
-            }
-            else
-            {
-                amountText.text = "";
-            }
+                //On récupère l'item qui correspond à ce numéro de favoris
+                ItemAmount item = (inventory.GetItemList())[slot];
 
-            // Ensuite on refresh les favoris dans le petit menu depliant
+                // On refresh d'abord les favoris dans l'inventaire principal
 
-            Transform favSlotTemplate1 = favSlotContainerDepliement.GetChild(x);
-            image = favSlotTemplate1.GetChild(0).gameObject.GetComponent<Image>();
-            image.sprite = item.Item.Icon;
-            amountText = favSlotTemplate1.GetChild(1).gameObject.GetComponent<Text>();
-            if (item.Amount > 1)
-            {
-                amountText.text = item.Amount.ToString();
+                RectTransform favSlotRectTransform = Instantiate(favSlotTemplate, favSlotContainer).GetComponent<RectTransform>();
+                favSlotRectTransform.gameObject.SetActive(true);
+                favSlotRectTransform.gameObject.name = slot.ToString();  //on renomme le gameObject par la position du favoris dans l'inventaire
+                favSlotRectTransform.anchoredPosition = new Vector2(46.49f + x * itemSlotSize, -41.09f);
+
+                Image image = favSlotRectTransform.transform.GetChild(0).gameObject.GetComponent<Image>();
+                image.sprite = item.Item.Icon;
+                Text amountText = favSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Text>();
+                if (item.Amount > 1)
+                {
+                    amountText.text = item.Amount.ToString();
+                }
+                else
+                {
+                    amountText.text = "";
+                }
+
+                // Ensuite on refresh les favoris dans le petit menu depliant
+
+                Transform favSlotTemplate1 = favSlotContainerDepliement.GetChild(x);
+                image = favSlotTemplate1.GetChild(0).gameObject.GetComponent<Image>();
+                image.sprite = item.Item.Icon;
+                amountText = favSlotTemplate1.GetChild(1).gameObject.GetComponent<Text>();
+                if (item.Amount > 1)
+                {
+                    amountText.text = item.Amount.ToString();
+                }
+                else
+                {
+                    amountText.text = "";
+                }
+                x++;
             }
-            else
-            {
-                amountText.text = "";
-            }
-            x++;
+            slot++;
         }
-        while (x < nbrFavoris)
+        while (x < nbrFavoris)  //on affiche des slots vides ensuite si l'inventaire n'est pas rempli
         {
             // On refresh d'abord les favoris dans l'inventaire principal
 
@@ -277,7 +274,7 @@ public class UI_Inventory : MonoBehaviour
 
             Transform favSlotTemplate1 = favSlotContainerDepliement.GetChild(x);
             Image image = favSlotTemplate1.GetChild(0).gameObject.GetComponent<Image>();
-            image.sprite = empty;
+            image.sprite = favSlotTemplate.transform.GetChild(0).gameObject.GetComponent<Image>().sprite;
             Text amountText = favSlotTemplate1.GetChild(1).gameObject.GetComponent<Text>();
             amountText.text = "";
 
@@ -294,7 +291,7 @@ public class UI_Inventory : MonoBehaviour
             //pos.x += 10f;
             //pos.y += 25f;
             moveToFav.transform.position = pos;
-            slotSelected = int.Parse(name);
+            slotSelected = int.Parse(name);  //position de l'item à ajouter dans l'inventaire principal
             moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Mettre en favoris";
 
             Button button = moveToFav.GetComponent<Button>();
@@ -315,7 +312,7 @@ public class UI_Inventory : MonoBehaviour
             //pos.x += 10f;
             //pos.y += 25f;
             moveToFav.transform.position = pos;
-            slotSelected = int.Parse(name);
+            slotSelected = int.Parse(name);  //position du favoris dans la liste itemList (inventaire principal) et donc position du true dans favList
             moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Enlever des favoris";
 
             Button button = moveToFav.GetComponent<Button>();
@@ -351,25 +348,19 @@ public class UI_Inventory : MonoBehaviour
 
 
 
-    public void CopyToFav()   //ajoute un item à la liste 'inventaire'
+    public void CopyToFav()   //ajoute un item au favoris si on peut
     {
-        if (addedToFav[slotSelected])
+        if (!inventory.AddToFav(slotSelected))
         {
             Debug.Log("Item deja ajouté aux favoris");
-        }
-        else
-        {
-            addedToFav[slotSelected] = true;
-            inventory.AddToFav(inventory.GetItemList()[slotSelected]);
         }
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
 
-    public void DelFromFav()     //enleve un item à la liste 'inventaire'
+    public void DelFromFav()     //enleve un item des favoris
     {
-        inventory.DelFavAtIndex(slotSelected);
-        addedToFav[slotSelected] = false;
+        inventory.DelFav(slotSelected);
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
@@ -406,6 +397,18 @@ public class UI_Inventory : MonoBehaviour
     public string NomItemEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
     {
         if (slotEquipé == 0) return "";
-        else return inventory.GetFavList()[slotEquipé - 1].Item.name;
+        else
+        {
+            // 1<=slotEquipé<=4 ; on cherche a retrouver la place dans favList a laquel correspond ce slot equipé
+            List<bool> favList = inventory.GetFavList();
+            int count = 0;  //on compte le nombre de true qu'on rencontre
+            int slot = -1;   //vraie position de l'item dans favList
+            while (count < slotEquipé)
+            {
+                if (favList[slot]) count++;
+                slot++;
+            }
+            return inventory.GetItemList()[slot].Item.name;
+        }
     }
 }
