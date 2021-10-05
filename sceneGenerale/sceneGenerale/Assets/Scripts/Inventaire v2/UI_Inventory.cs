@@ -40,6 +40,8 @@ public class UI_Inventory : MonoBehaviour
 
     public Sprite empty;
 
+    private List<bool> addedToFav;        //liste de la même taille que inventory.itemList qui indique si chaque item a déja été ajouté aux favoris
+
     public void Awake()
     {
         itemSlotContainer = gameObject.transform.GetChild(0).GetChild(0);
@@ -70,6 +72,13 @@ public class UI_Inventory : MonoBehaviour
 
         stadeAffichage = 0;
         slotEquipé = 0;
+
+        //initialisation addedToFav
+        addedToFav = new List<bool>();
+        for (int i = 0; i<xSizeMaxInv*ySizeMaxInv;i++)
+        {
+            addedToFav.Add(false); 
+        }
     }
 
     void LateUpdate ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
@@ -209,7 +218,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void RefreshInventoryFavoris()
     {
-        //d'abord on supprimer l'inventaire de la frame d'avant
+        //d'abord on supprime l'inventaire de la frame d'avant
         foreach (Transform child in favSlotContainer)
         {
             if (child.name == "FavSlotTemplate") continue;
@@ -320,12 +329,20 @@ public class UI_Inventory : MonoBehaviour
 
     public void EquiperFav(Transform slotInv)   //on equipe le favoris sur lequel on a cliqué dans le menu dépliant
     {
-        Debug.Log("tentative d'équipage d'un item");
         string name = slotInv.gameObject.name;
-        
-        //on équipe l'objet
-        slotEquipé = name[name.Length - 1] - '0';
-        Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+        int slot = name[name.Length - 1] - '0';
+
+        if (slot == slotEquipé)
+        {
+            slotEquipé = 0;
+            Debug.Log("On déséquipe l'item n" + slot.ToString());
+        }
+        else
+        {
+            //on équipe l'objet
+            slotEquipé = slot;
+            Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+        }
 
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
@@ -336,7 +353,15 @@ public class UI_Inventory : MonoBehaviour
 
     public void CopyToFav()   //ajoute un item à la liste 'inventaire'
     {
-        inventory.AddToFav(inventory.GetItemList()[slotSelected]);
+        if (addedToFav[slotSelected])
+        {
+            Debug.Log("Item deja ajouté aux favoris");
+        }
+        else
+        {
+            addedToFav[slotSelected] = true;
+            inventory.AddToFav(inventory.GetItemList()[slotSelected]);
+        }
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
@@ -344,6 +369,7 @@ public class UI_Inventory : MonoBehaviour
     public void DelFromFav()     //enleve un item à la liste 'inventaire'
     {
         inventory.DelFavAtIndex(slotSelected);
+        addedToFav[slotSelected] = false;
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
