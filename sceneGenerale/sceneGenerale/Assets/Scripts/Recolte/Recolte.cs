@@ -27,12 +27,11 @@ public class Recolte : MonoBehaviour
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
     public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
-    public int a;
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
 
     public Player player;
-    private Animator animator;
+    private Animator animatorA,animatorR,animatorF;
 
     // Start is called before the first frame update
     void Start()
@@ -46,19 +45,25 @@ public class Recolte : MonoBehaviour
         buttonA1.onClick.AddListener(SpawnBuche);
         buttonA2 = buttonA2.GetComponent<Button>();
         buttonA2.onClick.AddListener(SpawnBuche);
-        buttonA3 = buttonA3.GetComponent<Button>();
-        buttonA3.onClick.AddListener(ClickOnPanel);
+        //buttonA3 = buttonA3.GetComponent<Button>();
+        //buttonA3.onClick.AddListener(ClickOnPanel);
         // le boutons A1 servira a Couper l'arbre et récuperer les buches
-        buttonF1 = buttonF1.GetComponent<Button>();
-        buttonF1.onClick.AddListener(SpawnFleurs);
-        buttonR1 = buttonR1.GetComponent<Button>();
-        buttonR1.onClick.AddListener(SpawnRoche);
+        buttonF1 = buttonF1.GetComponent<Button>();//Bouton cueillir
+        buttonF1.onClick.AddListener(SpawnFleurs);//Bouton cueillir
+        buttonF2 = buttonF2.GetComponent<Button>();//Bordereau ramasser
+        buttonF2.onClick.AddListener(SpawnFleurs);//Bordereau ramasser
+        buttonR1 = buttonR1.GetComponent<Button>(); //Bouton miner
+        buttonR1.onClick.AddListener(SpawnRoche);//Bouton miner
+        buttonR2 = buttonR2.GetComponent<Button>(); //bordereau miner
+        buttonR2.onClick.AddListener(SpawnRoche); // bordereau miner
         height = FondA.GetComponent<RectTransform>().rect.height ;
         width = FondA.GetComponent<RectTransform>().rect.width;
-        a = Screen.height / 3;
         player = this.GetComponent<Player>();
         
-        animator = FondA.transform.GetChild(0).GetComponent<Animator>(); // Pour faire fonctionner les anims
+        animatorA = FondA.transform.GetChild(0).GetComponent<Animator>();
+        animatorR = FondR.transform.GetChild(0).GetComponent<Animator>();
+        animatorF = FondF.transform.GetChild(0).GetComponent<Animator>();
+        // Pour faire fonctionner les anims
     }
     // Update is called once per frame
     void Update()
@@ -118,7 +123,7 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
                         {
-                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        if (onPanel == true || IsCraftRoche == false)
                         {
                                 if (IsCraftRoche == false)
                                 {
@@ -149,7 +154,7 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Fleurs")) //same
                         {
-                        if (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)
+                        if (onPanel == true || IsCraftFleur == false)
                         {
                                 if (IsCraftFleur == false)
                                 {
@@ -181,7 +186,9 @@ public class Recolte : MonoBehaviour
 
                     if (onPanel == false && (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
                         {
-                            animator.SetTrigger("fermetture1BulleCouper");
+                            animatorA.SetTrigger("fermetture1BulleCouper");
+                            animatorR.SetTrigger("fermetture1BulleCouper");
+                            animatorF.SetTrigger("fermetture1BulleCouper");
                             IsCraftRoche = false;
                             IsCraftFleur = false;
                             IsCraftArbre = false;
@@ -208,7 +215,7 @@ public class Recolte : MonoBehaviour
             }
             FondA.SetActive(true);
             
-            animator.SetTrigger("ouverture1BulleCouper");
+            animatorA.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -217,16 +224,19 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftRoche == true)
         {
-            FondR.transform.position = new Vector2(mP.x - width/3, mP.y - height/2);
+            FondR.transform.position = new Vector2(mP.x - width/3, mP.y + height);
             if (CountItem("Pioche") > 0)
             {
                 buttonR1.interactable = true;
+                buttonR2.interactable = true;
             }
             else
             {
                 buttonR1.interactable = false;
+                buttonR2.interactable = false;
             }
             FondR.SetActive(true);
+            animatorR.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -235,8 +245,9 @@ public class Recolte : MonoBehaviour
 
         if (IsCraftFleur == true)
         {
-            FondF.transform.position = new Vector2(mP.x, mP.y);
+            FondF.transform.position = new Vector2(mP.x - width/3 , mP.y+ height);
             FondF.SetActive(true);
+            animatorF.SetTrigger("ouverture1BulleCouper");
         }
         else
         {
@@ -578,13 +589,11 @@ public class Recolte : MonoBehaviour
 
     public void ClickOnPanel()
     {
-        Debug.Log("Souris dans le panel");
         onPanel = true;
     }
 
     public void ClickOutPanel()
     {
-        Debug.Log("Souris en dehors du panel");
         onPanel = false;
     }
 
