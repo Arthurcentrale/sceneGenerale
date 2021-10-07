@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Crafting2 : MonoBehaviour
 {
+
+
     public GameObject Fond;
     public GameObject FondaActiver;
     public Inventaire inventaire; //inventaire
@@ -16,6 +18,7 @@ public class Crafting2 : MonoBehaviour
     public Button bFond;
     Button button; 
     public int Count;
+   
     // Start is called before the first frame update
     void Start()
     {

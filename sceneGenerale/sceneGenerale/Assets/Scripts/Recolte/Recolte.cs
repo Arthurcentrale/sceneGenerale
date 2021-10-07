@@ -225,7 +225,7 @@ public class Recolte : MonoBehaviour
         if (IsCraftRoche == true)
         {
             FondR.transform.position = new Vector2(mP.x - width/3, mP.y + height);
-            if (CountItem("Pioche") > 0)
+            if (ui_inventory.NomItemEquip() == "Pioche")
             {
                 buttonR1.interactable = true;
                 buttonR2.interactable = true;
