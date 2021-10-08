@@ -43,6 +43,7 @@ public class ClicAtelier : MonoBehaviour
             {
                 panel.SetActive(false);
                 open = false;
+                Deplacement.enMenu = false;
             }
 
             if ( open == false)
@@ -50,7 +51,7 @@ public class ClicAtelier : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Atelier"))
 
                 {
-                    panel.transform.position = mP;
+                    panel.transform.position = new Vector2(mP.x +panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
