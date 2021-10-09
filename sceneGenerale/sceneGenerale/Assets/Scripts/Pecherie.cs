@@ -19,9 +19,11 @@ public class Pecherie : MonoBehaviour
     int PoissonEnAttente;
     float timer = 0f;
     float delai = 5f;
-    //Item poisson;
+    public Item poisson;
     public Text textPoisson;
     public CompteurBouffe compteurbouffe;
+    public Player player;
+    public RecetteCraft recettecraft;
 
     // Start is called before the first frame update
     void Start()
@@ -68,13 +70,16 @@ public class Pecherie : MonoBehaviour
 
 
         }
-        timer += Time.deltaTime;
-        if(timer>=delai)
+        if (isOccupied)
         {
-            timer = 0f;
-            PoissonEnAttente++;
-            textPoisson.text = PoissonEnAttente.ToString();
+            timer += Time.deltaTime;
+            if (timer >= delai)
+            {
+                timer = 0f;
+                PoissonEnAttente++;
+                textPoisson.text = PoissonEnAttente.ToString();
 
+            }
         }
 
     }
@@ -91,9 +96,9 @@ public class Pecherie : MonoBehaviour
     //Fonction quand on clique sur le bouton du milieu
     public void RecupererPoisson()
     {
-        Debug.Log("Poisson : " + PoissonEnAttente);
         compteurbouffe.NbrBouffe += PoissonEnAttente;
-        Debug.Log(compteurbouffe.NbrBouffe);
+        ItemAmount itemamount = new ItemAmount(poisson, PoissonEnAttente);
+        player.inventory.AddItem(itemamount);
         PoissonEnAttente = 0;
         textPoisson.text = PoissonEnAttente.ToString();
         compteurbouffe.text.text = compteurbouffe.NbrBouffe.ToString();
