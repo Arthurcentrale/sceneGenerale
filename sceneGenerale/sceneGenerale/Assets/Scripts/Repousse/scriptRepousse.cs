@@ -133,6 +133,7 @@ public class scriptRepousse : MonoBehaviour
 
         // Ces valeurs doivent également être initialisées pour que la suite fonctionne mais les valeurs entrées sont arbitraires
         float x = 0;
+        float y = 0;
         float z = 0;
         Vector2 size = new Vector2(3, 3);
 
@@ -190,7 +191,7 @@ public class scriptRepousse : MonoBehaviour
             i--;
         }
         res[0] = x;
-        res[1] = 0;
+        res[1] = y;
         res[2] = z;
 
         return res;

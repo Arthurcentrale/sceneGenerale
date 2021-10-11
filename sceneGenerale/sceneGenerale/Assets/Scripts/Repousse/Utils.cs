@@ -44,6 +44,8 @@ public class Utils : MonoBehaviour
 
         newArbre.tag = "Arbre";
 
+        position[1] = newArbre.transform.position.y;
+
         // On insere le nouveau GameObject dans la scène
         Instantiate(newArbre, position, newArbre.transform.rotation, GameObject.Find("Arbres").transform);
 
