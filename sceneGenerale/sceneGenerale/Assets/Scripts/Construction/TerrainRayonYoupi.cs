@@ -54,7 +54,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 ChaumièreDéplaçable = GameObject.Find("nouvelleChaumière");
                 if (!EventSystem.current.IsPointerOverGameObject())    // On ne déplace pas la chaumière si on clique sur un bouton ou autre objet gui
                 {
-                    ChaumièreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    ChaumièreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 15f, dir.z);
                 }// Et là je déplace nouveauBatiment qui provient aussi du script construction
                 //3.1f est un facteur correctif propre à la hauteur du bati
             }
