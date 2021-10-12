@@ -14,4 +14,9 @@ public class EnvironnementManager
         this.qualiteEau = eau;
         this.qualiteSol = sol;
     }
+
+    public void MajEnviro()
+    {
+
+    }
 }

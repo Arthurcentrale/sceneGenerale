@@ -9,8 +9,21 @@ public class Batiment : MonoBehaviour
     private List<ItemAmount> ressourcesDeposees;
     private bool ouvrierHere;
     private bool isWorking;
-    private List<ItemAmount> ressourcesProduction;
+    public List<ItemAmount> ressourcesProduction;
     private string worker;
-    private int chauffageNeed;
-    private int chauffageActual;
+    public int chauffageNeed;
+    public int chauffageActual;
+
+    public int productionFood()  //on regarde tous les items de la liste ressourcesProduction pour savoir la quantité de nourriture produite par le bâtiment
+    {
+        int prod = 0;
+        foreach(ItemAmount item in ressourcesProduction)
+        {
+            if (item.Item.isFood)
+            {
+                prod += item.Item.GetPoints();
+            }
+        }
+        return prod;
+    }
 }

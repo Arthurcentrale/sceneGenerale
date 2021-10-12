@@ -11,6 +11,8 @@ public class Item : ScriptableObject
     public int Weight;
     public GameObject prefab;
 
+    public bool isFood;
+
     public void Init(string ItemName)
     {
         this.ItemName = ItemName;
@@ -34,4 +36,35 @@ public class Item : ScriptableObject
         }
     }
     */
+
+    
+    public virtual int GetPoints()  //fonction qui retourne 0 de base mais qui retournera les variables foodPoints ou burnPoints si l'item
+    {                               //est dans une sous-classe Aliment ou Combustible
+        return 0;
+    }
+}
+
+[CreateAssetMenu]
+[Serializable]
+public class Aliment : Item
+{
+    public int foodPoints;
+
+    public override int GetPoints()
+    {
+        return foodPoints;
+    }
+}
+
+[CreateAssetMenu]
+[Serializable]
+public class Combustible : Item
+{
+    public bool isBurnt;
+    public int burnPoints;
+
+    public override int GetPoints()
+    {
+        return burnPoints;
+    }
 }
