@@ -25,8 +25,6 @@ public class Utils : MonoBehaviour
         }
     }
 
-
-
     /******************************************************************************************************/
     // Gestion de la création d'arbres
 
@@ -46,15 +44,10 @@ public class Utils : MonoBehaviour
 
         newArbre.tag = "Arbre";
 
+        position[1] = newArbre.transform.position.y;
+
         // On insere le nouveau GameObject dans la scène
-        Instantiate(newArbre);
-
-        // On créé le vecteur position (complet i.e. à 3 coordonnées) du nouveau GameObject
-        float Ypos = newArbre.transform.position[1];
-        Vector3 GoPosition = new Vector3(position[0], Ypos, position[1]);
-
-        // On le déplace sur la scène à cette position 
-        newArbre.transform.position = GoPosition;
+        Instantiate(newArbre, position, newArbre.transform.rotation, GameObject.Find("Arbres").transform);
 
         // Puis on change son nom
         newArbre.name = typeArbre;
@@ -64,7 +57,7 @@ public class Utils : MonoBehaviour
     // Fonction qui retourne aléatoirement un type d'arbre (de manière équiprobable)
     private static string choixTypeArbre()
     {
-        int x = Utils.GetRandom(1, 6);
+        int x = Utils.GetRandom(1, 4);
 
         switch (x)
         {
