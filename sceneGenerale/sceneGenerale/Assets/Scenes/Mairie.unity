@@ -268,6 +268,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1935418754500006218, guid: 8b4288b794c4b08418445b280e90175e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935418754500006222, guid: 8b4288b794c4b08418445b280e90175e,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1885680786}
+    - target: {fileID: 1935418754500006222, guid: 8b4288b794c4b08418445b280e90175e,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1660059045}
+    - target: {fileID: 1935418754500006222, guid: 8b4288b794c4b08418445b280e90175e,
+        type: 3}
+      propertyPath: recolte
+      value: 
+      objectReference: {fileID: 1660059050}
     - target: {fileID: 2991883586161378415, guid: 8b4288b794c4b08418445b280e90175e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -352,6 +372,60 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 716427585}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1660059041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3815870739047160584, guid: 8b4288b794c4b08418445b280e90175e,
+    type: 3}
+  m_PrefabInstance: {fileID: 716427585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1660059045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1935418754500006218, guid: 8b4288b794c4b08418445b280e90175e,
+    type: 3}
+  m_PrefabInstance: {fileID: 716427585}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660059041}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7aa68fa470ec344addefa98dd27236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1660059050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660059041}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15314bea0d03b9d4bb5e71e85da28fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeChop: {fileID: 0}
+  apparitionBulle: {fileID: 0}
+  IsCraftArbre: 0
+  IsCraftRoche: 0
+  IsCraftFleur: 0
+  FondA: {fileID: 0}
+  FondR: {fileID: 0}
+  FondF: {fileID: 0}
+  buttonA1: {fileID: 0}
+  buttonA2: {fileID: 0}
+  buttonA3: {fileID: 0}
+  buttonR1: {fileID: 0}
+  buttonR2: {fileID: 0}
+  buttonR3: {fileID: 0}
+  buttonF1: {fileID: 0}
+  buttonF2: {fileID: 0}
+  buttonF3: {fileID: 0}
+  inventaire: {fileID: 0}
+  bois: {fileID: 0}
+  rocher: {fileID: 0}
+  fleurs: {fileID: 0}
+  a: 0
+  camera: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1669181729
 GameObject:
   m_ObjectHideFlags: 0
