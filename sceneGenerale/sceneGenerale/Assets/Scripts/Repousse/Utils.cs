@@ -31,7 +31,7 @@ public class Utils : MonoBehaviour
     private static void creerArbre(Vector3 position)
     {
         string typeArbre = choixTypeArbre();
-        string path = "templatesArbre/" + typeArbre;
+        string path = typeArbre;
 
         // On recupere le prefab correspondant à l'arbre qui va pousser
         GameObject newArbre = Resources.Load(path, typeof(GameObject)) as GameObject;
