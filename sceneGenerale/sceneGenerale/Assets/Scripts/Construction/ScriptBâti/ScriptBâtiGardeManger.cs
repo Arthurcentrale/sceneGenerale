@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptBâti : MonoBehaviour
+public class ScriptBâtiGardeManger : MonoBehaviour
 {
     public bool menuBâtiPasDéjàAffiché = true;
     public bool menuConstructionPasDéjàAffiché = false;
@@ -13,7 +13,7 @@ public class ScriptBâti : MonoBehaviour
     public Inventaire inventaire;
     private Rect rect;
     private bool positionDéfinie = false;
-    private int NbrBoisNécessaire = 0; //je mettrai les vrais valeurs plus tard
+    private int NbrBoisNécessaire = 0; //je mettrai les vraies valeurs plus tard
     public bool RessourcesNécessairesDéposées;
     public BoutonsMenuConstruction boutonsMenuConstruction;
     public bool OnCliqueDehors = false;
@@ -24,12 +24,12 @@ public class ScriptBâti : MonoBehaviour
     private int heures;
     private int minutes;
     private int secondes;
-    private float tempsConstructionChaumière = 10;
+    private float tempsConstructionChaumière = 10;  // je devrais le rename boulangerie mais c'est une variable private ça va rien changer bref flemme :) 
     private int tempsConstructionChaumièreEntier = 10; //10 sec pour l'instant, on changera plus tard
     private bool débuterConstruction = false;
-    public GameObject prefabChaumière;
-    public GameObject Chaumière;
-    public GameObject BatiChaumière;
+    public GameObject prefabGardeManger;
+    public GameObject GardeManger;
+    public GameObject BatiGardeManger;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
     //public static BoutonsMenuConstruction BatiMoulin;
@@ -60,9 +60,9 @@ public class ScriptBâti : MonoBehaviour
                 {
                     OnCliqueDehors = true;
                 }
-                if (hit.collider.CompareTag("BatiChaumière"))
+                if (hit.collider.CompareTag("BatiGardeManger"))
                 {
-                   
+
                     OnCliqueDehors = false;
                     OnAfficheLeMenuDuBâti = true;
                 }
@@ -76,7 +76,7 @@ public class ScriptBâti : MonoBehaviour
             heures = tempsConstructionChaumièreEntier / 3600;
             minutes = (tempsConstructionChaumièreEntier - heures * 3600) / 60;
             secondes = (tempsConstructionChaumièreEntier - heures * 3600 - minutes * 60);
-            tempsConstructionChaumière -= Time.deltaTime ;
+            tempsConstructionChaumière -= Time.deltaTime;
         }
     }
 
@@ -85,7 +85,7 @@ public class ScriptBâti : MonoBehaviour
 
         if (menuBâtiPasDéjàAffiché)// pour éviter d'avoir plusieurs menus en même temps
         {
-            
+
             RaycastHit hit;  //même principe que pour la récolte
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             mP = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0); //là j'ai une position en pixels il faut que je la transforme en une position sur l'écran
@@ -147,7 +147,7 @@ public class ScriptBâti : MonoBehaviour
             if (menuBâtiPasDéjàAffiché && positionDéfinie)// && boutonsMenuConstruction.boutonMenuEstAffiche) // si ya pas déjà de menu pour éviter les doublons et si on a la position(sinon le menu s'affiche sans qu'on clique c'est chiant)
             {
                 //print("oui");
-                GUI.Box(new Rect(mP.x, Screen.height - mP.y, 150, 250), "Chaumière");   // la fonction Screen.height permet 
+                GUI.Box(new Rect(mP.x, Screen.height - mP.y, 150, 250), "GardeManger");   // la fonction Screen.height permet 
 
                 //GUI.enabled = (CountItem("Hache") > 0); // si on a une hache, on peut cliquer sur le bouton (Pour la construction jsp s'il faut des items ou des pnj dispo bref)
                 if (!RessourcesNécessairesDéposées)//tant qu'on a pas encore déposer toutes les ressources, on peut continuer à en déposer
@@ -218,10 +218,10 @@ public class ScriptBâti : MonoBehaviour
                     if (secondes < 0 && onAPasEncoreDétruitLeBâti)
                     { //onGUI est une fonction qui s'appelle à chaque frame, donc il faut faire attention à ne construire le moulin qu'une seule fois
 
-                        BatiChaumière = GameObject.Find("BatiChaumière");
+                        BatiGardeManger = GameObject.Find("BatiGardeManger");
 
-                        Chaumière = Instantiate(prefabChaumière, BatiChaumière.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
-                        Destroy(BatiChaumière);
+                        GardeManger = Instantiate(prefabGardeManger, BatiGardeManger.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        Destroy(BatiGardeManger);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;
                     }
@@ -246,16 +246,3 @@ public class ScriptBâti : MonoBehaviour
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
