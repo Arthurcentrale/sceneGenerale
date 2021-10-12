@@ -9,6 +9,7 @@ public class Item : ScriptableObject
     public string ItemName;
     public Sprite Icon;
     public int Weight;
+    public bool isFood;
     public GameObject prefab;
 
     public void Init(string ItemName)
