@@ -24,6 +24,10 @@ public class UI_Inventory : MonoBehaviour
     private int slotSelected;
     private bool prevoirAffichage;
 
+    //partie sonore
+    public AudioClip apparitionBulle;
+    private AudioSource audioSource;
+
     GameObject Background;
     GameObject BouttonOuvertureGO;
 
@@ -39,6 +43,11 @@ public class UI_Inventory : MonoBehaviour
     public int slotEquipé;
 
     public Sprite empty;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void Awake()
     {
@@ -98,6 +107,7 @@ public class UI_Inventory : MonoBehaviour
     {
         if (stadeAffichage == 0)   //inventaire fermé
         {
+            audioSource.PlayOneShot(apparitionBulle);
             animator.SetTrigger("ouvrirInvFavs");
             stadeAffichage += 1;
         }
