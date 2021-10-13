@@ -12,7 +12,6 @@ public class Item : ScriptableObject
     public bool isFood;
     public GameObject prefab;
 
-    public bool isFood;
 
     public void Init(string ItemName)
     {

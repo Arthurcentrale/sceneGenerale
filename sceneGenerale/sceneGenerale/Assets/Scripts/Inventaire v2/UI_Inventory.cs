@@ -30,6 +30,8 @@ public class UI_Inventory : MonoBehaviour
     public Item Bois;
     public Item Marteau;
     public Item Hache;
+    public Item Pioche;
+    public Item Pierre;
 
     public static int xSizeMaxInv;
     public static int ySizeMaxInv;
@@ -139,6 +141,8 @@ public class UI_Inventory : MonoBehaviour
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
         inventory.AddItem(new ItemAmount(Item: Bois, Amount: 2));
         inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
+        inventory.AddItem(new ItemAmount(Item: Pioche, Amount: 1));
+        inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 2));
 
         RefreshInventoryItems();
         RefreshInventoryFavoris();
