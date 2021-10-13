@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public class Inventory
 {
     private List<ItemAmount> itemList;
-    private List<ItemAmount> favList;
+    private List<bool> favList;          //liste de bool de la même taille de itemList qui indique quel item de l'inventaire est dans les fav (donc un max de 4 true)
 
     public Player player;
 
@@ -37,11 +37,18 @@ public class Inventory
     */
 
 
-    public Inventory(List<ItemAmount> itemList, List<ItemAmount> favList,Player player)
+    public Inventory(List<ItemAmount> itemList_, List<bool> favList_,Player player_)
     {
-        this.itemList = itemList;
-        this.favList = favList;
-        this.player = player;
+        this.itemList = itemList_;
+
+        //on initialise favList avec des false
+        for (int i = 0; i < UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; i++)
+        {
+            favList_.Add(false);
+        }
+
+        this.favList = favList_;
+        this.player = player_;
         this.sizeMaxStack = 5;
     }
 
@@ -130,29 +137,45 @@ public class Inventory
         return itemList;
     }
 
-    public List<ItemAmount> GetFavList()
+    public List<bool> GetFavList()
     {
         return favList;
     }
 
-    public bool AddToFav(ItemAmount item) //retourne un bool qui indique si il avait asser de place dans les favoris pour que l'item soit ajouté
+    public bool AddToFav(int slot) //retourne un bool qui indique si l'item était déjà dans les favoris ou si les favoris était plein
     {
-        int n = UI_Inventory.xSizeMaxInv; //nombre de slots
-        if (favList.Count < n)
+        int n = UI_Inventory.nbrFavoris ; //nombre de favoris (4 en général)
+
+        //on compte le nombre de true dans favList dans count (donc d'item déjà dans les favoris)
+        int count = 0;
+        foreach (bool val in favList)
         {
-            favList.Add(item);
+            if (val) count++;
         }
-        else
+
+        if (favList[slot] || (count > 4))
         {
             return false;
         }
-        OnItemListChanged?.Invoke();
-        return true;
+        else
+        {
+            favList[slot] = true;
+            OnItemListChanged?.Invoke();
+            return true;
+        }
     }
 
-    public void DelFavAtIndex(int i) //supprime un item des favoris
+    public bool DelFav(int slot) //supprime un item des favoris et retourne false si l'item n'était déjà pas présent
     {
-        favList.RemoveAt(i);
-        OnItemListChanged?.Invoke();
+        if (!favList[slot])
+        {
+            return false;
+        }
+        else
+        {
+            favList[slot] = false;
+            OnItemListChanged?.Invoke();
+            return true;
+        }
     }
 }

@@ -35836,6 +35836,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 519023495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &852012898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980111755}
+  m_Layer: 0
+  m_Name: Recovery GameObject (980111755)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &853987977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42195,7 +42211,7 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237409478}
+  m_GameObject: {fileID: 852012898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -75954,7 +75970,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1806804573 stripped
 Transform:
@@ -76703,7 +76719,7 @@ Transform:
   - {fileID: 2088446929}
   - {fileID: 417120115}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1833530172
 GameObject:
@@ -85824,7 +85840,7 @@ Transform:
   - {fileID: 72812187}
   - {fileID: 705507995}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2056978227
 AudioSource:
@@ -88009,7 +88025,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2094472029
 SphereCollider:
@@ -90828,7 +90844,7 @@ PrefabInstance:
     - target: {fileID: 1935418754147658909, guid: 8b4288b794c4b08418445b280e90175e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1935418754147658909, guid: 8b4288b794c4b08418445b280e90175e,
         type: 3}
@@ -93390,7 +93406,7 @@ MonoBehaviour:
   Hache: {fileID: 11400000, guid: cf6aa088148ee7a409c480d926407cf7, type: 2}
   stadeAffichage: 0
   "slotEquip\xE9": 0
-  empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  empty: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 3}
 --- !u!95 &5514885086307765773
 Animator:
   serializedVersion: 3
