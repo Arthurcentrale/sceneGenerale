@@ -14,6 +14,9 @@ public class treeLayersMag : MonoBehaviour
     {
         GameObject[] treeList = GameObject.FindGameObjectsWithTag("treePart");
 
+        if (treeList.Length == 0)
+            return;
+
         foreach (GameObject go in treeList)
         {
             int z = (int)go.transform.position[2];
