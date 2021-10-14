@@ -105,6 +105,6 @@ public class Pecherie : MonoBehaviour
     }
     public void RendreOccupe()
     {
-        isOccupied = true;
+        isOccupied = !isOccupied;
     }
 }
