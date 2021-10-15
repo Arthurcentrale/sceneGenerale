@@ -42,6 +42,17 @@ public class UI_Inventory : MonoBehaviour
 
     public Sprite empty;
 
+    //partie son
+    public AudioClip premierClicBulle;
+    public AudioClip secondClicBulle;
+    public AudioClip fermeture;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Awake()
     {
         itemSlotContainer = gameObject.transform.GetChild(0).GetChild(0);
@@ -99,11 +110,13 @@ public class UI_Inventory : MonoBehaviour
         {
             animator.SetTrigger("ouvrirInvFavs");
             stadeAffichage += 1;
+            audioSource.PlayOneShot(premierClicBulle);
         }
         else if (stadeAffichage == 1)   //favoris dépliés
         {
             animator.SetTrigger("fermerInvFavs");
             StartCoroutine(DelayOuvertureInv(0.5f));
+            audioSource.PlayOneShot(secondClicBulle);
         }   
         else                      //inventaire complet ouvert
         {
@@ -127,6 +140,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void BouttonFermeture()   //clique sur croix avec inventaire complet ouvert
     {
+        audioSource.PlayOneShot(fermeture);
         stadeAffichage = 0;
         Background.SetActive(false);
         //BouttonOuvertureGO.SetActive(true);

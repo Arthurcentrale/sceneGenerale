@@ -8,6 +8,7 @@ public class Recolte : MonoBehaviour
     //SoundDesign part
     public AudioClip treeChop;
     public AudioClip apparitionBulle;
+    public AudioClip[] cassageRoche;
     private AudioSource audioSource;
 
     //Concrete part
@@ -90,9 +91,10 @@ public class Recolte : MonoBehaviour
                         {
                         if (onPanel == true || IsCraftArbre == false)
                         {
-                                audioSource.PlayOneShot(apparitionBulle);
+
+                                audioSource.PlayOneShot(apparitionBulle); 
                                 if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
-                                {
+                                {                                   
                                     cible = hit;
                                     R = ray;
                                     IsCraftFleur = false;
@@ -101,7 +103,7 @@ public class Recolte : MonoBehaviour
                                 
                                 }
                                 else
-                                {
+                                {                              
                                     cible = hit;
                                     R = ray;
                                     IsCraftArbre = false;
@@ -125,7 +127,8 @@ public class Recolte : MonoBehaviour
                         {
                         if (onPanel == true || IsCraftRoche == false)
                         {
-                                if (IsCraftRoche == false)
+                            audioSource.PlayOneShot(apparitionBulle);                          
+                            if (IsCraftRoche == false)
                                 {
                                     cible = hit;
                                     R = ray;
@@ -328,6 +331,8 @@ public class Recolte : MonoBehaviour
     }
     private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
+        audioSource.clip = cassageRoche[Random.Range(0, cassageRoche.Length)];
+        audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);
         IsCraftRoche = false;//detruit cible
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
