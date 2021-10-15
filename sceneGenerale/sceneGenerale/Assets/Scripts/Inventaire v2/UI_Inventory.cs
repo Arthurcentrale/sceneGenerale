@@ -46,6 +46,7 @@ public class UI_Inventory : MonoBehaviour
     public AudioClip premierClicBulle;
     public AudioClip secondClicBulle;
     public AudioClip fermeture;
+    public AudioClip equipOutil;
     private AudioSource audioSource;
 
     private void Start()
@@ -140,7 +141,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void BouttonFermeture()   //clique sur croix avec inventaire complet ouvert
     {
-        audioSource.PlayOneShot(fermeture);
+        audioSource.PlayOneShot(fermeture,0.2f);
         stadeAffichage = 0;
         Background.SetActive(false);
         //BouttonOuvertureGO.SetActive(true);
@@ -359,8 +360,9 @@ public class UI_Inventory : MonoBehaviour
             //on équipe l'objet
             slotEquipé = slot;
             Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+            audioSource.PlayOneShot(equipOutil);
         }
-
+        
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
