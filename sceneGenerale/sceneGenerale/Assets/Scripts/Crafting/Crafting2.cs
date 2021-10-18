@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class Crafting2 : MonoBehaviour
 {
+
+    List<ItemAmount> itemList;
     public GameObject Fond;
     public GameObject FondaActiver;
     public Inventaire inventaire; //inventaire
-    public GameObject Player; //on veut recuperer le script inventaire sur le joueur
+    public Player player; //on veut recuperer le script inventaire sur le joueur
     public RecetteCraft recettecraft; // la recette que l'on veut craft
     public Button Inc, Dec;
     GameObject BoutonsCrafting;
@@ -16,10 +18,12 @@ public class Crafting2 : MonoBehaviour
     public Button bFond;
     Button button; 
     public int Count;
+   
     // Start is called before the first frame update
     void Start()
     {
         BoutonsCrafting = GameObject.Find("Menus/Crafting/MenuAtelierFabrication/BoutonsCrafting");
+        itemList = player.inventory.GetItemList();
         bFond = bFond.GetComponent<Button>();
         bFond.onClick.AddListener(TaskOnClick);
         Count = 1;
@@ -45,15 +49,14 @@ public class Crafting2 : MonoBehaviour
     int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
     {
         int Amount = 0;
-        for(int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2;i++)
+        for(int i = 0; i < UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; i++)
         {
-            if (inventaire.Slot[i].Item.ItemName == itemname)
+            if (itemList[i].Item.ItemName == itemname)
             {
-                Amount += inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
+                Amount += itemList[i].Amount * itemList[i].Item.Weight;
             }
-            else if (inventaire.Slot[i].Item.ItemName == "Vide")
+            else if (itemList[i].Item.ItemName == "Vide")
             {
-
             }
         }
         return Amount;
@@ -64,14 +67,14 @@ public class Crafting2 : MonoBehaviour
     {
         foreach (ItemAmount ItemAmount in recettecraft.Results) // Si on a assez de place
         {
-            if (NbrPlace(ItemAmount.Item) == 0)
+            if (player.uiInventory.NbrPlace(ItemAmount.Item) == 0)
             {
                 return false;
             }
         }
         foreach (ItemAmount ItemAmount in recettecraft.Materials) // Si on a les ressources necessaire
         {
-            if (CountItem(ItemAmount.Item.ItemName) < ItemAmount.Amount)
+            if (player.uiInventory.CountItem(ItemAmount.Item.ItemName) < ItemAmount.Amount)
             {
                 return false;
             }
@@ -83,9 +86,9 @@ public class Crafting2 : MonoBehaviour
         int Count = 0;
         if (item.Weight == 5) //si l'item est un outil
         {
-            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
+            for (int i = 0; i < UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; i++)
             {
-                if (inventaire.Slot[i].Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
+                if (itemList[i].Item.ItemName == "Vide") // le nombre de place correspond aux nombre de slot vide
                 {
                     Count++;
                 }
@@ -94,12 +97,12 @@ public class Crafting2 : MonoBehaviour
         }
         else // si l'item n'est pas un outil
         {
-            for (int i = 5; i <= inventaire.transform.GetChild(0).childCount - 2; i++)
+            for (int i = 0; i < UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; i++)
             {
-                if (inventaire.Slot[i].Item.ItemName == "Vide" || inventaire.Slot[i].Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
+                if (itemList[i].Item.ItemName == "Vide" || itemList[i].Item == item) // le nombre de place correspond aux nombre de slot vide et ceux ou il y a le meme item avec moins
                                                                                    // de 64 items
                 {
-                    Count += 5 - inventaire.Slot[i].Amount * inventaire.Slot[i].Item.Weight;
+                    Count += 5 - itemList[i].Amount * itemList[i].Item.Weight;
                 }
             }
             return Count;
@@ -113,11 +116,11 @@ public class Crafting2 : MonoBehaviour
         {
             foreach (ItemAmount ItemAmount in recettecraft.Materials)
             {
-                RetirerInventaire(ItemAmount.Item, ItemAmount.Amount); //on enleve les ressources necessaire pour craft
+                player.inventory.DelItem(ItemAmount); //on enleve les ressources necessaire pour craft
             }
             foreach (ItemAmount ItemAmount in recettecraft.Results)
             {
-                AjouterInventaire(ItemAmount.Item, ItemAmount.Amount); // on ajoute les résultats
+                player.inventory.AddItem(ItemAmount); // on ajoute les résultats
             }
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();
         }
@@ -222,7 +225,7 @@ public class Crafting2 : MonoBehaviour
     public int maxCount(RecetteCraft recettecraft)
     {
         int i = 0;
-        while ((NbrPlace(recettecraft.Results[0].Item) * recettecraft.Results[0].Amount >= i + 1) && (CountItem(recettecraft.Materials[0].Item.ItemName) >= (i + 1) * recettecraft.Materials[0].Amount) && (CountItem(recettecraft.Materials[1].Item.ItemName) >= (i + 1) * recettecraft.Materials[1].Amount))
+        while ((player.uiInventory.NbrPlace(recettecraft.Results[0].Item) * recettecraft.Results[0].Amount >= i + 1) && (player.uiInventory.CountItem(recettecraft.Materials[0].Item.ItemName) >= (i + 1) * recettecraft.Materials[0].Amount) && (player.uiInventory.CountItem(recettecraft.Materials[1].Item.ItemName) >= (i + 1) * recettecraft.Materials[1].Amount))
             i++;
         return i;
     }

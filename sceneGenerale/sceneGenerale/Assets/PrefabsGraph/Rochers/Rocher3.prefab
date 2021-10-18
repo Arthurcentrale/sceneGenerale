@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4051986919196549110}
   - component: {fileID: 7086418677059949678}
   - component: {fileID: 2585293420762363854}
+  - component: {fileID: 2464132470607046741}
   m_Layer: 0
   m_Name: Rocher3
   m_TagString: Roche3
@@ -176,3 +177,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!136 &2464132470607046741
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750122219638719312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5
+  m_Height: 11.505448
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.00000813587, z: -0.1608453}

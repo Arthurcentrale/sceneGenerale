@@ -63,5 +63,9 @@ public class HabitantBehaviour : MonoBehaviour
             ecoLevel = 5;
         }
     }
-    
+}
+
+public class Bucheron : HabitantBehaviour
+{
+    public int chauffageNeed;
 }

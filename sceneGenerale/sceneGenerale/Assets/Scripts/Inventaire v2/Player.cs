@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         //inventory = Inventory.CreateInstance(new List<ItemAmount>());
-        inventory = new Inventory(new List<ItemAmount>(), new List<ItemAmount>(),this);
+        inventory = new Inventory(new List<ItemAmount>(), new List<bool>(),this);
         uiInventory = GameObject.Find("Inventaire2").transform.GetChild(0).gameObject.GetComponent<UI_Inventory>();
         uiInventory.SetInventory(inventory);
     }

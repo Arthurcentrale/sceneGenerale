@@ -29,6 +29,8 @@ public class ItemAmount
         this.Item = Item;
         this.Amount = Amount;
     }
+
+
 }
 
 [CreateAssetMenu]
