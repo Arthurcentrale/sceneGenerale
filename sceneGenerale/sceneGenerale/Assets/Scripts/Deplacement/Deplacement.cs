@@ -100,4 +100,12 @@ public class Deplacement : MonoBehaviour
     {
         transform.Translate(direction * speed * Time.deltaTime,Space.World);
     } //Move dans la direction du vecteur direction
+    public void MetEnMenu()
+    {
+        enMenu = true;
+    }
+    public void MetHorsMenu()
+    {
+        enMenu = false;
+    }
 }

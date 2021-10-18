@@ -96,12 +96,12 @@ public class Pecherie : MonoBehaviour
     //Fonction quand on clique sur le bouton du milieu
     public void RecupererPoisson()
     {
-        compteurbouffe.NbrBouffe += PoissonEnAttente;
+        CompteurBouffe.Data.NbrBouffe += PoissonEnAttente;
         ItemAmount itemamount = new ItemAmount(poisson, PoissonEnAttente);
         player.inventory.AddItem(itemamount);
         PoissonEnAttente = 0;
         textPoisson.text = PoissonEnAttente.ToString();
-        compteurbouffe.text.text = compteurbouffe.NbrBouffe.ToString();
+        compteurbouffe.text.text = CompteurBouffe.Data.NbrBouffe.ToString();
     }
     public void RendreOccupe()
     {

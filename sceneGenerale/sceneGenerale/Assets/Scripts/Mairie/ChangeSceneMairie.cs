@@ -8,7 +8,7 @@ public class ChangeSceneMairie : MonoBehaviour
     // Start is called before the first frame update
     public void EnterMairie()
     {
-        SceneManager.LoadScene("Mairie");
+        SceneManager.LoadScene("Mer i");
     }
 
     public void EnterIsland()
