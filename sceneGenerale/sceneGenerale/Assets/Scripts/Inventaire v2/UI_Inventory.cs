@@ -83,7 +83,7 @@ public class UI_Inventory : MonoBehaviour
         slotEquipé = 0;
     }
 
-    void LateUpdate ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
+    void Update ()     // permet de fermer le bouton 'ajouter au favoris' si on clique ailleurs
     {
         if (boutonFavAffiche && Input.GetMouseButton(0))
         {
