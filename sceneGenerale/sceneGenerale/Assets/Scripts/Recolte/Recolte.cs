@@ -89,7 +89,7 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
                         {
-                        if (onPanel == true || IsCraftArbre == false)
+                        if (onPanel == true || IsCraftArbre == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
                         {
 
                                 audioSource.PlayOneShot(apparitionBulle); 
@@ -125,7 +125,7 @@ public class Recolte : MonoBehaviour
 
                         if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
                         {
-                        if (onPanel == true || IsCraftRoche == false)
+                        if (onPanel == true || IsCraftRoche == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
                         {
                             audioSource.PlayOneShot(apparitionBulle);                          
                             if (IsCraftRoche == false)

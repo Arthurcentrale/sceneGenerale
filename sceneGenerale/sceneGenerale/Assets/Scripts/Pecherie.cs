@@ -54,7 +54,7 @@ public class Pecherie : MonoBehaviour
                 Deplacement.enMenu = false;
             }
 
-            if (open == false)
+            if (open == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
             {
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Pecherie"))
 
