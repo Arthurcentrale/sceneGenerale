@@ -33,7 +33,7 @@ public class Utils : MonoBehaviour
     private static void creerArbre(Vector3 position)
     {
         string typeArbre = choixTypeArbre();
-        string path = "templatesArbre/" + typeArbre;
+        string path = typeArbre;
 
         // On recupere le prefab correspondant à l'arbre qui va pousser
         GameObject newArbre = Resources.Load(path, typeof(GameObject)) as GameObject;
@@ -72,13 +72,12 @@ public class Utils : MonoBehaviour
             case 3:
                 return "Platane";
 
-            /*
-        case 4:
-            return "connifere_OK";
-
-        case 5:
-            return "bouleau_OK";
-            */
+            case 4:
+                return "Connifere";
+    /*
+            case 5:
+                return "bouleau_OK";
+                */
 
             default:
                 return "Chene";
