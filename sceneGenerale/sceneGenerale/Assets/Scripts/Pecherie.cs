@@ -54,7 +54,7 @@ public class Pecherie : MonoBehaviour
                 Deplacement.enMenu = false;
             }
 
-            if (open == false)
+            if (open == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
             {
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Pecherie"))
 
@@ -96,12 +96,12 @@ public class Pecherie : MonoBehaviour
     //Fonction quand on clique sur le bouton du milieu
     public void RecupererPoisson()
     {
-        compteurbouffe.NbrBouffe += PoissonEnAttente;
+        CompteurBouffe.Data.NbrBouffe += PoissonEnAttente;
         ItemAmount itemamount = new ItemAmount(poisson, PoissonEnAttente);
         player.inventory.AddItem(itemamount);
         PoissonEnAttente = 0;
         textPoisson.text = PoissonEnAttente.ToString();
-        compteurbouffe.text.text = compteurbouffe.NbrBouffe.ToString();
+        compteurbouffe.text.text = CompteurBouffe.Data.NbrBouffe.ToString();
     }
     public void RendreOccupe()
     {

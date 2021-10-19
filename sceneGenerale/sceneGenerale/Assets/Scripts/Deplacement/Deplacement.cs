@@ -19,14 +19,13 @@ public class Deplacement : MonoBehaviour
     public Recolte recolte;
 
     public Player player;
-
     // Start is called before the first frame update
     void Start()
     {
         Touch = false;
         recolte = recolte.GetComponent<Recolte>();
         canmove = true;
-
+        animator = player.GetComponent<Animator>();
         player = this.GetComponent<Player>();
     }
     // Update is called once per frame
@@ -77,15 +76,15 @@ public class Deplacement : MonoBehaviour
             direction = new Vector3(0, 0, 0);
         }
 
-        if (recolte.IsCraftArbre || (player.uiInventory.stadeAffichage == 2)) //Rajouter tous les booleens de chaque scripts qui doivent désactiver le déplacement
+        /*if (recolte.IsCraftArbre || (player.uiInventory.stadeAffichage == 2)) //Rajouter tous les booleens de chaque scripts qui doivent désactiver le déplacement
         {
             canmove = false;
         }
         else
         {
             canmove = true;
-        }
-        if (canmove == false)
+        }*/
+        if (enMenu == true)
         {
             direction = new Vector3(0, 0, 0);
         }
@@ -101,4 +100,12 @@ public class Deplacement : MonoBehaviour
     {
         transform.Translate(direction * speed * Time.deltaTime,Space.World);
     } //Move dans la direction du vecteur direction
+    public void MetEnMenu()
+    {
+        enMenu = true;
+    }
+    public void MetHorsMenu()
+    {
+        enMenu = false;
+    }
 }
