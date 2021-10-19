@@ -9,7 +9,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
     private Vector3 mP;
     private Vector3 position;
     private Vector3 positionBis;
-    public Camera camera;
+    private Camera camera;
     public Inventaire inventaire;
     private Rect rect;
     private bool positionDéfinie = false;
@@ -49,6 +49,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
     // Update is called once per frame
     void Update() // Pour savoir quand je clique dehors oui
     {
+        camera = Camera.main;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Du clic du clic");
@@ -82,7 +83,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
 
     void OnMouseDown()
     {
-
+        camera = Camera.main;
         if (menuBâtiPasDéjàAffiché)// pour éviter d'avoir plusieurs menus en même temps
         {
 

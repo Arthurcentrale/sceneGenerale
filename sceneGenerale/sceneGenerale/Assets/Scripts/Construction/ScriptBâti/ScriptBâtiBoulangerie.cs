@@ -9,7 +9,8 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     private Vector3 mP;
     private Vector3 position;
     private Vector3 positionBis;
-    public Camera camera;
+    //public Camera camera;    en fait ça marche pas en version prefab, on va devoir trouver la caméra via une ligne de commande
+    private Camera camera;
     public Inventaire inventaire;
     private Rect rect;
     private bool positionDéfinie = false;
@@ -33,6 +34,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
     //public static BoutonsMenuConstruction BatiMoulin;
+    
 
     //public Camera camera;
     //public GameObject prefabMenuBâti;
@@ -49,9 +51,12 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     // Update is called once per frame
     void Update() // Pour savoir quand je clique dehors oui
     {
+        camera = Camera.main;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Du clic du clic");
+            
+            
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -59,6 +64,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
                 if (hit.collider.CompareTag("Untagged"))
                 {
                     OnCliqueDehors = true;
+                    
                 }
                 if (hit.collider.CompareTag("BatiBoulangerie"))
                 {
@@ -85,6 +91,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
 
         if (menuBâtiPasDéjàAffiché)// pour éviter d'avoir plusieurs menus en même temps
         {
+            camera = Camera.main;
 
             RaycastHit hit;  //même principe que pour la récolte
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);

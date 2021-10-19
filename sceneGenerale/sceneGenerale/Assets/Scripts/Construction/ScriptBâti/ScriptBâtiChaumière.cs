@@ -9,7 +9,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
     private Vector3 mP;
     private Vector3 position;
     private Vector3 positionBis;
-    public Camera camera;
+    private Camera camera;
     public Inventaire inventaire;
     private Rect rect;
     private bool positionDéfinie = false;
@@ -49,9 +49,11 @@ public class ScriptBâtiChaumière : MonoBehaviour
     // Update is called once per frame
     void Update() // Pour savoir quand je clique dehors oui
     {
+        camera = Camera.main;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Du clic du clic");
+            
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -82,6 +84,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
 
     void OnMouseDown()
     {
+        camera = Camera.main;
 
         if (menuBâtiPasDéjàAffiché)// pour éviter d'avoir plusieurs menus en même temps
         {
@@ -123,7 +126,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
 
     private void OnGUI() //affichage des menus
     {
-
+        camera = Camera.main;
         if (!OnCliqueDehors && OnAfficheLeMenuDuBâti)
         {
             //if (Input.GetKeyDown(KeyCode.Mouse0))
