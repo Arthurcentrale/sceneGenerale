@@ -46,15 +46,10 @@ public class Utils : MonoBehaviour
 
         newArbre.tag = "Arbre";
 
+        Vector3 positionArbre = new Vector3(position[0], newArbre.transform.position.y, position[1]);
+
         // On insere le nouveau GameObject dans la scène
-        Instantiate(newArbre);
-
-        // On créé le vecteur position (complet i.e. à 3 coordonnées) du nouveau GameObject
-        float Ypos = newArbre.transform.position[1];
-        Vector3 GoPosition = new Vector3(position[0], Ypos, position[1]);
-
-        // On le déplace sur la scène à cette position 
-        newArbre.transform.position = GoPosition;
+        Instantiate(newArbre, positionArbre, newArbre.transform.rotation);
 
         // Puis on change son nom
         newArbre.name = typeArbre;
