@@ -38,26 +38,36 @@ public class Labourage : MonoBehaviour
         parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
     }
 
-    public void UpdateZonePreview()    //déplace le prefab de la zone de prévisualisation à la position du pointeur
+    public void Update()
     {
-        zoneVertePf.transform.position = TouchToPos();
+        //On cherche à savoir si le joueur clique sur une parcelle non-labourée
+        if (Input.GetMouseButtonDown(0))
+        {
+            //on récupère la position du toucher de l'utilisateur sur l'écran
+            Vector2 touchPosition = Input.mousePosition;
+
+            //on transforme cette position en rayon perpendiculaire au plan de la camera
+            Ray ray = MainCamera.ScreenPointToRay(new Vector3(touchPosition.x, touchPosition.y, 0f));
+            RaycastHit hit;
+
+            //si ce rayon rencontre un obstable on récupère l'objet
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject objetTouche = hit.transform.gameObject;
+
+                if (objetTouche.name.Length == 2)  //c'est l'indaction que c'est une parcelle bleue, donc on la laboure
+                {
+                    int i = ToInt(objetTouche.name[0]);
+                    int j = ToInt(objetTouche.name[1]);
+                    Labourer(i, j);
+                }
+            }
+        }
     }
 
-    public Vector3 TouchToPos()  //Retourne la coordonnée du premier objet rencontré par un rayon qui part de l'endroit où on touche l'écran
+    private int ToInt(char c)
     {
-        //on récupère la position du toucher de l'utilisateur sur l'écran
-        Vector2 touchPosition = Input.mousePosition;
-
-        //on transforme cette position en rayon perpendiculaire au plan de la camera
-        Ray ray = MainCamera.ScreenPointToRay(new Vector3(touchPosition.x, touchPosition.y, 0f));
-        RaycastHit hit;
-        Vector3 newTargetPos = new Vector3();
-        //si ce rayon rencontre un obstable on récupère la position de l'impact
-        if (Physics.Raycast(ray, out hit))
-        {
-            newTargetPos = hit.point;
-        }
-        return newTargetPos;
+        return (int)(c - '0');
     }
 
     public void Labourer(int x, int y) //on laboure une des parcelles
@@ -70,6 +80,7 @@ public class Labourage : MonoBehaviour
         if ((x < 6) && !parcellesLabourees[x + 1, y]) parcellesAdjacentes[x + 1, y] = true;
         if ((y > 0) && !parcellesLabourees[x, y - 1]) parcellesAdjacentes[x, y - 1] = true;
         if ((y < 4) && !parcellesLabourees[x, y + 1]) parcellesAdjacentes[x, y + 1] = true;
+        MajPrefabsLabourage();
     }
 
     public void MajPrefabsLabourage()
@@ -80,13 +91,15 @@ public class Labourage : MonoBehaviour
             Destroy(child.gameObject);
         }
         //Puis on affiche les nouvelles
+        GameObject parc;
         for (int i=0; i<xNbrParcelles; i++)
         {
             for (int j = 0; j< yNbrParcelles; j++)
             {
                 if (parcellesAdjacentes[i, j])
                 {
-                    Instantiate(zoneBleuePf, parcelleContainer.position + new Vector3(i * sizeParcelle.x, 0f, j * sizeParcelle.z), Quaternion.identity, parcelleContainer);
+                    parc = (GameObject) Instantiate(zoneBleuePf, parcelleContainer.position + new Vector3(i * sizeParcelle.x, 0f, j * sizeParcelle.z), Quaternion.identity, parcelleContainer);
+                    parc.name = i.ToString() + j.ToString();
                 }
                 if (parcellesLabourees[i, j])
                 {
