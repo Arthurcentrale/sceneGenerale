@@ -6,6 +6,7 @@ public class Utils : MonoBehaviour
 {
     // Fonction qui permet de créer des nombres aléatoires
     private static System.Random rnd = new System.Random();
+
     public static int GetRandom(int min, int max)
     {
         return rnd.Next(min, max);
@@ -33,14 +34,13 @@ public class Utils : MonoBehaviour
     private static void creerArbre(Vector3 position)
     {
         string typeArbre = choixTypeArbre();
-        string path = typeArbre;
 
         // On recupere le prefab correspondant à l'arbre qui va pousser
-        GameObject newArbre = Resources.Load(path, typeof(GameObject)) as GameObject;
+        GameObject newArbre = Resources.Load(typeArbre, typeof(GameObject)) as GameObject;
 
         if (newArbre == null)
         {
-            Debug.LogError("Pas d'arbre trouvé... path = " + path);
+            Debug.LogError("Pas d'arbre trouvé... path = " + typeArbre);
             return;
         }
 
@@ -49,7 +49,7 @@ public class Utils : MonoBehaviour
         Vector3 positionArbre = new Vector3(position[0], newArbre.transform.position.y, position[1]);
 
         // On insere le nouveau GameObject dans la scène
-        Instantiate(newArbre, positionArbre, newArbre.transform.rotation);
+        Instantiate(newArbre, positionArbre, newArbre.transform.rotation, GameObject.Find("Arbres").transform);
 
         // Puis on change son nom
         newArbre.name = typeArbre;
@@ -59,7 +59,7 @@ public class Utils : MonoBehaviour
     // Fonction qui retourne aléatoirement un type d'arbre (de manière équiprobable)
     private static string choixTypeArbre()
     {
-        int x = Utils.GetRandom(1, 6);
+        int x = Utils.GetRandom(1, 5);
 
         switch (x)
         {
