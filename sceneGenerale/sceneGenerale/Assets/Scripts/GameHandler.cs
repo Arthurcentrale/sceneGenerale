@@ -11,11 +11,14 @@ public class GameHandler : MonoBehaviour
     public GameObject chene;
     public GameObject platane;
 
+    private Transform dossierArbres;
+
     public float intervalleSauvegarde = 5.0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        dossierArbres = GameObject.Find("Arbres").transform;
         Load();
         StartCoroutine(SaveGame());
     }
@@ -85,16 +88,16 @@ public class GameHandler : MonoBehaviour
         GameData gameData = JsonUtility.FromJson<GameData>(donneesEnregistrees);
 
         foreach (Vector3 positionOfPin in gameData.listePositionsPins)
-            Instantiate(pin, positionOfPin, pin.transform.rotation);
+            Instantiate(pin, positionOfPin, pin.transform.rotation, dossierArbres);
 
         foreach (Vector3 positionOfConnifere in gameData.listePositionsConniferes)
-            Instantiate(connifere, positionOfConnifere, connifere.transform.rotation);
+            Instantiate(connifere, positionOfConnifere, connifere.transform.rotation, dossierArbres);
 
         foreach (Vector3 positionOfPlatane in gameData.listePositionsPlatanes)
-            Instantiate(platane, positionOfPlatane, platane.transform.rotation);
+            Instantiate(platane, positionOfPlatane, platane.transform.rotation, dossierArbres);
 
         foreach (Vector3 positionOfChene in gameData.listePositionsChenes)
-            Instantiate(chene, positionOfChene, chene.transform.rotation);
+            Instantiate(chene, positionOfChene, chene.transform.rotation, dossierArbres);
     }
 }
 

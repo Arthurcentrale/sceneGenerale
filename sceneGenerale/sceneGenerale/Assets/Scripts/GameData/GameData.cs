@@ -10,7 +10,7 @@ public class GameData
     public List<Vector3> listePositionsConniferes;
 
     // Constructeur par données
-    public GameData(List<Vector3> LPP, List<Vector3> LPC, List<Vector3> LPPL, List<Vector3> LPCH)
+    public GameData(List<Vector3> LPP, List<Vector3> LPC, List<Vector3> LPCH, List<Vector3> LPPL)
     {
         this.listePositionsChenes = LPCH;
         this.listePositionsPins = LPP;
