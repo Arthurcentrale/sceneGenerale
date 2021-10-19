@@ -20,6 +20,7 @@ public class GameHandler : MonoBehaviour
     {
         dossierArbres = GameObject.Find("Arbres").transform;
         Load();
+        treeLayersMag.updateTreeLayers();
         StartCoroutine(SaveGame());
     }
 
