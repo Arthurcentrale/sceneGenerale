@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private bool victoire;
 
     //On initialise toute les instances uniques (singletons) des différents managers
-    SocialManager socialManager = new SocialManager(0,0,0);
+    public SocialManager socialManager = new SocialManager(0,0,0);
     public EnvironnementManager environnementManager = new EnvironnementManager(0,0,0);
     public DeveloppementManager developpementManager = new DeveloppementManager(0);
     //public HabitantManager habitantManager = new HabitantManager(new List<GameObject>());
