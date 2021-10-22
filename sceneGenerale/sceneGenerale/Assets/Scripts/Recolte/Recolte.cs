@@ -42,7 +42,7 @@ public class Recolte : MonoBehaviour
         onPanel = false ;
         inventaire = inventaire.GetComponent<Inventaire>();
         ui_inventory = ui_inventory.GetComponent<UI_Inventory>() ;
-        buttonA1 = buttonA1.GetComponent<Button>();
+        buttonA1 = buttonA1.GetComponent<Button>();  // buttonA1 est pas directement un bouton, c'est un sprite auquel on a rajouté un component button, c'est lui qu'on récupère ici
         buttonA1.onClick.AddListener(SpawnBuche);
         buttonA2 = buttonA2.GetComponent<Button>();
         buttonA2.onClick.AddListener(SpawnBuche);
