@@ -14,11 +14,15 @@ public class Pecherie : MonoBehaviour
     new public Camera camera;
     private Animator animator;
     public Button validation;
+    public Text textslider;
 
     //Gestion des paramètres globaux
 
     public HabitantBehaviour habitant;
-    public GameManager gm;
+    public GameObject go;
+    GameManager gm;
+
+
 
     //Booleens pour savoir si la pecherie est habité / Si on a validé une nouvelle valeur à produire dans la journée
 
@@ -38,7 +42,6 @@ public class Pecherie : MonoBehaviour
 
     //Affichage
 
-    public Text textPoisson;
     public CompteurBouffe compteurbouffe;
     public Slider slider;
 
@@ -53,15 +56,19 @@ public class Pecherie : MonoBehaviour
         isOccupied = false;
         QuantitePoisson = 0;
         AnciennequantitePoisson = 0;
-        textPoisson.text = 0.ToString() + '/' + gm.socialManager.nombreAlimentsDifferents.ToString();
+        textslider.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         compteurbouffe = compteurbouffe.GetComponent<CompteurBouffe>();
         validation = validation.GetComponent<Button>();
-        validation.onClick.AddListener(ValiderValeur);
+        //validation.onClick.AddListener(ValiderValeur);
+        gm = go.GetComponent<GameManager>();
     }
 
     void Update()
     {
+        slider.minValue = 0;
+        slider.maxValue = QuantiteMax(habitant);
+
         var ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit Hit;
 
@@ -86,8 +93,7 @@ public class Pecherie : MonoBehaviour
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
                     Deplacement.enMenu = true;
-                    slider.minValue = 0;
-                    slider.maxValue = QuantiteMax(habitant);
+
                 }
 
             }
@@ -98,7 +104,20 @@ public class Pecherie : MonoBehaviour
 
 
         }
-        if (isOccupied) //Fonctionnement de la pecherie que si un pecheur est présent ++ Blocage jusqu'à minuit quand on valide
+        
+        //¨Partie si on ne valide pas dans la journée
+
+        if(isOccupied && valider == false)
+        {
+            timer += Time.deltaTime;
+            if (timer >= delai)
+            {
+                FonctionMinuit();
+                timer = 0;
+            }
+
+        }
+        /*if (isOccupied) //Fonctionnement de la pecherie que si un pecheur est présent ++ Blocage jusqu'à minuit quand on valide
         {
             timer += Time.deltaTime;
             if (timer >= delai)
@@ -108,7 +127,7 @@ public class Pecherie : MonoBehaviour
                 textPoisson.text = QuantitePoisson.ToString();
 
             }
-        }
+        }*/
 
     }
     public void ClickOnPanel()
@@ -121,36 +140,43 @@ public class Pecherie : MonoBehaviour
         onPanel = false;
     }
 
+    public void AffichageSlider()
+    {
+        textslider.text = slider.value.ToString();
+    }
+
     //Fonction quand on clique sur le bouton du milieu
     public void RecupererPoisson()
-    { 
-        if (isOccupied && valider)
+    {
+        if (isOccupied)
         {
-            if(QuantitePoisson > 8)
+            if (QuantitePoisson > 8)
             {
                 i++; // On incrémente la valeur de jour où on peche plus de 8 poissons
                 j = 0; // On remet a 0 le nombre de jour où on peche moins de 8 poissons
             }
-            else if(isOccupied)
+            else
             {
                 i = 0;
                 j++;
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
-        }
-        else // Si on a pas validé, on garde le meme nombre de poisson produit que la veille
-        {
-            CompteurBouffe.Data.NbrBouffe -= Mathf.Max(QuantitePoisson - MalusQualite(gm), 0); // On enleve la quantité de poisson choisie la veille
-            UpdateQualiteEau(gm);
-            CompteurBouffe.Data.NbrBouffe += Mathf.Max(QuantitePoisson - MalusQualite(gm), 0); // On regarde la malus sur la production après mise a jour de la qualité
+            //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
+            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite(gm); 
+            UpdateQE(gm);
+            CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite(gm);
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
-            compteurbouffe.text.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
+            compteurbouffe.text.text = CompteurBouffe.Data.NbrBouffe.ToString() + '/' + gm.socialManager.nombreAlimentsDifferents.ToString() + '/' + gm.environnementManager.qualiteEau.ToString("F1");// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
+
         }
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
     {
-        // Pecherie.habitant = Gerard;
+        //GameObject gameObject1 = GameObject.Find("/habitants/pêcheur");
+        //habitant = gameObject1.GetComponent<HabitantBehaviour>();
         isOccupied = !isOccupied;
+
+        // Si non, on affiche que personne est disponible
     }
     int GetLevel(HabitantBehaviour habitant)
     {
@@ -159,24 +185,24 @@ public class Pecherie : MonoBehaviour
 
     void UpdateVariete(HabitantBehaviour habitants,GameManager gm) //A utiliser que quand on level up
     {
-        int QE = gm.environnementManager.qualiteEau;
-        if (habitant.ecoLevel == 1)
+        float QE = gm.environnementManager.qualiteEau;
+        /*if (habitant.ecoLevel == 1)
         {
-            gm.socialManager.nombreAlimentsDifferents+=1;
+            gm.socialManager.nombreAlimentsDifferents=1;
         }
         if(habitant.ecoLevel == 3)
         {
-            gm.socialManager.nombreAlimentsDifferents+=1;
+            gm.socialManager.nombreAlimentsDifferents=2;
         }
         if(habitant.ecoLevel == 5)
         {
-            gm.socialManager.nombreAlimentsDifferents +=1;
-        }
+            gm.socialManager.nombreAlimentsDifferents =3;
+        }*/
         if(!limite1 && QE < 60)
         {
             gm.socialManager.nombreAlimentsDifferents -= 1;
             limite1 = true;
-            //Qualité max de l'eau -1 a voir dans le script gamemanager
+            //Qualité max de l'eau -5 a voir dans le script gamemanager
         }
         if(limite1 && QE > 70)
         {
@@ -210,7 +236,6 @@ public class Pecherie : MonoBehaviour
     int QuantiteMax(HabitantBehaviour habitant)
     {
         limite = limitemax(limite);
-
         if (limite && GetLevel(habitant) >= 2)
         {
             return 8;
@@ -244,7 +269,7 @@ public class Pecherie : MonoBehaviour
 
     int MalusQualite(GameManager gm)
     {
-        int QE = gm.environnementManager.qualiteEau;
+        float QE = gm.environnementManager.qualiteEau;
         if(QE >= 80)
         {
             return 0;
@@ -275,13 +300,22 @@ public class Pecherie : MonoBehaviour
         }
     } //Malus sur la production selon la qualité de l'eau
 
+    void UpdateQE(GameManager gm)
+    {
+        if(QuantitePoisson > 8)
+        {
+            gm.environnementManager.qualiteEau = Mathf.Max( gm.environnementManager.qualiteEau -(float) 0.1 * (QuantitePoisson - 8),0);
+        }
+        else
+        {
+            gm.environnementManager.qualiteEau = Mathf.Min( gm.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), 100f);
+        }
+    } 
 
-    // Fonction pour modifier la qualité max de l'eau 
-
-
-    void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
+    public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
         QuantitePoisson = QuantitePoissonNonValide;
+        RecupererPoisson();
         valider = true;
         StartCoroutine(Coroutine());
         //Lancer le blocage de la valeur jusqu'à minuit
@@ -299,7 +333,7 @@ public class Pecherie : MonoBehaviour
         }
         else
         {
-            return false;
+            return limite;
         }
     }
 
@@ -320,7 +354,7 @@ public class Pecherie : MonoBehaviour
     IEnumerator Coroutine() // On bloque jusqu'a minuit
     {
         validation.interactable = false;
-        yield return new WaitForSeconds(10); //Pour test que tout marche
+        yield return new WaitForSeconds(5); //Pour test que tout marche
         /*DateTime current = DateTime.Now; //Vrai mécanique minuit
         DateTime tomorrow = current.AddDays(1).Date; 
 

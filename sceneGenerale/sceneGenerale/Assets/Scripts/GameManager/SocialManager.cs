@@ -6,7 +6,7 @@ public class SocialManager
 {
     public int quantiteNourriture { get; set; }
     public int ecoSensibilisation { get; set; }
-    public int qualiteDeVie { get; set; }
+    public float qualiteDeVie { get; set; }
 
     public int nombreAlimentsDifferents;
 

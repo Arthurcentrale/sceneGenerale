@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     public float globalWaste;
     */
 
-    public int score { get; set; }
+    public float score { get; set; }
     private bool victoire;
 
     //On initialise toute les instances uniques (singletons) des différents managers
     public SocialManager socialManager = new SocialManager(0,0,0);
-    public EnvironnementManager environnementManager = new EnvironnementManager(0,0,0);
+    public EnvironnementManager environnementManager = new EnvironnementManager(0,100,0);
     public DeveloppementManager developpementManager = new DeveloppementManager(0);
     //public HabitantManager habitantManager = new HabitantManager(new List<GameObject>());
 

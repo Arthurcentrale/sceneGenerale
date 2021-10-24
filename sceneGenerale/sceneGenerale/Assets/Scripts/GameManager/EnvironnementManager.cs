@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnvironnementManager
 {
     public int qualiteAir { get; set; }
-    public int qualiteEau { get; set; }
+    public float qualiteEau { get; set; }
     public int qualiteSol { get; set; }
 
     public EnvironnementManager(int air, int eau, int sol)
