@@ -32,6 +32,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
     public GameObject BatiPêcherie;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -41,7 +42,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -221,7 +222,7 @@ public class ScriptBâtiPêcherie : MonoBehaviour
 
                         BatiPêcherie = GameObject.Find("BatiPêcherie");
 
-                        Pêcherie = Instantiate(prefabPêcherie, BatiPêcherie.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        Pêcherie = Instantiate(prefabPêcherie, BatiPêcherie.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiPêcherie);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;

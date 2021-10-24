@@ -32,6 +32,7 @@ public class ScriptBâtiMoulinAEau : MonoBehaviour
     public GameObject BatiMoulinAEau;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -41,7 +42,7 @@ public class ScriptBâtiMoulinAEau : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -222,7 +223,7 @@ public class ScriptBâtiMoulinAEau : MonoBehaviour
 
                         BatiMoulinAEau = GameObject.Find("BatiMoulinAEau");
 
-                        MoulinAEau = Instantiate(prefabMoulinAEau, BatiMoulinAEau.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        MoulinAEau = Instantiate(prefabMoulinAEau, BatiMoulinAEau.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiMoulinAEau);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;

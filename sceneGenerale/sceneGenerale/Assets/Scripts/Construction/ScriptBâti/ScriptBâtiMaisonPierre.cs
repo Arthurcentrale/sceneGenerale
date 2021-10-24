@@ -32,6 +32,7 @@ public class ScriptBâtiMaisonPierre : MonoBehaviour
     public GameObject BatiMaisonPierre;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -41,7 +42,7 @@ public class ScriptBâtiMaisonPierre : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -221,7 +222,7 @@ public class ScriptBâtiMaisonPierre : MonoBehaviour
 
                         BatiMaisonPierre = GameObject.Find("BatiMaisonPierre");
 
-                        MaisonPierre = Instantiate(prefabMaisonPierre, BatiMaisonPierre.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        MaisonPierre = Instantiate(prefabMaisonPierre, BatiMaisonPierre.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiMaisonPierre);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;

@@ -117,6 +117,8 @@ MonoBehaviour:
   "menuB\xE2tiPasD\xE9j\xE0Affich\xE9": 1
   "menuConstructionPasD\xE9j\xE0Affich\xE9": 0
   inventaire: {fileID: 0}
+  NbrBois: 0
+  NbrPierre: 0
   "RessourcesN\xE9cessairesD\xE9pos\xE9es": 0
   boutonsMenuConstruction: {fileID: 0}
   OnCliqueDehors: 0
@@ -126,6 +128,8 @@ MonoBehaviour:
   "Chaumi\xE8re": {fileID: 0}
   "BatiChaumi\xE8re": {fileID: 0}
   "onAPasEncoreD\xE9truitLeB\xE2ti": 1
+  ui_inventory: {fileID: 7023238949088907154, guid: 81acad2f7cd26ea489e3de348daf1301,
+    type: 3}
 --- !u!114 &6003383339755204629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +155,8 @@ MonoBehaviour:
   Cabanon: {fileID: 0}
   BatiCabanon: {fileID: 0}
   "onAPasEncoreD\xE9truitLeB\xE2ti": 1
+  ui_inventory: {fileID: 7023238949088907154, guid: 81acad2f7cd26ea489e3de348daf1301,
+    type: 3}
 --- !u!1 &6003383339784856403
 GameObject:
   m_ObjectHideFlags: 0
