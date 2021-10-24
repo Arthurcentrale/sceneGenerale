@@ -9,7 +9,7 @@ public class Ferme : MonoBehaviour
     public GameObject panel;
     bool open;
     bool onPanel;
-    Vector2 mP;
+    Vector3 mP;
     new public Camera camera;
     private Animator animator;
 
@@ -41,7 +41,7 @@ public class Ferme : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            mP = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20f);
             if (onPanel == false)
             {
                 panel.SetActive(false);
@@ -54,9 +54,9 @@ public class Ferme : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
 
                 {
-                    panel.transform.position = new Vector2(mP.x, mP.y);
+                    panel.transform.GetChild(0).position = camera.ScreenToWorldPoint(mP);
                     panel.gameObject.SetActive(true);
-                    animator.SetTrigger("ouverture1BulleCouper");
+                    animator.SetTrigger("ouverture_3_bulle");
                     open = true;
                     Deplacement.enMenu = true;
                 }

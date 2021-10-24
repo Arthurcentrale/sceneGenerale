@@ -11,6 +11,9 @@ public class Agri : MonoBehaviour
     public static int xNbrParcelles;
     public static int yNbrParcelles;
 
+    public GameObject panelLabourage;
+    public GameObject panelPlantage;
+
     void Start()
     {
         xNbrParcelles = 7;
@@ -46,7 +49,15 @@ public class Agri : MonoBehaviour
     public void EntreeLabourage()
     {
         Labourage lab = GameObject.Find("Ferme").GetComponent<Labourage>();
+        panelLabourage.SetActive(true);
         lab.enabled = true;
         lab.MajPrefabsLabourage();
+    }
+
+    public void EntreePlantage()
+    {
+        Planter plan = GameObject.Find("Ferme").GetComponent<Planter>();
+        panelPlantage.SetActive(true);
+        plan.enabled = true;
     }
 }
