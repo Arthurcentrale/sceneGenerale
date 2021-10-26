@@ -6,9 +6,9 @@ public class SocialManager
 {
     public int quantiteNourriture { get; set; }
     public int ecoSensibilisation { get; set; }
-    public int qualiteDeVie { get; set; }
+    public float qualiteDeVie { get; set; }
 
-    private int nombreAlimentsDifferents;
+    public int nombreAlimentsDifferents;
 
     public List<GameObject> listeBatiment;  //copie de la liste des batiments de DeveloppementManager qu'on va update avec la fonction MajSocial()
     public List<GameObject> habitants;      //copie de la liste des habitants de HabitantManager qu'on va update avec la fonction MajSocial()

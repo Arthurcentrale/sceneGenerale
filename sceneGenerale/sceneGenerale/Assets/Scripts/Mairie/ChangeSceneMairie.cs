@@ -11,7 +11,7 @@ public class ChangeSceneMairie : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        slider.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
+        // slider.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
     }
     public void EnterMairie()
     {
