@@ -20,8 +20,6 @@ public class Pecherie : MonoBehaviour
 
     public HabitantBehaviour habitant;
     public GameObject go;
-    GameManager gm;
-
 
 
     //Booleens pour savoir si la pecherie est habité / Si on a validé une nouvelle valeur à produire dans la journée
@@ -33,6 +31,7 @@ public class Pecherie : MonoBehaviour
     int QuantitePoissonNonValide,AnciennequantitePoisson;
     int QuantitePoisson;
     int i,j;
+    int levelactuel;
     bool limite;
     bool limite1, limite2, limite3;
     //Timer pour le délai a changer
@@ -61,7 +60,6 @@ public class Pecherie : MonoBehaviour
         compteurbouffe = compteurbouffe.GetComponent<CompteurBouffe>();
         validation = validation.GetComponent<Button>();
         //validation.onClick.AddListener(ValiderValeur);
-        gm = go.GetComponent<GameManager>();
     }
 
     void Update()
@@ -162,19 +160,22 @@ public class Pecherie : MonoBehaviour
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite(gm); 
-            UpdateQE(gm);
-            CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite(gm);
+            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite(); 
+            UpdateQE();
+            UpdateVariete();
+            CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite();
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
-            compteurbouffe.text.text = CompteurBouffe.Data.NbrBouffe.ToString() + '/' + gm.socialManager.nombreAlimentsDifferents.ToString() + '/' + gm.environnementManager.qualiteEau.ToString("F1");// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
-
+            compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
+            compteurbouffe.CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
+            compteurbouffe.CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString("F1");
         }
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
     {
-        //GameObject gameObject1 = GameObject.Find("/habitants/pêcheur");
-        //habitant = gameObject1.GetComponent<HabitantBehaviour>();
+        GameObject gameObject1 = GameObject.Find("pêcheur");
+        habitant = gameObject1.GetComponent<HabitantBehaviour>();
         isOccupied = !isOccupied;
+        InitVariete(habitant);
 
         // Si non, on affiche que personne est disponible
     }
@@ -183,56 +184,68 @@ public class Pecherie : MonoBehaviour
         return habitant.ecoLevel;
     } //On recupère le level du pecheur
 
-    void UpdateVariete(HabitantBehaviour habitants,GameManager gm) //A utiliser que quand on level up
+    void UpdateVariete() //A utiliser que quand on level up
     {
-        float QE = gm.environnementManager.qualiteEau;
-        /*if (habitant.ecoLevel == 1)
+        float QE = GameManager.environnementManager.qualiteEau;
+        if (habitant.ecoLevel == 3 && levelactuel < 3 )
         {
-            gm.socialManager.nombreAlimentsDifferents=1;
+            GameManager.socialManager.nombreAlimentsDifferents+= 1;
         }
-        if(habitant.ecoLevel == 3)
+        if (habitant.ecoLevel == 5 && levelactuel < 5)
         {
-            gm.socialManager.nombreAlimentsDifferents=2;
+            GameManager.socialManager.nombreAlimentsDifferents += 1;
         }
-        if(habitant.ecoLevel == 5)
+        if (!limite1 && QE < 60 && GameManager.socialManager.nombreAlimentsDifferents >1 )
         {
-            gm.socialManager.nombreAlimentsDifferents =3;
-        }*/
-        if(!limite1 && QE < 60)
-        {
-            gm.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite1 = true;
             //Qualité max de l'eau -5 a voir dans le script gamemanager
         }
         if(limite1 && QE > 70)
         {
-            gm.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.socialManager.nombreAlimentsDifferents += 1;
             limite1 = false;
         }
-        if (!limite2 && QE < 40)
+        if (!limite2 && QE < 40 && GameManager.socialManager.nombreAlimentsDifferents > 1)
         {
-            gm.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite2 = true;
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite2 && QE > 50)
         {
-            gm.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.socialManager.nombreAlimentsDifferents += 1;
             limite2 = false;
         }
-        if (!limite3 && QE < 20)
+        if (!limite3 && QE < 20 && GameManager.socialManager.nombreAlimentsDifferents > 1)
         {
-            gm.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite3 = true;
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite3 && QE > 30)
         {
-            gm.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.socialManager.nombreAlimentsDifferents += 1;
             limite3 = false;
         }
     }
 
+    void InitVariete(HabitantBehaviour habitant)
+    {
+        if (habitant.ecoLevel == 1)
+        {
+            GameManager.socialManager.nombreAlimentsDifferents=1;
+        }
+        if(habitant.ecoLevel == 3)
+        {
+            GameManager.socialManager.nombreAlimentsDifferents=2;
+        }
+        if(habitant.ecoLevel == 5)
+        {
+            GameManager.socialManager.nombreAlimentsDifferents =3;
+        }
+        levelactuel = habitant.ecoLevel;
+    }
     int QuantiteMax(HabitantBehaviour habitant)
     {
         limite = limitemax(limite);
@@ -267,9 +280,9 @@ public class Pecherie : MonoBehaviour
 
     } //Quantité max que le pecheur peut produire selon son level
 
-    int MalusQualite(GameManager gm)
+    int MalusQualite()
     {
-        float QE = gm.environnementManager.qualiteEau;
+        float QE = GameManager.environnementManager.qualiteEau;
         if(QE >= 80)
         {
             return 0;
@@ -300,15 +313,15 @@ public class Pecherie : MonoBehaviour
         }
     } //Malus sur la production selon la qualité de l'eau
 
-    void UpdateQE(GameManager gm)
+    void UpdateQE()
     {
         if(QuantitePoisson > 8)
         {
-            gm.environnementManager.qualiteEau = Mathf.Max( gm.environnementManager.qualiteEau -(float) 0.1 * (QuantitePoisson - 8),0);
+            GameManager.environnementManager.qualiteEau = Mathf.Max( GameManager.environnementManager.qualiteEau -(float) 0.1 * (QuantitePoisson - 8),0);
         }
         else
         {
-            gm.environnementManager.qualiteEau = Mathf.Min( gm.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), 100f);
+            GameManager.environnementManager.qualiteEau = Mathf.Min( GameManager.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), 100f);
         }
     } 
 
@@ -362,5 +375,6 @@ public class Pecherie : MonoBehaviour
         yield return new WaitForSeconds((float) seconds);*/
         FonctionMinuit();
         validation.interactable = true;
+        timer = 0;
     }
 }
