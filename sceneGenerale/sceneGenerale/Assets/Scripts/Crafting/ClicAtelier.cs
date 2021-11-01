@@ -44,7 +44,6 @@ public class ClicAtelier : MonoBehaviour
             {
                 panel.SetActive(false);
                 open = false;
-                Deplacement.enMenu = false;
             }
 
             if ( open == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) +((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
@@ -57,7 +56,6 @@ public class ClicAtelier : MonoBehaviour
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
                     rectTransform = panel.GetComponent<RectTransform>();
-                    Deplacement.enMenu=true;
                 }
 
             }
@@ -84,11 +82,13 @@ public class ClicAtelier : MonoBehaviour
     public void ClickOnPanel()
     {
         onPanel = true;
+        Deplacement.enMenu = true;
     }
 
     public void ClickOutPanel()
     {
         onPanel = false;
+        Deplacement.enMenu = false;
     }
 
     public void OpenMenu()

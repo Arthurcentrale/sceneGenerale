@@ -35,7 +35,7 @@ public class Mairie : MonoBehaviour
             {
                 panel.SetActive(false);
                 open = false;
-                Deplacement.enMenu = false;
+                
             }
 
             if (open == false /*&& (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1)*/)
@@ -47,7 +47,7 @@ public class Mairie : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
-                    Deplacement.enMenu = true;
+                    
                 }
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Bureau2"))
                 {
@@ -60,11 +60,13 @@ public class Mairie : MonoBehaviour
     }
     public void ClickOnPanel()
     {
+        Deplacement.enMenu = true;
         onPanel = true;
     }
 
     public void ClickOutPanel()
     {
         onPanel = false;
+        Deplacement.enMenu = false;
     }
 }

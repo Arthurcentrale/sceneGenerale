@@ -46,7 +46,7 @@ public class Ferme : MonoBehaviour
             {
                 panel.SetActive(false);
                 open = false;
-                Deplacement.enMenu = false;
+                
             }
 
             if (open == false)
@@ -58,7 +58,7 @@ public class Ferme : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
-                    Deplacement.enMenu = true;
+                    
                 }
 
             }
@@ -81,11 +81,13 @@ public class Ferme : MonoBehaviour
     public void ClickOnPanel()
     {
         onPanel = true;
+        Deplacement.enMenu = true;
     }
 
     public void ClickOutPanel()
     {
         onPanel = false;
+        Deplacement.enMenu = false;
     }
 
     //Fonction quand on clique sur le bouton du milieu

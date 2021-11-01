@@ -118,6 +118,7 @@ public class UI_Inventory : MonoBehaviour
             animator.SetTrigger("fermerInvFavs");
             StartCoroutine(DelayOuvertureInv(0.5f));
             audioSource.PlayOneShot(secondClicBulle);
+            Deplacement.enMenu = true;
         }   
         else                      //inventaire complet ouvert
         {
@@ -136,6 +137,7 @@ public class UI_Inventory : MonoBehaviour
         //favSlotContainerDepliement.gameObject.SetActive(false);
         Background.SetActive(true);
         stadeAffichage += 1;
+        
     }
 
 
@@ -147,6 +149,7 @@ public class UI_Inventory : MonoBehaviour
         //BouttonOuvertureGO.SetActive(true);
         //favSlotContainerDepliement.gameObject.SetActive(true);
         animator.SetTrigger("ouvrirBouton");
+        Deplacement.enMenu = false;
     }
 
     public void SetInventory(Inventory _inventory)   //initialisation de l'inventaire

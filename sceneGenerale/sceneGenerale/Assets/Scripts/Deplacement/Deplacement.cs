@@ -61,7 +61,7 @@ public class Deplacement : MonoBehaviour
                 Vector3 a = Fin - Debut;
                 Vector3 b = new Vector3(a.x, 0, a.y);
                 direction = Vector3.ClampMagnitude(b, 1.0f);
-                if (!enMenu){
+                if (enMenu==false){
                     Move(direction);
                 }
 
