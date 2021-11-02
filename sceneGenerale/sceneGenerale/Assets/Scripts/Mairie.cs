@@ -10,7 +10,7 @@ public class Mairie : MonoBehaviour
     private Animator animator;
     public Player player;
 
-    public GameObject FondBouffe;
+    public GameObject PanelBureau;
 
 
 
@@ -34,6 +34,7 @@ public class Mairie : MonoBehaviour
             if (onPanel == false)
             {
                 panel.SetActive(false);
+                PanelBureau.SetActive(false);
                 open = false;
                 
             }
@@ -51,8 +52,10 @@ public class Mairie : MonoBehaviour
                 }
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Bureau2"))
                 {
-                    FondBouffe.transform.position = new Vector2(mP.x, mP.y);
-                    FondBouffe.gameObject.SetActive(true);
+                    PanelBureau.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
+                    PanelBureau.gameObject.SetActive(true);
+                    open = true;
+                    Deplacement.enMenu = true;
                 }
 
             }

@@ -56,7 +56,7 @@ public class SocialManager
             Batiment bati = batimentGO.GetComponent<Batiment>();
             sommeChauffage += bati.chauffageActual - bati.chauffageNeed;
         }
-        EnvironnementManager enviro = GameObject.Find("GameManager").GetComponent<GameManager>().environnementManager;
-        qualiteDeVie = (sommeChauffage + (enviro.qualiteAir + enviro.qualiteEau + enviro.qualiteSol) / 300) * 100 / 3 + sommeSatisfactionNourriture;
+        //EnvironnementManager enviro = GameObject.Find("GameManager").GetComponent<GameManager>().environnementManager;
+        //qualiteDeVie = (sommeChauffage + (enviro.qualiteAir + enviro.qualiteEau + enviro.qualiteSol) / 300) * 100 / 3 + sommeSatisfactionNourriture;
     }
 }

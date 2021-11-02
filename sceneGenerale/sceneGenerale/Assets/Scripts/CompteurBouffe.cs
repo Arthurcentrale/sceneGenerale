@@ -9,12 +9,18 @@ public class CompteurBouffe : MonoBehaviour
     {
         public static int NbrBouffe;
     }
+
     //public int NbrBouffe;
-    public Text text;
+    public Text CBouffe;
+    public Text CompteurVariete;
+    public Text CompteurQualiteEau;
     // Start is called before the first frame update
     void Start()
     {
-        text.text = Data.NbrBouffe.ToString();
+        Data.NbrBouffe = 0;
+        CBouffe.text = Data.NbrBouffe.ToString();
+        CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
+        CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString();
     }
 
     // Update is called once per frame
