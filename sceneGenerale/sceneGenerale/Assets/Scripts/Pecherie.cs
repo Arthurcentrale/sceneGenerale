@@ -148,12 +148,12 @@ public class Pecherie : MonoBehaviour
     {
         if (isOccupied)
         {
-            if (QuantitePoisson > 8)
+            if (QuantitePoisson  > 20)
             {
                 i++; // On incrémente la valeur de jour où on peche plus de 8 poissons
                 j = 0; // On remet a 0 le nombre de jour où on peche moins de 8 poissons
             }
-            else
+            else if(QuantitePoisson - MalusQualite() < 4)
             {
                 i = 0;
                 j++;
