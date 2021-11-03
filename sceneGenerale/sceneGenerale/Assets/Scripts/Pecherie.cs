@@ -161,7 +161,7 @@ public class Pecherie : MonoBehaviour
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite(); 
+            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite();
             UpdateQE();
             UpdateVariete();
             CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite();

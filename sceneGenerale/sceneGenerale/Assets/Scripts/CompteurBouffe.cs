@@ -17,7 +17,7 @@ public class CompteurBouffe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Data.NbrBouffe = 0;
+        //Data.NbrBouffe = 0;
         CBouffe.text = Data.NbrBouffe.ToString();
         CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
         CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString();
