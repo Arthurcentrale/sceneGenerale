@@ -8,7 +8,7 @@ public class Deplacement : MonoBehaviour
 {
     public Animator animator;
     public static bool enMenu = false; //Rayon qui délimite la zone où on peut clicker pour se déplacer ou non
-    private float speed = 10.0f; //vitesse arbitraire du personnage
+    public float speed; //vitesse arbitraire du personnage
     private Vector3 Debut, Fin;
     private Vector3 direction;//Pour calculer la direction du déplacement
     private bool Touch, outside;

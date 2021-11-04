@@ -52,6 +52,8 @@ public class Planter : MonoBehaviour
     public int engraisDispo;
     private int planteSelectionnee; //de base aucune, donc -1
 
+    public GameObject panelPlantage;
+
     void Start()
     {
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
@@ -112,30 +114,31 @@ public class Planter : MonoBehaviour
     public void PlanterCulture(int x, int y) //plante la plante sélectionnée sur une certaine parcelle
     {
         GameObject plante;
+        float taillePlante = 0.2f;
         if (planteSelectionnee == -1) Debug.Log("Aucune plante sélectionnée");
         else if (planteSelectionnee == 0)
         {
-            plante = Instantiate(blePf, planteContainer.position + new Vector3((x + 0.4f) * sizeParcelle.x, 0f, (y + 0.4f) * sizeParcelle.z), Quaternion.identity, planteContainer);
+            plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
         else if (planteSelectionnee == 1)
         {
-            plante = Instantiate(maisPf, planteContainer.position + new Vector3((x + 0.4f) * sizeParcelle.x, 0f, (y + 0.4f) * sizeParcelle.z), Quaternion.identity, planteContainer);
+            plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
         else if (planteSelectionnee == 2)
         {
-            plante = Instantiate(saladePf, planteContainer.position + new Vector3((x + 0.4f) * sizeParcelle.x, 0f, (y + 0.4f) * sizeParcelle.z), Quaternion.identity, planteContainer);
+            plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
         else if (planteSelectionnee == 3)
         {
-            plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x + 0.4f) * sizeParcelle.x, 0f, (y + 0.4f) * sizeParcelle.z), Quaternion.identity, planteContainer);
+            plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
         else if (planteSelectionnee == 5)
         {
-            plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x + 0.4f) * sizeParcelle.x, 0f, (y + 0.4f) * sizeParcelle.z), Quaternion.identity, planteContainer);
+            plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
     }
@@ -205,5 +208,11 @@ public class Planter : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SortiePlantage()  //boutton vert
+    {
+        panelPlantage.SetActive(false);
+        this.GetComponent<Planter>().enabled = false;
     }
 }

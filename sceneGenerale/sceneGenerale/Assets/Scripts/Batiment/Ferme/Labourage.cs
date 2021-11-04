@@ -24,6 +24,8 @@ public class Labourage : MonoBehaviour
     public Transform fermeTransform;       //Transform de la ferme
     public Transform parcelleContainer;   //Gameobject qui contient les instances des parcelles
 
+    public GameObject panelLabourage;
+
     public void Start()
     {
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
@@ -42,7 +44,7 @@ public class Labourage : MonoBehaviour
         //On place parcelleContainer à l'origine de l'endroit à partir duquel seront placées les parcelles
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
-        parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+        parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 4.40f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
     }
 
     public void Update()
@@ -117,7 +119,7 @@ public class Labourage : MonoBehaviour
         }
     }
 
-    public void SortieLabourage()
+    public void SortieLabourageAvecValidation()    //boutton vert
     {
         //On détruit d'abord les anciennes parcelles dans parcelleContainer
         foreach (Transform child in parcelleContainer)
@@ -137,5 +139,20 @@ public class Labourage : MonoBehaviour
                 }
             }
         }
+        //On cache l'UI et on re-désactive le script
+        panelLabourage.SetActive(false);
+        this.GetComponent<Labourage>().enabled = false;
+    }
+
+    public void SortieLabourageSansValidation()     //boutton rouge
+    {
+        //On détruit toutes les parcelles
+        foreach (Transform child in parcelleContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        //Puis on cache l'UI et on re-désactive le script
+        panelLabourage.SetActive(false);
+        this.GetComponent<Labourage>().enabled = false;
     }
 }
