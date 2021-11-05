@@ -8,7 +8,7 @@ public class EnvironnementManager
     public float qualiteEau { get; set; }
     public int qualiteSol { get; set; }
 
-    public EnvironnementManager(int air, int eau, int sol)
+    public EnvironnementManager(int air, float eau, int sol)
     {
         this.qualiteAir = air;
         this.qualiteEau = eau;
