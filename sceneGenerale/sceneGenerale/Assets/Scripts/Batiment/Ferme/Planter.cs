@@ -55,6 +55,7 @@ public class Planter : MonoBehaviour
 
     public int engraisDispo;
     private int planteSelectionnee; //de base aucune, donc -1
+    public Slider slider;
 
     public GameObject panelPlantage;
 
@@ -85,6 +86,9 @@ public class Planter : MonoBehaviour
 
     void Update()
     {
+        slider.maxValue = capaciteTravail;
+        slider.value = capaciteTravailUtilisee;
+
         //On cherche à savoir si le joueur clique sur une parcelle
         if (Input.GetMouseButtonDown(0))
         {
@@ -122,28 +126,47 @@ public class Planter : MonoBehaviour
         if (planteSelectionnee == -1) Debug.Log("Aucune plante sélectionnée");
         else if (planteSelectionnee == 0)
         {
-            plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-            plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
+                plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+                MajCT();
+            }
         }
         else if (planteSelectionnee == 1)
         {
-            plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-            plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+            {
+                plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+                MajCT();
+            }
         }
         else if (planteSelectionnee == 2)
         {
-            plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-            plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+            {
+                plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+                MajCT();
+            }
         }
         else if (planteSelectionnee == 3)
         {
-            plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-            plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+            {
+                plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+                MajCT();
+            }
         }
         else if (planteSelectionnee == 5)
         {
-            plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-            plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+            {
+                plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
+                MajCT();
+            }
         }
         cultureParcelles[x, y] = planteSelectionnee;
     }

@@ -45,6 +45,7 @@ public class Labourage : MonoBehaviour
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
         parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 4.40f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+        MajPrefabsLabourage();
     }
 
     public void Update()
