@@ -119,7 +119,7 @@ public class Labourage : MonoBehaviour
         }
     }
 
-    public void SortieLabourageAvecValidation()    //boutton vert
+    public void SortieLabourageAvecValidation()    //bouton vert
     {
         //On détruit d'abord les anciennes parcelles dans parcelleContainer
         foreach (Transform child in parcelleContainer)
@@ -144,7 +144,7 @@ public class Labourage : MonoBehaviour
         this.GetComponent<Labourage>().enabled = false;
     }
 
-    public void SortieLabourageSansValidation()     //boutton rouge
+    public void SortieLabourageSansValidation()     //bouton rouge
     {
         //On détruit toutes les parcelles
         foreach (Transform child in parcelleContainer)

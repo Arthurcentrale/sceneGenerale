@@ -9,6 +9,7 @@ public class Planter : MonoBehaviour
     private Camera MainCamera;
 
     public static int capaciteTravail;
+    private int capaciteTravailUtilisee;
     public static int culture;
 
     //types de cultures que l'on fait correspondre aux quantitées de nourriture qu'ils génèrent
@@ -27,6 +28,9 @@ public class Planter : MonoBehaviour
     public const int saladeCT = 15;
     public const int tomateCT = 17;
     public const int raisinCT = 20;
+
+    //array qui contient les capacités de travail demandés par les cultures
+    public int[] arrayCT = new int[] { 10, 12, 15, 17, 20, 20};
 
     public int quantiteNourriture;
     public int[,] cultureParcelles;    //array qui contient les numéros (correspondant à un enum de Culture et à la quantité de nourriture générée par cette culture) de chaque culture présente sur chaque parcdelle
@@ -111,7 +115,7 @@ public class Planter : MonoBehaviour
         return (int)(c - '0');
     }
 
-    public void PlanterCulture(int x, int y) //plante la plante sélectionnée sur une certaine parcelle
+    public void PlanterCulture(int x, int y) //Ajoute un prefab de la plante sélectionnée sur une certaine parcelle
     {
         GameObject plante;
         float taillePlante = 0.2f;
@@ -141,6 +145,31 @@ public class Planter : MonoBehaviour
             plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
             plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
         }
+        cultureParcelles[x, y] = planteSelectionnee;
+    }
+
+    public void EnleverCulture(int x, int y)    //On enlève la plante sélectionnée d'une certaine parcelle
+    {
+        //On enleve la plante de l'array cultureParcelles
+        cultureParcelles[x, y] = -1;
+        //On détruit d'abord les anciens prefabs de cultures dans planteContainer
+        foreach (Transform child in planteContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                planteSelectionnee = cultureParcelles[i, j];
+                PlanterCulture(x, y);
+            }
+        }
+    }
+
+    private void MajCT()     //mise à jour de la quantité de travail, en fonction de la plante sélectionnée
+    {
+        capaciteTravailUtilisee += arrayCT[planteSelectionnee];
     }
 
     // Fonctions appelées lorsqu'on clique sur les boutons des différentes plantes que l'on veut planter
@@ -210,7 +239,7 @@ public class Planter : MonoBehaviour
         }
     }
 
-    public void SortiePlantage()  //boutton vert
+    public void SortiePlantage()  //bouton vert
     {
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
