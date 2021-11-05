@@ -10,13 +10,18 @@ public class GameManager : MonoBehaviour
     public float globalFoodVariety;
     public float globalWaste;
     */
+    public static float maxQE;
 
+    private void Start()
+    {
+        maxQE = 100;
+    }
     public float score { get; set; }
     private bool victoire;
 
     //On initialise toute les instances uniques (singletons) des différents managers
     public static SocialManager socialManager = new SocialManager(0,0,0);
-    public static EnvironnementManager environnementManager = new EnvironnementManager(0,100,0);
+    public static EnvironnementManager environnementManager = new EnvironnementManager(0,maxQE,0);
     public DeveloppementManager developpementManager = new DeveloppementManager(0);
     //public HabitantManager habitantManager = new HabitantManager(new List<GameObject>());
 

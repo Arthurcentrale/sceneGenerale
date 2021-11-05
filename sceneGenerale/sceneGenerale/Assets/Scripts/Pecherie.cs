@@ -31,6 +31,7 @@ public class Pecherie : MonoBehaviour
     int QuantitePoissonNonValide,AnciennequantitePoisson;
     int QuantitePoisson;
     int i,j;
+    int nbrdiminutionQE; // On regarde combien de fois la qualité max de l'eau à diminué
     int levelactuel;
     bool limite;
     bool limite1, limite2, limite3;
@@ -46,6 +47,7 @@ public class Pecherie : MonoBehaviour
 
     void Start()
     {
+
         limite1 = false;
         limite2 = false;
         limite3 = false;
@@ -54,6 +56,7 @@ public class Pecherie : MonoBehaviour
         open = false;
         isOccupied = false;
         QuantitePoisson = 0;
+        nbrdiminutionQE = 0;
         AnciennequantitePoisson = 0;
         textslider.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
@@ -200,6 +203,11 @@ public class Pecherie : MonoBehaviour
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite1 = true;
+            if(nbrdiminutionQE == 0)
+            {
+                GameManager.maxQE -= 5;
+                nbrdiminutionQE++;
+            }
             //Qualité max de l'eau -5 a voir dans le script gamemanager
         }
         if(limite1 && QE > 70)
@@ -211,6 +219,11 @@ public class Pecherie : MonoBehaviour
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite2 = true;
+            if(nbrdiminutionQE == 1)
+            {
+                GameManager.maxQE -= 5;
+                nbrdiminutionQE++;
+            }
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite2 && QE > 50)
@@ -222,6 +235,11 @@ public class Pecherie : MonoBehaviour
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
             limite3 = true;
+            if(nbrdiminutionQE == 2)
+            {
+                GameManager.maxQE -= 5;
+                nbrdiminutionQE++;
+            }
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite3 && QE > 30)
@@ -322,7 +340,7 @@ public class Pecherie : MonoBehaviour
         }
         else
         {
-            GameManager.environnementManager.qualiteEau = Mathf.Min( GameManager.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), 100f);
+            GameManager.environnementManager.qualiteEau = Mathf.Min( GameManager.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), GameManager.maxQE);
         }
     } 
 
