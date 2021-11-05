@@ -55,14 +55,14 @@ public class BoutonsMenuConstruction : MonoBehaviour
     ////////////////////// PARTIE CONSTRUCTION ////////////////////////////////////
     //public GameObject prefabChaumièreDéplaçable;
 
-    
+
 
     // Les bâtiments: Chaumière, Pècherie, MoulinAEau, MoulinAVent, Boulangerie, Cabanon de grand forestier, Puits, Forge, Fosse commune, Maison en pierre, Garde-manger, Ferme
 
 
     /////////////////////////////////////////////////////DEBUT PARTIE MENU/////////////////////////////////////////////////////////////////////////
 
-    
+
     void EnleverMenuPrincipal()             // Des fonctions intermédiaires pour coder les boutons un peu plus vite
     {
         boutonConstruction.SetActive(false);
@@ -84,14 +84,14 @@ public class BoutonsMenuConstruction : MonoBehaviour
         boutonMenu.SetActive(false);
         MenuEstAffiche = true;
         boutonMenuEstAffiche = false;
-        Deplacement.enMenu=true;
+        Deplacement.enMenu = true;
     }
 
 
 
 
     public void menuPrincipal()                 // Code le bouton menu principal (on affiche le menu, on désaffiche le bouton menu)
-    {   
+    {
         if (MenuEstAffiche == false)
         {
             AfficherMenuPrincipal();
@@ -104,11 +104,11 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
     public void CloseMenuPrincipal()   // le bouton close
     {
-        Deplacement.enMenu=false;
+        Deplacement.enMenu = false;
         if (MenuEstAffiche == true)
         {
             EnleverMenuPrincipal();
-            
+
         }
     }
 
@@ -203,8 +203,8 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
 
     public void CloseMenuConstructions()
-    {   
-        Deplacement.enMenu=false;
+    {
+        Deplacement.enMenu = false;
         if (MenuConstructionEstAffiche == true && OnEstEnPage1)
         {
             EnleverMenuConstructionsPage1();         // je pourrais faire un bouton retour où on retourne sur le menu principal mais en vrai ça change pas grand chose
@@ -218,7 +218,7 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
 
     public void boutonPageSuivante1()
-    {   
+    {
         if (OnEstEnPage1)
         {
             EnleverMenuConstructionsPage1();
@@ -463,11 +463,11 @@ public class BoutonsMenuConstruction : MonoBehaviour
 
     public void RetourAuMenuConstructionDepuisForge()
     {
-        
-            PanelInformationForge.SetActive(false);
 
-            MenuConstructions();
-        
+        PanelInformationForge.SetActive(false);
+
+        MenuConstructions();
+
 
     }
     ////////////////////////////////////////////////////FIN FORGE//////////////////////////////////////////////////////////////
@@ -616,41 +616,41 @@ public class BoutonsMenuConstruction : MonoBehaviour
     /////////////////////////////////////////////////////DÉBUT CHAUMIERE/////////////////////////////////////////////////////////////////
     public void ConstruireChaumièreDepuisMenuInformation()
     {
-        
-            nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
-            nouvelleChaumière.name = "nouvelleChaumière";
-            //print("console");
-            //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
-            en_construction = true;
-            //MenuInformationChaumièrestAffiche = false;
-            PanelInformationChaumière.SetActive(false);
-            boutonMenu.SetActive(true);
-            boutonMenuEstAffiche = true;
-            boutonValiderConstructionChaumière.SetActive(true);
+
+        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleChaumière.name = "nouvelleChaumière";
+        //print("console");
+        //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
+        en_construction = true;
+        //MenuInformationChaumièrestAffiche = false;
+        PanelInformationChaumière.SetActive(false);
+        boutonMenu.SetActive(true);
+        boutonMenuEstAffiche = true;
+        boutonValiderConstructionChaumière.SetActive(true);
 
 
 
-        
+
     }
 
     public void ConstruireChaumièreDepuisMenuConstruction()
     {
-        
-        
-            nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
-            nouvelleChaumière.name = "nouvelleChaumière";
-            //print("console");
-            //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
-            en_construction = true;
+
+
+        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)3.1, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleChaumière.name = "nouvelleChaumière";
+        //print("console");
+        //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
+        en_construction = true;
         //MenuInformationChaumièrestAffiche = false;
-            EnleverMenuConstructionsPage1(); // cette fois on enlève le menu de construction, puisqu'on construit directement depuis le menu
-            boutonMenu.SetActive(true);
-            boutonMenuEstAffiche = true;
-            boutonValiderConstructionChaumière.SetActive(true);
+        EnleverMenuConstructionsPage1(); // cette fois on enlève le menu de construction, puisqu'on construit directement depuis le menu
+        boutonMenu.SetActive(true);
+        boutonMenuEstAffiche = true;
+        boutonValiderConstructionChaumière.SetActive(true);
 
 
 
-        
+
     }
 
 

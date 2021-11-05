@@ -33,8 +33,9 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     public GameObject BatiBoulangerie;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
-    
+
 
     //public Camera camera;
     //public GameObject prefabMenuBâti;
@@ -43,7 +44,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -55,8 +56,8 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Du clic du clic");
-            
-            
+
+
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -64,7 +65,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
                 if (hit.collider.CompareTag("Untagged"))
                 {
                     OnCliqueDehors = true;
-                    
+
                 }
                 if (hit.collider.CompareTag("BatiBoulangerie"))
                 {
@@ -227,7 +228,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
 
                         BatiBoulangerie = GameObject.Find("BatiBoulangerie");
 
-                        Boulangerie = Instantiate(prefabBoulangerie, BatiBoulangerie.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        Boulangerie = Instantiate(prefabBoulangerie, BatiBoulangerie.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiBoulangerie);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;

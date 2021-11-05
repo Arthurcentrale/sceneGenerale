@@ -32,6 +32,7 @@ public class ScriptBâtiFerme : MonoBehaviour
     public GameObject BatiFerme;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -41,7 +42,7 @@ public class ScriptBâtiFerme : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -221,7 +222,7 @@ public class ScriptBâtiFerme : MonoBehaviour
 
                         BatiFerme = GameObject.Find("BatiFerme");
 
-                        Ferme = Instantiate(prefabFerme, BatiFerme.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        Ferme = Instantiate(prefabFerme, BatiFerme.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiFerme);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;

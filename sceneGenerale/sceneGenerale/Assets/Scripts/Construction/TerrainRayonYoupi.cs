@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems; // pour le bug avec les bouttons 
-
+//oyu
 public class TerrainRayonYoupi : MonoBehaviour
 {
     public GameObject ChaumièreDéplaçable;
@@ -54,7 +54,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 ChaumièreDéplaçable = GameObject.Find("nouvelleChaumière");
                 if (!EventSystem.current.IsPointerOverGameObject())    // On ne déplace pas la chaumière si on clique sur un bouton ou autre objet gui
                 {
-                    ChaumièreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 15f, dir.z);
+                    ChaumièreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }// Et là je déplace nouveauBatiment qui provient aussi du script construction
                 //3.1f est un facteur correctif propre à la hauteur du bati
             }
@@ -65,7 +65,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 PêcherieDéplaçable = GameObject.Find("nouvellePêcherie");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    PêcherieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    PêcherieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -77,7 +77,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 MoulinAEauDéplaçable = GameObject.Find("nouvelleMoulinAEau");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    MoulinAEauDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    MoulinAEauDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -91,7 +91,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 MoulinAVentDéplaçable = GameObject.Find("nouvelleMoulinAVent");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    MoulinAVentDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    MoulinAVentDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -106,7 +106,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 BoulangerieDéplaçable = GameObject.Find("nouvelleBoulangerie");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    BoulangerieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    BoulangerieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -123,7 +123,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 CabanonDéplaçable = GameObject.Find("nouvelleCabanon");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    CabanonDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    CabanonDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -140,7 +140,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 PuitsDéplaçable = GameObject.Find("nouvellePuits");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    PuitsDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    PuitsDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -159,7 +159,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 ForgeDéplaçable = GameObject.Find("nouvelleForge");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    ForgeDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    ForgeDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -178,7 +178,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 FosseDéplaçable = GameObject.Find("nouvelleFosse");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    FosseDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    FosseDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -195,7 +195,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 MaisonPierreDéplaçable = GameObject.Find("nouvelleMaisonPierre");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    MaisonPierreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    MaisonPierreDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -209,7 +209,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 GardeMangerDéplaçable = GameObject.Find("nouvelleGardeManger");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    GardeMangerDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    GardeMangerDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 
@@ -225,7 +225,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 FermeDéplaçable = GameObject.Find("nouvelleFerme");
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    FermeDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 3.1f, dir.z);
+                    FermeDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                 }
             }
 

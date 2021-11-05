@@ -32,6 +32,7 @@ public class ScriptBâtiGardeManger : MonoBehaviour
     public GameObject BatiGardeManger;
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
+    public UI_Inventory ui_inventory;
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -41,7 +42,7 @@ public class ScriptBâtiGardeManger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -222,7 +223,7 @@ public class ScriptBâtiGardeManger : MonoBehaviour
 
                         BatiGardeManger = GameObject.Find("BatiGardeManger");
 
-                        GardeManger = Instantiate(prefabGardeManger, BatiGardeManger.transform.position, Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                        GardeManger = Instantiate(prefabGardeManger, BatiGardeManger.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
                         Destroy(BatiGardeManger);
                         onAPasEncoreDétruitLeBâti = false;
                         débuterConstruction = false;
