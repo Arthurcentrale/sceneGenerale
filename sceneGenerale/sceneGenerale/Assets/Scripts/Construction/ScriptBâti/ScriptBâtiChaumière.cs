@@ -172,7 +172,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
                     if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 40, 150, 50), "Déposer ressources")) //le bouton pour déposer les ressources
                     {
                         //script du bouton déposer ressources. On a la fonction CountItem(string itemname) pour compter un item
-                        NbrBois = player.uiInventory.CountItem("Bois"); 
+                        NbrBois = player.uiInventory.CountItem("Bois");
                         NbrPierre = player.uiInventory.CountItem("Pierre");
                         print(NbrBois);
                         //if ya du bois et nombre bois inventaire< nombre bois nécessaire à la constru du bâtiment
@@ -181,11 +181,11 @@ public class ScriptBâtiChaumière : MonoBehaviour
                             if (NbrBois <= NbrBoisNécessaire)
                             {
                                 NbrBoisNécessaire -= NbrBois;
-                                AjouterInventaire(Bois, -NbrBois);
+                                RetirerInventaire(Bois, NbrBois);
                             }
                             else
                             {
-                                AjouterInventaire(Bois, -NbrBoisNécessaire);
+                                RetirerInventaire(Bois, NbrBoisNécessaire);
                                 NbrBoisNécessaire = 0;
 
                             }
@@ -200,6 +200,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
                             }
                         }
                     }
+                }
 
 
                     if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 100, 150, 50), "Choisir ouvrier")) // chiant de disable un seul bouton avec la commande GUI, donc je le laisse dispo mais quand on clique dessus ça fait rien
@@ -270,13 +271,20 @@ public class ScriptBâtiChaumière : MonoBehaviour
                 //GUI.enabled = true;
             }
         }
-    }
+    
 
     void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
     {
 
         player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
+
+    void RetirerInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
+    {
+
+        player.inventory.DelItem(new ItemAmount(Item: item, Amount: Amount));
+    }
+
 
 }
 

@@ -13,7 +13,9 @@ public class ScriptBâtiForge : MonoBehaviour
     public Inventaire inventaire;
     private Rect rect;
     private bool positionDéfinie = false;
-    private int NbrBoisNécessaire = 0; //je mettrai les vraies valeurs plus tard
+    private int NbrBoisNécessaire = 1; //je mettrai les vrais valeurs plus tard
+    public int NbrBois;
+    public int NbrPierre;
     public bool RessourcesNécessairesDéposées;
     public BoutonsMenuConstruction boutonsMenuConstruction;
     public bool OnCliqueDehors = false;
@@ -24,8 +26,8 @@ public class ScriptBâtiForge : MonoBehaviour
     private int heures;
     private int minutes;
     private int secondes;
-    private float tempsConstructionChaumière = 10;  // je devrais le rename boulangerie mais c'est une variable private ça va rien changer bref flemme :) 
-    private int tempsConstructionChaumièreEntier = 10; //10 sec pour l'instant, on changera plus tard
+    private float tempsConstructionChaumière = 3; //oui ça s'appelle chaumière :) 
+    private int tempsConstructionChaumièreEntier = 3; //3 sec pour l'instant, on changera plus tard
     private bool débuterConstruction = false;
     public GameObject prefabForge;
     public GameObject Forge;
@@ -33,6 +35,11 @@ public class ScriptBâtiForge : MonoBehaviour
     //public GameObject BatiMoulin;
     public bool onAPasEncoreDétruitLeBâti = true;
     public UI_Inventory ui_inventory;
+    public Item Bois, Pierre;
+
+    public Player player;
+    private GameObject[] playerLeVrai;
+    public GameObject lePapaDePlayer; //pour pouvoir récupérer player depuis la fonction start via un getchild. Je peux pas directement le link dans mon script prefab
     //public static BoutonsMenuConstruction BatiMoulin;
 
     //public Camera camera;
@@ -42,7 +49,10 @@ public class ScriptBâtiForge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
+        playerLeVrai = GameObject.FindGameObjectsWithTag("Player");
+        print(playerLeVrai[0]);
+        player = playerLeVrai[0].GetComponent<Player>(); //yavait même pas besoin de passer par lePapaDePlayer en fait :) 
+        ui_inventory = player.uiInventory;
         //inventaire = inventaire.GetComponent<Inventaire>();
 
     }
@@ -54,6 +64,7 @@ public class ScriptBâtiForge : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //print("Du clic du clic");
+
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -62,7 +73,10 @@ public class ScriptBâtiForge : MonoBehaviour
                 {
                     OnCliqueDehors = true;
                 }
-                if (hit.collider.CompareTag("BatiForge"))
+                if (hit.collider.CompareTag("BatiChaumière")) //Problème: Quand on construit plusieurs chaumières en même temps (seul bâtiment avec lequel on peut faire ça :)))) )
+                                                              //, et qu'on clique sur le bâti, le menu de tous les bâtis de chaumière s'affichent, puisqu'on fonctionne avec des tags, donc il va falloir trouver une astuce
+                                                              //pour éviter ce petit problème. --> Après mûre réflexion, on s'en branle :) , de toute façon on va plus utiliser les onGUI pour les menus donc nsm
+
                 {
 
                     OnCliqueDehors = false;
@@ -126,7 +140,7 @@ public class ScriptBâtiForge : MonoBehaviour
 
     private void OnGUI() //affichage des menus
     {
-
+        camera = Camera.main;
         if (!OnCliqueDehors && OnAfficheLeMenuDuBâti)
         {
             //if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -157,25 +171,34 @@ public class ScriptBâtiForge : MonoBehaviour
                 {
                     if (GUI.Button(new Rect(mP.x, Screen.height - mP.y + 40, 150, 50), "Déposer ressources")) //le bouton pour déposer les ressources
                     {
-                        //script du bouton déposer ressources
+                        //script du bouton déposer ressources. On a la fonction CountItem(string itemname) pour compter un item
+                        NbrBois = player.uiInventory.CountItem("Bois");
+                        NbrPierre = player.uiInventory.CountItem("Pierre");
+                        print(NbrBois);
                         //if ya du bois et nombre bois inventaire< nombre bois nécessaire à la constru du bâtiment
-                        //if (NbrBois(Inventaire) > 0){
-                        //    if (NbrBois(Inventaire) <= NbrBoisNécessaire){
-                        //        NbrBoisNécessaire -= NbrBois(Inventaire);
-                        //        AjouterInventaire("Bois", -NbrBois(Inventaire));
-                        //    }
-                        //    else
-                        //    {
-                        //        AjouterInventaire("Bois", -NbrBoisNécessaire);
-                        //        NbrBoisNécessaire=0;
+                        if (NbrBois > 0)
+                        {
+                            if (NbrBois <= NbrBoisNécessaire)
+                            {
+                                NbrBoisNécessaire -= NbrBois;
+                                RetirerInventaire(Bois, NbrBois);
+                            }
+                            else
+                            {
+                                RetirerInventaire(Bois, NbrBoisNécessaire);
+                                NbrBoisNécessaire = 0;
 
-                        //    }
-                        //    if NbrBoisNécessaire==0 && NbrTissusNécessaire==0 &&...{
-                        //       RessourcesNécessairesDéposées=true;
-                        //    }
-                        //}
-                        // Et on fait pareil pour les autres ressources nécessaires
-                        RessourcesNécessairesDéposées = !RessourcesNécessairesDéposées;
+                            }
+                            //if NbrBoisNécessaire == 0 && NbrTissusNécessaire == 0 && ...{
+                            //    RessourcesNécessairesDéposées = true;
+                            //}
+                            //}
+                            // Et on fait pareil pour les autres ressources nécessaires
+                            if (NbrBoisNécessaire == 0)
+                            {
+                                RessourcesNécessairesDéposées = !RessourcesNécessairesDéposées;
+                            }
+                        }
                     }
                 }
 
@@ -248,4 +271,32 @@ public class ScriptBâtiForge : MonoBehaviour
             //GUI.enabled = true;
         }
     }
+
+
+    void AjouterInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
+    {
+
+        player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
+    }
+
+    void RetirerInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
+    {
+
+        player.inventory.DelItem(new ItemAmount(Item: item, Amount: Amount));
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
