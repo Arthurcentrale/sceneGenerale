@@ -29,10 +29,10 @@ public class Planter : MonoBehaviour
     public const int tomateCT = 17;
     public const int raisinCT = 20;
 
-    //array qui contient les capacités de travail demandés par les cultures
+    //array qui contient les capacités de travail demandés par les cultures, puis les quantités de nourritures produites avec engrais
     public int[] arrayCT = new int[] { 10, 12, 15, 17, 20, 20};
+    public int[] arrayQN_max = new int[] { 0, 2, 4, 5, 7, 7 };
 
-    public int quantiteNourriture;
     public int[,] cultureParcelles;    //array qui contient les numéros (correspondant à un enum de Culture et à la quantité de nourriture générée par cette culture) de chaque culture présente sur chaque parcdelle
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
     public int[,] engraisParcelles;     //array qui contient le nombre de jours restants durant lesquels un engrais va continuer à agir, la valeur est donc à 0 par defaut
@@ -58,14 +58,17 @@ public class Planter : MonoBehaviour
 
     public GameObject panelPlantage;
 
+    public int quantiteNourriture;
+    public float qualiteSol;
+    public float qualiteEau;
+
     void Start()
     {
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
 
         capaciteTravail = 50;
+        capaciteTravailUtilisee = 0;
         culture = 1;
-
-        quantiteNourriture = 0;
 
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
@@ -81,6 +84,10 @@ public class Planter : MonoBehaviour
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
         planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+
+        quantiteNourriture = 0;
+        qualiteEau = 0f;
+        qualiteSol = 0f;
     }
 
     void Update()
@@ -104,7 +111,14 @@ public class Planter : MonoBehaviour
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
-                    PlanterCulture(i, j);
+                    if (cultureParcelles[i,j] == -1)  //si il n'y a pas de culture sur la parcelle
+                    {
+                        PlanterCulture(i, j);
+                    } 
+                    else
+                    {
+                        EnleverCulture(i, j);
+                    }
                 }
             }
         }
@@ -117,6 +131,7 @@ public class Planter : MonoBehaviour
 
     public void PlanterCulture(int x, int y) //Ajoute un prefab de la plante sélectionnée sur une certaine parcelle
     {
+
         GameObject plante;
         float taillePlante = 0.2f;
         if (planteSelectionnee == -1) Debug.Log("Aucune plante sélectionnée");
@@ -165,6 +180,7 @@ public class Planter : MonoBehaviour
                 PlanterCulture(x, y);
             }
         }
+        planteSelectionnee = -1;
     }
 
     private void MajCT()     //mise à jour de la quantité de travail, en fonction de la plante sélectionnée
@@ -198,7 +214,7 @@ public class Planter : MonoBehaviour
         planteSelectionnee = 5;
     }
 
-    public void MajQuantiteNourriture()  //avec prise en compte pluriculture, pas encore engrais ni qualité de sols
+    public void MajQuantiteNourriture()  //avec prise en compte pluriculture et engrais, pas encore qualité de sol
     {
         int q; //quantité nourriture sur les parcelle
         for (int i = 0; i < xNbrParcelles; i++)
@@ -206,37 +222,65 @@ public class Planter : MonoBehaviour
             for (int j = 0; j < yNbrParcelles; j++)
             {
                 q = cultureParcelles[i, j];
-                if (q == (int)Culture.Ble)   //Blé sur parcelle
-                {              
-                    quantiteNourriture += q;
-                }
-                else if (((int)Culture.Mais <= q) && (q <= (int)Culture.Salade))  //Mais ou Salade..
-                {
-                    //on check les 4 parcelles autour si il y a au moins une culture
-                    if (
-                       ((i > 0) && (cultureParcelles[i - 1, j] > -1))
-                    || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
-                    || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
-                    || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
-                       )
-                    {
-                        quantiteNourriture += q + 1;
-                    }
-                    else quantiteNourriture += q;
-                }
-                else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
-                {
-                    int n = 0; //on compte le nombre de cultures qu'il y a sur les parcelles autour
-                    if ((i > 0) && (cultureParcelles[i - 1, j] > -1)) n++;
-                    else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1)) n++;
-                    else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
-                    else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
 
-                    if (n > 1) quantiteNourriture = q + 1;
-                    else quantiteNourriture = q;
+                // On regarde d'abord si il y a de l'engrais 
+                if (engraisParcelles[i,j] > 0)
+                {
+                    quantiteNourriture += arrayQN_max[q];
+                }
+
+                else // Sinon on met les autres valeurs en prenant compte la pluriculture
+                {
+                    if (q == (int)Culture.Ble)   //Blé sur parcelle
+                    {
+                        quantiteNourriture += q;
+                    }
+                    else if (((int)Culture.Mais <= q) && (q <= (int)Culture.Salade))  //Mais ou Salade..
+                    {
+                        //on check les 4 parcelles autour si il y a au moins une culture
+                        if (
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           )
+                        {
+                            quantiteNourriture += q + 1;
+                        }
+                        else quantiteNourriture += q;
+                    }
+                    else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
+                    {
+                        int n = 0; //on compte le nombre de cultures qu'il y a sur les parcelles autour
+                        if ((i > 0) && (cultureParcelles[i - 1, j] > -1)) n++;
+                        else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1)) n++;
+                        else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
+                        else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
+
+                        if (n > 1) quantiteNourriture = q + 1;
+                        else quantiteNourriture = q;
+                    }
                 }
             }
         }
+    }
+
+    public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
+    {
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                if (engraisParcelles[i, j] > 0) engraisParcelles[i, j] += -1;
+            }
+        }
+    }
+
+    public void DepotEngraisChimique(int x, int y)    //On met de l'engrais au coordonnées d'une certains parcelle
+    {
+        engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
+        qualiteSol -= 0.5f;
+        qualiteEau -= 0.5f;
     }
 
     public void SortiePlantage()  //bouton vert
