@@ -12,6 +12,10 @@ public class Labourage : MonoBehaviour
     public GameObject parcelleLaboureePf;   //prefab d'une parcelle placée et confirmée
     private Vector3 sizeParcelle;     //taille de ces prefabs
 
+    public Transform fermeTransform;       //Transform de la ferme
+    private Vector2 sizeFerme;             //Sa taille
+
+
     //on récupère ces variables dans Agri
     private int xNbrParcelles;
     private int yNbrParcelles;
@@ -21,7 +25,6 @@ public class Labourage : MonoBehaviour
 
     public static int nbreParcellesPlacables;
 
-    public Transform fermeTransform;       //Transform de la ferme
     public Transform parcelleContainer;   //Gameobject qui contient les instances des parcelles
 
     public GameObject panelLabourage;
@@ -39,12 +42,15 @@ public class Labourage : MonoBehaviour
         parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
 
         //on a la ferme à la place de la parcelle du milieu et on la considere comme une parcelle labourée
-        Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
+        //Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
 
         //On place parcelleContainer à l'origine de l'endroit à partir duquel seront placées les parcelles
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
-        parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 4.40f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+        sizeFerme = fermeTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().size;
+        parcelleContainer.position = fermeTransform.position - (new Vector3((sizeParcelle.x * xNbrParcelles / 2) - sizeFerme.x, 4.40f, (sizeParcelle.z * yNbrParcelles / 2) - sizeFerme.y));
+
+        parcellesAdjacentes[(int)(xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2 - 1, (int)(yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2] = true;
         MajPrefabsLabourage();
     }
 
@@ -91,6 +97,8 @@ public class Labourage : MonoBehaviour
         if ((y > 0) && !parcellesLabourees[x, y - 1])                  parcellesAdjacentes[x, y - 1] = true;
         if ((y < yNbrParcelles - 1) && !parcellesLabourees[x, y + 1])  parcellesAdjacentes[x, y + 1] = true;
         MajPrefabsLabourage();
+
+        GameManager.environnementManager.qualiteSol -= 0.2f;
     }
 
     public void MajPrefabsLabourage()
@@ -102,6 +110,7 @@ public class Labourage : MonoBehaviour
         }
         //Puis on affiche les nouvelles
         GameObject parc;
+        /*
         for (int i=0; i<xNbrParcelles; i++)
         {
             for (int j = 0; j< yNbrParcelles; j++)
@@ -114,6 +123,41 @@ public class Labourage : MonoBehaviour
                 if (parcellesLabourees[i, j])
                 {
                     parc = Instantiate(zoneVertePf, parcelleContainer.position + new Vector3(i * sizeParcelle.x, 0f, j * sizeParcelle.z), Quaternion.identity, parcelleContainer);
+                    parc.name = i.ToString() + j.ToString() + "verte";
+                }
+            }
+        }
+        */
+        float X, Y;
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                if ((i <= (xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2) || (j <= (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
+                {
+                    (X, Y) = (i * sizeParcelle.x, j * sizeParcelle.z);
+                }
+                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles + sizeFerme.y / sizeParcelle.z) / 2))
+                {
+                    (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z + sizeFerme.y);
+                }
+                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
+                {
+                    (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z);
+                }
+                else
+                {
+                    (X, Y) = (i * sizeParcelle.x, j * sizeParcelle.z + sizeFerme.y);
+                }
+
+                if (parcellesAdjacentes[i, j])
+                {
+                    parc = (GameObject)Instantiate(zoneBleuePf, parcelleContainer.position + new Vector3(X, 0f, Y), Quaternion.identity, parcelleContainer);
+                    parc.name = i.ToString() + j.ToString();
+                }
+                if (parcellesLabourees[i, j])
+                {
+                    parc = Instantiate(zoneVertePf, parcelleContainer.position + new Vector3(X, 0f, Y), Quaternion.identity, parcelleContainer);
                     parc.name = i.ToString() + j.ToString() + "verte";
                 }
             }

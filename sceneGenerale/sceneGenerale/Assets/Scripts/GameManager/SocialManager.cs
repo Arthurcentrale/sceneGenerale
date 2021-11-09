@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SocialManager
 {
-    public int quantiteNourriture { get; set; }
+    public int quantiteNourriture { get; set; } 
     public int ecoSensibilisation { get; set; }
     public float qualiteDeVie { get; set; }
 
