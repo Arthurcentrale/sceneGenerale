@@ -16,9 +16,9 @@ public class PP_Movements : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.z);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        //animator.SetFloat("Horizontal", movement.x);
+        //animator.SetFloat("Vertical", movement.z);
+        //animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     void FixedUpdate()

@@ -15,6 +15,7 @@ public class Deplacement : MonoBehaviour
     public bool canmove;
     new public Camera camera;//Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
     float c;
+    float cMemo;
 
     public Recolte recolte;
 
@@ -68,8 +69,10 @@ public class Deplacement : MonoBehaviour
             }
             if (direction.x < 0) { c = -1; }
             else { c = 1; }
+            
 
         }
+        
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -89,9 +92,23 @@ public class Deplacement : MonoBehaviour
             direction = new Vector3(0, 0, 0);
         }
 
-        animator.SetFloat("Horizontal", c);
+
         //animator.SetFloat("Vertical", direction.z);
+
         animator.SetFloat("Speed", direction.sqrMagnitude);
+
+        if (animator.GetFloat("Speed") != 0)
+        {
+            print("testspeed non nul");
+            animator.SetFloat("Horizontal", c);
+        }
+        
+        if (animator.GetFloat("Speed") == 0)
+        {
+           
+            print("test speed = 0");
+            transform.localScale = new Vector3(-1,0,0);
+        }
 
     }
 
