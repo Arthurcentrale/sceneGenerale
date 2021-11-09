@@ -107,7 +107,7 @@ public class Deplacement : MonoBehaviour
         {
            
             print("test speed = 0");
-            transform.localScale = new Vector3(-1,0,0);
+            print(animator.GetCurrentAnimatorClipInfo(0));
         }
 
     }
