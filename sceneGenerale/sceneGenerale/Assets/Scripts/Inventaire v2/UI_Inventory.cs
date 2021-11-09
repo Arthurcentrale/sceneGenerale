@@ -18,6 +18,7 @@ public class UI_Inventory : MonoBehaviour
 
     private Transform favSlotContainerDepliement;
     private Animator animator;
+    private Animator animatorJoueur;
 
     private GameObject moveToFav;
     private bool boutonFavAffiche;
@@ -64,6 +65,8 @@ public class UI_Inventory : MonoBehaviour
 
         favSlotContainerDepliement = gameObject.transform.GetChild(1);
         animator = gameObject.GetComponent<Animator>();
+
+        animatorJoueur = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
 
         moveToFav = gameObject.transform.GetChild(0).GetChild(3).gameObject;
         boutonFavAffiche = false;
@@ -352,6 +355,8 @@ public class UI_Inventory : MonoBehaviour
     {
         string name = slotInv.gameObject.name;
         int slot = name[name.Length - 1] - '0';
+        
+
 
         if (slot == slotEquipé)
         {
@@ -364,8 +369,23 @@ public class UI_Inventory : MonoBehaviour
             slotEquipé = slot;
             Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
             audioSource.PlayOneShot(equipOutil);
+            
         }
-        
+
+        //partie animation
+        if (slot == 1)
+        {
+            animatorJoueur.SetBool("Pioche", false);
+            animatorJoueur.SetBool("Sac", false);
+            animatorJoueur.SetBool("Hache", true);
+        }
+        else if (slot == 2)
+        {
+            animatorJoueur.SetBool("Hache", false);
+            animatorJoueur.SetBool("Sac", false);
+            animatorJoueur.SetBool("Pioche", true);
+        }
+
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
