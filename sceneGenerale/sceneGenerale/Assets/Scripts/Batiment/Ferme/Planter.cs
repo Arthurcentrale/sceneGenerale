@@ -37,6 +37,8 @@ public class Planter : MonoBehaviour
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
     public GameObject[,] arrayPrefabsPlantes;  //array qui contient les prefabs des plantes qui sont instanciées pour pouvoir les enlever
     public int[,] engraisParcelles;     //array qui contient le nombre de jours restants durant lesquels un engrais va continuer à agir, la valeur est donc à 0 par defaut
+    public static bool modeEngrais;    //bool qui indique si on est dans le menu engrais ou dans le menu plantage
+    public int engraisSelectionne;  //0 pour le chimique et 1 pour le naturel
 
     //on récupère ces variables dans Agri
     private int xNbrParcelles;
@@ -59,6 +61,8 @@ public class Planter : MonoBehaviour
     public Slider slider;
 
     public GameObject panelPlantage;
+    public GameObject panelEngrais;
+    public Text textNombreEngraisNaturel;
 
     void Start()
     {
@@ -83,6 +87,8 @@ public class Planter : MonoBehaviour
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
         planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+
+        modeEngrais = false;
     }
 
     void Update()
@@ -110,13 +116,29 @@ public class Planter : MonoBehaviour
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
-                    if (cultureParcelles[i,j] == -1)  //si il n'y a pas de culture sur la parcelle
+
+                    if (modeEngrais)
                     {
-                        PlanterCulture(i, j);
-                    } 
-                    else
+                        if (DepotEngrais(i, j))
+                        {
+                            Debug.Log("Depot engrais en (" + i.ToString() + "," + j.ToString() + ")");
+                        }
+                        else
+                        {
+                            Debug.Log("Plus d'engrais naturel en réserve");
+                        }
+                        textNombreEngraisNaturel.text = engraisDispo.ToString();
+                    }
+                    else  //mode plantation
                     {
-                        EnleverCulture(i, j);
+                        if (cultureParcelles[i, j] == -1)  //si il n'y a pas de culture sur la parcelle
+                        {
+                            PlanterCulture(i, j);
+                        }
+                        else
+                        {
+                            EnleverCulture(i, j);
+                        }
                     }
                 }
             }
@@ -227,6 +249,16 @@ public class Planter : MonoBehaviour
         planteSelectionnee = 5;
     }
 
+    public void SelectionChimique()
+    {
+        engraisSelectionne = 0;
+    }
+
+    public void SelectionNaturel()
+    {
+        engraisSelectionne = 1;
+    }
+
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
         int q; //quantité nourriture sur les parcelle
@@ -283,6 +315,21 @@ public class Planter : MonoBehaviour
         }
     }
 
+    int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles
+    {
+        int[] nbrePlantes = new int[6] {0, 0, 0, 0, 0, 0};
+        int q;
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                q = cultureParcelles[i, j];
+                if (q >= 0) nbrePlantes[q] += 1;
+            }
+        }
+        return nbrePlantes;
+    }
+
     public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
     {
         for (int i = 0; i < xNbrParcelles; i++)
@@ -299,16 +346,16 @@ public class Planter : MonoBehaviour
         GameManager.environnementManager.qualiteSol += 0.1f;
     }
 
-    public void DepotEngraisChimique(int x, int y)    //On met de l'engrais chimique au coordonnées d'une certains parcelle
+    public bool DepotEngrais(int x, int y) //On met de l'engrais aux coordonnées d'une parcelle, retourne false si on en avait plus (si naturel)
     {
-        engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
-        GameManager.environnementManager.qualiteSol -= 0.5f;
-        GameManager.environnementManager.qualiteEau -= 0.5f;
-    }
-
-    public bool DepotEngraisNaturel(int x, int y)   //On met de l'engrais naturel aux coordonnées d'une parcelle, retourne false si on en avait plus
-    {
-        if (engraisDispo > 0)
+        if (engraisSelectionne == 0) //chimique
+        {
+            engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
+            GameManager.environnementManager.qualiteSol -= 0.5f;
+            GameManager.environnementManager.qualiteEau -= 0.5f;
+            return true;
+        }
+        else if (engraisDispo > 0)  //naturel
         {
             engraisParcelles[x, y] += 4;
             GameManager.environnementManager.qualiteSol += 0.2f;
@@ -320,7 +367,16 @@ public class Planter : MonoBehaviour
 
     public void SortiePlantage()  //bouton vert
     {
+        int[] nbrePlantes = CalculeNbrePlantes();
+        //Recap.MajMenuRecap(Labourage.nbreParcellesPlacees, Labourage.nbreParcellesPlacables, capaciteTravailUtilisee, capaciteTravail, nbrePlantes[0], nbrePlantes[1], nbrePlantes[2], nbrePlantes[3], nbrePlantes[5]);
         panelPlantage.SetActive(false);
+        this.GetComponent<Planter>().enabled = false;
+    }
+
+    public void SortieEngrais()  //bouton vert
+    {
+        panelEngrais.SetActive(false);
+        modeEngrais = false;
         this.GetComponent<Planter>().enabled = false;
     }
 }

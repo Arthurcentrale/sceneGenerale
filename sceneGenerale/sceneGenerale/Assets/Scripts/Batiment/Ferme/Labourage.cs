@@ -23,7 +23,8 @@ public class Labourage : MonoBehaviour
     public bool[,] parcellesLabourees;    //arrays qui indiquent les positions des parcelles labourées et celle adjacentes disponibles autour de la ferme
     public bool[,] parcellesAdjacentes;
 
-    public static int nbreParcellesPlacables;
+    public static int nbreParcellesPlacables;    
+    public static int nbreParcellesPlacees;
 
     public Transform parcelleContainer;   //Gameobject qui contient les instances des parcelles
 
@@ -71,7 +72,7 @@ public class Labourage : MonoBehaviour
             {
                 GameObject objetTouche = hit.transform.gameObject;
 
-                if (objetTouche.name.Length == 2)  //c'est l'indication que c'est une parcelle bleue, donc on la laboure
+                if (objetTouche.name.Length == 2)  //c'est l'indication que c'est une parcelle bleue, donc on la laboure    //if(hit.collider.tag == "Parcelle"
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
@@ -88,17 +89,23 @@ public class Labourage : MonoBehaviour
 
     public void Labourer(int x, int y) //on laboure une des parcelles
     {
-        parcellesLabourees[x, y] = true;
-        parcellesAdjacentes[x, y] = false;
+        if (nbreParcellesPlacees < nbreParcellesPlacables)
+        {
+            nbreParcellesPlacees += 1;
 
-        //on met à jour les parcelles dispo autour (4 cas) (elle ne deviennent pas dispo si elles sont déjà labourées
-        if ((x > 0) && !parcellesLabourees[x - 1, y])                  parcellesAdjacentes[x - 1, y] = true;
-        if ((x < xNbrParcelles - 1) && !parcellesLabourees[x + 1, y])  parcellesAdjacentes[x + 1, y] = true;
-        if ((y > 0) && !parcellesLabourees[x, y - 1])                  parcellesAdjacentes[x, y - 1] = true;
-        if ((y < yNbrParcelles - 1) && !parcellesLabourees[x, y + 1])  parcellesAdjacentes[x, y + 1] = true;
-        MajPrefabsLabourage();
+            parcellesLabourees[x, y] = true;
+            parcellesAdjacentes[x, y] = false;
 
-        GameManager.environnementManager.qualiteSol -= 0.2f;
+            //on met à jour les parcelles dispo autour (4 cas) (elle ne deviennent pas dispo si elles sont déjà labourées
+            if ((x > 0) && !parcellesLabourees[x - 1, y]) parcellesAdjacentes[x - 1, y] = true;
+            if ((x < xNbrParcelles - 1) && !parcellesLabourees[x + 1, y]) parcellesAdjacentes[x + 1, y] = true;
+            if ((y > 0) && !parcellesLabourees[x, y - 1]) parcellesAdjacentes[x, y - 1] = true;
+            if ((y < yNbrParcelles - 1) && !parcellesLabourees[x, y + 1]) parcellesAdjacentes[x, y + 1] = true;
+            MajPrefabsLabourage();
+
+            GameManager.environnementManager.qualiteSol -= 0.2f;
+        }
+        else Debug.Log("Le nombre max de parcelles a été atteint pour le moment");
     }
 
     public void MajPrefabsLabourage()
@@ -137,7 +144,7 @@ public class Labourage : MonoBehaviour
                 {
                     (X, Y) = (i * sizeParcelle.x, j * sizeParcelle.z);
                 }
-                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles + sizeFerme.y / sizeParcelle.z) / 2))
+                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles + sizeFerme.y / sizeParcelle.z) / 2))  //tester de mettres des - à la place des plus
                 {
                     (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z + sizeFerme.y);
                 }
