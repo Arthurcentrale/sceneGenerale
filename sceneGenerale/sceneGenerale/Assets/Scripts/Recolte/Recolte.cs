@@ -92,7 +92,7 @@ public class Recolte : MonoBehaviour
                         if (onPanel == true || IsCraftArbre == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
                         {
 
-                                audioSource.PlayOneShot(apparitionBulle); 
+                                //audioSource.PlayOneShot(apparitionBulle); 
                                 if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
                                 {                                   
                                     cible = hit;
@@ -260,7 +260,7 @@ public class Recolte : MonoBehaviour
 
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
-        audioSource.PlayOneShot(treeChop);
+        //FaudioSource.PlayOneShot(treeChop);
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;
         float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
