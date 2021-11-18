@@ -50,15 +50,18 @@ public class ArbreComportement : MonoBehaviour
 
     string DefineEssence(string name)
     {
-        if (name == "Douglas" || name == "Douglas(Clone)" || name == "Douglas Frele" || name == "Douglas Frele(Clone)") 
-                return "douglas";
+        if (name == "Douglas" || name == "Douglas(Clone)" || name == "Douglas Frele" || name == "Douglas Frele(Clone)"
+            || name == "Douglas Arbuste" || name == "Douglas Arbuste Frele" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Frele(Clone)")
+            return "douglas";
         else if (name == "Chene" || name == "Chene(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" 
                 || name == "Chene Arbuste" || name == "Chene Arbuste Frele" || name == "Chene Arbuste(Clone)" || name == "Chene Arbuste Frele(Clone)") 
                 return "chene";
-        else if (name == "Pin" || name == "Pin(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)") 
-                return "pin";
-        else if (name == "Hetre" || name == "Hetre(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)") 
-                return "hetre";
+        else if (name == "Pin" || name == "Pin(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)"
+            || name == "Pin Arbuste" || name == "Pin Arbuste Frele" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Frele(Clone)")
+            return "pin";
+        else if (name == "Hetre" || name == "Hetre(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)"
+            || name == "Hetre Arbuste" || name == "Hetre Arbuste Frele" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Frele(Clone)")
+            return "hetre";
         else  return "bouleau";
     }
 
@@ -68,7 +71,10 @@ public class ArbreComportement : MonoBehaviour
         { return "adulteRobuste"; }
         else if (name == "Douglas Frele" || name =="Douglas Frele(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)")
         { return "adulteFrele"; }
-        else if (name =="Chene Arbuste(Clone)" || name =="Chene Arbuste Frele(Clone)" ||name == "Chene Arbuste" || name == "Chene Arbuste Frele")
+        else if (name =="Chene Arbuste(Clone)" || name =="Chene Arbuste Frele(Clone)" ||name == "Chene Arbuste" || name == "Chene Arbuste Frele"
+                || name == "Douglas Arbuste" || name == "Douglas Arbuste Frele" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Frele(Clone)"
+                || name == "Pin Arbuste" || name == "Pin Arbuste Frele" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Frele(Clone)"
+                || name == "Hetre Arbuste" || name == "Hetre Arbuste Frele" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Frele(Clone)")
         { return "arbuste"; }
         else return "non defini";
     }
@@ -97,14 +103,41 @@ public class ArbreComportement : MonoBehaviour
         float arbreY;
         Quaternion rot;
 
-        if (essence == "chene") { arbreY = arbreManager.cheneRobuste.transform.position.y; rot = arbreManager.cheneRobuste.transform.rotation; }
-        else if (essence == "pin") { arbreY = arbreManager.pinRobuste.transform.position.y; rot = arbreManager.pinRobuste.transform.rotation; }
-        else if (essence == "douglas") { arbreY = arbreManager.douglasRobuste.transform.position.y; rot = arbreManager.douglasRobuste.transform.rotation; }
-        else if (essence == "hetre") { arbreY = arbreManager.hetreRobuste.transform.position.y; rot = arbreManager.hetreRobuste.transform.rotation; }
-        else { arbreY = arbreManager.bouleauRobuste.transform.position.y; rot = arbreManager.bouleauRobuste.transform.rotation; }
-
-        Vector3 pos = new Vector3(arbreX,arbreY,arbreZ);
-        Instantiate(arbreManager.cheneRobuste,pos,rot);
+        if (essence == "chene") 
+        { 
+            arbreY = arbreManager.cheneRobuste.transform.position.y; 
+            rot = arbreManager.cheneRobuste.transform.rotation;
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Instantiate(arbreManager.cheneRobuste, pos, rot);
+        }
+        else if (essence == "pin") 
+        { 
+            arbreY = arbreManager.pinRobuste.transform.position.y; 
+            rot = arbreManager.pinRobuste.transform.rotation;
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Instantiate(arbreManager.pinRobuste, pos, rot);
+        }
+        else if (essence == "douglas") 
+        { 
+            arbreY = arbreManager.douglasRobuste.transform.position.y; 
+            rot = arbreManager.douglasRobuste.transform.rotation;
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Instantiate(arbreManager.douglasRobuste, pos, rot);
+        }
+        else if (essence == "hetre") 
+        { 
+            arbreY = arbreManager.hetreRobuste.transform.position.y; 
+            rot = arbreManager.hetreRobuste.transform.rotation;
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Instantiate(arbreManager.hetreRobuste, pos, rot);
+        }
+        else { 
+            arbreY = arbreManager.bouleauRobuste.transform.position.y; 
+            rot = arbreManager.bouleauRobuste.transform.rotation;
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Instantiate(arbreManager.bouleauRobuste, pos, rot);
+        }
+        
         Destroy(gameObject);
     }
     
