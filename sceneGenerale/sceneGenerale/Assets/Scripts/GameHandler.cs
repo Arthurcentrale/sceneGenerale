@@ -7,9 +7,9 @@ using System.Collections;
 public class GameHandler : MonoBehaviour
 {
     public GameObject pin;
-    public GameObject connifere;
+    public GameObject douglas;
     public GameObject chene;
-    public GameObject platane;
+    public GameObject hetre;
 
     private Transform dossierArbres;
 
@@ -45,9 +45,9 @@ public class GameHandler : MonoBehaviour
 
         // On créé chacune des listes de positions des arbres
         List<Vector3> listePositionsPins = new List<Vector3>();
-        List<Vector3> listePositionsConniferes = new List<Vector3>();
+        List<Vector3> listePositionsDouglas = new List<Vector3>();
         List<Vector3> listePositionsChenes = new List<Vector3>();
-        List<Vector3> listePositionsPlatanes = new List<Vector3>();
+        List<Vector3> listePositionsHetres = new List<Vector3>();
 
         // On parcourt la liste des arbres (sous formes de GO) présent dans le jeu
         // Pour chacun d'entre eux, on créé une objet de la structure arbresJSON pouvant être transformé directement en JSON
@@ -60,15 +60,15 @@ public class GameHandler : MonoBehaviour
             else if (nomArbre.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
                 listePositionsChenes.Add(arbre.transform.position);
 
-            else if (nomArbre.IndexOf("Platane", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsPlatanes.Add(arbre.transform.position);
+            else if (nomArbre.IndexOf("Hetre", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsHetres.Add(arbre.transform.position);
 
-            else
-                listePositionsConniferes.Add(arbre.transform.position);
+            else if (nomArbre.IndexOf("Douglas", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsDouglas.Add(arbre.transform.position);
         }
 
         // Objet que l'on transformera en JSON
-        GameData gameData = new GameData(listePositionsPins, listePositionsConniferes, listePositionsChenes, listePositionsPlatanes);
+        GameData gameData = new GameData(listePositionsPins, listePositionsDouglas, listePositionsChenes, listePositionsHetres);
 
         string jsonData = JsonUtility.ToJson(gameData, true);
 
@@ -91,11 +91,11 @@ public class GameHandler : MonoBehaviour
         foreach (Vector3 positionOfPin in gameData.listePositionsPins)
             Instantiate(pin, positionOfPin, pin.transform.rotation, dossierArbres);
 
-        foreach (Vector3 positionOfConnifere in gameData.listePositionsConniferes)
-            Instantiate(connifere, positionOfConnifere, connifere.transform.rotation, dossierArbres);
+        foreach (Vector3 positionOfDouglas in gameData.listePositionsDouglas)
+            Instantiate(douglas, positionOfDouglas, douglas.transform.rotation, dossierArbres);
 
-        foreach (Vector3 positionOfPlatane in gameData.listePositionsPlatanes)
-            Instantiate(platane, positionOfPlatane, platane.transform.rotation, dossierArbres);
+        foreach (Vector3 positionOfHetre in gameData.listePositionsHetres)
+            Instantiate(hetre, positionOfHetre, hetre.transform.rotation, dossierArbres);
 
         foreach (Vector3 positionOfChene in gameData.listePositionsChenes)
             Instantiate(chene, positionOfChene, chene.transform.rotation, dossierArbres);
