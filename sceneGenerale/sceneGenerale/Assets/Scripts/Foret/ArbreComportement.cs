@@ -43,7 +43,7 @@ public class ArbreComportement : MonoBehaviour
     string DefineEssence(string name)
     {
         if (name == "Douglas" || name == "Douglas(Clone)" || name == "Douglas Frele" || name == "Douglas Frele(Clone)") return "douglas";
-        else if (name == "Chene" || name == "Chene(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)") return "chene";
+        else if (name == "Chene" || name == "Chene(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" || name == "Chene Arbuste" || name == "Chene Arbuste Frele" || name == "Chene Arbuste(Clone)" || name == "Chene Arbuste Frele(Clone)") return "chene";
         else if (name == "Pin" || name == "Pin(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)") return "pin";
         else if (name == "Hetre" || name == "Hetre(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)") return "hetre";
         else  return "bouleau";
@@ -53,8 +53,10 @@ public class ArbreComportement : MonoBehaviour
     {
         if (name == "Douglas" || name == "Douglas(Clone)" || name == "Chene" || name == "Chene(Clone)" || name == "Pin" || name == "Pin(Clone)" || name == "Hetre" || name == "Hetre(Clone)" || name == "Bouleau" || name == "Bouleau(Clone)")
         { return "adulteRobuste"; }
-        if (name == "Douglas Frele" || name =="Douglas Frele(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)")
+        else if (name == "Douglas Frele" || name =="Douglas Frele(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)")
         { return "adulteFrele"; }
+        else if (name =="Chene Arbuste(Clone)" || name =="Chene Arbuste Frele(Clone)" ||name == "Chene Arbuste" || name == "Chene Arbuste Frele")
+        { return "arbuste"; }
         else return "non defini";
     }
 
