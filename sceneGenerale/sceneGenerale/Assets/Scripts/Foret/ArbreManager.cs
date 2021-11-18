@@ -23,6 +23,28 @@ public class ArbreManager : MonoBehaviour
         bouleau,
     }
 
+    //les arbres robustes
+    public GameObject cheneRobuste;
+    public GameObject hetreRobuste;
+    public GameObject douglasRobuste;
+    public GameObject pinRobuste;
+    public GameObject bouleauRobuste;
+
+    //les arbres frêles
+    public GameObject cheneFrele;
+    public GameObject hetreFrele;
+    public GameObject douglasFrele;
+    public GameObject pinFrele;
+    public GameObject bouleauFrele;
+
+    //Temps de croissance
+    public int tempsCroissanceChene = 6;
+    public int tempsCroissanceDouglas = 4;
+    public int tempsCroissancePin = 5;
+    public int tempsCroissanceHetre = 4;
+    public int tempsCroissanceBouleau = 3;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,4 +56,7 @@ public class ArbreManager : MonoBehaviour
     {
         
     }
+
+    
+        
 }
