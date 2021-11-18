@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4159845415367100947}
   - component: {fileID: 4159845415367100946}
   - component: {fileID: 1148673336262851148}
+  - component: {fileID: -4664557297942445507}
   m_Layer: 0
   m_Name: Pin
   m_TagString: Arbre
@@ -109,6 +110,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.556072, y: 4.9999995, z: 1.7055118}
   m_Center: {x: -0.44517055, y: 0.0000009971429, z: -4.252985}
+--- !u!114 &-4664557297942445507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159845415367100949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre: {fileID: 0}
+  etat: 
+  essence: 
+  age: 0
+  tempsCroissance: 0
 --- !u!1001 &4159845415317376172
 PrefabInstance:
   m_ObjectHideFlags: 0

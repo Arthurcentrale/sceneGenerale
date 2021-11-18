@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6867410443429010388}
   - component: {fileID: 6867410443429010389}
   - component: {fileID: 6411149860356759360}
+  - component: {fileID: 194783351243212615}
   m_Layer: 0
   m_Name: Hetre
   m_TagString: Arbre
@@ -109,6 +110,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.914836, y: 5, z: 1.3945884}
   m_Center: {x: -0.3925079, y: -0.0000044099424, z: -4.482913}
+--- !u!114 &194783351243212615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867410443429010394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre: {fileID: 0}
+  etat: 
+  essence: 
+  age: 0
+  tempsCroissance: 0
 --- !u!1001 &6867410442584945535
 PrefabInstance:
   m_ObjectHideFlags: 0
