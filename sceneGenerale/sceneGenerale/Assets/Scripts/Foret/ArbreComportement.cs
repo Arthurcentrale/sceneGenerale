@@ -51,16 +51,16 @@ public class ArbreComportement : MonoBehaviour
     string DefineEssence(string name)
     {
         if (name == "Douglas" || name == "Douglas(Clone)" || name == "Douglas Frele" || name == "Douglas Frele(Clone)"
-            || name == "Douglas Arbuste" || name == "Douglas Arbuste Frele" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Frele(Clone)")
+            || name == "Douglas Arbuste" || name == "Douglas Arbuste Malade" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Malade(Clone)")
             return "douglas";
         else if (name == "Chene" || name == "Chene(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" 
-                || name == "Chene Arbuste" || name == "Chene Arbuste Frele" || name == "Chene Arbuste(Clone)" || name == "Chene Arbuste Frele(Clone)") 
+                || name == "Chene Arbuste" || name == "Chene Arbuste Malade" || name == "Chene Arbuste(Clone)" || name == "Chene Arbuste Malade(Clone)") 
                 return "chene";
         else if (name == "Pin" || name == "Pin(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)"
-            || name == "Pin Arbuste" || name == "Pin Arbuste Frele" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Frele(Clone)")
+            || name == "Pin Arbuste" || name == "Pin Arbuste Malade" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Malade(Clone)")
             return "pin";
         else if (name == "Hetre" || name == "Hetre(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)"
-            || name == "Hetre Arbuste" || name == "Hetre Arbuste Frele" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Frele(Clone)")
+            || name == "Hetre Arbuste" || name == "Hetre Arbuste Malade" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Malade(Clone)")
             return "hetre";
         else  return "bouleau";
     }
@@ -71,10 +71,10 @@ public class ArbreComportement : MonoBehaviour
         { return "adulteRobuste"; }
         else if (name == "Douglas Frele" || name =="Douglas Frele(Clone)" || name == "Chene Frele" || name == "Chene Frele(Clone)" || name == "Pin Frele" || name == "Pin Frele(Clone)" || name == "Hetre Frele" || name == "Hetre Frele(Clone)")
         { return "adulteFrele"; }
-        else if (name =="Chene Arbuste(Clone)" || name =="Chene Arbuste Frele(Clone)" ||name == "Chene Arbuste" || name == "Chene Arbuste Frele"
-                || name == "Douglas Arbuste" || name == "Douglas Arbuste Frele" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Frele(Clone)"
-                || name == "Pin Arbuste" || name == "Pin Arbuste Frele" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Frele(Clone)"
-                || name == "Hetre Arbuste" || name == "Hetre Arbuste Frele" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Frele(Clone)")
+        else if (name =="Chene Arbuste(Clone)" || name =="Chene Arbuste Malade(Clone)" ||name == "Chene Arbuste" || name == "Chene Arbuste Malade"
+                || name == "Douglas Arbuste" || name == "Douglas Arbuste Malade" || name == "Douglas Arbuste(Clone)" || name == "Douglas Arbuste Malade(Clone)"
+                || name == "Pin Arbuste" || name == "Pin Arbuste Malade" || name == "Pin Arbuste(Clone)" || name == "Pin Arbuste Malade(Clone)"
+                || name == "Hetre Arbuste" || name == "Hetre Arbuste Malade" || name == "Hetre Arbuste(Clone)" || name == "Hetre Arbuste Malade(Clone)")
         { return "arbuste"; }
         else return "non defini";
     }
