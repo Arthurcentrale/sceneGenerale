@@ -30,7 +30,7 @@ public class ArbreComportement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (age >= tempsCroissance) croissance();
+        //if (age >= tempsCroissance) croissance();
         
     }
 
@@ -88,6 +88,7 @@ public class ArbreComportement : MonoBehaviour
         else return tempsCroissance;
     }
 
+    /*
     void croissance()
     {
         float arbreX = transform.position.x;
@@ -104,5 +105,5 @@ public class ArbreComportement : MonoBehaviour
         Vector3 pos = new Vector3(arbreX,arbreY,arbreZ);
         Instantiate(arbreManager.cheneRobuste,pos,rot);
     }
-
+    */
 }
