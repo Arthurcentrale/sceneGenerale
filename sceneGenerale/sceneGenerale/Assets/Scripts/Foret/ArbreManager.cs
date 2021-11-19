@@ -46,6 +46,21 @@ public class ArbreManager : MonoBehaviour
     public GameObject pinMalade;
     public GameObject bouleauMalade;
 
+    //les arbustes
+    public GameObject arbusteChene;
+    public GameObject arbusteHetre;
+    public GameObject arbusteDouglas;
+    public GameObject arbustePin;
+    public GameObject arbusteBouleau;
+
+
+    //les arbustes malades
+    public GameObject arbusteCheneMalade;
+    public GameObject arbusteHetreMalade;
+    public GameObject arbusteDouglasMalade;
+    public GameObject arbustePinMalade;
+    public GameObject arbusteBouleauMalade;
+
     //Temps de croissance
     public int tempsCroissanceChene = 6;
     public int tempsCroissanceDouglas = 4;
@@ -60,6 +75,8 @@ public class ArbreManager : MonoBehaviour
     public float absorptionDouglas = 0.1f;
     public float absorptionBouleau = 0.2f;
 
+    
+
 
 
     // Start is called before the first frame update
@@ -72,6 +89,26 @@ public class ArbreManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    public void declencherEpidemie()
+    {
+        int declencheur = Random.Range(1, 100);
+
+        if (declencheur < 4)
+        {
+            int randomNumber = Random.Range(1, 100);
+            string essenceMalade;
+            if (randomNumber < 31) essenceMalade = "Chene";
+            else if (randomNumber >= 31 && randomNumber < 41) essenceMalade = "Hetre";
+            else if (randomNumber >= 41 && randomNumber < 71) essenceMalade = "Pin";
+            else if (randomNumber >= 71 && randomNumber < 86) essenceMalade = "Douglas";
+            else essenceMalade = "Bouleau";
+
+        }
+        int nombreArbres = 0;
+        GameObject.Find("");
     }
 
     
