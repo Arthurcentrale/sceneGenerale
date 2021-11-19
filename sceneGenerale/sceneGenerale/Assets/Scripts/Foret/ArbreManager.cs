@@ -53,6 +53,14 @@ public class ArbreManager : MonoBehaviour
     public int tempsCroissanceHetre = 4;
     public int tempsCroissanceBouleau = 3;
 
+    //absorption de Co2
+    public float absorptionChene = 0.2f;
+    public float absorptionHetre = 0.2f;
+    public float absorptionPin = 0.1f;
+    public float absorptionDouglas = 0.1f;
+    public float absorptionBouleau = 0.2f;
+
+
 
     // Start is called before the first frame update
     void Start()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7684433710108639293}
   - component: {fileID: 5255023643243381076}
   - component: {fileID: 800082952730746754}
+  - component: {fileID: 6298184333960458809}
   m_Layer: 0
   m_Name: Hetre Malade
   m_TagString: Untagged
@@ -94,3 +95,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6298184333960458809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102909709273768916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre: {fileID: 0}
+  etat: 
+  essence: 
+  age: 0
+  tempsCroissance: 0
+  absorptionCo2: 0

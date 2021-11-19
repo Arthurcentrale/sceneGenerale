@@ -11,6 +11,8 @@ public class ArbreComportement : MonoBehaviour
     public ArrayList production;
     public int age = 0;
     public int tempsCroissance;
+    public float absorptionCo2;
+
     private ArbreManager arbreManager;
 
 
@@ -23,6 +25,7 @@ public class ArbreComportement : MonoBehaviour
         etat = DefineEtat(gameObject.name);
         tempsCroissance = DefineTempsCroissance(essence);
         age = DefineAge(etat);
+        absorptionCo2 = DefineAbsorptionCo2(essence);
         
         if (age < tempsCroissance) StartCoroutine(TestOne());
     }
@@ -97,6 +100,20 @@ public class ArbreComportement : MonoBehaviour
     {
         if (etat == "arbuste" || etat=="arbusteMalade") return 0;
         else return tempsCroissance;
+    }
+
+    float DefineAbsorptionCo2(string essence)
+    {
+        if (etat == "adulteRobuste" || etat == "adulteFrele" || etat =="adulteMalade")
+        {
+            if (essence == "douglas") return arbreManager.absorptionDouglas;
+            else if (essence == "chene") return arbreManager.absorptionChene;
+            else if (essence == "pin") return arbreManager.absorptionPin;
+            else if (essence == "hetre") return arbreManager.absorptionHetre;
+            else return arbreManager.absorptionBouleau;
+        }
+        else return 0;
+        
     }
 
     
