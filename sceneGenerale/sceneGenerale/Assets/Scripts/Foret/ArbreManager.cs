@@ -9,6 +9,8 @@ public class ArbreManager : MonoBehaviour
     {
         adulteRobuste,
         adulteFrele,
+        adulteMalade,
+        arbusteMalade,
         arbuste,
         souche,
 
@@ -36,6 +38,13 @@ public class ArbreManager : MonoBehaviour
     public GameObject douglasFrele;
     public GameObject pinFrele;
     public GameObject bouleauFrele;
+
+    //les arbres malades
+    public GameObject cheneMalade;
+    public GameObject hetreMalade;
+    public GameObject douglasMalade;
+    public GameObject pinMalade;
+    public GameObject bouleauMalade;
 
     //Temps de croissance
     public int tempsCroissanceChene = 6;

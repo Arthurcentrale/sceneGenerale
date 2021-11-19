@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3674098441499818408}
   - component: {fileID: 2578590422977119107}
   - component: {fileID: 4344231799419536662}
+  - component: {fileID: 1322267332051608028}
   m_Layer: 0
   m_Name: Souche Hetre Malade
   m_TagString: Untagged
@@ -94,3 +95,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1322267332051608028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060447511646697360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b3fbc73577d684fb6374caf59f352b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempsCroissance: 0
+  age: 0
