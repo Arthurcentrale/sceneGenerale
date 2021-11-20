@@ -37,6 +37,32 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     public UI_Inventory ui_inventory;
     public Item Bois, Pierre;
 
+
+    //partie ath
+    // je peux pas glisser les boutons, je passe par le padre
+    private GameObject boutonTravailOuvrier;
+    private GameObject boutonDéposerRessources;
+    private GameObject boutonBanderoleDéposerRessources;
+    private GameObject boutonFabriquerAvant;
+    private GameObject boutonBanderoleFabriquerAvant; // dans le update if ressourcesNécessaires on met le setActive
+    private GameObject boutonFabriquerAprès;
+    private GameObject boutonBanderoleFabriquerAprès;
+    private GameObject boutonAnnuler;
+    private GameObject boutonBanderoleAnnuler;
+    private GameObject FondPrefab;
+    private GameObject Fond;
+    private GameObject Menus;
+    private GameObject MenuConstruction;
+    private Animator animator;
+    
+
+
+    // animators, 
+    /// <summary>
+    /// 
+    /// </summary>
+
+
     public Player player;
     private GameObject[] playerLeVrai;
     public GameObject lePapaDePlayer; //pour pouvoir récupérer player depuis la fonction start via un getchild. Je peux pas directement le link dans mon script prefab
@@ -46,9 +72,52 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
     //public GameObject prefabMenuBâti;
 
     private Rect menuBâti;
-    // Start is called before the first frame update
+    
+    //j'instantiate le fond au start avec un set active false? Puis transform à chaque clic?
+
+    
     void Start()
     {
+        //Partie ATH
+        Menus = GameObject.Find("Menus");
+        MenuConstruction = Menus.transform.Find("MenuConstruction").gameObject;
+        Fond = MenuConstruction.transform.Find("AnimsATH/animATHBoulangerie/PanelMenuBoulangerie").gameObject;
+        if (Fond != null)
+        {
+            print("çamarche");
+        }
+        boutonTravailOuvrier = Fond.transform.Find("InfoBulle").gameObject;
+        boutonDéposerRessources = Fond.transform.Find("BulleDeposRessource").gameObject;
+        boutonBanderoleDéposerRessources = boutonDéposerRessources.transform.Find("borderoDéposer").gameObject;
+        boutonFabriquerAprès = Fond.transform.Find("BulleConstruireAprès").gameObject;
+        boutonBanderoleFabriquerAprès = boutonFabriquerAprès.transform.Find("borderoConstruireAprès").gameObject;
+        boutonAnnuler = Fond.transform.Find("BulleAnnuler").gameObject;
+        boutonBanderoleAnnuler = boutonAnnuler.transform.Find("borderoAnnuler").gameObject;
+        animator = Fond.transform.GetChild(0).GetComponent<Animator>();
+
+
+
+        //Fond= Instantiate(FondPrefab, new Vector3(0f, 2f, 0f), Quaternion.Euler(0, 0, 0));
+        //boutonTravailOuvrier = Fond.transform.GetChild(0);
+        //boutonDéposerRessources = boutonTravailOuvrier.transform.GetChild(2) ;
+        ////boutonDéposerRessources = boutonDéposerRessources.GetComponent<Button>();
+        //boutonBanderoleDéposerRessources = boutonDéposerRessources.transform.GetChild(0);
+        ////boutonBanderoleDéposerRessources = boutonBanderoleDéposerRessources.GetComponent<Button>();
+        //boutonFabriquer = boutonTravailOuvrier.transform.GetChild(3);
+        ////boutonFabriquer = boutonFabriquer.GetComponent<Button>();
+        //boutonBanderoleFabriquer = boutonFabriquer.transform.GetChild(0);
+        ////boutonBanderoleFabriquer = boutonBanderoleFabriquer.GetComponent<Button>();
+        //boutonAnnuler = boutonTravailOuvrier.transform.GetChild(0);
+        ////boutonAnnuler = boutonAnnuler.GetComponent<Button>();
+        //boutonBanderoleAnnuler = boutonAnnuler.transform.GetChild(0);
+        ////boutonBanderoleAnnuler=boutonBanderoleAnnuler.transform.GetChild(0);
+        //animator = Fond.transform.GetChild(0).GetComponent<Animator>();
+
+
+
+
+
+        //Partie Bâti
         playerLeVrai = GameObject.FindGameObjectsWithTag("Player");
         print(playerLeVrai[0]);
         player = playerLeVrai[0].GetComponent<Player>(); //yavait même pas besoin de passer par lePapaDePlayer en fait :) 
@@ -73,7 +142,7 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
                 {
                     OnCliqueDehors = true;
                 }
-                if (hit.collider.CompareTag("BatiChaumière")) //Problème: Quand on construit plusieurs chaumières en même temps (seul bâtiment avec lequel on peut faire ça :)))) )
+                if (hit.collider.CompareTag("BatiBoulangerie")) //Problème: Quand on construit plusieurs chaumières en même temps (seul bâtiment avec lequel on peut faire ça :)))) )
                                                               //, et qu'on clique sur le bâti, le menu de tous les bâtis de chaumière s'affichent, puisqu'on fonctionne avec des tags, donc il va falloir trouver une astuce
                                                               //pour éviter ce petit problème. --> Après mûre réflexion, on s'en branle :) , de toute façon on va plus utiliser les onGUI pour les menus donc nsm
 
@@ -94,6 +163,11 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
             secondes = (tempsConstructionChaumièreEntier - heures * 3600 - minutes * 60);
             tempsConstructionChaumière -= Time.deltaTime;
         }
+
+        if (OnCliqueDehors)
+        {
+            animator.SetTrigger("fermetture_3_bulle"); //tu sais pas écrire dodo
+        }
     }
 
     void OnMouseDown()
@@ -113,27 +187,18 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
             //print(position.z);
             positionDéfinie = true;
             rect = GUIUtility.ScreenToGUIRect(new Rect(position.x, position.y, 150, 250));
-            //print(boutonsMenuConstruction.boutonMenuEstAffiche);
-            //if (boutonsMenuConstruction.boutonMenuEstAffiche)
-            //{
-            //   print("oui");
-            //}
+            //ici on va s'occuper de la partie affichage de l'animation pour l'ath
+            Fond.SetActive(true);
+            animator.SetTrigger("ouverture_3_bulle");
 
 
-            //if (Physics.Raycast(ray, out hit))
-            //{
-            //    if (hit.collider.CompareTag("Untagged"))
-            //    {
-            //        OnCliqueDehors = true;
-            //    }
-            //    if (hit.collider.CompareTag("Moulin"))
-            //    {
-            //        OnCliqueDehors = false;
-            //    }
-
-            //}
 
         }
+
+    }
+
+    public void DéposerRessources()
+    {
 
     }
 
@@ -279,14 +344,36 @@ public class ScriptBâtiBoulangerie : MonoBehaviour
         player.inventory.AddItem(new ItemAmount(Item: item, Amount: Amount));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="Amount"></param>
     void RetirerInventaire(Item item, int Amount) //On ajoute Amount items dans l'inventaire
     {
 
         player.inventory.DelItem(new ItemAmount(Item: item, Amount: Amount));
     }
 
+    /////////////////////////////////////////// Partie ATH construction de la Boulangerie ////////////////////////////////////////////
+
+    //Il s'agit là de la partie script du bouton pour fabriquer la boulangerie. Il ne doit être activable que lorsque toutes les ressources nécessaires à la fabrication ont été déposées
+    // Je fais le script ici car ya déjà les bools dont j'ai besoin (RessourcesNécessairesDéposées notamment)
+
+    // void start où on récupère boutons, animators, texts --> pas besoin en fait c'est des préfabs youpii juste à glisser
+    //puis le update où on rend le bouton interactable si les ressources nécessaires ont été déposées
+
+
+
+
 
 }
+
+
+
+
+
+
 
 
 
