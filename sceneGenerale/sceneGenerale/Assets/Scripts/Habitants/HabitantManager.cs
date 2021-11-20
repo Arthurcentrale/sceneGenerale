@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-public class HabitantManager : ScriptableObject
+public class HabitantManager : MonoBehaviour
 {
     //liste de tous les habitants du jeu
     public List<GameObject> habitants;

@@ -26,6 +26,9 @@ public class HabitantBehaviour : MonoBehaviour
 
     //statut dans l'aventure
     public bool isVillager = false;
+    public bool isHoused = false; // Boolen pour savoir si l'habitant possède sa chaumière
+    public bool hasWorkplace = false;
+    public bool isWorking = false; // Booleen pour savoir si l'habitant possède son batiment de travail
 
     //conditions = bâtiments nécessaires pour qu'il puisse travailler et autres
 
@@ -33,6 +36,10 @@ public class HabitantBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+    void UpdateSituation()
+    {
+        if (isHoused && hasWorkplace) isWorking = true; 
     }
 
     // Update is called once per frame
