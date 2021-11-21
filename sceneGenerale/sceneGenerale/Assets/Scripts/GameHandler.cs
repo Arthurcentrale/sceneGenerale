@@ -349,12 +349,6 @@ public class GameHandler : MonoBehaviour
         // Demarrage de l'inventaire
         player.createInventory(gameData.listeItems, gameData.listeFavoris);
         inventory = player.inventory;
-        
-        /*
-        uiInventory = GameObject.Find("Inventaire2").transform.GetChild(0).gameObject.GetComponent<UI_Inventory>();
-        inventory = new Inventory(gameData.listeItems, gameData.listeFavoris, player);
-        uiInventory.SetInventory(inventory);
-        */
     }
 }
 

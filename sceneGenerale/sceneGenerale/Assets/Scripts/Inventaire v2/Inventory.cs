@@ -40,13 +40,6 @@ public class Inventory
     public Inventory(List<ItemAmount> itemList_, List<bool> favList_, Player player_)
     {
         this.itemList = itemList_;
-
-        //on initialise favList avec des false
-        for (int i = 0; i < UI_Inventory.xSizeMaxInv * UI_Inventory.ySizeMaxInv; i++)
-        {
-            favList_.Add(false);
-        }
-
         this.favList = favList_;
         this.player = player_;
         this.sizeMaxStack = 5;
