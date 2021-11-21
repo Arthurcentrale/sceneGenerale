@@ -33,7 +33,7 @@ public class MoulinEau : MonoBehaviour
 
     public Slider slider;
 
-    bool isBle;
+    bool isBle = true;
     int QuantiteFarineNonValide;
     int QuantiteFarine;
 
@@ -141,23 +141,23 @@ public class MoulinEau : MonoBehaviour
         {
             if (habitant.ecoLevel == 1)
             {
-                return Math.Max(2, nbParcelleBle);
+                return Math.Max(2, nbParcelleMais);
             }
             if (habitant.ecoLevel == 2)
             {
-                return Math.Max(4, nbParcelleBle);
+                return Math.Max(4, nbParcelleMais);
             }
             if (habitant.ecoLevel == 3)
             {
-                return Math.Max(6, nbParcelleBle);
+                return Math.Max(6, nbParcelleMais);
             }
             if (habitant.ecoLevel == 4)
             {
-                return Math.Max(8, nbParcelleBle);
+                return Math.Max(8, nbParcelleMais);
             }
             else
             {
-                return Math.Max(10, nbParcelleBle);
+                return Math.Max(10, nbParcelleMais);
             }
         }
     }*/
