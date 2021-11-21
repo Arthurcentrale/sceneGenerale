@@ -37,7 +37,7 @@ public class Inventory
     */
 
 
-    public Inventory(List<ItemAmount> itemList_, List<bool> favList_,Player player_)
+    public Inventory(List<ItemAmount> itemList_, List<bool> favList_, Player player_)
     {
         this.itemList = itemList_;
 
@@ -52,9 +52,10 @@ public class Inventory
         this.sizeMaxStack = 5;
     }
 
-    public bool AddItem(ItemAmount item) //retourne un bool qui indique si il avait assez de place dans l'inventaire pour que l'item soit ajouté
+    public bool AddItem(ItemAmount item) //retourne un bool qui indique si il y avait assez de place dans l'inventaire pour que l'item soit ajouté
     {
         int x = item.Amount; // le total d'objet à placer
+
         if (player.uiInventory.NbrPlace(item.Item) < x) // Pas assez de place
         {
             return false;
@@ -86,11 +87,11 @@ public class Inventory
             if (x > 0) // si il reste des items à placer dans des slots vides
             {
                 p = sizeMaxStack / item.Item.Weight; // on redefinie p comme le nombre d'item plaçable dans un slot
-                for (int i=0; i<x/p; i++)
+                for (int i = 0; i < x / p; i++)
                 {
                     itemList.Add(new ItemAmount(Item: item.Item, Amount: p));
                 }
-                if (x%p > 0)
+                if (x % p > 0)
                 {
                     itemList.Add(new ItemAmount(Item: item.Item, Amount: x % p));
                 }
@@ -109,7 +110,7 @@ public class Inventory
             {
                 int i = item.Amount;
                 int j = inventoryItem.Amount;
-                if (j > i) 
+                if (j > i)
                 {
                     itemList[n].Amount -= item.Amount;
                     OnItemListChanged?.Invoke();
@@ -127,7 +128,7 @@ public class Inventory
                     item.Amount = i - j;
                 }
             }
-            n++; 
+            n++;
         }
         return false;
     }
@@ -144,7 +145,7 @@ public class Inventory
 
     public bool AddToFav(int slot) //retourne un bool qui indique si l'item était déjà dans les favoris ou si les favoris était plein
     {
-        int n = UI_Inventory.nbrFavoris ; //nombre de favoris (4 en général)
+        int n = UI_Inventory.nbrFavoris; //nombre de favoris (4 en général)
 
         //on compte le nombre de true dans favList dans count (donc d'item déjà dans les favoris)
         int count = 0;

@@ -8,9 +8,9 @@ public class GameHandler : MonoBehaviour
 {
     // Arbres
     public GameObject pin;
-    public GameObject connifere;
+    public GameObject douglas;
     public GameObject chene;
-    public GameObject platane;
+    public GameObject hetre;
 
     // Rochers
     public GameObject Rocher1;
@@ -95,9 +95,9 @@ public class GameHandler : MonoBehaviour
 
         // On créé chacune des listes de positions des arbres
         List<Vector3> listePositionsPins = new List<Vector3>();
-        List<Vector3> listePositionsConniferes = new List<Vector3>();
+        List<Vector3> listePositionsDouglas = new List<Vector3>();
         List<Vector3> listePositionsChenes = new List<Vector3>();
-        List<Vector3> listePositionsPlatanes = new List<Vector3>();
+        List<Vector3> listePositionsHetres = new List<Vector3>();
 
         // On parcourt la liste des arbres (sous formes de GO) présent dans le jeu
         // Pour chacun d'entre eux, on créé une objet de la structure arbresJSON pouvant être transformé directement en JSON
@@ -110,11 +110,11 @@ public class GameHandler : MonoBehaviour
             else if (nomArbre.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
                 listePositionsChenes.Add(arbre.transform.position);
 
-            else if (nomArbre.IndexOf("Platane", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsPlatanes.Add(arbre.transform.position);
+            else if (nomArbre.IndexOf("hetre", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsHetres.Add(arbre.transform.position);
 
             else
-                listePositionsConniferes.Add(arbre.transform.position);
+                listePositionsDouglas.Add(arbre.transform.position);
         }
 
         /** ------------------ Sauvegarde des rochers ------------------ **/
@@ -191,9 +191,9 @@ public class GameHandler : MonoBehaviour
 
         // Objet que l'on transformera en JSON
         GameData gameData = new GameData(listePositionsPins,
-                                         listePositionsConniferes,
+                                         listePositionsDouglas,
                                          listePositionsChenes,
-                                         listePositionsPlatanes,
+                                         listePositionsHetres,
                                          listePositionsRochers1,
                                          listePositionsRochers2,
                                          listePositionsRochers3,
@@ -226,14 +226,19 @@ public class GameHandler : MonoBehaviour
         foreach (Vector3 positionOfPin in gameData.listePositionsPins)
             Instantiate(pin, positionOfPin, pin.transform.rotation, dossierArbres);
 
-        foreach (Vector3 positionOfConnifere in gameData.listePositionsConniferes)
-            Instantiate(connifere, positionOfConnifere, connifere.transform.rotation, dossierArbres);
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglas)
+            Instantiate(douglas, positionOfdouglas, douglas.transform.rotation, dossierArbres);
 
-        foreach (Vector3 positionOfPlatane in gameData.listePositionsPlatanes)
-            Instantiate(platane, positionOfPlatane, platane.transform.rotation, dossierArbres);
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetres)
+            Instantiate(hetre, positionOfhetre, hetre.transform.rotation, dossierArbres);
 
         foreach (Vector3 positionOfChene in gameData.listePositionsChenes)
             Instantiate(chene, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        // On fait pas apparaitre les rochers parce qu'ils sont sur la scene pour l'instant
+        // Le script creerait donc un double de chaque a tous les appels
+
+        /*
 
         foreach (Vector3 positionOfRocher1 in gameData.listePositionsRochers1)
             Instantiate(Rocher1, positionOfRocher1, Rocher1.transform.rotation, dossierRochers);
@@ -256,90 +261,100 @@ public class GameHandler : MonoBehaviour
         foreach (Vector3 positionOfRocher7 in gameData.listePositionsRochers7)
             Instantiate(Rocher7, positionOfRocher7, Rocher7.transform.rotation, dossierRochers);
 
-        foreach (KeyValuePair<string, Vector3> kvp in gameData.dictionnaireBatiments)
+        */
+
+        if (gameData.dictionnaireBatiments != null)
         {
-            string nomBat = kvp.Key;
-            Vector3 positionBat = kvp.Value;
-
-            if (nomBat.IndexOf("Boulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(boulangerie, positionBat, boulangerie.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiBoulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiBoulangerie, positionBat, batiBoulangerie.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Chaumière", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(chaumiere, positionBat, chaumiere.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiChaumière", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiChaumiere, positionBat, batiChaumiere.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Cabanon", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(cabanon, positionBat, cabanon.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiCabanon", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiCabanon, positionBat, batiCabanon.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Ferme", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(ferme, positionBat, ferme.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiFerme", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiFerme, positionBat, batiFerme.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Forge", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(forge, positionBat, forge.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("batiForge", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiForge, positionBat, batiForge.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Fosse", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(fosse, positionBat, fosse.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiFosse", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiFosse, positionBat, batiFosse.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("GardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(gardeManger, positionBat, gardeManger.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiGardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiGardeManger, positionBat, batiGardeManger.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("MaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(maisonPierre, positionBat, maisonPierre.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiMaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiMaisonPierre, positionBat, batiMaisonPierre.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("MoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(moulinEau, positionBat, moulinEau.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiMoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiMoulinEau, positionBat, batiMoulinEau.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("MoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(moulinVent, positionBat, moulinVent.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiMoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiMoulinVent, positionBat, batiMoulinVent.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Pecherie", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(pecherie, positionBat, pecherie.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("BatiPecherie", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(batiPecherie, positionBat, batiPecherie.transform.rotation, dossierBatiments);
-
-            else if (nomBat.IndexOf("Puit", StringComparison.OrdinalIgnoreCase) >= 0)
-                Instantiate(puit, positionBat, puit.transform.rotation, dossierBatiments);
-
-            else
+            foreach (KeyValuePair<string, Vector3> kvp in gameData.dictionnaireBatiments)
             {
-                print("Probleme chargement : le batiment " + nomBat + " n'est pas reconnu");
+                string nomBat = kvp.Key;
+                Vector3 positionBat = kvp.Value;
+
+                if (nomBat.IndexOf("Boulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(boulangerie, positionBat, boulangerie.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiBoulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiBoulangerie, positionBat, batiBoulangerie.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Chaumière", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(chaumiere, positionBat, chaumiere.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiChaumière", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiChaumiere, positionBat, batiChaumiere.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Cabanon", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(cabanon, positionBat, cabanon.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiCabanon", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiCabanon, positionBat, batiCabanon.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Ferme", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(ferme, positionBat, ferme.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiFerme", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiFerme, positionBat, batiFerme.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Forge", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(forge, positionBat, forge.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("batiForge", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiForge, positionBat, batiForge.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Fosse", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(fosse, positionBat, fosse.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiFosse", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiFosse, positionBat, batiFosse.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("GardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(gardeManger, positionBat, gardeManger.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiGardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiGardeManger, positionBat, batiGardeManger.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("MaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(maisonPierre, positionBat, maisonPierre.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiMaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiMaisonPierre, positionBat, batiMaisonPierre.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("MoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(moulinEau, positionBat, moulinEau.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiMoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiMoulinEau, positionBat, batiMoulinEau.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("MoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(moulinVent, positionBat, moulinVent.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiMoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiMoulinVent, positionBat, batiMoulinVent.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Pecherie", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(pecherie, positionBat, pecherie.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("BatiPecherie", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(batiPecherie, positionBat, batiPecherie.transform.rotation, dossierBatiments);
+
+                else if (nomBat.IndexOf("Puit", StringComparison.OrdinalIgnoreCase) >= 0)
+                    Instantiate(puit, positionBat, puit.transform.rotation, dossierBatiments);
+
+                else
+                {
+                    print("Probleme chargement : le batiment " + nomBat + " n'est pas reconnu");
+                }
             }
         }
 
-        // Demarrage de l'inventaire        
-        inventory = new Inventory(gameData.listeItems, gameData.listeFavoris, player);
+        // Demarrage de l'inventaire
+        player.createInventory(gameData.listeItems, gameData.listeFavoris);
+        inventory = player.inventory;
+        
+        /*
         uiInventory = GameObject.Find("Inventaire2").transform.GetChild(0).gameObject.GetComponent<UI_Inventory>();
+        inventory = new Inventory(gameData.listeItems, gameData.listeFavoris, player);
         uiInventory.SetInventory(inventory);
+        */
     }
 }
 

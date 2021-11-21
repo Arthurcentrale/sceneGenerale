@@ -9,8 +9,19 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //inventory = Inventory.CreateInstance(new List<ItemAmount>());
-        inventory = new Inventory(new List<ItemAmount>(), new List<bool>(),this);
+        // ------------------------------------------------------------------------- //
+
+        // L'inventaire est maintenant initialisé sur le GameHandler pour avoir      //
+        // à la sauvegarde
+
+        // ------------------------------------------------------------------------- //
+        
+        //inventory = Inventory.CreateInstance(new List<ItemAmount>());              
+    }
+
+    public void createInventory(List<ItemAmount> listeItems, List<bool> listeFavoris)        
+    {
+        inventory = new Inventory(listeItems, listeFavoris, this);
         uiInventory = GameObject.Find("Inventaire2").transform.GetChild(0).gameObject.GetComponent<UI_Inventory>();
         uiInventory.SetInventory(inventory);
     }

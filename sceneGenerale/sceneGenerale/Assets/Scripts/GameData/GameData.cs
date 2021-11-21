@@ -5,9 +5,9 @@ using UnityEngine;
 public class GameData
 {
     public List<Vector3> listePositionsChenes;
-    public List<Vector3> listePositionsPlatanes;
+    public List<Vector3> listePositionsHetres;
     public List<Vector3> listePositionsPins;
-    public List<Vector3> listePositionsConniferes;
+    public List<Vector3> listePositionsDouglas;
 
     public List<Vector3> listePositionsRochers1;
     public List<Vector3> listePositionsRochers2;
@@ -26,8 +26,8 @@ public class GameData
     {
         this.listePositionsChenes = LPCH;
         this.listePositionsPins = LPP;
-        this.listePositionsPlatanes = LPPL;
-        this.listePositionsConniferes = LPC;
+        this.listePositionsHetres = LPPL;
+        this.listePositionsDouglas = LPC;
 
         this.listePositionsRochers1 = LR1;
         this.listePositionsRochers1 = LR2;

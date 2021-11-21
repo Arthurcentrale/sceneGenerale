@@ -54,7 +54,7 @@ public class scriptRepousse : MonoBehaviour
             //******************************************************************************************************************************//
 
             // On stocke tous les Arbres du terrain dans une liste
-            GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
+            GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");                        
 
             // On compte combien il y en a
             nbArbresSurTerrain = ListeGO.Length;
@@ -92,10 +92,7 @@ public class scriptRepousse : MonoBehaviour
             return x;
         }
     }
-
-
-
-
+    
 
 
 
