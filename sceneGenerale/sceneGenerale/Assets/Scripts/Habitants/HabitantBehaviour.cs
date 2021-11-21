@@ -93,6 +93,12 @@ public class HabitantBehaviour : MonoBehaviour
             ecoLevel = 5;
         }
     }
+
+    public void Requierements()
+    {
+        //Afficher la bonne animation et panel selon ce qu'il manque pour que l'habitant se mette à travailler
+        Debug.Log(isHoused & hasWorkplace);
+    }
 }
 
 public class Bucheron : HabitantBehaviour

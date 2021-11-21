@@ -56,7 +56,9 @@ public class Chaumiere : MonoBehaviour
 
     void AttribuerChaumiere()
     {
-
+        //Retrouver l'habitant lié grace à son rang dans la liste habitantsansmaison
+        //habitantsansmaison[i].isHoused = true
+        //Ajouter à la consommation générale
     }
     public void ClickOnPanel()
     {
