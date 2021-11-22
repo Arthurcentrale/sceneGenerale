@@ -13,15 +13,20 @@ public class Chaumiere : MonoBehaviour
     bool onPanel;
     Vector2 mP;
     new public Camera camera;
-
-
+    public bool isEmpty;
+    private Animator animator;
+    GameObject listehabitants;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        /*listehabitants = GameObject.Find("listehabitants");
+        Debug.Log(listehabitants.transform.childCount);*/
+        isEmpty = true;
         onPanel = false;
         open = false;
+        animator = panel.transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,13 +46,26 @@ public class Chaumiere : MonoBehaviour
 
             if (open == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
             {
-                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Chaumiere"))
+                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Chaumière"))
                 {
                     cible = Hit.transform.gameObject;
-                    habitantsSansMaison = TrouverHabitantSansMaison();
+                    //habitantsSansMaison = TrouverHabitantSansMaison();
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
-                    panel.gameObject.SetActive(true);
-                    open = true;
+                    if (isEmpty)
+                    {
+                        panel.gameObject.SetActive(true);
+                        animator.SetTrigger("ouverture1BulleCouper");
+                        open = true;
+                    }
+                    else
+                    {
+
+
+                        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        panel.gameObject.SetActive(true);
+                        animator.SetTrigger("ouverture1BulleCouper");
+                        open = true;
+                    }
                 }
 
             }
@@ -56,9 +74,7 @@ public class Chaumiere : MonoBehaviour
 
     void AttribuerChaumiere()
     {
-        //Retrouver l'habitant lié grace à son rang dans la liste habitantsansmaison
-        //habitantsansmaison[i].isHoused = true
-        //Ajouter à la consommation générale
+        isEmpty = false;
     }
     public void ClickOnPanel()
     {
