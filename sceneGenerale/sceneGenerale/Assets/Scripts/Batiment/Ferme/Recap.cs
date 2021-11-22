@@ -48,4 +48,9 @@ public class Recap : MonoBehaviour
     {
         panelRecap.gameObject.SetActive(true);
     }
+
+    public void FermetureMenuRecap()
+    {
+        panelRecap.gameObject.SetActive(false);
+    }
 }

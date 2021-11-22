@@ -37,7 +37,7 @@ public class Labourage : MonoBehaviour
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
 
-        nbreParcellesPlacables = 5;
+        nbreParcellesPlacables = 40;
 
         parcellesLabourees = new bool[xNbrParcelles, yNbrParcelles];
         parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
@@ -144,11 +144,11 @@ public class Labourage : MonoBehaviour
                 {
                     (X, Y) = (i * sizeParcelle.x, j * sizeParcelle.z);
                 }
-                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles + sizeFerme.y / sizeParcelle.z) / 2))  //tester de mettres des - à la place des plus
+                else if ((i > (xNbrParcelles /*+*/- sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles /*+*/- sizeFerme.y / sizeParcelle.z) / 2))  //tester de mettres des - à la place des +
                 {
                     (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z + sizeFerme.y);
                 }
-                else if ((i > (xNbrParcelles + sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
+                else if ((i > (xNbrParcelles /*+*/- sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
                 {
                     (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z);
                 }

@@ -8,9 +8,11 @@ public class Planter : MonoBehaviour
 {
     private Camera MainCamera;
 
-    public static int capaciteTravail;
-    private int capaciteTravailUtilisee;
-    public static int culture;    //nombre de culture dispo pour le jouer (pas encore implémenté)
+    //Variables récupérées dans Agri.cs
+    private int xNbrParcelles;
+    private int yNbrParcelles;
+
+    //------QUANTITES NOURRITURE------//
 
     //types de cultures que l'on fait correspondre aux quantitées de nourriture qu'ils génèrent
     enum Culture
@@ -22,6 +24,13 @@ public class Planter : MonoBehaviour
         Raisin = 5
     }
 
+    public int[] arrayQN_max = new int[] { 0, 2, 4, 5, 7, 7 };
+
+    //------CAPACITE DE TRAVAIL------//
+
+    public static int capaciteTravail;
+    private int capaciteTravailUtilisee;
+
     //capacités de travail demandées par types de cultures
     public const int bleCT = 10;
     public const int maisCT = 12;
@@ -31,19 +40,15 @@ public class Planter : MonoBehaviour
 
     //array qui contient les capacités de travail demandés par les cultures, puis les quantités de nourritures produites avec engrais
     public int[] arrayCT = new int[] { 10, 12, 15, 17, 20, 20, 0};   //on met un 0 à la fin pour que quand planteSelectionee == -1, ça update la CT de 0 en appellant arrayCT[-1]
-    public int[] arrayQN_max = new int[] { 0, 2, 4, 5, 7, 7 };
 
+    //------------CULTURES------------//
+
+    public static int culture;    //nombre de culture dispo pour le jouer (pas encore implémenté)
     public int[,] cultureParcelles;    //array qui contient les numéros (correspondant à un enum de Culture et à la quantité de nourriture générée par cette culture) de chaque culture présente sur chaque parcdelle
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
+    private int planteSelectionnee;  //de base aucune, donc -1
     public GameObject[,] arrayPrefabsPlantes;  //array qui contient les prefabs des plantes qui sont instanciées pour pouvoir les enlever
-    public int[,] engraisParcelles;     //array qui contient le nombre de jours restants durant lesquels un engrais va continuer à agir, la valeur est donc à 0 par defaut
-    public static bool modeEngrais;    //bool qui indique si on est dans le menu engrais ou dans le menu plantage
-    public int engraisSelectionne;  //0 pour le chimique et 1 pour le naturel
-
-    //on récupère ces variables dans Agri
-    private int xNbrParcelles;
-    private int yNbrParcelles;
-
+    
     //prefab des images que l'on va afficher sur les parcelles
     public GameObject blePf;
     public GameObject maisPf;
@@ -56,39 +61,44 @@ public class Planter : MonoBehaviour
     public Transform fermeTransform;   //Transform de la ferme
     private Vector3 sizeParcelle;      //taille des prefabs des parcelles
 
-    public int engraisDispo;         //nombre d'engrais naturels
-    private int planteSelectionnee;  //de base aucune, donc -1
+    public GameObject panelPlantage;
     public Slider slider;
 
-    public GameObject panelPlantage;
+    //------ENGRAIS------//
+
+    public int[,] engraisParcelles;     //array qui contient le nombre de jours restants durant lesquels un engrais va continuer à agir, la valeur est donc à 0 par defaut
+    public static bool modeEngrais;    //bool qui indique si on est dans le menu engrais ou dans le menu plantage
+    public int engraisSelectionne;  //0 pour le chimique et 1 pour le naturel
+    public int engraisDispo;         //nombre d'engrais naturels
+
     public GameObject panelEngrais;
     public Text textNombreEngraisNaturel;
+
+
 
     void Start()
     {
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
-
-        capaciteTravail = 50;
-        capaciteTravailUtilisee = 0;
-        culture = 1;
-
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
 
+        capaciteTravail = 50;
+        capaciteTravailUtilisee = 0;
+
+        culture = 1;
         //initialisation de cultureParcelles
         cultureParcelles = new int[xNbrParcelles, yNbrParcelles];
         for (int i = 0; i < xNbrParcelles * yNbrParcelles; i++) cultureParcelles[i % xNbrParcelles, i / xNbrParcelles] = -1;
-        arrayPrefabsPlantes = new GameObject[xNbrParcelles, yNbrParcelles];
-        engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
-
-        engraisDispo = 5;
         planteSelectionnee = -1;
+        arrayPrefabsPlantes = new GameObject[xNbrParcelles, yNbrParcelles];
 
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
         planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
 
+        engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
+        engraisDispo = 5;
     }
 
     void Update()
@@ -96,7 +106,7 @@ public class Planter : MonoBehaviour
         slider.maxValue = capaciteTravail;
         slider.value = capaciteTravailUtilisee;
 
-        //On cherche à savoir si le joueur clique sur une parcelle (on pourrait remplacer tout ça par des fonctions trigger lorsqu'on touche les colliders des parcelles ou cultures)
+        //On cherche à savoir si le joueur clique sur une parcelle
         // (faudra bien si on a plus de 10x10 parcelles)
         if (Input.GetMouseButtonDown(0))
         {
@@ -368,7 +378,7 @@ public class Planter : MonoBehaviour
     public void SortiePlantage()  //bouton vert
     {
         int[] nbrePlantes = CalculeNbrePlantes();
-        //Recap.MajMenuRecap(Labourage.nbreParcellesPlacees, Labourage.nbreParcellesPlacables, capaciteTravailUtilisee, capaciteTravail, nbrePlantes[0], nbrePlantes[1], nbrePlantes[2], nbrePlantes[3], nbrePlantes[5]);
+        this.GetComponent<Recap>().MajMenuRecap(Labourage.nbreParcellesPlacees, Labourage.nbreParcellesPlacables, capaciteTravailUtilisee, capaciteTravail, nbrePlantes[0], nbrePlantes[1], nbrePlantes[2], nbrePlantes[3], nbrePlantes[5]);
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
     }
