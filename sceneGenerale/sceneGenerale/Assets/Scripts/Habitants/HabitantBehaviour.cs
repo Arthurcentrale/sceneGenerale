@@ -15,7 +15,7 @@ public class HabitantBehaviour : MonoBehaviour
     public Sprite image;
 
     //besoins et déchets
-    public float foodQuantity;
+    public int foodQuantity;
     public float foodVariety;
     public float waste;
 
