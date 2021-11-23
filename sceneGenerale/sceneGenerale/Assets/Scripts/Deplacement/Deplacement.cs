@@ -100,7 +100,7 @@ public class Deplacement : MonoBehaviour
         if (animator.GetFloat("Speed") != 0)
         {
             print("testspeed non nul");
-            //animator.SetFloat("Horizontal", c);
+            animator.SetFloat("Horizontal", c);
         }
         
         if (animator.GetFloat("Speed") == 0)
