@@ -43,15 +43,18 @@ public class Labourage : MonoBehaviour
         parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
 
         //on a la ferme à la place de la parcelle du milieu et on la considere comme une parcelle labourée
-        //Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
+        Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
 
         //On place parcelleContainer à l'origine de l'endroit à partir duquel seront placées les parcelles
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
         sizeFerme = fermeTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().size;
-        parcelleContainer.position = fermeTransform.position - (new Vector3((sizeParcelle.x * xNbrParcelles / 2) - sizeFerme.x, 4.40f, (sizeParcelle.z * yNbrParcelles / 2) - sizeFerme.y));
+        //parcelleContainer.position = fermeTransform.position - (new Vector3((sizeParcelle.x * xNbrParcelles / 2) - sizeFerme.x, 4.40f, (sizeParcelle.z * yNbrParcelles / 2) - sizeFerme.y));
+        parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 4.40f, sizeParcelle.z * (yNbrParcelles - 1) / 2));
 
-        parcellesAdjacentes[(int)(xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2 - 1, (int)(yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2] = true;
+        //parcellesAdjacentes[(int)(xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2 - 1, (int)(yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2] = true;
+        //parcellesAdjacentes[(xNbrParcelles - 1) / 2 - 1, (yNbrParcelles - 1) / 2] = true;
+
         MajPrefabsLabourage();
     }
 
@@ -117,7 +120,7 @@ public class Labourage : MonoBehaviour
         }
         //Puis on affiche les nouvelles
         GameObject parc;
-        /*
+
         for (int i=0; i<xNbrParcelles; i++)
         {
             for (int j = 0; j< yNbrParcelles; j++)
@@ -134,7 +137,8 @@ public class Labourage : MonoBehaviour
                 }
             }
         }
-        */
+
+        /*
         float X, Y;
         for (int i = 0; i < xNbrParcelles; i++)
         {
@@ -144,11 +148,11 @@ public class Labourage : MonoBehaviour
                 {
                     (X, Y) = (i * sizeParcelle.x, j * sizeParcelle.z);
                 }
-                else if ((i > (xNbrParcelles /*+*/- sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles /*+*/- sizeFerme.y / sizeParcelle.z) / 2))  //tester de mettres des - à la place des +
+                else if ((i > (xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))  
                 {
                     (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z + sizeFerme.y);
                 }
-                else if ((i > (xNbrParcelles /*+*/- sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
+                else if ((i > (xNbrParcelles - sizeFerme.x / sizeParcelle.x) / 2) && (j > (yNbrParcelles - sizeFerme.y / sizeParcelle.z) / 2))
                 {
                     (X, Y) = (i * sizeParcelle.x + sizeFerme.x, j * sizeParcelle.z);
                 }
@@ -169,6 +173,7 @@ public class Labourage : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public void SortieLabourageAvecValidation()    //bouton vert
