@@ -132,9 +132,9 @@ public class UI_Inventory : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
 
-        //BouttonOuvertureGO.SetActive(false);
-        animator.SetTrigger("fermerBouton");
-        //favSlotContainerDepliement.gameObject.SetActive(false);
+        BouttonOuvertureGO.SetActive(false);
+        //animator.SetTrigger("fermerBouton");
+        favSlotContainerDepliement.gameObject.SetActive(false);
         Background.SetActive(true);
         stadeAffichage += 1;
         
@@ -146,9 +146,9 @@ public class UI_Inventory : MonoBehaviour
         audioSource.PlayOneShot(fermeture,0.2f);
         stadeAffichage = 0;
         Background.SetActive(false);
-        //BouttonOuvertureGO.SetActive(true);
-        //favSlotContainerDepliement.gameObject.SetActive(true);
-        animator.SetTrigger("ouvrirBouton");
+        BouttonOuvertureGO.SetActive(true);
+        favSlotContainerDepliement.gameObject.SetActive(true);
+        //animator.SetTrigger("ouvrirBouton");
         Deplacement.enMenu = false;
     }
 
