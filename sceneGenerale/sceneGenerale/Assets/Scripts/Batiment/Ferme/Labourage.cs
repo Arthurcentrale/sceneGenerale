@@ -29,6 +29,7 @@ public class Labourage : MonoBehaviour
     public Transform parcelleContainer;   //Gameobject qui contient les instances des parcelles
 
     public GameObject panelLabourage;
+    private Text nbreParcelles;
 
     public void Start()
     {
@@ -38,6 +39,8 @@ public class Labourage : MonoBehaviour
         yNbrParcelles = Agri.yNbrParcelles;
 
         nbreParcellesPlacables = 40;
+
+        nbreParcelles = panelLabourage.transform.GetChild(0).gameObject.GetComponent<Text>();
 
         parcellesLabourees = new bool[xNbrParcelles, yNbrParcelles];
         parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
@@ -107,6 +110,8 @@ public class Labourage : MonoBehaviour
             MajPrefabsLabourage();
 
             GameManager.environnementManager.qualiteSol -= 0.2f;
+
+            nbreParcelles.text = nbreParcellesPlacees.ToString() + "/" + nbreParcellesPlacables.ToString();
         }
         else Debug.Log("Le nombre max de parcelles a été atteint pour le moment");
     }
