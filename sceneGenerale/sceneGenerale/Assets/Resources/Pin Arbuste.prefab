@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3260272815760836371}
   m_Layer: 0
   m_Name: Pin Arbuste
-  m_TagString: Untagged
+  m_TagString: Arbre
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,6 +195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pin_arbustre
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462284412157570565, guid: a8ccd75995409cc4dbce29a3aa1553fd,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 3397439653949965640, guid: a8ccd75995409cc4dbce29a3aa1553fd,

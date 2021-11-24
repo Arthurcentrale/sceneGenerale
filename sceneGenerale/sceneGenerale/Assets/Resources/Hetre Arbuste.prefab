@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8033496271741785260}
   m_Layer: 0
   m_Name: Hetre Arbuste
-  m_TagString: Untagged
+  m_TagString: Arbre
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,6 +195,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: hetre_arbustre
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266036489102881872, guid: f81f3ed4e7063f3468b4a57a9d24a201,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -3257675949065623309, guid: f81f3ed4e7063f3468b4a57a9d24a201,

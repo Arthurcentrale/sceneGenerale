@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1839909031823569353}
   m_Layer: 0
   m_Name: Douglas Arbuste
-  m_TagString: Untagged
+  m_TagString: Arbre
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +125,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: douglas_arbustre
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518109069858894058, guid: 3b58517a9f390b042ad18b1a76c646cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 7050207994321501230, guid: 3b58517a9f390b042ad18b1a76c646cf,
         type: 3}
