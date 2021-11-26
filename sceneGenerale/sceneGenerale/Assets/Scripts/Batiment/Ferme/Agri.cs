@@ -13,6 +13,7 @@ public class Agri : MonoBehaviour
 
     public GameObject panelLabourage;
     public GameObject panelPlantage;
+    public GameObject panelEngrais;
 
     void Start()
     {
@@ -59,5 +60,13 @@ public class Agri : MonoBehaviour
         Planter plan = GameObject.Find("Ferme").GetComponent<Planter>();
         panelPlantage.SetActive(true);
         plan.enabled = true;
+    }
+
+    public void EntreeEngrais()
+    {
+        Planter plan = GameObject.Find("Ferme").GetComponent<Planter>();
+        panelEngrais.SetActive(true);
+        plan.enabled = true;
+        Planter.modeEngrais = true;
     }
 }

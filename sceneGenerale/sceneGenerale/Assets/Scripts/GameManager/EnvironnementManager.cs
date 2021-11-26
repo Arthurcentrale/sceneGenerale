@@ -6,9 +6,9 @@ public class EnvironnementManager
 {
     public int qualiteAir { get; set; }
     public float qualiteEau { get; set; }
-    public int qualiteSol { get; set; }
+    public float qualiteSol { get; set; }
 
-    public EnvironnementManager(int air, float eau, int sol)
+    public EnvironnementManager(int air, float eau, float sol)
     {
         this.qualiteAir = air;
         this.qualiteEau = eau;
