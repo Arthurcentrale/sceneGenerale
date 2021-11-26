@@ -122,7 +122,7 @@ public class Planter : MonoBehaviour
             {
                 GameObject objetTouche = hit.transform.gameObject;
 
-                if (objetTouche.name.Length == 10)  //c'est l'indication que c'est une parcelle labourée finale, donc on peut planter une culture dessus
+                if (objetTouche.tag == "Parcelle")  //c'est l'indication que c'est une parcelle labourée finale, donc on peut planter une culture dessus
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
@@ -150,6 +150,10 @@ public class Planter : MonoBehaviour
                             EnleverCulture(i, j);
                         }
                     }
+                }
+                else if (objetTouche.tag == "Plante")  //si on touche une culture
+                {
+
                 }
             }
         }

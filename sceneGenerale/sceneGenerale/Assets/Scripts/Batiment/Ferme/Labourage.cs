@@ -42,11 +42,7 @@ public class Labourage : MonoBehaviour
 
         nbreParcelles = panelLabourage.transform.GetChild(0).gameObject.GetComponent<Text>();
 
-        parcellesLabourees = new bool[xNbrParcelles, yNbrParcelles];
-        parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
-
-        //on a la ferme à la place de la parcelle du milieu et on la considere comme une parcelle labourée
-        Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
+        InitialiseParcelles();
 
         //On place parcelleContainer à l'origine de l'endroit à partir duquel seront placées les parcelles
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
@@ -61,7 +57,7 @@ public class Labourage : MonoBehaviour
         MajPrefabsLabourage();
     }
 
-    public void Update()
+    void Update()
     {
         //On cherche à savoir si le joueur clique sur une parcelle non-labourée
         if (Input.GetMouseButtonDown(0))
@@ -78,14 +74,29 @@ public class Labourage : MonoBehaviour
             {
                 GameObject objetTouche = hit.transform.gameObject;
 
-                if (objetTouche.name.Length == 2)  //c'est l'indication que c'est une parcelle bleue, donc on la laboure    //if(hit.collider.tag == "Parcelle"
+                if (objetTouche.tag == "ParcelleBleue")  //c'est l'indication que c'est une parcelle bleue, donc on la laboure
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
                     Labourer(i, j);
                 }
+                else if (objetTouche.tag = "ParcelleVerte") //c'est une parcelle verte donc on la déselectionne
+                {
+                    int i = ToInt(objetTouche.name[0]);
+                    int j = ToInt(objetTouche.name[1]);
+                    Delabourer(i, j);
+                }
             }
         }
+    }
+
+    private void InitialiseParcelles() //permet d'initialiser les tableaux de parcelles, dans Start() ou quand on ferme le menu sans valider
+    {
+        parcellesLabourees = new bool[xNbrParcelles, yNbrParcelles];
+        parcellesAdjacentes = new bool[xNbrParcelles, yNbrParcelles];
+
+        //on a la ferme à la place de la parcelle du milieu et on la considere comme une parcelle labourée
+        Labourer((xNbrParcelles - 1) / 2, (yNbrParcelles - 1) / 2);
     }
 
     private int ToInt(char c)
@@ -93,7 +104,7 @@ public class Labourage : MonoBehaviour
         return (int)(c - '0');
     }
 
-    public void Labourer(int x, int y) //on laboure une des parcelles
+    private void Labourer(int x, int y) //on laboure une des parcelles
     {
         if (nbreParcellesPlacees < nbreParcellesPlacables)
         {
@@ -116,6 +127,32 @@ public class Labourage : MonoBehaviour
         else Debug.Log("Le nombre max de parcelles a été atteint pour le moment");
     }
 
+    private void Delabourer(int x, int y)
+    {
+        nbreParcellesPlacees -= 1;
+
+        parcellesLabourees[x, y] = false;
+
+        //Pour toutes les parcelles adjacentes autour, on va regarder si elle sont adjacentes avec une autre parcelle labourée pour voir si on les garde
+        if ((x > 0) && !CheckParcelleLaboureeAdjacente(x - 1, y)) parcellesAdjacentes[x - 1, y] = false;
+        if ((x < xNbrParcelles - 1) && !CheckParcelleLaboureeAdjacente(x + 1, y)) parcellesAdjacentes[x + 1, y] = false;
+        if ((y > 0) && !CheckParcelleLaboureeAdjacente(x, y - 1)) parcellesAdjacentes[x, y - 1] = false;
+        if ((y < yNbrParcelles - 1) && !CheckParcelleLaboureeAdjacente(x, y + 1)) parcellesAdjacentes[x, y + 1] = false;
+
+
+        MajPrefabsLabourage();
+        nbreParcelles.text = nbreParcellesPlacees.ToString() + "/" + nbreParcellesPlacables.ToString();
+    }
+
+    private bool CheckParcelleLaboureeAdjacente(int x, int y)  //Pour une parcelle adjacente, on regarde si on a bien une parcelle labouree autour pour voir si on la garde
+    {
+        if ((x > 0) && parcellesLabourees[x - 1, y]) return true;
+        else if ((x < xNbrParcelles - 1) && parcellesLabourees[x + 1, y]) return true;
+        else if ((y > 0) && parcellesLabourees[x, y - 1]) return true;
+        else if ((y < yNbrParcelles - 1) && parcellesLabourees[x, y + 1]) return true;
+        else return false;
+    }
+
     public void MajPrefabsLabourage()
     {
         //On détruit d'abord les anciennes parcelles dns parcelleContainer
@@ -133,7 +170,7 @@ public class Labourage : MonoBehaviour
                 if (parcellesAdjacentes[i, j])
                 {
                     parc = (GameObject) Instantiate(zoneBleuePf, parcelleContainer.position + new Vector3(i * sizeParcelle.x, 0f, j * sizeParcelle.z), Quaternion.identity, parcelleContainer);
-                    parc.name = i.ToString() + j.ToString();
+                    parc.name = i.ToString() + j.ToString() + "bleue";
                 }
                 if (parcellesLabourees[i, j])
                 {
@@ -208,11 +245,13 @@ public class Labourage : MonoBehaviour
 
     public void SortieLabourageSansValidation()     //bouton rouge
     {
-        //On détruit toutes les parcelles
+        //On détruit toutes les prefabs de parcelles
         foreach (Transform child in parcelleContainer)
         {
             Destroy(child.gameObject);
         }
+        //Reset des tableaux parcelles
+        InitialiseParcelles();
         //Puis on cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
