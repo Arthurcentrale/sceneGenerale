@@ -80,7 +80,7 @@ public class Labourage : MonoBehaviour
                     int j = ToInt(objetTouche.name[1]);
                     Labourer(i, j);
                 }
-                else if (objetTouche.tag = "ParcelleVerte") //c'est une parcelle verte donc on la déselectionne
+                else if (objetTouche.tag == "ParcelleVerte") //c'est une parcelle verte donc on la déselectionne
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
