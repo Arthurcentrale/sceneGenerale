@@ -26,7 +26,7 @@ public class Recolte : MonoBehaviour
     public UI_Inventory ui_inventory;//script de l'inventaire
     Ray R; //raycast 
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
-    public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
+    public Item boisR,boisF, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
@@ -116,10 +116,10 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
                         {
-                            if (NbrPlace(bois) > 0) // a changer lorsque l'inventaire sera fonctionnelle
+                            if (NbrPlace(boisR) > 0) // a changer lorsque l'inventaire sera fonctionnelle
                             {
                                 Destroy(hit.transform.gameObject);
-                                AjouterInventaire(bois, 1); // à changer lorsque l'inventaire sera terminé
+                                AjouterInventaire(boisR, 1); // à changer lorsque l'inventaire sera terminé
                             }
                         }
 
@@ -261,56 +261,43 @@ public class Recolte : MonoBehaviour
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
         audioSource.PlayOneShot(treeChop);
+        if(cible.transform.name == "Chene")
+        {
+            AjouterInventaire(boisR,4);
+            AjouterInventaire(boisF,3);
+            //Instantiate(Souchechene, cible.transform.position);
+
+        }
+        if (cible.transform.name == "Hetre")
+        {
+            AjouterInventaire(boisR, 3);
+            AjouterInventaire(boisF, 3);
+            //Instantiate(Souchehetre, cible.transform.position);
+
+        }
+        if (cible.transform.name == "PinMaritime")
+        {
+            AjouterInventaire(boisR, 4);
+            AjouterInventaire(boisF, 1);
+            //Instantiate(Souchepinm, cible.transform.position);
+
+        }
+        if (cible.transform.name == "Douglas")
+        {
+            AjouterInventaire(boisR, 1);
+            AjouterInventaire(boisF, 4);
+            //Instantiate(Souchedouglas, cible.transform.position);
+
+        }
+        if (cible.transform.name == "Bouleau")
+        {
+            AjouterInventaire(boisF, 5);
+            //Instantiate(Souchebouleau, cible.transform.position);
+
+        }
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;
-        float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
-        if (0 <= x && x < 0.25) //3 spawns
-        {
-            if (NbrPlace(bois) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
-            {
-                AjouterInventaire(bois, 3);
-            }
-            else //sinon, on remplit l'inventaire et le reste va par terre
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 3 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
-                }
-            }
-
-        }
-        else if (0.25 <= x && x < 0.75) // 4 spawns
-        {
-            if (NbrPlace(bois) >= 4)
-            {
-                AjouterInventaire(bois, 4);
-            }
-            else
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 4 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0,0, 0));
-                }
-            }
-        }
-
-        else
-        {
-            if (NbrPlace(bois) >= 5) // 5 spawns
-            {
-                AjouterInventaire(bois, 5);
-            }
-            else
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 5 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
-                }
-            }
-        }
+        
     }
     private void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
