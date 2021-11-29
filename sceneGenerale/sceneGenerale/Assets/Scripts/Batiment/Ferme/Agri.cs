@@ -15,10 +15,14 @@ public class Agri : MonoBehaviour
     public GameObject panelPlantage;
     public GameObject panelEngrais;
 
+    private Animator animatorLivreActivite;
+
     void Start()
     {
         xNbrParcelles = 7;
         yNbrParcelles = 5;
+
+        animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
     }
 
     public void MajNiveau()
@@ -53,6 +57,8 @@ public class Agri : MonoBehaviour
         panelLabourage.SetActive(true);
         lab.enabled = true;
         lab.MajPrefabsLabourage();
+
+        animatorLivreActivite.SetTrigger("Selected");
     }
 
     public void EntreePlantage()
@@ -60,6 +66,8 @@ public class Agri : MonoBehaviour
         Planter plan = GameObject.Find("Ferme").GetComponent<Planter>();
         panelPlantage.SetActive(true);
         plan.enabled = true;
+
+        animatorLivreActivite.SetTrigger("Selected");
     }
 
     public void EntreeEngrais()
@@ -68,5 +76,7 @@ public class Agri : MonoBehaviour
         panelEngrais.SetActive(true);
         plan.enabled = true;
         Planter.modeEngrais = true;
+
+        animatorLivreActivite.SetTrigger("Selected");
     }
 }

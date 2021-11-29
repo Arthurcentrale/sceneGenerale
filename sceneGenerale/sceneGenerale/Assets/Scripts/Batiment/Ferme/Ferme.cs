@@ -12,6 +12,7 @@ public class Ferme : MonoBehaviour
     Vector2 mP;
     new public Camera camera;
     private Animator animator;
+    private Animator livreActivite;
 
     //Gestion Bouffe
     public bool isOccupied;
@@ -31,6 +32,7 @@ public class Ferme : MonoBehaviour
         isOccupied = false;
         textBlé.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
+        livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
     }
 
     // Update is called once per frame

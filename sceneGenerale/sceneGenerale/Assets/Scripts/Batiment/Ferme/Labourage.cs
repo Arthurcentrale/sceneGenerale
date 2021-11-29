@@ -14,7 +14,7 @@ public class Labourage : MonoBehaviour
 
     public Transform fermeTransform;       //Transform de la ferme
     private Vector2 sizeFerme;             //Sa taille
-
+    private Animator animatorLivreActivite;
 
     //on récupère ces variables dans Agri
     private int xNbrParcelles;
@@ -33,6 +33,8 @@ public class Labourage : MonoBehaviour
 
     public void Start()
     {
+        animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
+
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
 
         xNbrParcelles = Agri.xNbrParcelles;
@@ -220,6 +222,8 @@ public class Labourage : MonoBehaviour
 
     public void SortieLabourageAvecValidation()    //bouton vert
     {
+
+        animatorLivreActivite.SetTrigger("Return");
         //On détruit d'abord les anciennes parcelles dans parcelleContainer
         foreach (Transform child in parcelleContainer)
         {
@@ -241,10 +245,13 @@ public class Labourage : MonoBehaviour
         //On cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
+
     }
 
     public void SortieLabourageSansValidation()     //bouton rouge
     {
+
+        animatorLivreActivite.SetTrigger("Return");
         //On détruit toutes les prefabs de parcelles
         foreach (Transform child in parcelleContainer)
         {
@@ -255,5 +262,6 @@ public class Labourage : MonoBehaviour
         //Puis on cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
+
     }
 }

@@ -8,6 +8,8 @@ public class Planter : MonoBehaviour
 {
     private Camera MainCamera;
 
+    private Animator animatorLivreActivite;
+
     //Variables récupérées dans Agri.cs
     private int xNbrParcelles;
     private int yNbrParcelles;
@@ -78,6 +80,7 @@ public class Planter : MonoBehaviour
 
     void Start()
     {
+        animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
@@ -385,6 +388,7 @@ public class Planter : MonoBehaviour
         this.GetComponent<Recap>().MajMenuRecap(Labourage.nbreParcellesPlacees, Labourage.nbreParcellesPlacables, capaciteTravailUtilisee, capaciteTravail, nbrePlantes[0], nbrePlantes[1], nbrePlantes[2], nbrePlantes[3], nbrePlantes[5]);
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
+        animatorLivreActivite.SetTrigger("Return");
     }
 
     public void SortieEngrais()  //bouton vert
@@ -392,5 +396,6 @@ public class Planter : MonoBehaviour
         panelEngrais.SetActive(false);
         modeEngrais = false;
         this.GetComponent<Planter>().enabled = false;
+        animatorLivreActivite.SetTrigger("Return");
     }
 }
