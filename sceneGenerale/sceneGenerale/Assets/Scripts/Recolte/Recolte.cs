@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Recolte : MonoBehaviour
 {
@@ -16,17 +17,18 @@ public class Recolte : MonoBehaviour
     public bool IsCraftRoche; //same
     public bool IsCraftFleur;
     private bool onPanel;//same
-    public GameObject FondA, FondR, FondF; //panel à activer pour la récolte
+    public GameObject FondA, FondR, FondF,menuinfo; //panel à activer pour la récolte
     public Button buttonA1, buttonA2, buttonA3; // boutons sur la panel pour l'arbre
     public Button buttonR1, buttonR2, buttonR3; // boutons pour roche
-    public Button buttonF1, buttonF2, buttonF3; // boutons pour fleurs
+    public Button buttonF1, buttonF2, buttonF3;
+    public Button buttonInfo,buttonQuitter;// boutons pour fleurs
     private Sprite boutonInfo; //pour l'anim
     RaycastHit cible; //pour cibler un gameobject
     public Inventaire inventaire;
     public UI_Inventory ui_inventory;//script de l'inventaire
     Ray R; //raycast 
     private Rect rect; //pour verifier si un clic est dans le menu ( eviter les deplacements si un menu est ouvert)
-    public Item bois, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
+    public Item boisR,boisF, rocher, fleurs;// pour faire spawn les objets lors de la destruction de leurs parents
     Vector2 mP;
     float height, width;
     new public Camera camera;//longueur et largerur des menus de récolte
@@ -34,11 +36,13 @@ public class Recolte : MonoBehaviour
     public Player player;
     private Animator animatorA,animatorR,animatorF;
 
+    public List<Item> itemlist;
+    public List<GameObject> prefablist;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
         onPanel = false ;
         inventaire = inventaire.GetComponent<Inventaire>();
         ui_inventory = ui_inventory.GetComponent<UI_Inventory>() ;
@@ -57,6 +61,12 @@ public class Recolte : MonoBehaviour
         buttonR1.onClick.AddListener(SpawnRoche);//Bouton miner
         buttonR2 = buttonR2.GetComponent<Button>(); //bordereau miner
         buttonR2.onClick.AddListener(SpawnRoche); // bordereau miner
+        buttonInfo = buttonInfo.GetComponent<Button>();
+        buttonInfo.onClick.AddListener(FctInfo);
+        buttonQuitter = buttonQuitter.GetComponent<Button>();
+        buttonQuitter.onClick.AddListener(quitter);
+
+
         height = FondA.GetComponent<RectTransform>().rect.height ;
         width = FondA.GetComponent<RectTransform>().rect.width;
         player = this.GetComponent<Player>();
@@ -64,6 +74,19 @@ public class Recolte : MonoBehaviour
         animatorA = FondA.transform.GetChild(0).GetComponent<Animator>();
         animatorR = FondR.transform.GetChild(0).GetComponent<Animator>();
         animatorF = FondF.transform.GetChild(0).GetComponent<Animator>();
+
+        var list = Resources.LoadAll("items", typeof(Item)).Cast<Item>();
+        foreach(Item item in list)
+        {
+            itemlist.Add(item);
+        }
+        var list2 = Resources.LoadAll("souches", typeof(GameObject)).Cast<GameObject>();
+        foreach (GameObject go in list2)
+        {
+            prefablist.Add(go);
+        }
+        Debug.Log(prefablist.Count);
+
         // Pour faire fonctionner les anims
     }
     // Update is called once per frame
@@ -116,10 +139,10 @@ public class Recolte : MonoBehaviour
 
                         if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
                         {
-                            if (NbrPlace(bois) > 0) // a changer lorsque l'inventaire sera fonctionnelle
+                            if (NbrPlace(boisR) > 0) // a changer lorsque l'inventaire sera fonctionnelle
                             {
                                 Destroy(hit.transform.gameObject);
-                                AjouterInventaire(bois, 1); // à changer lorsque l'inventaire sera terminé
+                                AjouterInventaire(boisR, 1); // à changer lorsque l'inventaire sera terminé
                             }
                         }
 
@@ -261,56 +284,49 @@ public class Recolte : MonoBehaviour
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
         audioSource.PlayOneShot(treeChop);
+        if(cible.transform.name == "Chene")
+        {
+            AjouterInventaire(boisR,4);
+            AjouterInventaire(boisF,3);
+            AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+            Instantiate(prefablist[FindPrefabinList("SoucheChene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f,cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0)) ;
+
+
+        }
+        if (cible.transform.name == "Hetre")
+        {
+            AjouterInventaire(boisR, 3);
+            AjouterInventaire(boisF, 3);
+            AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+            //Instantiate(Souchehetre, cible.transform.position);
+
+        }
+        if (cible.transform.name == "PinMaritime")
+        {
+            AjouterInventaire(boisR, 4);
+            AjouterInventaire(boisF, 1);
+            AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+            //Instantiate(Souchepinm, cible.transform.position);
+
+        }
+        if (cible.transform.name == "Douglas")
+        {
+            AjouterInventaire(boisR, 1);
+            AjouterInventaire(boisF, 4);
+            AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+            //Instantiate(Souchedouglas, cible.transform.position);
+
+        }
+        if (cible.transform.name == "Bouleau")
+        {
+            AjouterInventaire(boisF, 5);
+            AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+            //Instantiate(Souchebouleau, cible.transform.position);
+
+        }
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;
-        float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
-        if (0 <= x && x < 0.25) //3 spawns
-        {
-            if (NbrPlace(bois) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
-            {
-                AjouterInventaire(bois, 3);
-            }
-            else //sinon, on remplit l'inventaire et le reste va par terre
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 3 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
-                }
-            }
-
-        }
-        else if (0.25 <= x && x < 0.75) // 4 spawns
-        {
-            if (NbrPlace(bois) >= 4)
-            {
-                AjouterInventaire(bois, 4);
-            }
-            else
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 4 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0,0, 0));
-                }
-            }
-        }
-
-        else
-        {
-            if (NbrPlace(bois) >= 5) // 5 spawns
-            {
-                AjouterInventaire(bois, 5);
-            }
-            else
-            {
-                AjouterInventaire(bois, NbrPlace(bois));
-                for (int i = 0; i < 5 - NbrPlace(bois); i++)
-                {
-                    Instantiate(bois.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(0, 0, 0));
-                }
-            }
-        }
+        
     }
     private void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
@@ -601,5 +617,44 @@ public class Recolte : MonoBehaviour
     {
         onPanel = false;
     }
+
+    int FindInlist(string itemname) //
+    {
+        int i = 0;
+        foreach(Item item in itemlist)
+        {
+            if (item.name == itemname) return i;
+            i++;
+        }
+        return itemlist.Count + 1;
+    }
+
+    int FindPrefabinList(string prefabname)
+    {
+        int i = 0;
+        foreach (GameObject go in prefablist)
+        {
+            if (go.name == prefabname) return i;
+            i++;
+        }
+        return itemlist.Count + 1;
+    }
+
+    void quitter()
+    {
+        menuinfo.SetActive(false);
+        FondA.gameObject.SetActive(true);
+        animatorA.SetTrigger("ouverture1BulleCouper");
+    }
+    void FctInfo()
+    {
+        //menuinfo.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GameObject.Find("Chene").GetComponent<SpriteRenderer>().sprite;
+        menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = cible.transform.name;
+        menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste"; // a modifier
+        menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non"; // a modifier
+        FondA.SetActive(false);
+        menuinfo.SetActive(true);
+    }
+
 
 }

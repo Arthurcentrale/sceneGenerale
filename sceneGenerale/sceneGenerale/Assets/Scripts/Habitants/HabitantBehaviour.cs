@@ -6,7 +6,8 @@ public class HabitantBehaviour : MonoBehaviour
 {
     //variables générales :
     public Vector3 originalPosition;
-    public Vector3 mairiePosition; //donne l'endroit où les habitants se rendent quand ils sont recrutables et qu'ils ne sont pas encore logés
+    public Vector3 mairiePosition;//donne l'endroit où les habitants se rendent quand ils sont recrutables et qu'ils ne sont pas encore logés
+    public Vector3 housePosition;
 
     public string nom;
 
@@ -14,7 +15,7 @@ public class HabitantBehaviour : MonoBehaviour
     public Sprite image;
 
     //besoins et déchets
-    public float foodQuantity;
+    public int foodQuantity;
     public float foodVariety;
     public float waste;
 
@@ -25,6 +26,9 @@ public class HabitantBehaviour : MonoBehaviour
 
     //statut dans l'aventure
     public bool isVillager = false;
+    public bool isHoused = false; // Boolen pour savoir si l'habitant possède sa chaumière
+    public bool hasWorkplace = false;
+    public bool isWorking = false; // Booleen pour savoir si l'habitant possède son batiment de travail
 
     //conditions = bâtiments nécessaires pour qu'il puisse travailler et autres
 
@@ -32,7 +36,10 @@ public class HabitantBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+    }
+    void UpdateSituation()
+    {
+        if (isHoused && hasWorkplace) isWorking = true; 
     }
 
     // Update is called once per frame
@@ -45,6 +52,29 @@ public class HabitantBehaviour : MonoBehaviour
     void goToMairie()
     {       
             transform.position = mairiePosition;
+    }
+
+    void goToOriginalPosition()
+    {
+        transform.position = originalPosition;
+    }
+
+    void goToHouse()
+    {
+        transform.position = housePosition;
+    }
+
+    void AffecterMaison() // Lorsqu'on affecte l'habitant à la maison
+    {
+        // mettre la position de la maison comme coordonnées pour les tps le soir (z +/- 5 pour etre juste devant)
+        // Mettre l'habitant comme résident de la maison pour qu'elle ne soit plus compté comme vide
+        // Ajouter la consommation de l'habitant a la conso globale
+    }
+
+    void Fonction6h()
+    {
+        if (System.DateTime.Now.Hour == 6) goToOriginalPosition();
+        else if (System.DateTime.Now.Hour == 20) goToHouse();
     }
 
     void levelUp()
@@ -62,6 +92,12 @@ public class HabitantBehaviour : MonoBehaviour
         {
             ecoLevel = 5;
         }
+    }
+
+    public void Requierements()
+    {
+        //Afficher la bonne animation et panel selon ce qu'il manque pour que l'habitant se mette à travailler
+        Debug.Log(isHoused & hasWorkplace);
     }
 }
 
