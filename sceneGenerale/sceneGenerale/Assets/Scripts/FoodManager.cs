@@ -19,7 +19,6 @@ public class FoodManager : MonoBehaviour
                 ListeNourriture.Add(item);
             }
         }
-        Debug.Log(ListeNourriture.Count);
     }
 
     // Update is called once per frame

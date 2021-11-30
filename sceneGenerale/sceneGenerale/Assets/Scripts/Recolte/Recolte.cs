@@ -85,7 +85,6 @@ public class Recolte : MonoBehaviour
         {
             prefablist.Add(go);
         }
-        Debug.Log(prefablist.Count);
 
         // Pour faire fonctionner les anims
     }
