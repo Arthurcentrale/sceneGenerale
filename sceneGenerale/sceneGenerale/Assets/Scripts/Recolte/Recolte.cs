@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Recolte : MonoBehaviour
 {
@@ -16,10 +17,11 @@ public class Recolte : MonoBehaviour
     public bool IsCraftRoche; //same
     public bool IsCraftFleur;
     private bool onPanel;//same
-    public GameObject FondA, FondR, FondF; //panel à activer pour la récolte
+    public GameObject FondA, FondR, FondF,menuinfo; //panel à activer pour la récolte
     public Button buttonA1, buttonA2, buttonA3; // boutons sur la panel pour l'arbre
     public Button buttonR1, buttonR2, buttonR3; // boutons pour roche
-    public Button buttonF1, buttonF2, buttonF3; // boutons pour fleurs
+    public Button buttonF1, buttonF2, buttonF3;
+    public Button buttonInfo,buttonQuitter;// boutons pour fleurs
     private Sprite boutonInfo; //pour l'anim
     RaycastHit cible; //pour cibler un gameobject
     public Inventaire inventaire;
@@ -34,11 +36,13 @@ public class Recolte : MonoBehaviour
     public Player player;
     private Animator animatorA,animatorR,animatorF;
 
+    public List<Item> itemlist;
+    public List<GameObject> prefablist;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
         onPanel = false ;
         inventaire = inventaire.GetComponent<Inventaire>();
         ui_inventory = ui_inventory.GetComponent<UI_Inventory>() ;
@@ -57,6 +61,12 @@ public class Recolte : MonoBehaviour
         buttonR1.onClick.AddListener(SpawnRoche);//Bouton miner
         buttonR2 = buttonR2.GetComponent<Button>(); //bordereau miner
         buttonR2.onClick.AddListener(SpawnRoche); // bordereau miner
+        buttonInfo = buttonInfo.GetComponent<Button>();
+        buttonInfo.onClick.AddListener(FctInfo);
+        buttonQuitter = buttonQuitter.GetComponent<Button>();
+        buttonQuitter.onClick.AddListener(quitter);
+
+
         height = FondA.GetComponent<RectTransform>().rect.height ;
         width = FondA.GetComponent<RectTransform>().rect.width;
         player = this.GetComponent<Player>();
@@ -64,6 +74,19 @@ public class Recolte : MonoBehaviour
         animatorA = FondA.transform.GetChild(0).GetComponent<Animator>();
         animatorR = FondR.transform.GetChild(0).GetComponent<Animator>();
         animatorF = FondF.transform.GetChild(0).GetComponent<Animator>();
+
+        var list = Resources.LoadAll("items", typeof(Item)).Cast<Item>();
+        foreach(Item item in list)
+        {
+            itemlist.Add(item);
+        }
+        var list2 = Resources.LoadAll("souches", typeof(GameObject)).Cast<GameObject>();
+        foreach (GameObject go in list2)
+        {
+            prefablist.Add(go);
+        }
+        Debug.Log(prefablist.Count);
+
         // Pour faire fonctionner les anims
     }
     // Update is called once per frame
@@ -265,13 +288,16 @@ public class Recolte : MonoBehaviour
         {
             AjouterInventaire(boisR,4);
             AjouterInventaire(boisF,3);
-            //Instantiate(Souchechene, cible.transform.position);
+            AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+            Instantiate(prefablist[FindPrefabinList("SoucheChene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f,cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0)) ;
+
 
         }
         if (cible.transform.name == "Hetre")
         {
             AjouterInventaire(boisR, 3);
             AjouterInventaire(boisF, 3);
+            AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
             //Instantiate(Souchehetre, cible.transform.position);
 
         }
@@ -279,6 +305,7 @@ public class Recolte : MonoBehaviour
         {
             AjouterInventaire(boisR, 4);
             AjouterInventaire(boisF, 1);
+            AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
             //Instantiate(Souchepinm, cible.transform.position);
 
         }
@@ -286,12 +313,14 @@ public class Recolte : MonoBehaviour
         {
             AjouterInventaire(boisR, 1);
             AjouterInventaire(boisF, 4);
+            AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
             //Instantiate(Souchedouglas, cible.transform.position);
 
         }
         if (cible.transform.name == "Bouleau")
         {
             AjouterInventaire(boisF, 5);
+            AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
             //Instantiate(Souchebouleau, cible.transform.position);
 
         }
@@ -588,5 +617,44 @@ public class Recolte : MonoBehaviour
     {
         onPanel = false;
     }
+
+    int FindInlist(string itemname) //
+    {
+        int i = 0;
+        foreach(Item item in itemlist)
+        {
+            if (item.name == itemname) return i;
+            i++;
+        }
+        return itemlist.Count + 1;
+    }
+
+    int FindPrefabinList(string prefabname)
+    {
+        int i = 0;
+        foreach (GameObject go in prefablist)
+        {
+            if (go.name == prefabname) return i;
+            i++;
+        }
+        return itemlist.Count + 1;
+    }
+
+    void quitter()
+    {
+        menuinfo.SetActive(false);
+        FondA.gameObject.SetActive(true);
+        animatorA.SetTrigger("ouverture1BulleCouper");
+    }
+    void FctInfo()
+    {
+        //menuinfo.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GameObject.Find("Chene").GetComponent<SpriteRenderer>().sprite;
+        menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = cible.transform.name;
+        menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste"; // a modifier
+        menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non"; // a modifier
+        FondA.SetActive(false);
+        menuinfo.SetActive(true);
+    }
+
 
 }
