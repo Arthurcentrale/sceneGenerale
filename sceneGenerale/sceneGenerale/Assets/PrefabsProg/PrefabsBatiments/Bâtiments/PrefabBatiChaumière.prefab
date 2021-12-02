@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8502974625154949682}
   - component: {fileID: 8502974625154949683}
   - component: {fileID: 8502974625154949684}
+  - component: {fileID: 4479855082140441488}
   m_Layer: 5
   m_Name: "PrefabBatiChaumi\xE8re"
   m_TagString: "BatiChaumi\xE8re"
@@ -214,3 +215,17 @@ MonoBehaviour:
   Pierre: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
   player: {fileID: 0}
   lePapaDePlayer: {fileID: 0}
+--- !u!114 &4479855082140441488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502974625154949686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3b06ee45d174246b6eb3740b12fd54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOccupied: 0
+  camera: {fileID: 0}
