@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class IUBatis : MonoBehaviour
 {
 
-    private GameObject panel;
+    public GameObject panel;
     bool open;
     bool onPanel;
     public bool isOccupied;
     Vector2 mP;
     new public Camera camera;
-    private Animator animator;
+    public Animator animator;
 
 
 
