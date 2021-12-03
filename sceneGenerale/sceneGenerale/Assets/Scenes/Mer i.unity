@@ -572,6 +572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1729732220}
   loadingScreen: {fileID: 2130737488}
+  player: {fileID: 1495348407}
+  positiondevantmairie: {x: 0, y: 0, z: 0}
 --- !u!1001 &1094534933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -868,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 4305498693347649112, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4753139019444051424, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
         type: 3}
@@ -904,6 +906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087024644746977926, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6141947841121059419, guid: c35fd4988d95ffa4ba5c45e7c72d0394,
         type: 3}
@@ -1370,6 +1377,11 @@ PrefabInstance:
     - target: {fileID: 1935418754500006218, guid: 8b4288b794c4b08418445b280e90175e,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935418754500006222, guid: 8b4288b794c4b08418445b280e90175e,
+        type: 3}
+      propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1935418754500006222, guid: 8b4288b794c4b08418445b280e90175e,

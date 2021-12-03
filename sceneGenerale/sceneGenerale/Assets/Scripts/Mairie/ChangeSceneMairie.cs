@@ -8,10 +8,11 @@ public class ChangeSceneMairie : MonoBehaviour
     AsyncOperation loadingOperation;
     public Slider slider;
     public GameObject loadingScreen;
+    public Player player;
+    public Vector3 positiondevantmairie;
     // Start is called before the first frame update
     void Update()
     {
-        // slider.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
     }
     public void EnterMairie()
     {
@@ -40,5 +41,6 @@ public class ChangeSceneMairie : MonoBehaviour
             yield return null;
         } while (fade >= 0.0f);
         Debug.Log("Faded");
+
     }
 }
