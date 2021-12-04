@@ -8,6 +8,8 @@ public class Pecherie : MonoBehaviour
 {
     //Ouvrir UI
     public GameObject panel;
+    public GameObject menuinfo;
+    public GameObject choixhabitant;
     bool open;
     bool onPanel;
     Vector2 mP;
@@ -47,7 +49,6 @@ public class Pecherie : MonoBehaviour
 
     void Start()
     {
-
         limite1 = false;
         limite2 = false;
         limite3 = false;
@@ -107,7 +108,7 @@ public class Pecherie : MonoBehaviour
         
         //¨Partie si on ne valide pas dans la journée
 
-        if(isOccupied && valider == false)
+        if(isOccupied && habitant != null && habitant.isHoused && valider == false)
         {
             timer += Time.deltaTime;
             if (timer >= delai)
@@ -186,7 +187,8 @@ public class Pecherie : MonoBehaviour
     }
     int GetLevel(HabitantBehaviour habitant)
     {
-        return habitant.ecoLevel;
+        if (habitant != null) return habitant.ecoLevel;
+        else return 0;
     } //On recupère le level du pecheur
 
     void UpdateVariete() //A utiliser que quand on level up
@@ -397,4 +399,109 @@ public class Pecherie : MonoBehaviour
         validation.interactable = true;
         timer = 0;
     }
+
+    // Partie IU et Boutons : 
+
+    public void FctInfo()
+    {
+        if (habitant == null)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = null;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Vacant";
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else if (habitant != null && habitant.isHoused == false)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+    }
+
+    public void FctChoix()
+    {
+
+        GameObject PecheurDispo = TrouverPecheur();
+        if(PecheurDispo == null)
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = PecheurDispo.GetComponent<HabitantBehaviour>().image;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = PecheurDispo.GetComponent<HabitantBehaviour>().name;
+        }
+        panel.SetActive(false);
+        choixhabitant.SetActive(true);
+    }
+    GameObject TrouverPecheur()
+    {
+        GameObject ha = new GameObject();
+        GameObject habitant = GameObject.Find("habitants");
+        foreach (Transform child in habitant.transform)
+        {
+            HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
+            if(Behaviour.transform.name == "pêcheur")
+            {
+                if (Behaviour.hasWorkplace == false)
+                {
+                    ha = child.gameObject;
+                }
+            }
+        }
+        return ha;
+    }
+
+    public void quitter()
+    {
+        choixhabitant.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
+    }
+    public void selectionpecheur()
+    {
+        GameObject pecheurdispo = TrouverPecheur();
+        habitant = pecheurdispo.GetComponent<HabitantBehaviour>();
+        habitant.hasWorkplace = true;
+        isOccupied = true;
+        choixhabitant.SetActive(false);
+        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        panel.SetActive(true);
+    }
+    public void quitter2()
+    {
+        menuinfo.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
+    }
+
 }
