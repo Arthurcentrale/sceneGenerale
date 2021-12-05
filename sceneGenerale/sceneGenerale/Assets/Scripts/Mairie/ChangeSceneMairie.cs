@@ -10,6 +10,7 @@ public class ChangeSceneMairie : MonoBehaviour
     public GameObject loadingScreen;
     public Player player;
     public Vector3 positiondevantmairie;
+    int level;
     // Start is called before the first frame update
     void Update()
     {
@@ -19,12 +20,15 @@ public class ChangeSceneMairie : MonoBehaviour
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Mer i");
         //SceneManager.LoadScene("Mer i");
+        level = 0;
     }
 
     public void EnterIsland()
     {
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Island");
+        level = 1;
+
         //SceneManager.LoadScene("Island");
     }
     private IEnumerator FadeToBlackCoroutine()
@@ -42,5 +46,10 @@ public class ChangeSceneMairie : MonoBehaviour
         } while (fade >= 0.0f);
         Debug.Log("Faded");
 
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+        player.transform.position = positiondevantmairie;
     }
 }
