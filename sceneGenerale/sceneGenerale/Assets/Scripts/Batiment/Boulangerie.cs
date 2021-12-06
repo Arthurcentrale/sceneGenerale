@@ -14,24 +14,25 @@ public class Boulangerie : MonoBehaviour
     new public Camera camera;
     private Animator animator;
     public Button validation;
-    public Text textslider;
+    public Text textslider1;
+    public Text textslider2;
     public bool isOccupied, valider;
-    bool isBle = true;
-    bool wasBle = false;
-    public Text textType;
 
     float timer = 0f;
     float delai = 5f;
 
-    public Slider slider;
+    public Slider slider1;
+    public Slider slider2;
 
     //Gestion des paramètres globaux
 
     public HabitantBehaviour habitant;
     public GameObject go;
 
-    int QuantitePain;
-    int QuantitePainNonValide;
+    int QuantitePainMais;
+    int QuantitePainMaisNonValide;
+    int QuantitePainBle;
+    int QuantitePainBleNonValide;
     public CompteurBouffe compteurbouffe;
 
     void Start()
@@ -39,12 +40,14 @@ public class Boulangerie : MonoBehaviour
         onPanel = false;
         open = false;
         isOccupied = false;
-        QuantitePain = 0;
-        QuantitePainNonValide = 0;
-        textslider.text = 0.ToString();
+        QuantitePainMais = 0;
+        QuantitePainMaisNonValide = 0;
+        QuantitePainBle = 0;
+        QuantitePainBleNonValide = 0;
+        textslider1.text = 0.ToString();
+        textslider2.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         validation = validation.GetComponent<Button>();
-        textType.text = "Blé";
         compteurbouffe = compteurbouffe.GetComponent<CompteurBouffe>();
 
     }
@@ -52,9 +55,12 @@ public class Boulangerie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.minValue = 0;
+        slider1.minValue = 0;
         //slider.maxValue = QuantiteMax(habitant);
-        slider.maxValue = 15;
+        slider1.maxValue = 15;
+        slider2.minValue = 0;
+        //slider.maxValue = QuantiteMax(habitant);
+        slider2.maxValue = 15;
         var ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit Hit;
 
@@ -83,7 +89,8 @@ public class Boulangerie : MonoBehaviour
             }
             if (open == true)
             {
-                QuantitePainNonValide = (int)slider.value;
+                QuantitePainBleNonValide = (int)slider1.value;
+                QuantitePainMaisNonValide = (int)slider2.value;
             }
 
             if (isOccupied && valider == false)
@@ -100,18 +107,7 @@ public class Boulangerie : MonoBehaviour
 
         }
     }
-    public void BoutonChangemntType()
-    {
-        isBle = !isBle;
-        if (isBle)
-        {
-            textType.text = "Blé";
-        }
-        else
-        {
-            textType.text = "Maïs";
-        }
-    }
+
     /*int QuantiteMax(HabitantBehaviour habitant)
     {
         if (isBle)
@@ -172,34 +168,19 @@ public class Boulangerie : MonoBehaviour
         onPanel = false;
         Deplacement.enMenu = false;
     }
+
     public void AffichageSlider()
     {
-        if (isBle)
-        {
-            textslider.text = slider.value.ToString();
-        }
-        else
-        {
-            float value = slider.value * 3.0f;
-            textslider.text = value.ToString();
-        }
+        textslider1.text = slider1.value.ToString();
+        textslider2.text = slider2.value.ToString();
     }
+
     public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
-        QuantitePain = QuantitePainNonValide;
-        if (isBle != wasBle)
-        {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
-        }
-        if (isBle)
-        {
-            CompteurBouffe.Data.NbrBouffe += QuantitePain;
-        }
-        else
-        {
-            CompteurBouffe.Data.NbrBouffe += QuantitePain;
-        }
-        wasBle = isBle;
+        QuantitePainBle = QuantitePainBleNonValide;
+        QuantitePainMais = QuantitePainMaisNonValide;
+        CompteurBouffe.Data.NbrBouffe += QuantitePainMais;
+        CompteurBouffe.Data.NbrBouffe += QuantitePainBle;
         valider = true;
         StartCoroutine(Coroutine());
         //Lancer le blocage de la valeur jusqu'à minuit
@@ -213,14 +194,8 @@ public class Boulangerie : MonoBehaviour
         }
         else
         {
-            if (isBle)
-            {
-                CompteurBouffe.Data.NbrBouffe += QuantitePain;
-            }
-            else
-            {
-                CompteurBouffe.Data.NbrBouffe += QuantitePain;
-            }
+            CompteurBouffe.Data.NbrBouffe += QuantitePainBle;
+            CompteurBouffe.Data.NbrBouffe += QuantitePainMais;
         }
     }
 
