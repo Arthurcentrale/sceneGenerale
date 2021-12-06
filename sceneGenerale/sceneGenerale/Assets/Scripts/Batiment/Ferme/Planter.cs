@@ -363,6 +363,13 @@ public class Planter : MonoBehaviour
         GameManager.environnementManager.qualiteSol += 0.1f;
     }
 
+    public void ToutesMAJ()
+    {
+        MajQS();
+        MajEngrais();
+        MajQuantiteNourriture();
+    }
+
     public bool DepotEngrais(int x, int y) //On met de l'engrais aux coordonnées d'une parcelle, retourne false si on en avait plus (si naturel)
     {
         if (engraisSelectionne == 0) //chimique

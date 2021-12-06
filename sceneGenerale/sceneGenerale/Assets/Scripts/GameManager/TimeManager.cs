@@ -9,8 +9,14 @@ public class TimeManager : MonoBehaviour
     DateTime tomorrow;
     double seconds;
 
+    Planter planter;
+    Agri agri;
+
     void Start()
     {
+        planter = GameObject.Find("Ferme").GetComponent<Planter>();
+        agri = GameObject.Find("Ferme").GetComponent<Agri>();
+
         StartCoroutine(Coroutine());
     }
 
@@ -37,5 +43,13 @@ public class TimeManager : MonoBehaviour
     void FonctionsMinuit()
     {
         //Toutes les fonctions à exécuter à minuit;
+        //Debug.Log("TEST MAJ DE MINUIT");
+
+        //Agri
+        agri.MajNiveau();
+        planter.enabled = true;
+        planter.ToutesMAJ();
+        planter.enabled = false;
+
     }
 }
