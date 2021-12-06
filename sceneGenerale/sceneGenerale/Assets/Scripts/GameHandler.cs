@@ -67,6 +67,7 @@ public class GameHandler : MonoBehaviour
         dossierRochers = GameObject.Find("Rocher").transform;
         dossierBatiments = GameObject.Find("Batiments").transform;
 
+        Save();
         Load();
         treeLayersMag.updateTreeLayers();
         StartCoroutine(SaveGame());
@@ -263,6 +264,7 @@ public class GameHandler : MonoBehaviour
 
         */
 
+
         if (gameData.dictionnaireBatiments != null)
         {
             foreach (KeyValuePair<string, Vector3> kvp in gameData.dictionnaireBatiments)
@@ -347,6 +349,7 @@ public class GameHandler : MonoBehaviour
         }
 
         // Demarrage de l'inventaire
+        
         player.createInventory(gameData.listeItems, gameData.listeFavoris);
         inventory = player.inventory;
     }
