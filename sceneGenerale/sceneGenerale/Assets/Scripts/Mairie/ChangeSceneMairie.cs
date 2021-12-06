@@ -47,9 +47,9 @@ public class ChangeSceneMairie : MonoBehaviour
         Debug.Log("Faded");
 
     }
-    private void Awake()
+    /*private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
         player.transform.position = positiondevantmairie;
-    }
+    }*/
 }
