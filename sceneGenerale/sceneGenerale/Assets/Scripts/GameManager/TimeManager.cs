@@ -46,10 +46,11 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("TEST MAJ DE MINUIT");
 
         //Agri
+        /*
         agri.MajNiveau();
         planter.enabled = true;
         planter.ToutesMAJ();
         planter.enabled = false;
-
+        */
     }
 }
