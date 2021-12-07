@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6485351259561496887}
   - component: {fileID: 6485351259561496880}
   - component: {fileID: 6485351259561496881}
+  - component: {fileID: -2895672440714839545}
   m_Layer: 5
   m_Name: "Chaumi\xE8reD\xE9pla\xE7able"
   m_TagString: Untagged
@@ -100,6 +101,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-2895672440714839545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485351259561496883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ceec86b456b5544861008f259a953c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheneMalade: {fileID: 8961042327562975717, guid: 9c8cee4e963b5384a8cd2816c7e77ef2,
+    type: 3}
 --- !u!1 &6485351260062362555
 GameObject:
   m_ObjectHideFlags: 0

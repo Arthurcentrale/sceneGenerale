@@ -157,14 +157,13 @@ public class UI_Inventory : MonoBehaviour
         inventory = _inventory;
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
-
+        
+        /*
+        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 2));
         inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
-        
-        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 5));
-        
         inventory.AddItem(new ItemAmount(Item: Pioche, Amount: 1));
-        inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 5));
-        
+        inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 2));
+        */
 
         RefreshInventoryItems();
         RefreshInventoryFavoris();

@@ -178,7 +178,6 @@ public class Pecherie : MonoBehaviour
     {
         GameObject gameObject1 = GameObject.Find("pêcheur");
         habitant = gameObject1.GetComponent<HabitantBehaviour>();
-        habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
         InitVariete(habitant);
 

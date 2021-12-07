@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5241632415729536052}
   - component: {fileID: 5241632415729536059}
   - component: {fileID: 5241632415729536058}
-  - component: {fileID: 833442397}
+  - component: {fileID: -4326636115322089559}
   m_Layer: 5
   m_Name: "Chaumi\xE8re"
-  m_TagString: "Chaumi\xE8re"
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &833442397
+--- !u!114 &-4326636115322089559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,11 +110,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5241632415729536056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39336acff8369048955c7fcc071ec4d, type: 3}
+  m_Script: {fileID: 11500000, guid: b9ceec86b456b5544861008f259a953c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  habitantActuel: {fileID: 0}
-  isEmpty: 0
 --- !u!1 &5241632416235202297
 GameObject:
   m_ObjectHideFlags: 0

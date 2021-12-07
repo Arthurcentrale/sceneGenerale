@@ -45,7 +45,7 @@ public class Planter : MonoBehaviour
 
     //------------CULTURES------------//
 
-    public static int culture;         //nombre de culture dispo pour le jouer (pas encore implémenté)
+    public static int culture;    //nombre de culture dispo pour le jouer (pas encore implémenté)
     public int[,] cultureParcelles;    //array qui contient les numéros (correspondant à un enum de Culture et à la quantité de nourriture générée par cette culture) de chaque culture présente sur chaque parcdelle
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
     private int planteSelectionnee;  //de base aucune, donc -1
@@ -176,7 +176,7 @@ public class Planter : MonoBehaviour
         {
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
                 plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
                 GameManager.environnementManager.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
@@ -186,7 +186,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
             {
                 plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
                 GameManager.environnementManager.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
@@ -196,7 +196,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
             {
                 plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
                 GameManager.environnementManager.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
@@ -206,7 +206,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
             {
                 plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
                 GameManager.environnementManager.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
@@ -216,7 +216,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
             {
                 plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                plante.name = Enum.GetName(typeof(Culture), planteSelectionnee);
                 GameManager.environnementManager.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
@@ -361,13 +361,6 @@ public class Planter : MonoBehaviour
     public void MajQS()   //La qualité du sol augmente tous les jours de 0.1 à minuit
     {
         GameManager.environnementManager.qualiteSol += 0.1f;
-    }
-
-    public void ToutesMAJ()
-    {
-        MajQS();
-        MajEngrais();
-        MajQuantiteNourriture();
     }
 
     public bool DepotEngrais(int x, int y) //On met de l'engrais aux coordonnées d'une parcelle, retourne false si on en avait plus (si naturel)
