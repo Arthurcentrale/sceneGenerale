@@ -39,7 +39,7 @@ public class ScriptATHBatis : MonoBehaviour
     float ecartTime;
     public float TimerInterval = 5;
     float tick;
-    private float tempsConstruChaumiere = 30;
+    private float tempsConstruChaumiere = 10;
 
     //donnees
     public float tempsConstruTotal = 1000; //doit être exprimé en heures
@@ -86,6 +86,8 @@ public class ScriptATHBatis : MonoBehaviour
         {
             ConstructionInProgress();
         }
+
+        if ((int) (tempsConstruChaumiere - ecartTime) == 0) finirConstruction();
     }
 
     public void DepotRessource()
@@ -178,7 +180,8 @@ public class ScriptATHBatis : MonoBehaviour
 
     void finirConstruction()
     {
-        Instantiate()   
+        Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.y), chaumiere.transform.rotation);
+        Destroy(bati.gameObject);
     }
 
     //fonction pour ajouter un item à l'inventaire
