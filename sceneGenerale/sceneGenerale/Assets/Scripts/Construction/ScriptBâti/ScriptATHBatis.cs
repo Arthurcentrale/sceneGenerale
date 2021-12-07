@@ -8,6 +8,14 @@ public class ScriptATHBatis : MonoBehaviour
 
     public UI_Inventory ui_inventory;
     public Player player;
+    public GameObject ouvrier;
+
+    //les batis
+    private GameObject bati;
+
+    //les batiments
+    public GameObject chaumiere;
+    public GameObject autre;
 
     //les boutons
     public Button bulleInfo;
@@ -26,12 +34,15 @@ public class ScriptATHBatis : MonoBehaviour
     //temps
     public GameObject temps;
     private Text texteTemps;
-    private int heures;
-    private int minutes;
-    private int secondes;
+    float time;
+    float timeDepart;
+    float ecartTime;
+    public float TimerInterval = 5;
+    float tick;
+    private float tempsConstruChaumiere = 30;
 
     //donnees
-    public float tempsConstruTotal = 0.001f; //doit être exprimé en heures
+    public float tempsConstruTotal = 1000; //doit être exprimé en heures
     public Item itemOne;
     public Item itemTwo;
     private int nombreItemOne;
@@ -47,6 +58,12 @@ public class ScriptATHBatis : MonoBehaviour
 
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        time = (int)Time.time;
+        tick = TimerInterval;
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -73,10 +90,14 @@ public class ScriptATHBatis : MonoBehaviour
 
     public void DepotRessource()
     {
+        //cette ligne sert à trouver le bati pour plus tard
+        bati = GameObject.Find("BatiChaumière");
+
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
         nombreItemOne = player.uiInventory.CountItem("Pierre");
-        print(nombreItemOne);
+        print("pierre du joueur : " + nombreItemOne);
+        print("bois du joueur : " + nombreItemTwo);
         //if ya du bois et nombre bois inventaire< nombre bois nécessaire à la constru du bâtiment
         if (nombreItemOne > 0)
         {
@@ -111,6 +132,11 @@ public class ScriptATHBatis : MonoBehaviour
             
         }
 
+        if (nombreItemOneNécessaire < 0) nombreItemOneNécessaire = 0;
+        if (nombreItemTwoNécessaire < 0) nombreItemTwoNécessaire = 0;
+
+        nombreItemTwo = player.uiInventory.CountItem("Bois");
+        nombreItemOne = player.uiInventory.CountItem("Pierre");
         textItemOne.text = nombreItemOne.ToString();
         textItemTwo.text = nombreItemTwo.ToString();
 
@@ -127,21 +153,32 @@ public class ScriptATHBatis : MonoBehaviour
 
     }
 
-    void DebuterConstruction()
+    public void DebuterConstruction()
     {
         permissionConstruction = true;
         temps.SetActive(true);
+        timeDepart = Time.time;
+
+        ouvrier.transform.position = new Vector3 (bati.transform.position.x+6,ouvrier.transform.position.y,bati.transform.position.z-5);
+        ouvrier.GetComponent<Animator>().SetFloat("Construction", 1);
     }
 
     void ConstructionInProgress()
     {
         int tempsConstruTotalEntier = (int)(3600 * tempsConstruTotal); //ceci est exprimé en secondes
+        if (permissionConstruction)
+        {
+            time = Time.time;
+            ecartTime = (int) (time - timeDepart);
+            
+        }
+        texteTemps.text = string.Format("{0:0}:{1:00}", Mathf.Floor((tempsConstruChaumiere- ecartTime) / 60), (tempsConstruChaumiere - ecartTime) % 60);
+       
+    }
 
-        heures = tempsConstruTotalEntier / 3600;
-        minutes = (tempsConstruTotalEntier - heures * 3600) / 60;
-        secondes = (tempsConstruTotalEntier - heures * 3600 - minutes * 60);
-        tempsConstruTotal -= Time.deltaTime;
-        texteTemps.text = heures.ToString() + " : " + minutes.ToString() + " : " + secondes.ToString();
+    void finirConstruction()
+    {
+        Instantiate()   
     }
 
     //fonction pour ajouter un item à l'inventaire
