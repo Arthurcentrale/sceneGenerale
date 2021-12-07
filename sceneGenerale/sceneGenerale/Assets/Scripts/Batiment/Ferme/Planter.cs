@@ -41,14 +41,14 @@ public class Planter : MonoBehaviour
     public const int raisinCT = 20;
 
     //array qui contient les capacités de travail demandés par les cultures, puis les quantités de nourritures produites avec engrais
-    public int[] arrayCT = new int[] { 10, 12, 15, 17, 20, 20, 0};   //on met un 0 à la fin pour que quand planteSelectionee == -1, ça update la CT de 0 en appellant arrayCT[-1]
+    public int[] arrayCT;
 
     //------------CULTURES------------//
 
     public static int culture;         //nombre de culture dispo pour le jouer (pas encore implémenté)
     public int[,] cultureParcelles;    //array qui contient les numéros (correspondant à un enum de Culture et à la quantité de nourriture générée par cette culture) de chaque culture présente sur chaque parcdelle
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
-    private int planteSelectionnee;  //de base aucune, donc -1
+    private int planteSelectionnee;  //de base aucune, donc 6
     public GameObject[,] arrayPrefabsPlantes;  //array qui contient les prefabs des plantes qui sont instanciées pour pouvoir les enlever
     
     //prefab des images que l'on va afficher sur les parcelles
@@ -80,6 +80,8 @@ public class Planter : MonoBehaviour
 
     void Start()
     {
+        arrayCT = new int[7] { 10, 12, 15, 17, 20, 20, 0 };   //on met un 0 à la fin pour que quand planteSelectionee == 6, ça update la CT de 0 en appellant arrayCT[6]
+
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
         MainCamera = GameObject.Find("Camera").GetComponent<Camera>();
         xNbrParcelles = Agri.xNbrParcelles;
@@ -92,7 +94,7 @@ public class Planter : MonoBehaviour
         //initialisation de cultureParcelles
         cultureParcelles = new int[xNbrParcelles, yNbrParcelles];
         for (int i = 0; i < xNbrParcelles * yNbrParcelles; i++) cultureParcelles[i % xNbrParcelles, i / xNbrParcelles] = -1;
-        planteSelectionnee = -1;
+        SelectionAucunePlante();
         arrayPrefabsPlantes = new GameObject[xNbrParcelles, yNbrParcelles];
 
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
@@ -125,7 +127,7 @@ public class Planter : MonoBehaviour
             {
                 GameObject objetTouche = hit.transform.gameObject;
 
-                if (objetTouche.tag == "Parcelle")  //c'est l'indication que c'est une parcelle labourée finale, donc on peut planter une culture dessus
+                if ((objetTouche.tag == "Parcelle") || (objetTouche.tag == "Plante"))  //c'est l'indication que c'est une parcelle labourée finale ou une culture, donc on peut planter une culture dessus ou mettre de l'engrais
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
@@ -154,10 +156,6 @@ public class Planter : MonoBehaviour
                         }
                     }
                 }
-                else if (objetTouche.tag == "Plante")  //si on touche une culture
-                {
-
-                }
             }
         }
     }
@@ -171,7 +169,12 @@ public class Planter : MonoBehaviour
     {
         GameObject plante;
         float taillePlante = 0.2f;
-        if (planteSelectionnee == -1) Debug.Log("Aucune plante sélectionnée");
+        if (planteSelectionnee == 6)
+        {
+            Debug.Log("Aucune plante sélectionnée"); 
+            cultureParcelles[x, y] = -1; 
+            return;
+        }
         else if (planteSelectionnee == 0)
         {
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
@@ -227,12 +230,13 @@ public class Planter : MonoBehaviour
 
     public void EnleverCulture(int x, int y)    //On enlève la plante sélectionnée d'une certaine parcelle
     {
+        capaciteTravailUtilisee -= arrayCT[cultureParcelles[x, y]];  //on met à jour la capacité de travail
         //On enleve la plante de l'array cultureParcelles
         cultureParcelles[x, y] = -1;
         //On détruit ensuite le prefab de la plante dans planteContainer
         Destroy(arrayPrefabsPlantes[x, y]);
-        capaciteTravailUtilisee -= arrayCT[planteSelectionnee];  //on met à jour la capacité de travail
-        planteSelectionnee = -1;
+        
+        SelectionAucunePlante();
     }
 
     private void MajCT()     //mise à jour de la quantité de travail, en fonction de la plante sélectionnée
@@ -264,6 +268,11 @@ public class Planter : MonoBehaviour
     public void SelectionRaisin()
     {
         planteSelectionnee = 5;
+    }
+
+    public void SelectionAucunePlante()
+    {
+        planteSelectionnee = 6;
     }
 
     public void SelectionChimique()

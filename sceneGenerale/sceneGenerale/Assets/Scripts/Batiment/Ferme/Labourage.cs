@@ -81,12 +81,14 @@ public class Labourage : MonoBehaviour
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
                     Labourer(i, j);
+                    MajPrefabsLabourage();
                 }
                 else if (objetTouche.tag == "ParcelleVerte") //c'est une parcelle verte donc on la déselectionne
                 {
                     int i = ToInt(objetTouche.name[0]);
                     int j = ToInt(objetTouche.name[1]);
                     Delabourer(i, j);
+                    MajPrefabsLabourage();
                 }
             }
         }
@@ -120,7 +122,7 @@ public class Labourage : MonoBehaviour
             if ((x < xNbrParcelles - 1) && !parcellesLabourees[x + 1, y]) parcellesAdjacentes[x + 1, y] = true;
             if ((y > 0) && !parcellesLabourees[x, y - 1]) parcellesAdjacentes[x, y - 1] = true;
             if ((y < yNbrParcelles - 1) && !parcellesLabourees[x, y + 1]) parcellesAdjacentes[x, y + 1] = true;
-            MajPrefabsLabourage();
+            
 
             GameManager.environnementManager.qualiteSol -= 0.2f;
 
@@ -134,6 +136,7 @@ public class Labourage : MonoBehaviour
         nbreParcellesPlacees -= 1;
 
         parcellesLabourees[x, y] = false;
+        parcellesAdjacentes[x, y] = true;
 
         //Pour toutes les parcelles adjacentes autour, on va regarder si elle sont adjacentes avec une autre parcelle labourée pour voir si on les garde
         if ((x > 0) && !CheckParcelleLaboureeAdjacente(x - 1, y)) parcellesAdjacentes[x - 1, y] = false;
@@ -141,8 +144,6 @@ public class Labourage : MonoBehaviour
         if ((y > 0) && !CheckParcelleLaboureeAdjacente(x, y - 1)) parcellesAdjacentes[x, y - 1] = false;
         if ((y < yNbrParcelles - 1) && !CheckParcelleLaboureeAdjacente(x, y + 1)) parcellesAdjacentes[x, y + 1] = false;
 
-
-        MajPrefabsLabourage();
         nbreParcelles.text = nbreParcellesPlacees.ToString() + "/" + nbreParcellesPlacables.ToString();
     }
 
@@ -250,8 +251,8 @@ public class Labourage : MonoBehaviour
 
     public void SortieLabourageSansValidation()     //bouton rouge
     {
-
         animatorLivreActivite.SetTrigger("Return");
+
         //On détruit toutes les prefabs de parcelles
         foreach (Transform child in parcelleContainer)
         {
