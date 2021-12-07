@@ -10,24 +10,31 @@ public class ChangeSceneMairie : MonoBehaviour
     public GameObject loadingScreen;
     public Player player;
     public Vector3 positiondevantmairie;
-    int level;
+    static Vector3 positionactuelle;
     // Start is called before the first frame update
-    void Update()
+    void Start()
     {
+        //positionactuelle = player.transform.position;
+        if(positionactuelle != new Vector3(0, 0, 0))
+        {
+            player.transform.position = positionactuelle;
+        }
+        positionactuelle = new Vector3(0, 0, 0);
     }
+
     public void EnterMairie()
     {
+        positiondevantmairie = player.transform.position;
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Mer i");
         //SceneManager.LoadScene("Mer i");
-        level = 0;
     }
 
     public void EnterIsland()
     {
+        positionactuelle = positiondevantmairie;
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Island");
-        level = 1;
 
         //SceneManager.LoadScene("Island");
     }
