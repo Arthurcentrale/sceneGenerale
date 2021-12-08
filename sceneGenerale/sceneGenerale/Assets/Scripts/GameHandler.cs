@@ -11,6 +11,44 @@ public class GameHandler : MonoBehaviour
     public GameObject douglas;
     public GameObject chene;
     public GameObject hetre;
+    public GameObject bouleau;
+
+    public GameObject pinFrele;
+    public GameObject douglasFrele;
+    public GameObject cheneFrele;
+    public GameObject hetreFrele;
+    public GameObject bouleauFrele;
+
+    public GameObject pinMalade;
+    public GameObject douglasMalade;
+    public GameObject cheneMalade;
+    public GameObject hetreMalade;
+    public GameObject bouleauMalade;
+
+    public GameObject pinArbuste;
+    public GameObject douglasArbuste;
+    public GameObject cheneArbuste;
+    public GameObject hetreArbuste;
+    public GameObject bouleauArbuste;
+
+    public GameObject pinArbusteMalade;
+    public GameObject douglasArbusteMalade;
+    public GameObject cheneArbusteMalade;
+    public GameObject hetreArbusteMalade;
+    public GameObject bouleauArbusteMalade;
+
+    public GameObject pinSouche;
+    public GameObject douglasSouche;
+    public GameObject cheneSouche;
+    public GameObject hetreSouche;
+    public GameObject bouleauSouche;
+
+    public GameObject pinSoucheMalade;
+    public GameObject douglasSoucheMalade;
+    public GameObject cheneSoucheMalade;
+    public GameObject hetreSoucheMalade;
+    public GameObject bouleauSoucheMalade;
+
 
     // Rochers
     public GameObject Rocher1;
@@ -21,33 +59,7 @@ public class GameHandler : MonoBehaviour
     public GameObject Rocher6;
     public GameObject Rocher7;
 
-    // Batiments
-    public GameObject boulangerie;
-    public GameObject cabanon;
-    public GameObject chaumiere;
-    public GameObject ferme;
-    public GameObject forge;
-    public GameObject fosse;
-    public GameObject gardeManger;
-    public GameObject maisonPierre;
-    public GameObject moulinEau;
-    public GameObject moulinVent;
-    public GameObject pecherie;
-    public GameObject puit;
-
-    // Batis batiments
-    public GameObject batiBoulangerie;
-    public GameObject batiCabanon;
-    public GameObject batiChaumiere;
-    public GameObject batiFerme;
-    public GameObject batiForge;
-    public GameObject batiFosse;
-    public GameObject batiGardeManger;
-    public GameObject batiMaisonPierre;
-    public GameObject batiMoulinEau;
-    public GameObject batiMoulinVent;
-    public GameObject batiPecherie;
-    public GameObject batiPuit;
+    public List<GameObject> listeCompleteBatiments = new List<GameObject>(24);
 
     public Inventory inventory;
     public Player player;
@@ -67,7 +79,8 @@ public class GameHandler : MonoBehaviour
         dossierRochers = GameObject.Find("Rocher").transform;
         dossierBatiments = GameObject.Find("Batiments").transform;
 
-        Save();
+        //fillListeCompleteBatiments();
+
         Load();
         treeLayersMag.updateTreeLayers();
         StartCoroutine(SaveGame());
@@ -99,6 +112,43 @@ public class GameHandler : MonoBehaviour
         List<Vector3> listePositionsDouglas = new List<Vector3>();
         List<Vector3> listePositionsChenes = new List<Vector3>();
         List<Vector3> listePositionsHetres = new List<Vector3>();
+        List<Vector3> listePositionsBouleaux = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsFrele = new List<Vector3>();
+        List<Vector3> listePositionsDouglasFrele = new List<Vector3>();
+        List<Vector3> listePositionsChenesFrele = new List<Vector3>();
+        List<Vector3> listePositionsHetresFrele = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxFrele = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsMalade = new List<Vector3>();
+        List<Vector3> listePositionsDouglasMalade = new List<Vector3>();
+        List<Vector3> listePositionsChenesMalade = new List<Vector3>();
+        List<Vector3> listePositionsHetresMalade = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxMalade = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsArbuste = new List<Vector3>();
+        List<Vector3> listePositionsDouglasArbuste = new List<Vector3>();
+        List<Vector3> listePositionsChenesArbuste = new List<Vector3>();
+        List<Vector3> listePositionsHetresArbuste = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxArbuste = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsArbusteMalade = new List<Vector3>();
+        List<Vector3> listePositionsDouglasArbusteMalade = new List<Vector3>();
+        List<Vector3> listePositionsChenesArbusteMalade = new List<Vector3>();
+        List<Vector3> listePositionsHetresArbusteMalade = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxArbusteMalade = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsSouche = new List<Vector3>();
+        List<Vector3> listePositionsDouglasSouche = new List<Vector3>();
+        List<Vector3> listePositionsChenesSouche = new List<Vector3>();
+        List<Vector3> listePositionsHetresSouche = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxSouche = new List<Vector3>();
+
+        List<Vector3> listePositionsPinsSoucheMalade = new List<Vector3>();
+        List<Vector3> listePositionsDouglasSoucheMalade = new List<Vector3>();
+        List<Vector3> listePositionsChenesSoucheMalade = new List<Vector3>();
+        List<Vector3> listePositionsHetresSoucheMalade = new List<Vector3>();
+        List<Vector3> listePositionsBouleauxSoucheMalade = new List<Vector3>();
 
         // On parcourt la liste des arbres (sous formes de GO) présent dans le jeu
         // Pour chacun d'entre eux, on créé une objet de la structure arbresJSON pouvant être transformé directement en JSON
@@ -106,23 +156,225 @@ public class GameHandler : MonoBehaviour
         {
             string nomArbre = arbre.name;
             if (nomArbre.IndexOf("Pin", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsPins.Add(arbre.transform.position);
+            {
+                if (nomArbre.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+                    listePositionsPinsFrele.Add(arbre.transform.position);
+
+                else if (nomArbre.IndexOf("ArbusteMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsPinsArbusteMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsPinsArbuste.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsPinsMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("SoucheMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsPinsSoucheMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsPinsSouche.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else
+                {
+                    listePositionsPins.Add(arbre.transform.position);
+                    continue;
+                }
+            }
 
             else if (nomArbre.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsChenes.Add(arbre.transform.position);
+            {
+                if (nomArbre.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+                    listePositionsChenesFrele.Add(arbre.transform.position);
 
-            else if (nomArbre.IndexOf("hetre", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsHetres.Add(arbre.transform.position);
+                else if (nomArbre.IndexOf("ArbusteMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsChenesArbusteMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsChenesArbuste.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsChenesMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsChenesSouche.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("SoucheMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsChenesSoucheMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else
+                {
+                    listePositionsChenes.Add(arbre.transform.position);
+                    continue;
+                }
+            }
+
+
+            else if (nomArbre.IndexOf("Hetre", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (nomArbre.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+                    listePositionsHetresFrele.Add(arbre.transform.position);
+
+                else if (nomArbre.IndexOf("ArbusteMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsHetresArbusteMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsHetresArbuste.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsHetresMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsHetresSouche.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("SoucheMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsHetresSoucheMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else
+                {
+                    listePositionsHetres.Add(arbre.transform.position);
+                    continue;
+                }
+            }
+
+            else if (nomArbre.IndexOf("Bouleau", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (nomArbre.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+                    listePositionsBouleauxFrele.Add(arbre.transform.position);
+
+                else if (nomArbre.IndexOf("ArbusteMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsBouleauxArbusteMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsBouleauxArbuste.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsBouleauxMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsBouleauxSouche.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("SoucheMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsBouleauxSoucheMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else
+                {
+                    listePositionsBouleaux.Add(arbre.transform.position);
+                    continue;
+                }
+            }
+
+            else if (nomArbre.IndexOf("Douglas", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (nomArbre.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+                    listePositionsDouglasFrele.Add(arbre.transform.position);
+
+                else if (nomArbre.IndexOf("ArbusteMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsDouglasArbusteMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsDouglasArbuste.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsDouglasMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsDouglasSouche.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else if (nomArbre.IndexOf("SoucheMalade", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    listePositionsDouglasSoucheMalade.Add(arbre.transform.position);
+                    continue;
+                }
+
+                else
+                {
+                    listePositionsDouglas.Add(arbre.transform.position);
+                    continue;
+                }
+            }
 
             else
-                listePositionsDouglas.Add(arbre.transform.position);
+            {
+                print("Problème save : le gameobjet a le tag \"Arbre\" mais son type n'est pas identifiable");
+            }
         }
 
         /** ------------------ Sauvegarde des rochers ------------------ **/
 
-        GameObject[] listeRoche1 = GameObject.FindGameObjectsWithTag("Roche1");
-        GameObject[] listeRoche2 = GameObject.FindGameObjectsWithTag("Roche2");
-        GameObject[] listeRoche3 = GameObject.FindGameObjectsWithTag("Roche3");
+        GameObject[] listeRochers = GameObject.FindGameObjectsWithTag("Rocher");
 
         // On créé chacune des listes de positions des arbres
         List<Vector3> listePositionsRochers1 = new List<Vector3>();
@@ -133,56 +385,49 @@ public class GameHandler : MonoBehaviour
         List<Vector3> listePositionsRochers6 = new List<Vector3>();
         List<Vector3> listePositionsRochers7 = new List<Vector3>();
 
-        foreach (GameObject arbre in listeRoche1)
+        foreach (GameObject rocher in listeRochers)
         {
-            string nomArbre = arbre.name;
-            if (nomArbre.IndexOf("Rocher1", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers1.Add(arbre.transform.position);
+            string nomRocher = rocher.name;
+            if (nomRocher.IndexOf("Rocher1", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers1.Add(rocher.transform.position);
 
-            else if (nomArbre.IndexOf("Rocher4", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers4.Add(arbre.transform.position);
+            else if (nomRocher.IndexOf("Rocher4", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers4.Add(rocher.transform.position);
 
-            else if (nomArbre.IndexOf("Rocher7", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers7.Add(arbre.transform.position);
+            else if (nomRocher.IndexOf("Rocher7", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers7.Add(rocher.transform.position);
+
+            else if (nomRocher.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers2.Add(rocher.transform.position);
+
+            else if (nomRocher.IndexOf("Rocher5", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers5.Add(rocher.transform.position);
+
+            else if (nomRocher.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers3.Add(rocher.transform.position);
+
+            else if (nomRocher.IndexOf("Rocher6", StringComparison.OrdinalIgnoreCase) >= 0)
+                listePositionsRochers6.Add(rocher.transform.position);
 
             else
-                print("Problème sauvegarde : un rocher de type autre que 1, 4 et 7 porte le tag \"Roche1\"");
-        }
-
-        foreach (GameObject arbre in listeRoche2)
-        {
-            string nomArbre = arbre.name;
-            if (nomArbre.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers2.Add(arbre.transform.position);
-
-            else if (nomArbre.IndexOf("Rocher5", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers5.Add(arbre.transform.position);
-
-            else
-                print("Problème sauvegarde : un rocher de type autre que 2 et 5 porte le tag \"Roche2\"");
-        }
-
-        foreach (GameObject arbre in listeRoche3)
-        {
-            string nomArbre = arbre.name;
-            if (nomArbre.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers3.Add(arbre.transform.position);
-
-            else if (nomArbre.IndexOf("Rocher6", StringComparison.OrdinalIgnoreCase) >= 0)
-                listePositionsRochers6.Add(arbre.transform.position);
-
-            else
-                print("Problème sauvegarde : un rocher de type autre que 3 et 6 porte le tag \"Roche3\"");
+                print("Problème sauvegarde : un objet portant le tag \"Rocher\" n'a pas de type de roche correspondant");
         }
 
         /** ------------------ Sauvegarde des batiments ------------------ **/
 
         // On recupere tous les elements dans le dossier des batiments                
-        Dictionary<string, Vector3> listeBatiments = new Dictionary<string, Vector3>();
+        List<string> listeBatiments = new List<string>();
+        List<Vector3> listePosBatiments = new List<Vector3>();
 
         for (int i = 0; i < dossierBatiments.childCount; i++)
         {
-            listeBatiments.Add(dossierBatiments.GetChild(i).name, dossierBatiments.GetChild(i).position);
+            Transform currentBat = dossierBatiments.GetChild(i);
+
+            if (currentBat.name.IndexOf("Déplaçable", StringComparison.OrdinalIgnoreCase) >= 0)
+                continue;
+
+            listeBatiments.Add(currentBat.name);
+            listePosBatiments.Add(currentBat.position);
         }
 
         /** ------------------ Sauvegarde des données de l'inventaire ------------------ **/
@@ -195,6 +440,37 @@ public class GameHandler : MonoBehaviour
                                          listePositionsDouglas,
                                          listePositionsChenes,
                                          listePositionsHetres,
+                                         listePositionsBouleaux,
+                                         listePositionsPinsFrele,
+                                         listePositionsDouglasFrele,
+                                         listePositionsChenesFrele,
+                                         listePositionsHetresFrele,
+                                         listePositionsBouleauxFrele,
+                                         listePositionsPinsMalade,
+                                         listePositionsDouglasMalade,
+                                         listePositionsChenesMalade,
+                                         listePositionsHetresMalade,
+                                         listePositionsBouleauxMalade,
+                                         listePositionsPinsArbuste,
+                                         listePositionsDouglasArbuste,
+                                         listePositionsChenesArbuste,
+                                         listePositionsHetresArbuste,
+                                         listePositionsBouleauxArbuste,
+                                         listePositionsPinsArbusteMalade,
+                                         listePositionsDouglasArbusteMalade,
+                                         listePositionsChenesArbusteMalade,
+                                         listePositionsHetresArbusteMalade,
+                                         listePositionsBouleauxArbusteMalade,
+                                         listePositionsPinsSouche,
+                                         listePositionsDouglasSouche,
+                                         listePositionsChenesSouche,
+                                         listePositionsHetresSouche,
+                                         listePositionsBouleauxSouche,
+                                         listePositionsPinsSoucheMalade,
+                                         listePositionsDouglasSoucheMalade,
+                                         listePositionsChenesSoucheMalade,
+                                         listePositionsHetresSoucheMalade,
+                                         listePositionsBouleauxSoucheMalade,
                                          listePositionsRochers1,
                                          listePositionsRochers2,
                                          listePositionsRochers3,
@@ -203,6 +479,7 @@ public class GameHandler : MonoBehaviour
                                          listePositionsRochers6,
                                          listePositionsRochers7,
                                          listeBatiments,
+                                         listePosBatiments,
                                          listeItems,
                                          listeFavoris);
 
@@ -215,7 +492,7 @@ public class GameHandler : MonoBehaviour
     {
         string donneesEnregistrees = File.ReadAllText(Application.dataPath + "/sauvegarde.json");
 
-        // Si il n'y a aucun arbre à charger
+        // Si il n'y a rien à charger
         if (donneesEnregistrees == "{}" || donneesEnregistrees == "")
         {
             Debug.Log("Aucune donnée enregistrée");
@@ -223,6 +500,8 @@ public class GameHandler : MonoBehaviour
         }
 
         GameData gameData = JsonUtility.FromJson<GameData>(donneesEnregistrees);
+
+        /** -------------------- ARBRES EN BONNE SANTE -------------------- **/
 
         foreach (Vector3 positionOfPin in gameData.listePositionsPins)
             Instantiate(pin, positionOfPin, pin.transform.rotation, dossierArbres);
@@ -236,11 +515,116 @@ public class GameHandler : MonoBehaviour
         foreach (Vector3 positionOfChene in gameData.listePositionsChenes)
             Instantiate(chene, positionOfChene, chene.transform.rotation, dossierArbres);
 
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleaux)
+            Instantiate(bouleau, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- ARBRES MALADES -------------------- **/
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsMalade)
+            Instantiate(pinMalade, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasMalade)
+            Instantiate(douglasMalade, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresMalade)
+            Instantiate(hetreMalade, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesMalade)
+            Instantiate(cheneMalade, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxMalade)
+            Instantiate(bouleauMalade, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- ARBRES FRELES -------------------- **/
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsFrele)
+            Instantiate(pinFrele, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasFrele)
+            Instantiate(douglasFrele, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresFrele)
+            Instantiate(hetreFrele, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesFrele)
+            Instantiate(cheneFrele, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxFrele)
+            Instantiate(bouleauFrele, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- ARBRES ARBUSTES -------------------- **/
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsArbuste)
+            Instantiate(pinArbuste, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasArbuste)
+            Instantiate(douglasArbuste, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresArbuste)
+            Instantiate(hetreArbuste, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesArbuste)
+            Instantiate(cheneArbuste, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxArbuste)
+            Instantiate(bouleauArbuste, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- ARBRES ARBUSTES MALADES -------------------- **/
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsArbusteMalade)
+            Instantiate(pinArbusteMalade, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasArbusteMalade)
+            Instantiate(douglasArbusteMalade, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresArbusteMalade)
+            Instantiate(hetreArbusteMalade, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesArbusteMalade)
+            Instantiate(cheneArbusteMalade, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxArbusteMalade)
+            Instantiate(bouleauArbusteMalade, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- SOUCHES -------------------- **/
+
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsSouche)
+            Instantiate(pinSouche, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasSouche)
+            Instantiate(douglasSouche, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresSouche)
+            Instantiate(hetreSouche, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesSouche)
+            Instantiate(cheneSouche, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxSouche)
+            Instantiate(bouleauSouche, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
+        /** -------------------- SOUCHES MALADES -------------------- **/
+
+        foreach (Vector3 positionOfPin in gameData.listePositionsPinsSoucheMalade)
+            Instantiate(pinSoucheMalade, positionOfPin, pin.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfdouglas in gameData.listePositionsDouglasSoucheMalade)
+            Instantiate(douglasSoucheMalade, positionOfdouglas, douglas.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfhetre in gameData.listePositionsHetresSoucheMalade)
+            Instantiate(hetreSoucheMalade, positionOfhetre, hetre.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfChene in gameData.listePositionsChenesSoucheMalade)
+            Instantiate(cheneSoucheMalade, positionOfChene, chene.transform.rotation, dossierArbres);
+
+        foreach (Vector3 positionOfBouleau in gameData.listePositionsBouleauxSoucheMalade)
+            Instantiate(bouleauSoucheMalade, positionOfBouleau, bouleau.transform.rotation, dossierArbres);
+
+
         // On fait pas apparaitre les rochers parce qu'ils sont sur la scene pour l'instant
-        // Le script creerait donc un double de chaque a tous les appels
-
-        /*
-
+        // Le script creerait donc un double de chaque a tous les appels      
         foreach (Vector3 positionOfRocher1 in gameData.listePositionsRochers1)
             Instantiate(Rocher1, positionOfRocher1, Rocher1.transform.rotation, dossierRochers);
 
@@ -262,94 +646,36 @@ public class GameHandler : MonoBehaviour
         foreach (Vector3 positionOfRocher7 in gameData.listePositionsRochers7)
             Instantiate(Rocher7, positionOfRocher7, Rocher7.transform.rotation, dossierRochers);
 
-        */
 
-
-        if (gameData.dictionnaireBatiments != null)
+        for (int i = 0; i < gameData.listePosBatiments.Count; i++)
         {
-            foreach (KeyValuePair<string, Vector3> kvp in gameData.dictionnaireBatiments)
+            string nomBat = gameData.listeBatiments[i];
+            Vector3 positionBat = gameData.listePosBatiments[i];
+
+            GameObject batiment = null;
+
+            foreach (GameObject go in listeCompleteBatiments)
             {
-                string nomBat = kvp.Key;
-                Vector3 positionBat = kvp.Value;
-
-                if (nomBat.IndexOf("Boulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(boulangerie, positionBat, boulangerie.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiBoulangerie", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiBoulangerie, positionBat, batiBoulangerie.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Chaumière", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(chaumiere, positionBat, chaumiere.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiChaumière", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiChaumiere, positionBat, batiChaumiere.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Cabanon", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(cabanon, positionBat, cabanon.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiCabanon", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiCabanon, positionBat, batiCabanon.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Ferme", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(ferme, positionBat, ferme.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiFerme", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiFerme, positionBat, batiFerme.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Forge", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(forge, positionBat, forge.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("batiForge", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiForge, positionBat, batiForge.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Fosse", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(fosse, positionBat, fosse.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiFosse", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiFosse, positionBat, batiFosse.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("GardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(gardeManger, positionBat, gardeManger.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiGardeManger", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiGardeManger, positionBat, batiGardeManger.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("MaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(maisonPierre, positionBat, maisonPierre.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiMaisonPierre", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiMaisonPierre, positionBat, batiMaisonPierre.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("MoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(moulinEau, positionBat, moulinEau.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiMoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiMoulinEau, positionBat, batiMoulinEau.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("MoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(moulinVent, positionBat, moulinVent.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiMoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiMoulinVent, positionBat, batiMoulinVent.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Pecherie", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(pecherie, positionBat, pecherie.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("BatiPecherie", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(batiPecherie, positionBat, batiPecherie.transform.rotation, dossierBatiments);
-
-                else if (nomBat.IndexOf("Puit", StringComparison.OrdinalIgnoreCase) >= 0)
-                    Instantiate(puit, positionBat, puit.transform.rotation, dossierBatiments);
-
-                else
+                if (go.name == nomBat)
                 {
-                    print("Probleme chargement : le batiment " + nomBat + " n'est pas reconnu");
+                    batiment = go;
+                    break;
                 }
+            }
+
+            if (batiment == null)
+            {
+                print("Problème load : le nom du batiment (\"" + nomBat + "\") enregistré ne correspond à aucun batiment");
+                continue;
+            }
+
+            else
+            {
+                Instantiate(batiment, positionBat, batiment.transform.rotation, dossierBatiments);
             }
         }
 
         // Demarrage de l'inventaire
-        
         player.createInventory(gameData.listeItems, gameData.listeFavoris);
         inventory = player.inventory;
     }
