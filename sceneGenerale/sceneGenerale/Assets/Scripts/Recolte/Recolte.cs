@@ -323,6 +323,68 @@ public class Recolte : MonoBehaviour
             //Instantiate(Souchebouleau, cible.transform.position);
 
         }
+        if (cible.transform.name == "CheneFrele")
+        {
+            AjouterInventaire(boisF, 6);
+            AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+            Instantiate(prefablist[FindPrefabinList("SoucheChene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+
+        }
+        if (cible.transform.name == "HetreFrele")
+        {
+            AjouterInventaire(boisF, 5);
+            AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+            //Instantiate(Souchehetre, cible.transform.position);
+
+        }
+        if (cible.transform.name == "PinMaritimeFrele")
+        {
+            AjouterInventaire(boisF, 4);
+            AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+            //Instantiate(Souchepinm, cible.transform.position);
+
+        }
+        if (cible.transform.name == "DouglasFrele")
+        {
+            AjouterInventaire(boisF, 3);
+            AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+            //Instantiate(Souchedouglas, cible.transform.position);
+
+        }
+        if (cible.transform.name == "BouleauFrele")
+        {
+            AjouterInventaire(boisF, 4);
+            AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+            //Instantiate(Souchebouleau, cible.transform.position);
+
+        }
+        if (cible.transform.name == "CheneMalade")
+        {
+            //Instantiate(prefablist[FindPrefabinList("SoucheCheneMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+
+        }
+        if (cible.transform.name == "HetreMalade")
+        {
+            //Instantiate(prefablist[FindPrefabinList("SoucheHetreMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+        }
+        if (cible.transform.name == "PinMaritimeMalade")
+        {
+            //Instantiate(prefablist[FindPrefabinList("SouchePinMMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+        }
+        if (cible.transform.name == "DouglasMalade")
+        {
+            //Instantiate(prefablist[FindPrefabinList("SoucheDouglasMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+        }
+        if (cible.transform.name == "BouleauMalade")
+        {
+            //Instantiate(prefablist[FindPrefabinList("SoucheBouleauMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+
+        }
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;
         
@@ -647,10 +709,96 @@ public class Recolte : MonoBehaviour
     }
     void FctInfo()
     {
-        //menuinfo.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = GameObject.Find("Chene").GetComponent<SpriteRenderer>().sprite;
-        menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = cible.transform.name;
-        menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste"; // a modifier
-        menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non"; // a modifier
+        if(cible.transform.name == "Chene")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste"; 
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non"; 
+        }
+        if(cible.transform.name == "CheneFrele")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if(cible.transform.name == "CheneMalade")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+        }
+        if (cible.transform.name == "Hetre")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "HetreFrele")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "HetreMalade")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+        }
+        if (cible.transform.name == "PinMaritime")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "PinMaritimeFrele")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "PinMaritimeMalade")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+        }
+        if (cible.transform.name == "Douglas")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "DouglasFrele")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "DouglasMalade")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+        }
+        if (cible.transform.name == "Bouleau")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "BouleauFrele")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+        }
+        if (cible.transform.name == "BouleauMalade")
+        {
+            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
+            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+        }
         FondA.SetActive(false);
         menuinfo.SetActive(true);
     }

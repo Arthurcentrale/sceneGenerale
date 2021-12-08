@@ -8,13 +8,23 @@ public class ChangeSceneMairie : MonoBehaviour
     AsyncOperation loadingOperation;
     public Slider slider;
     public GameObject loadingScreen;
+    public Player player;
+    public Vector3 positiondevantmairie;
+    static Vector3 positionactuelle;
     // Start is called before the first frame update
-    void Update()
+    void Start()
     {
-        // slider.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
+        //positionactuelle = player.transform.position;
+        if(positionactuelle != new Vector3(0, 0, 0))
+        {
+            player.transform.position = positionactuelle;
+        }
+        positionactuelle = new Vector3(0, 0, 0);
     }
+
     public void EnterMairie()
     {
+        positiondevantmairie = player.transform.position;
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Mer i");
         //SceneManager.LoadScene("Mer i");
@@ -22,8 +32,10 @@ public class ChangeSceneMairie : MonoBehaviour
 
     public void EnterIsland()
     {
+        positionactuelle = positiondevantmairie;
         StartCoroutine(FadeToBlackCoroutine());
         loadingOperation = SceneManager.LoadSceneAsync("Island");
+
         //SceneManager.LoadScene("Island");
     }
     private IEnumerator FadeToBlackCoroutine()
@@ -40,5 +52,11 @@ public class ChangeSceneMairie : MonoBehaviour
             yield return null;
         } while (fade >= 0.0f);
         Debug.Log("Faded");
+
     }
+    /*private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+        player.transform.position = positiondevantmairie;
+    }*/
 }

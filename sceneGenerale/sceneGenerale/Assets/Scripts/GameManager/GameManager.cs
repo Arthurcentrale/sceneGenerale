@@ -10,11 +10,10 @@ public class GameManager : MonoBehaviour
     public float globalFoodVariety;
     public float globalWaste;
     */
-    public static float maxQE;
+    public static float maxQE = 100f;
 
     private void Start()
     {
-        maxQE = 100;
     }
     public float score { get; set; }
     private bool victoire;
