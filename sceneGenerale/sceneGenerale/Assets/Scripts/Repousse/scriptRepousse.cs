@@ -3,15 +3,7 @@ using System;
 using UnityEngine.SceneManagement;
 
 public class scriptRepousse : MonoBehaviour
-{
-    // Start is called before the first frame update
-
-
-    //******************************************************************************************************************************//
-    public int testDebug = 0;
-    //******************************************************************************************************************************//
-
-
+{ 
     // les deux prochaines variables sont en public pour l'instant (pour les tests) mais seront privées à terme
     private int nbArbresSurTerrain = 0;
     private int nbArbres; // correspond au nombre d'arbres qui pousseront à minuit
@@ -28,46 +20,34 @@ public class scriptRepousse : MonoBehaviour
     public string goTag = "Arbre";
 
 
-
-
-
-
+    // Start is called before the first frame update
     void Start()
     {
-        nbArbreMax = 60;
-        distanceDensite = 100;
-        goMarge = 10;
+        
     }
 
-
-
     // Update is called once per frame
-
     void Update()
     {
-        var now = DateTime.UtcNow;
-        //if (now.Hour == 23 && now.Minute == 59 && now.Second == 59)
-        if (testDebug == 1)
-        {
-            //******************************************************************************************************************************//
-            testDebug = 2;
-            //******************************************************************************************************************************//
 
-            // On stocke tous les Arbres du terrain dans une liste
-            GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");                        
+    }
 
-            // On compte combien il y en a
-            nbArbresSurTerrain = ListeGO.Length;
+    public void majMinuit()
+    {
+        // On stocke tous les Arbres du terrain dans une liste
+        GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
 
-            nbArbres = fonctionRepousse(nbArbresSurTerrain);
+        // On compte combien il y en a
+        nbArbresSurTerrain = ListeGO.Length;
 
-            fairePousserArbre(nbArbres, ListeGO);
+        nbArbres = fonctionRepousse(nbArbresSurTerrain);
 
-            nbArbresSurTerrain = 0;
+        fairePousserArbre(nbArbres, ListeGO);
 
-            // On met à jour les sorting order des arbres
-            treeLayersMag.updateTreeLayers();
-        }
+        nbArbresSurTerrain = 0;
+
+        // On met à jour les sorting order des arbres
+        treeLayersMag.updateTreeLayers();
     }
 
 
@@ -93,15 +73,6 @@ public class scriptRepousse : MonoBehaviour
         }
     }
     
-
-
-
-
-
-
-
-
-
     // Fonction qui fait pousser un arbre de manière cohérente par rapport à la forêt
     private void fairePousserArbre(int nbArbre, GameObject[] ListeGO)
     {
@@ -109,7 +80,6 @@ public class scriptRepousse : MonoBehaviour
         for (int i = 0; i < nbArbre; i++)
         {
             // On détermine la future position du GameObject 
-
             // On est obligé d'initialiser rand ici sinon le même chiffre sortirait à chaque fois
             var rand = new System.Random();
 
@@ -117,8 +87,6 @@ public class scriptRepousse : MonoBehaviour
             Utils.creerGo(goTag, position);
         }
     }
-
-
 
     // Fonction qui renvoie une position aléatoire disponible parmis toutes celles disponible sur le terrain
     private Vector2 positionAvailable(GameObject[] ListeGO)
@@ -149,13 +117,6 @@ public class scriptRepousse : MonoBehaviour
         while (test == false && i>0)
         {
             numProcheObjet = Utils.GetRandom(0, lengthListeGO);
-
-            // Le passage en commentaire suivant résolvait un problème d'une ancienne version
-            // Je l'ai gardé au cas ou j'en aurait de nouveau besoin
-            /*
-            while (ListeGO[numProcheObjet].CompareTag(goTag) == false)
-                numProcheObjet++;
-            */
 
             // On recupere le collider de l'arbre selectionné
             Collider col = ListeGO[numProcheObjet].GetComponent<Collider>();
@@ -192,9 +153,6 @@ public class scriptRepousse : MonoBehaviour
 
         return res;
     }
-
-
-
 
     // Fonction qui dit si la position aléatoire tirée est disponible 
     private bool isPositionOk(int numObjet, float x, float z, GameObject[] list, float size)

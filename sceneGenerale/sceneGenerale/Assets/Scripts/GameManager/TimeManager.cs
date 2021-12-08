@@ -11,11 +11,14 @@ public class TimeManager : MonoBehaviour
 
     Planter planter;
     Agri agri;
+    scriptRepousse repousse;
 
     void Start()
     {
         planter = GameObject.Find("Ferme").GetComponent<Planter>();
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
+
+        repousse = GameObject.Find("Terrain").GetComponent<scriptRepousse>();
 
         StartCoroutine(Coroutine());
     }
@@ -52,5 +55,8 @@ public class TimeManager : MonoBehaviour
         planter.ToutesMAJ();
         planter.enabled = false;
         */
+
+        // Repousse
+        //repousse.majMinuit();
     }
 }
