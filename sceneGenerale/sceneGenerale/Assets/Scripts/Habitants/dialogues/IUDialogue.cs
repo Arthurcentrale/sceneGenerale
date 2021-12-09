@@ -70,4 +70,6 @@ public class IUDialogue : MonoBehaviour
         onPanel = false;
         Deplacement.enMenu = false;
     }
+
+   
 }
