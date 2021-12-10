@@ -45,6 +45,7 @@ public class livre : MonoBehaviour
     private string constructeur;
     public GameObject emptydeArthur;
     private BoutonMenu2 fonctionsConstru;
+    private bool constru;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +77,7 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(true);
         boutonInformations.SetActive(true);
         menuConstruPageDroite.SetActive(false);
-        fermetureBouton.SetActive(false);
+        fermetureBouton.SetActive(true);
     }
 
     public void ouvertureMenuConstru()
@@ -87,6 +88,7 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(false);
         boutonInformations.SetActive(false);
         fermetureBouton.SetActive(true);
+        constru = true;
     }
 
     public void affichagePageDroiteMenuConstru()
@@ -96,10 +98,18 @@ public class livre : MonoBehaviour
 
     public void fermetureLivre()
     {
-        animatorLivreOuvert.SetTrigger("FermetureComplete");
-        fermetureBouton.SetActive(false);
         animatorLivreFerme.SetTrigger("Return");
+        if (constru) 
+        {
+            animatorLivreOuvert.SetTrigger("FermetureComplete");
+        }
+        else animatorLivreOuvert.SetTrigger("Fermeture");
+
+
+        fermetureBouton.SetActive(false);
+        constru = false;
     }
+
 
     public void construire()
     {
