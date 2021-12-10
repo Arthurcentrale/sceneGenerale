@@ -12,6 +12,9 @@ public class livre : MonoBehaviour
 
     //éléments principaux de l'IU
     private GameObject boutonConstruction;
+    private GameObject boutonInformations;
+    private GameObject boutonMissions;
+    private GameObject boutonProgression;
     private GameObject menuConstruPageDroite;
     private GameObject fermetureBouton;
 
@@ -49,6 +52,9 @@ public class livre : MonoBehaviour
         animatorLivreFerme = GameObject.Find("LivreFerme").GetComponent<Animator>();
         animatorLivreOuvert = GameObject.Find("LivreOuvert").GetComponent<Animator>();
         boutonConstruction = GameObject.Find("ConstructionBouton");
+        boutonInformations = GameObject.Find("InformationBouton");
+        boutonMissions = GameObject.Find("MissionBouton");
+        boutonProgression = GameObject.Find("ProgressionBouton");
         menuConstruPageDroite = GameObject.Find("menuConstructionPageDroite");
         fermetureBouton = GameObject.Find("FermetureBouton");
         nom = GameObject.Find("nom").GetComponent<Image>();
@@ -66,6 +72,9 @@ public class livre : MonoBehaviour
         animatorLivreFerme.SetTrigger("Selected");
         animatorLivreOuvert.SetTrigger("Selected");
         boutonConstruction.SetActive(true);
+        boutonMissions.SetActive(true);
+        boutonProgression.SetActive(true);
+        boutonInformations.SetActive(true);
         menuConstruPageDroite.SetActive(false);
         fermetureBouton.SetActive(false);
     }
@@ -74,6 +83,9 @@ public class livre : MonoBehaviour
     {
         animatorLivreOuvert.SetTrigger("OuvertureComplete");
         boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
         fermetureBouton.SetActive(true);
     }
 
