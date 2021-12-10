@@ -175,6 +175,7 @@ public class Maladie : MonoBehaviour
 
     private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1){
         var objectscaca = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
+        Vector3 prout=caca.transform.position;
         distancemini=(Vector3.Distance(caca.transform.position,objectscaca.ElementAt(0).transform.position));
         gameObjectProche=objectscaca.ElementAt(0);
         for (int i=1; i<objectscaca.Count(); i++){
