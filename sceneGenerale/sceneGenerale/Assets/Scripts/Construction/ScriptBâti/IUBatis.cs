@@ -61,6 +61,7 @@ public class IUBatis : MonoBehaviour
         }
     }
 
+
     public void ClickOnPanel()
     {
         onPanel = true;

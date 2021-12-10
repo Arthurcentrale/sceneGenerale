@@ -14,6 +14,8 @@ public class IUDialogue : MonoBehaviour
 
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,7 @@ public class IUDialogue : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("Selected");
                     open = true;
+                   
 
                 }
 
@@ -58,6 +61,8 @@ public class IUDialogue : MonoBehaviour
 
         }
     }
+
+  
 
     public void ClickOnPanel()
     {
