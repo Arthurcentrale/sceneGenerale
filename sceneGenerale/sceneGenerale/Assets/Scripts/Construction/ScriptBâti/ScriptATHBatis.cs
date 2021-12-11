@@ -180,8 +180,10 @@ public class ScriptATHBatis : MonoBehaviour
 
     void finirConstruction()
     {
-        Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.y), chaumiere.transform.rotation);
+        Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
         Destroy(bati.gameObject);
+        ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
+        ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
     }
 
     //fonction pour ajouter un item à l'inventaire
