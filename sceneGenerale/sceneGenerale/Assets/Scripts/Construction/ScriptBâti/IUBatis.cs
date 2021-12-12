@@ -13,6 +13,7 @@ public class IUBatis : MonoBehaviour
     Vector2 mP;
     new public Camera camera;
     public Animator animator;
+    public ScriptATHBatis scriptATHBati;
 
 
 
@@ -22,6 +23,7 @@ public class IUBatis : MonoBehaviour
         panel = GameObject.Find("PanelBatisConstruction");
         camera = GameObject.Find("Camera").GetComponent<Camera>();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
+        scriptATHBati = GameObject.Find("Camera").GetComponent<ScriptATHBatis>();
 
         onPanel = false;
         open = false;
@@ -50,7 +52,8 @@ public class IUBatis : MonoBehaviour
                     || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiMoulinAEau"))))
 
                 {
-                    //Ajouter update valeur max du slider, etc..
+                    scriptATHBati.affectation();
+                    
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("Ouverture");

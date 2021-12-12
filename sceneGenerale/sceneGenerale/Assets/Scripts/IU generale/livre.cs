@@ -41,6 +41,17 @@ public class livre : MonoBehaviour
     public Sprite descriptionMoulinEau;
     public Sprite descriptionBoulangerie;
 
+    //nombres
+    public Sprite un;
+    public Sprite deux;
+    public Sprite trois;
+    public Sprite quatre;
+    public Sprite cinq;
+    public Sprite six;
+    public Sprite sept;
+    public Sprite huit;
+    public Sprite neuf;
+
     //éléments autres
     private string constructeur;
     public GameObject emptydeArthur;
@@ -128,6 +139,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
+        qteR1.sprite = 
     }
 
     public void etabli()
