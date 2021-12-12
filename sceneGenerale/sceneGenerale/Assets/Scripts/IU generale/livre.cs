@@ -139,7 +139,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
-        qteR1.sprite = 
+        
     }
 
     public void etabli()

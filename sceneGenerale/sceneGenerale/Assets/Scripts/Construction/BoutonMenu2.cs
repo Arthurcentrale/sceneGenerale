@@ -20,6 +20,7 @@ public class BoutonMenu2 : MonoBehaviour
     public static bool en_construction_MaisonPierre;
     public static bool en_construction_GardeManger;
     public static bool en_construction_Ferme;
+    public static bool en_construction_Etabli;
     /// </summary>
     /// 
     /// Chaumière ///
@@ -128,6 +129,14 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject prefabFermeDéplaçable;
     public static GameObject nouvelleFerme;
 
+    /// Etabli ///
+    public GameObject boutonValiderConstructionEtabli;
+    public GameObject EtabliDéplaçable;
+    public GameObject BatiEtabli;
+    public GameObject prefabBatiEtabli;
+    public GameObject prefabEtabliDéplaçable;
+    public static GameObject nouvelleEtabli;
+
 
     public GameObject player;
     public bool boutonMenuEstAffiche = true;
@@ -148,6 +157,7 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject Pècherie;
     public GameObject MoulinAEau;
     public GameObject MoulinAVent;
+    public GameObject Etabli;
     public GameObject Boulangerie;
     public GameObject Cabanon;
     public GameObject Puits;
@@ -169,9 +179,10 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject PanelInformationMaisonPierre;
     public GameObject PanelInformationGardeManger;
     public GameObject PanelInformationFerme;
+    public GameObject PanelInformationEtabli;
 
 
- 
+
 
     // Update is called once per frame
     void Update()
@@ -1042,6 +1053,65 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction = false;
         en_construction_Ferme = false;
         boutonValiderConstructionFerme.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
+        Deplacement.enMenu = false;
+    }
+
+
+    /////////////////////////////////////////////////////DÉBUT ETABLI/////////////////////////////////////////////////////////////////
+    public void ConstruireEtabliDepuisMenuInformation()
+    {
+
+        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleEtabli.name = "nouvelleEtabli";
+        //print("console");
+        //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
+        en_construction = true;
+        en_construction_Etabli = true;
+        //MenuInformationChaumièrestAffiche = false;
+        PanelInformationEtabli.SetActive(false);
+        boutonMenu.SetActive(true);
+        boutonMenuEstAffiche = true;
+        boutonValiderConstructionEtabli.SetActive(true);
+
+
+
+
+    }
+
+    public void ConstruireEtabliDepuisMenuConstruction()
+    {
+
+
+        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleEtabli.name = "nouvelleEtabli";
+        //print("console");
+        //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
+        en_construction = true;
+        en_construction_Etabli = true;
+        //MenuInformationChaumièrestAffiche = false;
+        EnleverMenuConstructionsPage1(); // cette fois on enlève le menu de construction, puisqu'on construit directement depuis le menu
+        boutonMenu.SetActive(true);
+        boutonMenuEstAffiche = true;
+        boutonValiderConstructionEtabli.SetActive(true);
+
+
+
+
+    }
+
+
+    public void ValiderConstructionEtabli()
+    {
+        EtabliDéplaçable = GameObject.Find("nouvelleEtabli");
+        //print(MoulinDéplaçable.transform.position.x);
+        //print(MoulinDéplaçable.transform.position.y);
+        //print(MoulinDéplaçable.transform.position.z);
+        BatiEtabli = Instantiate(prefabBatiEtabli, EtabliDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiEtabli.name = ("Bati");
+        Destroy(nouvelleEtabli); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
+        en_construction = false;
+        en_construction_Etabli = false;
+        boutonValiderConstructionEtabli.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
     }
 
