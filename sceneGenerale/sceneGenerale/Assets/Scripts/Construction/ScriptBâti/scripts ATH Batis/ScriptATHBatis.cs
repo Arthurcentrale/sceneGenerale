@@ -10,12 +10,29 @@ public class ScriptATHBatis : MonoBehaviour
     public Player player;
     public GameObject ouvrier;
 
-    //les batis
-    private GameObject bati;
+    //le bati
+    public GameObject bati;
 
-    //les batiments
+    //chaumière
     public GameObject chaumiere;
-    public GameObject autre;
+    public Item itemOneChaumiere;
+    public Item itemTwoChaumiere;
+    public int nombreItemOneChaumiere;
+    public int nombreItemTwoChaumiere;
+
+    //ferme
+    public GameObject ferme;
+    public Item itemOneFerme;
+    public Item itemTwoFerme;
+    public int nombreItemOneFerme;
+    public int nombreItemTwoFerme;
+
+    //Pêcherie
+    public GameObject pecherie;
+    public Item itemOnePecherie;
+    public Item itemTwoPecherie;
+    public int nombreItemOnePecherie;
+    public int nombreItemTwoPecherie;
 
     //les boutons
     public Button bulleInfo;
@@ -49,8 +66,8 @@ public class ScriptATHBatis : MonoBehaviour
     private int nombreItemTwo;
     private int nombreItemOneRestants;
     private int nombreItemTwoRestants;
-    private int nombreItemOneNécessaire = 1;
-    private int nombreItemTwoNécessaire = 1;
+    private int nombreItemOneNécessaire;
+    private int nombreItemTwoNécessaire;
 
     //outils
     public bool RessourcesNécessairesDéposées = false;
@@ -93,7 +110,31 @@ public class ScriptATHBatis : MonoBehaviour
     public void DepotRessource()
     {
         //cette ligne sert à trouver le bati pour plus tard
-        bati = GameObject.Find("BatiChaumière");
+        bati = GameObject.Find("Bati");
+
+        if (bati.CompareTag("BatiChaumière"))
+        {
+            itemOne = itemOneChaumiere;
+            itemTwo = itemTwoChaumiere;
+            nombreItemOneNécessaire = nombreItemOneChaumiere;
+            nombreItemTwoNécessaire = nombreItemTwoChaumiere;
+        }
+
+        else if (bati.CompareTag("BatiFerme"))
+        {
+            itemOne = itemOneFerme;
+            itemTwo = itemTwoFerme;
+            nombreItemOneNécessaire = nombreItemOneFerme;
+            nombreItemTwoNécessaire = nombreItemTwoFerme;
+        }
+
+        else if (bati.CompareTag("BatiPêcherie"))
+        {
+            itemOne = itemOnePecherie;
+            itemTwo = itemTwoPecherie;
+            nombreItemOneNécessaire = nombreItemOnePecherie;
+            nombreItemTwoNécessaire = nombreItemTwoPecherie;
+        }
 
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
@@ -180,7 +221,9 @@ public class ScriptATHBatis : MonoBehaviour
 
     void finirConstruction()
     {
-        Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
+        if (bati.CompareTag("BatiChaumière")) Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
+        else if (bati.CompareTag("BatiFerme")) Instantiate(ferme, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z), ferme.transform.rotation);
+        else if (bati.CompareTag("BatiPêcherie")) Instantiate(pecherie, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z), pecherie.transform.rotation);
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
@@ -198,6 +241,11 @@ public class ScriptATHBatis : MonoBehaviour
     {
 
         player.inventory.DelItem(new ItemAmount(Item: item, Amount: Amount));
+    }
+
+    void relierBatiABatiment()
+    {
+        
     }
 
 }

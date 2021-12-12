@@ -140,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6003383339755204639}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf50eebbd2965094d9865fda98ef9808, type: 3}
   m_Name: 
@@ -148,6 +148,8 @@ MonoBehaviour:
   "menuB\xE2tiPasD\xE9j\xE0Affich\xE9": 1
   "menuConstructionPasD\xE9j\xE0Affich\xE9": 0
   inventaire: {fileID: 0}
+  NbrBois: 0
+  NbrPierre: 0
   "RessourcesN\xE9cessairesD\xE9pos\xE9es": 0
   boutonsMenuConstruction: {fileID: 0}
   OnCliqueDehors: 0
@@ -159,6 +161,10 @@ MonoBehaviour:
   BatiCabanon: {fileID: 0}
   "onAPasEncoreD\xE9truitLeB\xE2ti": 1
   ui_inventory: {fileID: 0}
+  Bois: {fileID: 0}
+  Pierre: {fileID: 0}
+  player: {fileID: 0}
+  lePapaDePlayer: {fileID: 0}
 --- !u!1 &6003383339784856403
 GameObject:
   m_ObjectHideFlags: 0

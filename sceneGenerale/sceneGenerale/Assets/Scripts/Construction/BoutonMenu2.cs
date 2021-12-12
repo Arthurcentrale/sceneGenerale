@@ -171,8 +171,7 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject PanelInformationFerme;
 
 
-
-
+ 
 
     // Update is called once per frame
     void Update()
@@ -309,7 +308,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiChaumière = Instantiate(prefabBatiChaumière, ChaumièreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiChaumière.name = ("BatiChaumière");
+        BatiChaumière.name = ("Bati");
         Destroy(nouvelleChaumière); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Chaumière = false;
@@ -371,7 +370,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiPêcherie = Instantiate(prefabBatiPêcherie, PêcherieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiPêcherie.name = ("BatiPêcherie");
+        BatiPêcherie.name = ("Bati");
         Destroy(nouvellePêcherie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Pêcherie = false;
@@ -435,7 +434,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiMoulinAEau = Instantiate(prefabBatiMoulinAEau, MoulinAEauDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiMoulinAEau.name = ("BatiMoulinAEau");
+        BatiMoulinAEau.name = ("Bati");
         Destroy(nouvelleMoulinAEau); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_MoulinAEau = false;
@@ -505,7 +504,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiMoulinAVent = Instantiate(prefabBatiMoulinAVent, MoulinAVentDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiMoulinAVent.name = ("BatiMoulinAVent");
+        BatiMoulinAVent.name = ("Bati");
         Destroy(nouvelleMoulinAVent); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_MoulinAVent = false;
@@ -573,7 +572,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiBoulangerie = Instantiate(prefabBatiBoulangerie, BoulangerieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiBoulangerie.name = ("BatiBoulangerie");
+        BatiBoulangerie.name = ("Bati");
         Destroy(nouvelleBoulangerie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Boulangerie = false;
@@ -645,7 +644,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiCabanon = Instantiate(prefabBatiCabanon, CabanonDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiCabanon.name = ("BatiCabanon");
+        BatiCabanon.name = ("Bati");
         Destroy(nouvelleCabanon); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Cabanon = false;
@@ -715,7 +714,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiPuits = Instantiate(prefabBatiPuits, PuitsDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiPuits.name = ("BatiPuits");
+        BatiPuits.name = ("Bati");
         Destroy(nouvellePuits); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Puits = false;
@@ -784,7 +783,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiForge = Instantiate(prefabBatiForge, ForgeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiForge.name = ("BatiForge");
+        BatiForge.name = ("Bati");
         Destroy(nouvelleForge); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Forge = false;
@@ -851,7 +850,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiFosse = Instantiate(prefabBatiFosse, FosseDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiFosse.name = ("BatiFosse");
+        BatiFosse.name = ("Bati");
         Destroy(nouvelleFosse); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Fosse = false;
@@ -913,7 +912,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiMaisonPierre = Instantiate(prefabBatiMaisonPierre, MaisonPierreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiMaisonPierre.name = ("BatiMaisonPierre");
+        BatiMaisonPierre.name = ("Bati");
         Destroy(nouvelleMaisonPierre); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_MaisonPierre = false;
@@ -976,7 +975,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiGardeManger = Instantiate(prefabBatiGardeManger, GardeMangerDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiGardeManger.name = ("BatiGardeManger");
+        BatiGardeManger.name = ("Bati");
         Destroy(nouvelleGardeManger); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_GardeManger = false;
@@ -1038,7 +1037,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
         BatiFerme = Instantiate(prefabBatiFerme, FermeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiFerme.name = ("BatiFerme");
+        BatiFerme.name = ("Bati");
         Destroy(nouvelleFerme); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
         en_construction_Ferme = false;

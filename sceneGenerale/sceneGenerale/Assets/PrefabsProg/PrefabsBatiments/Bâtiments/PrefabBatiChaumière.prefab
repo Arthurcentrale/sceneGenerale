@@ -93,8 +93,6 @@ GameObject:
   - component: {fileID: 8502974625154949681}
   - component: {fileID: 8502974625154949682}
   - component: {fileID: 8502974625154949683}
-  - component: {fileID: 8502974625154949684}
-  - component: {fileID: 4479855082140441488}
   m_Layer: 5
   m_Name: "PrefabBatiChaumi\xE8re"
   m_TagString: "BatiChaumi\xE8re"
@@ -183,51 +181,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8502974625154949684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8502974625154949686}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a16267113ad36424c90c4cd3c3ac4cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "menuB\xE2tiPasD\xE9j\xE0Affich\xE9": 1
-  "menuConstructionPasD\xE9j\xE0Affich\xE9": 0
-  inventaire: {fileID: 0}
-  NbrBois: 0
-  NbrPierre: 0
-  "RessourcesN\xE9cessairesD\xE9pos\xE9es": 0
-  boutonsMenuConstruction: {fileID: 0}
-  OnCliqueDehors: 0
-  moving: 0
-  "OnAfficheLeMenuDuB\xE2ti": 1
-  "prefabChaumi\xE8re": {fileID: 5241632415729536056, guid: 42e9c12d2442df547b5ac6e38857bee5,
-    type: 3}
-  "Chaumi\xE8re": {fileID: 0}
-  "BatiChaumi\xE8re": {fileID: 0}
-  "onAPasEncoreD\xE9truitLeB\xE2ti": 1
-  ui_inventory: {fileID: 0}
-  Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
-  Pierre: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
-  player: {fileID: 0}
-  lePapaDePlayer: {fileID: 0}
---- !u!114 &4479855082140441488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8502974625154949686}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3b06ee45d174246b6eb3740b12fd54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
-  isOccupied: 0
-  camera: {fileID: 0}
-  animator: {fileID: 0}
