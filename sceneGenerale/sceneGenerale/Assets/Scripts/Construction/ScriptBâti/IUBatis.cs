@@ -53,7 +53,7 @@ public class IUBatis : MonoBehaviour
 
                 {
                     scriptATHBati.affectation();
-                    
+                    if (scriptATHBati.constructionTerminee) scriptATHBati.resetConstruction();
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("Ouverture");

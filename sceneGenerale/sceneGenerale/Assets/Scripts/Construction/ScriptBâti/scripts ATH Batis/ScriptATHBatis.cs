@@ -63,7 +63,7 @@ public class ScriptATHBatis : MonoBehaviour
     float ecartTime;
     public float TimerInterval = 5;
     float tick;
-    private float tempsConstruChaumiere = 10;
+    private float tempsConstruChaumiere = 5;
 
     //donnees
     public float tempsConstruTotal = 1000; //doit être exprimé en heures
@@ -78,8 +78,9 @@ public class ScriptATHBatis : MonoBehaviour
 
     //outils
     public bool RessourcesNécessairesDéposées = false;
-    private bool permissionConstruction = false;
-
+    public bool permissionConstruction = false;
+    public bool constructionTerminee = false;
+    private Text josianne;
 
     // Start is called before the first frame update
 
@@ -94,14 +95,14 @@ public class ScriptATHBatis : MonoBehaviour
         texteTemps = temps.GetComponent<Text>();
         nombreItemTwoRestants = nombreItemTwoNécessaire;
         nombreItemOneRestants = nombreItemOneNécessaire;
-
+        josianne = GameObject.Find("Josianne").GetComponent<Text>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        josianne.text = ( "  EcartTime: " + ((int) ecartTime).ToString() + "  Time: " + ((int) time).ToString() + "TimeDepart: " + ((int) timeDepart).ToString());
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
         nombreItemOne = player.uiInventory.CountItem("Pierre");
@@ -117,7 +118,8 @@ public class ScriptATHBatis : MonoBehaviour
     public void affectation()
     {
         bati = GameObject.Find("Bati");
-
+        time = 10;
+        timeDepart = 65;
         if (bati.CompareTag("BatiChaumière"))
         {
             itemOne = itemOneChaumiere;
@@ -152,6 +154,19 @@ public class ScriptATHBatis : MonoBehaviour
 
         textItemOne.text = nombreItemOneNécessaire.ToString();
         textItemTwo.text = nombreItemTwoNécessaire.ToString();
+
+    }
+
+    public void resetConstruction()
+    {
+        imageOne.SetActive(true);
+        imageTwo.SetActive(true);
+        bulleConstruire.interactable = false;
+        bordereauConstruire.interactable = false;
+        bulleDeposer.interactable = true;
+        bordereauDeposer.interactable = true;
+        temps.SetActive(false);
+        
 
     }
 
@@ -251,6 +266,8 @@ public class ScriptATHBatis : MonoBehaviour
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
+        permissionConstruction = false;
+        constructionTerminee = true;
     }
 
     //fonction pour ajouter un item à l'inventaire
@@ -267,9 +284,5 @@ public class ScriptATHBatis : MonoBehaviour
         player.inventory.DelItem(new ItemAmount(Item: item, Amount: Amount));
     }
 
-    void relierBatiABatiment()
-    {
-        
-    }
 
 }
