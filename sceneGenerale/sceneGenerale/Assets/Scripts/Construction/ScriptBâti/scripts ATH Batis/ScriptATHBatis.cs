@@ -80,7 +80,6 @@ public class ScriptATHBatis : MonoBehaviour
     public bool RessourcesNécessairesDéposées = false;
     public bool permissionConstruction = false;
     public bool constructionTerminee = false;
-    private Text josianne;
 
     // Start is called before the first frame update
 
@@ -95,14 +94,12 @@ public class ScriptATHBatis : MonoBehaviour
         texteTemps = temps.GetComponent<Text>();
         nombreItemTwoRestants = nombreItemTwoNécessaire;
         nombreItemOneRestants = nombreItemOneNécessaire;
-        josianne = GameObject.Find("Josianne").GetComponent<Text>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        josianne.text = ( "  EcartTime: " + ((int) ecartTime).ToString() + "  Time: " + ((int) time).ToString() + "TimeDepart: " + ((int) timeDepart).ToString());
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
         nombreItemOne = player.uiInventory.CountItem("Pierre");
@@ -118,8 +115,7 @@ public class ScriptATHBatis : MonoBehaviour
     public void affectation()
     {
         bati = GameObject.Find("Bati");
-        time = 10;
-        timeDepart = 65;
+        
         if (bati.CompareTag("BatiChaumière"))
         {
             itemOne = itemOneChaumiere;
@@ -260,7 +256,7 @@ public class ScriptATHBatis : MonoBehaviour
     void finirConstruction()
     {
         if (bati.CompareTag("BatiChaumière")) Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
-        else if (bati.CompareTag("BatiFerme")) Instantiate(ferme, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z), ferme.transform.rotation);
+        else if (bati.CompareTag("BatiFerme")) ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
         else if (bati.CompareTag("BatiPêcherie")) Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
         else if (bati.CompareTag("BatiBoulangerie")) Instantiate(boulangerie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), boulangerie.transform.rotation);
         Destroy(bati.gameObject);
@@ -268,6 +264,10 @@ public class ScriptATHBatis : MonoBehaviour
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
         permissionConstruction = false;
         constructionTerminee = true;
+        RessourcesNécessairesDéposées = false;
+
+        timeDepart = time;
+        ecartTime = (int) (timeDepart - time);
     }
 
     //fonction pour ajouter un item à l'inventaire

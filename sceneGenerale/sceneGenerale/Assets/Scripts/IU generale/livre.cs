@@ -51,12 +51,19 @@ public class livre : MonoBehaviour
     public Sprite sept;
     public Sprite huit;
     public Sprite neuf;
+    public Sprite dix;
+    public Sprite onze;
+    public Sprite douze;
+    public Sprite treize;
+    public Sprite quatorze;
+    public Sprite quinze;
 
     //éléments autres
     private string constructeur;
     public GameObject emptydeArthur;
     private BoutonMenu2 fonctionsConstru;
     private bool constru;
+    private ScriptATHBatis athBati;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +83,7 @@ public class livre : MonoBehaviour
         qteR1 = GameObject.Find("numberOne").GetComponent<Image>();
         qteR2 = GameObject.Find("numberTwo").GetComponent<Image>();
         fonctionsConstru = emptydeArthur.GetComponent<BoutonMenu2>();
+        athBati = GameObject.Find("Camera").GetComponent<ScriptATHBatis>();
     }
 
     // Update is called once per frame
@@ -139,7 +147,10 @@ public class livre : MonoBehaviour
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
-        
+        selectivite(athBati.nombreItemOneChaumiere, athBati.nombreItemTwoChaumiere);
+
+
+
     }
 
     public void etabli()
@@ -176,5 +187,41 @@ public class livre : MonoBehaviour
         nom.sprite = nomBoulangerie;
         description.sprite = descriptionBoulangerie;
         constructeur = "boulangerie";
+    }
+
+
+    public void selectivite(int premier, int second)
+    {
+        if (premier == 1) qteR1.sprite = un;
+        else if (premier == 2) qteR1.sprite = deux;
+        else if (premier == 3) qteR1.sprite = trois;
+        else if (premier == 4) qteR1.sprite = quatre;
+        else if (premier == 5) qteR1.sprite = cinq;
+        else if (premier == 6) qteR1.sprite = six;
+        else if (premier == 7) qteR1.sprite = sept;
+        else if (premier == 8) qteR1.sprite = huit;
+        else if (premier == 9) qteR1.sprite = neuf;
+        else if (premier == 10) qteR1.sprite = dix;
+        else if (premier == 11) qteR1.sprite = onze;
+        else if (premier == 12) qteR1.sprite = douze;
+        else if (premier == 13) qteR1.sprite = treize;
+        else if (premier == 14) qteR1.sprite = quatorze;
+        else if (premier == 15) qteR1.sprite = deux;
+
+        if (second == 1) qteR2.sprite = un;
+        else if (second == 2) qteR2.sprite = deux;
+        else if (second == 3) qteR2.sprite = trois;
+        else if (second == 4) qteR2.sprite = quatre;
+        else if (second == 5) qteR2.sprite = cinq;
+        else if (second == 6) qteR2.sprite = six;
+        else if (second == 7) qteR2.sprite = sept;
+        else if (second == 8) qteR2.sprite = huit;
+        else if (second == 9) qteR2.sprite = neuf;
+        else if (second == 10) qteR2.sprite = dix;
+        else if (second == 11) qteR2.sprite = onze;
+        else if (second == 12) qteR2.sprite = douze;
+        else if (second == 13) qteR2.sprite = treize;
+        else if (second == 14) qteR2.sprite = quatorze;
+        else if (second == 15) qteR2.sprite = deux;
     }
 }
