@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class Recolte : MonoBehaviour
 {
@@ -283,111 +284,111 @@ public class Recolte : MonoBehaviour
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
         audioSource.PlayOneShot(treeChop);
-        if(cible.transform.name == "Chene")
+        if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            AjouterInventaire(boisR,4);
-            AjouterInventaire(boisF,3);
-            AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
-            Instantiate(prefablist[FindPrefabinList("SoucheChene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f,cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0)) ;
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                AjouterInventaire(boisF, 6);
+                AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
 
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                Debug.Log("Salut a tous");
+                AjouterInventaire(boisR, 4);
+                AjouterInventaire(boisF, 3);
+                AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+            }
 
         }
-        if (cible.transform.name == "Hetre")
+        if (cible.transform.name.IndexOf("Hetre", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            AjouterInventaire(boisR, 3);
-            AjouterInventaire(boisF, 3);
-            AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
-            //Instantiate(Souchehetre, cible.transform.position);
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                AjouterInventaire(boisF, 5);
+                AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0));
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                AjouterInventaire(boisR, 3);
+                AjouterInventaire(boisF, 3);
+                AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z -5.0f), Quaternion.Euler(0, 0, 0));
+            }
+        }
+        if (cible.transform.name.IndexOf("Pin", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                AjouterInventaire(boisF, 4);
+                AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0));
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                AjouterInventaire(boisR, 4);
+                AjouterInventaire(boisF, 1);
+                AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0));
+            }
+        }
+        if (cible.transform.name.IndexOf("Douglas",StringComparison.OrdinalIgnoreCase) >=0)
+        {
+            if(cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                AjouterInventaire(boisF, 3);
+                AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0));
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                AjouterInventaire(boisR, 1);
+                AjouterInventaire(boisF, 4);
+                AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y , cible.transform.position.z+1.0f), Quaternion.Euler(0, 0, 0));
+            }
 
         }
-        if (cible.transform.name == "PinMaritime")
+        if (cible.transform.name.IndexOf("Bouleau", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            AjouterInventaire(boisR, 4);
-            AjouterInventaire(boisF, 1);
-            AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
-            //Instantiate(Souchepinm, cible.transform.position);
-
-        }
-        if (cible.transform.name == "Douglas")
-        {
-            AjouterInventaire(boisR, 1);
-            AjouterInventaire(boisF, 4);
-            AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
-            //Instantiate(Souchedouglas, cible.transform.position);
-
-        }
-        if (cible.transform.name == "Bouleau")
-        {
-            AjouterInventaire(boisF, 5);
-            AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
-            //Instantiate(Souchebouleau, cible.transform.position);
-
-        }
-        if (cible.transform.name == "CheneFrele")
-        {
-            AjouterInventaire(boisF, 6);
-            AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
-            Instantiate(prefablist[FindPrefabinList("SoucheChene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
-
-        }
-        if (cible.transform.name == "HetreFrele")
-        {
-            AjouterInventaire(boisF, 5);
-            AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
-            //Instantiate(Souchehetre, cible.transform.position);
-
-        }
-        if (cible.transform.name == "PinMaritimeFrele")
-        {
-            AjouterInventaire(boisF, 4);
-            AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
-            //Instantiate(Souchepinm, cible.transform.position);
-
-        }
-        if (cible.transform.name == "DouglasFrele")
-        {
-            AjouterInventaire(boisF, 3);
-            AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
-            //Instantiate(Souchedouglas, cible.transform.position);
-
-        }
-        if (cible.transform.name == "BouleauFrele")
-        {
-            AjouterInventaire(boisF, 4);
-            AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
-            //Instantiate(Souchebouleau, cible.transform.position);
-
-        }
-        if (cible.transform.name == "CheneMalade")
-        {
-            //Instantiate(prefablist[FindPrefabinList("SoucheCheneMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
-
-        }
-        if (cible.transform.name == "HetreMalade")
-        {
-            //Instantiate(prefablist[FindPrefabinList("SoucheHetreMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
-        }
-        if (cible.transform.name == "PinMaritimeMalade")
-        {
-            //Instantiate(prefablist[FindPrefabinList("SouchePinMMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
-        }
-        if (cible.transform.name == "DouglasMalade")
-        {
-            //Instantiate(prefablist[FindPrefabinList("SoucheDouglasMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
-        }
-        if (cible.transform.name == "BouleauMalade")
-        {
-            //Instantiate(prefablist[FindPrefabinList("SoucheBouleauMalade")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
-
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                AjouterInventaire(boisF, 4);
+                AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                AjouterInventaire(boisF, 5);
+                AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0));
+            }
         }
         Destroy(cible.transform.gameObject);//detruit cible
-        IsCraftArbre = false;
-        
+        IsCraftArbre = false;  
     }
     private void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
@@ -402,17 +403,17 @@ public class Recolte : MonoBehaviour
             AjouterInventaire(fleurs, NbrPlace(fleurs));
             for (int i = 0; i < 3 - NbrPlace(fleurs); i++)
             {
-                Instantiate(fleurs.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                Instantiate(fleurs.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
             }
         }
     }
     private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
-        audioSource.clip = cassageRoche[Random.Range(0, cassageRoche.Length)];
+        audioSource.clip = cassageRoche[UnityEngine.Random.Range(0, cassageRoche.Length)];
         audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);
         IsCraftRoche = false;//detruit cible
-        float x = Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
+        float x = UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
             if (cible.collider.CompareTag("Roche1"))
@@ -426,7 +427,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -441,7 +442,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 4 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -456,7 +457,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 6 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -476,7 +477,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 3 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -491,7 +492,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 5 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -506,7 +507,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 7 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -526,7 +527,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 4 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -541,7 +542,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 6 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -556,7 +557,7 @@ public class Recolte : MonoBehaviour
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 8 - NbrPlace(rocher); i++)
                     {
-                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(Random.Range(-5, 5), cible.transform.position.y / 2, Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                        Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
                 }
             }
@@ -709,95 +710,113 @@ public class Recolte : MonoBehaviour
     }
     void FctInfo()
     {
-        if(cible.transform.name == "Chene")
+        if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste"; 
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non"; 
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
+
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
+            }
+            else
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
+            }
+
         }
-        if(cible.transform.name == "CheneFrele")
+        if (cible.transform.name.IndexOf("Hetre", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
+            }
+            else
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
+            }
         }
-        if(cible.transform.name == "CheneMalade")
+        if (cible.transform.name.IndexOf("Pin", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Pin Maritime";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Pin Maritime";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
+            }
+            else
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Pin Maritime";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
+            }
         }
-        if (cible.transform.name == "Hetre")
+        if (cible.transform.name.IndexOf("Douglas", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
+            }
+            else
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
+            }
+
         }
-        if (cible.transform.name == "HetreFrele")
+        if (cible.transform.name.IndexOf("Bouleau", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "HetreMalade")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
-        }
-        if (cible.transform.name == "PinMaritime")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "PinMaritimeFrele")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "PinMaritimeMalade")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "PinMaritime";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
-        }
-        if (cible.transform.name == "Douglas")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "DouglasFrele")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "DouglasMalade")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
-        }
-        if (cible.transform.name == "Bouleau")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "BouleauFrele")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Non";
-        }
-        if (cible.transform.name == "BouleauMalade")
-        {
-            menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
-            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frele";
-            menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Oui";
+            if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
+            }
+            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
+            }
+            else
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Robuste";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
+            }
         }
         FondA.SetActive(false);
         menuinfo.SetActive(true);
