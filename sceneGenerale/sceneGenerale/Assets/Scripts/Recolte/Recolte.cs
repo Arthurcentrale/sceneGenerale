@@ -283,6 +283,7 @@ public class Recolte : MonoBehaviour
 
     private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
+        player.uiInventory.ReduitDuraEquip();
         audioSource.PlayOneShot(treeChop);
         if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
         {
@@ -409,6 +410,7 @@ public class Recolte : MonoBehaviour
     }
     private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
+        player.uiInventory.ReduitDuraEquip();
         audioSource.clip = cassageRoche[UnityEngine.Random.Range(0, cassageRoche.Length)];
         audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);

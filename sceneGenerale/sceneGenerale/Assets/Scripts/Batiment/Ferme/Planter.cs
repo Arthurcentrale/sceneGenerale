@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Planter : MonoBehaviour
 {
     private Camera MainCamera;
+    public static int[] nbrePlantes;
 
     private Animator animatorLivreActivite;
 
@@ -343,17 +344,17 @@ public class Planter : MonoBehaviour
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles
     {
-        int[] nbrePlantes = new int[6] {0, 0, 0, 0, 0, 0};
+        int[] nbPlantes = new int[6] {0, 0, 0, 0, 0, 0};
         int q;
         for (int i = 0; i < xNbrParcelles; i++)
         {
             for (int j = 0; j < yNbrParcelles; j++)
             {
                 q = cultureParcelles[i, j];
-                if (q >= 0) nbrePlantes[q] += 1;
+                if (q >= 0) nbPlantes[q] += 1;
             }
         }
-        return nbrePlantes;
+        return nbPlantes;
     }
 
     public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
@@ -400,7 +401,7 @@ public class Planter : MonoBehaviour
 
     public void SortiePlantage()  //bouton vert
     {
-        int[] nbrePlantes = CalculeNbrePlantes();
+        nbrePlantes = CalculeNbrePlantes();
         this.GetComponent<Recap>().MajMenuRecap(Labourage.nbreParcellesPlacees, Labourage.nbreParcellesPlacables, capaciteTravailUtilisee, capaciteTravail, nbrePlantes[0], nbrePlantes[1], nbrePlantes[2], nbrePlantes[3], nbrePlantes[5]);
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
