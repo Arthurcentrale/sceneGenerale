@@ -52,7 +52,7 @@ public class IUBatis : MonoBehaviour
                     || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiMoulinAEau"))))
 
                 {
-                    scriptATHBati.affectation();
+                    if (scriptATHBati.depotEnCours == false) scriptATHBati.affectation();
                     if (scriptATHBati.constructionTerminee) scriptATHBati.resetConstruction();
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);

@@ -159,6 +159,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomEtabli;
         description.sprite = descriptionEtabli;
         constructeur = "etabli";
+        
     }
 
     public void ferme()
@@ -166,6 +167,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomFerme;
         description.sprite = descriptionFerme;
         constructeur = "ferme";
+        selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
     }
 
     public void pecherie()
@@ -173,6 +175,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomPecherie;
         description.sprite = descriptionPecherie;
         constructeur = "pecherie";
+        selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
     }
 
     public void moulinEau()
@@ -180,6 +183,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomMoulinEau;
         description.sprite = descriptionMoulinEau;
         constructeur = "moulinEau";
+        selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
     }
 
     public void boulangerie()
@@ -187,6 +191,7 @@ public class livre : MonoBehaviour
         nom.sprite = nomBoulangerie;
         description.sprite = descriptionBoulangerie;
         constructeur = "boulangerie";
+        selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
     }
 
 
@@ -206,7 +211,7 @@ public class livre : MonoBehaviour
         else if (premier == 12) qteR1.sprite = douze;
         else if (premier == 13) qteR1.sprite = treize;
         else if (premier == 14) qteR1.sprite = quatorze;
-        else if (premier == 15) qteR1.sprite = deux;
+        else if (premier == 15) qteR1.sprite = quinze;
 
         if (second == 1) qteR2.sprite = un;
         else if (second == 2) qteR2.sprite = deux;
@@ -222,6 +227,6 @@ public class livre : MonoBehaviour
         else if (second == 12) qteR2.sprite = douze;
         else if (second == 13) qteR2.sprite = treize;
         else if (second == 14) qteR2.sprite = quatorze;
-        else if (second == 15) qteR2.sprite = deux;
+        else if (second == 15) qteR2.sprite = quinze;
     }
 }

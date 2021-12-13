@@ -41,6 +41,13 @@ public class ScriptATHBatis : MonoBehaviour
     public int nombreItemOneBoulangerie;
     public int nombreItemTwoBoulangerie;
 
+    //Moulin à eau
+    public GameObject moulinEau;
+    public Item itemOneMoulinEau;
+    public Item itemTwoMoulinEau;
+    public int nombreItemOneMoulinEau;
+    public int nombreItemTwoMoulinEau;
+
     //les boutons
     public Button bulleInfo;
     public Button bulleConstruire;
@@ -80,6 +87,7 @@ public class ScriptATHBatis : MonoBehaviour
     public bool RessourcesNécessairesDéposées = false;
     public bool permissionConstruction = false;
     public bool constructionTerminee = false;
+    public bool depotEnCours = false;
 
     // Start is called before the first frame update
 
@@ -148,6 +156,14 @@ public class ScriptATHBatis : MonoBehaviour
             nombreItemTwoNécessaire = nombreItemTwoBoulangerie;
         }
 
+        else if (bati.CompareTag("BatiMoulinAEau"))
+        {
+            itemOne = itemOneMoulinEau;
+            itemTwo = itemTwoMoulinEau;
+            nombreItemOneNécessaire = nombreItemOneMoulinEau;
+            nombreItemTwoNécessaire = nombreItemTwoMoulinEau;
+        }
+
         textItemOne.text = nombreItemOneNécessaire.ToString();
         textItemTwo.text = nombreItemTwoNécessaire.ToString();
 
@@ -162,6 +178,7 @@ public class ScriptATHBatis : MonoBehaviour
         bulleDeposer.interactable = true;
         bordereauDeposer.interactable = true;
         temps.SetActive(false);
+        constructionTerminee = false;
         
 
     }
@@ -169,7 +186,7 @@ public class ScriptATHBatis : MonoBehaviour
     public void DepotRessource()
     {
         //cette ligne sert à trouver le bati pour plus tard
-        
+        depotEnCours = true;
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
         nombreItemOne = player.uiInventory.CountItem("Pierre");
@@ -235,7 +252,7 @@ public class ScriptATHBatis : MonoBehaviour
         permissionConstruction = true;
         temps.SetActive(true);
         timeDepart = Time.time;
-
+        depotEnCours = false;
         ouvrier.transform.position = new Vector3 (bati.transform.position.x+6,ouvrier.transform.position.y,bati.transform.position.z-5);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 1);
     }
@@ -258,7 +275,8 @@ public class ScriptATHBatis : MonoBehaviour
         if (bati.CompareTag("BatiChaumière")) Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
         else if (bati.CompareTag("BatiFerme")) ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
         else if (bati.CompareTag("BatiPêcherie")) Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
-        else if (bati.CompareTag("BatiBoulangerie")) Instantiate(boulangerie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), boulangerie.transform.rotation);
+        else if (bati.CompareTag("BatiBoulangerie")) boulangerie.transform.position = new Vector3(bati.transform.position.x, boulangerie.transform.position.y, bati.transform.position.z);
+        else if (bati.CompareTag("BatiMoulinAEau")) moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
