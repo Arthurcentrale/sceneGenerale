@@ -448,7 +448,7 @@ public class Recolte : MonoBehaviour
         float x = UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
-            if (cible.collider.CompareTag("Roche1"))
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
@@ -463,7 +463,7 @@ public class Recolte : MonoBehaviour
                     }
                 }
             }
-            if (cible.collider.CompareTag("Roche2"))
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
@@ -478,7 +478,7 @@ public class Recolte : MonoBehaviour
                     }
                 }
             }
-            if (cible.collider.CompareTag("Roche3"))
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher1", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 6) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {

@@ -160,7 +160,7 @@ public class UI_Inventory : MonoBehaviour
 
         inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
         
-        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 115));
+        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 5));
         
         inventory.AddItem(new ItemAmount(Item: Pioche, Amount: 1));
         inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 5));
