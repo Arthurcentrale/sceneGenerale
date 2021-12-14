@@ -23,8 +23,8 @@ public class MoulinEau : MonoBehaviour
     public GameObject go;
 
     //nombreDeParcelle
-    public int nbParcelleBle;
-    public int nbParcelleMais;
+    int nbParcelleBle;
+    int nbParcelleMais;
 
     public bool isOccupied, valider;
 
@@ -52,9 +52,10 @@ public class MoulinEau : MonoBehaviour
 
     void Update()
     {
+        nbParcelleBle = Planter.nbrePlantes[0];
+        nbParcelleMais = Planter.nbrePlantes[1];
         slider.minValue = 0;
-        //slider.maxValue = QuantiteMax(habitant);
-        slider.maxValue = 15;
+        slider.maxValue = QuantiteMax(habitant);
         var ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit Hit;
 
@@ -112,7 +113,7 @@ public class MoulinEau : MonoBehaviour
             textType.text = "Maïs";
         }
     }
-    /*int QuantiteMax(HabitantBehaviour habitant)
+    int QuantiteMax(HabitantBehaviour habitant)
     {
         if (isBle)
         {
@@ -160,7 +161,7 @@ public class MoulinEau : MonoBehaviour
                 return Math.Max(10, nbParcelleMais);
             }
         }
-    }*/
+    }
     public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
         QuantiteFarine = QuantiteFarineNonValide;

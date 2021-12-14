@@ -12,6 +12,9 @@ public class TimeManager : MonoBehaviour
     Planter planter;
     Agri agri;
     scriptRepousse repousse;
+    Boulangerie boulangerie;
+    MoulinVent moulinVent;
+    MoulinEau moulinEau;
 
     void Start()
     {
@@ -19,7 +22,9 @@ public class TimeManager : MonoBehaviour
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
 
         repousse = GameObject.Find("Terrain").GetComponent<scriptRepousse>();
-
+        boulangerie = GameObject.FindGameObjectWithTag("Boulangerie").GetComponent<Boulangerie>();
+        moulinVent = GameObject.FindGameObjectWithTag("MoulinVent").GetComponent<MoulinVent>();
+        moulinEau = GameObject.FindGameObjectWithTag("MoulinEau").GetComponent<MoulinEau>();
         StartCoroutine(Coroutine());
     }
 
@@ -56,6 +61,11 @@ public class TimeManager : MonoBehaviour
         planter.enabled = false;
         */
 
+        /*
+            boulangerie.FonctionMinuit();
+            moulinVent.FonctionMinuit();
+            moulinEau.FonctionMinuit();
+         */
         // Repousse
         //repousse.majMinuit();
     }
