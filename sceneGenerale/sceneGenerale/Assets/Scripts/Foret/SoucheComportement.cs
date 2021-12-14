@@ -78,35 +78,35 @@ public class SoucheComportement : MonoBehaviour
         {
             arbreY = arbreManager.cheneRobuste.transform.position.y;
             rot = arbreManager.cheneRobuste.transform.rotation;
-            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
             Instantiate(arbreManager.cheneFrele, pos, rot);
         }
         else if (essence == "pin")
         {
             arbreY = arbreManager.pinRobuste.transform.position.y;
             rot = arbreManager.pinRobuste.transform.rotation;
-            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
             Instantiate(arbreManager.pinFrele, pos, rot);
         }
         else if (essence == "douglas")
         {
             arbreY = arbreManager.douglasRobuste.transform.position.y;
             rot = arbreManager.douglasRobuste.transform.rotation;
-            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
             Instantiate(arbreManager.douglasFrele, pos, rot);
         }
         else if (essence == "hetre")
         {
             arbreY = arbreManager.hetreRobuste.transform.position.y;
             rot = arbreManager.hetreRobuste.transform.rotation;
-            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
             Instantiate(arbreManager.hetreFrele, pos, rot);
         }
         else
         {
             arbreY = arbreManager.bouleauRobuste.transform.position.y;
             rot = arbreManager.bouleauRobuste.transform.rotation;
-            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
+            Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
             Instantiate(arbreManager.bouleauFrele, pos, rot);
         }
 
