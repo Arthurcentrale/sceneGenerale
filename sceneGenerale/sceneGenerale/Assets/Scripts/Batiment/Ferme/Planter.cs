@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Planter : MonoBehaviour
 {
     private Camera MainCamera;
-    public static int[] nbrePlantes;
+    public static int[] nbrePlantes = new int[6] { 0, 0, 0, 0, 0, 0 };
 
     private Animator animatorLivreActivite;
 
