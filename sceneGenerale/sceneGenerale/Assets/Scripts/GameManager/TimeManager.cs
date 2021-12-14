@@ -12,11 +12,13 @@ public class TimeManager : MonoBehaviour
     Planter planter;
     Agri agri;
     scriptRepousse repousse;
+    Maladie maladie;
 
     void Start()
     {
         planter = GameObject.Find("Ferme").GetComponent<Planter>();
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
+        maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
 
         repousse = GameObject.Find("Terrain").GetComponent<scriptRepousse>();
 
@@ -35,11 +37,29 @@ public class TimeManager : MonoBehaviour
         FonctionsMinuit();
     }
 
+
+
+    IEnumerator AttenteTroisHeures() // On bloque jusqu'a minuit
+    {
+        current = DateTime.Now;  //Donne le jour et l'heure
+        tomorrow = current.AddDays(0.125).Date;   //AddDays marche prend en paramètre un double, donc normalement ça correspond bien à une attente de 3 heures
+        seconds = (tomorrow - current).TotalSeconds;
+
+        yield return new WaitForSeconds((float) seconds);
+        //yield return new WaitForSeconds(5f); //Pour test que tout marche
+
+        Fonctions3Heures();
+    }
+
+
+
+
     IEnumerator Coroutine() //Coroutine principale qui boucle à chaque fois que l'on a attendu jusqu'à minuit indéfiniment
     {
         while(true)
         {
             yield return StartCoroutine(AttenteMinuit());
+            yield return StartCoroutine(AttenteTroisHeures());
         }
     }
 
@@ -58,5 +78,26 @@ public class TimeManager : MonoBehaviour
 
         // Repousse
         //repousse.majMinuit();
+
+
+        //Maladie
+        var rand= UnityEngine.Random.Range(0f,1f);
+        if (rand<=0.03 && !(maladie.maladieEnCours)){ //3% de chance de déclencher une maladie si ya pas déjà une maladie en cours
+            maladie.FonctionQuiSeDéclencheÀMinuit();    
+        }
     }
+
+    void Fonctions3Heures(){
+        // Toutes les fonctions à éxécuter toutes les 3 heures
+
+        //Maladie
+        //on vérifie d'abord que ya encore la maladie
+        maladie.VérifierMaladie();
+        if (maladie.maladieEnCours){
+            maladie.ActualisationMaladie(maladie.essenceMalade);
+        }
+    }
+
+
+    
 }
