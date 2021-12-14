@@ -23,7 +23,7 @@ public class SocialManager
     public void MajSocial()
     {
         //On met à jour quantiteNourriture
-        listeBatiment = GameObject.Find("GameManager").GetComponent<GameManager>().developpementManager.listeBatiment;
+        listeBatiment = GameManager.developpementManager.listeBatiment;
         foreach(GameObject batimentGO in listeBatiment)
         {
             quantiteNourriture += batimentGO.GetComponent<Batiment>().productionFood(); //on ajoute la production de nourriture de chaque batiment de la liste lors d'une maj

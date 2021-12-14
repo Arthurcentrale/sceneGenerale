@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Mairie : MonoBehaviour
 {
@@ -10,8 +12,8 @@ public class Mairie : MonoBehaviour
     private Animator animator;
     public Player player;
 
-    public GameObject PanelBureau;
-
+    public GameObject PanelTableau;
+    
 
 
     // Start is called before the first frame update
@@ -34,7 +36,7 @@ public class Mairie : MonoBehaviour
             if (onPanel == false)
             {
                 panel.SetActive(false);
-                PanelBureau.SetActive(false);
+                PanelTableau.SetActive(false);
                 open = false;
                 
             }
@@ -50,10 +52,10 @@ public class Mairie : MonoBehaviour
                     open = true;
                     
                 }
-                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Bureau2"))
+                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Tableau"))
                 {
-                    PanelBureau.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
-                    PanelBureau.gameObject.SetActive(true);
+                    FctTableau();
+                    PanelTableau.gameObject.SetActive(true);
                     open = true;
                     Deplacement.enMenu = true;
                 }
@@ -71,5 +73,29 @@ public class Mairie : MonoBehaviour
     {
         onPanel = false;
         Deplacement.enMenu = false;
+    }
+
+    void FctTableau()
+    {
+        Transform jauges = PanelTableau.transform.GetChild(1);
+        //List<float> valeurs = new List<float> { 80,52,12,52,84,1};
+        List<float> valeurs = new List<float>{ GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol , GameManager.environnementManager.qualiteEau,GameManager.socialManager.qualiteDeVie,GameManager.socialManager.ecoSensibilisation,GameManager.developpementManager.navireConstruit };
+        for(int i = 0; i <= 5; i++)
+        {
+            Slider slider = jauges.GetChild(i).gameObject.GetComponent<Slider>();
+            slider.value = valeurs[i];
+            if (valeurs[i] / slider.maxValue > 0.65f)
+            {
+                slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.green;
+            }
+            else if(valeurs[i] / slider.maxValue <= 0.65f && valeurs[i] / slider.maxValue > 0.30f)
+            {
+                slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.yellow;
+            }
+            else
+            {
+                slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
+            }
+        }
     }
 }
