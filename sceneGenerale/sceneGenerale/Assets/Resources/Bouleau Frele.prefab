@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6977192096046594622}
+  - component: {fileID: 1342782364944471419}
   m_Layer: 0
   m_Name: Bouleau Frele
   m_TagString: Untagged
@@ -31,6 +32,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1342782364944471419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2305426129614202072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre: {fileID: 0}
+  etat: 
+  essence: 
+  age: 0
+  tempsCroissance: 0
+  absorptionCo2: 0
 --- !u!1 &3385936550939567782
 GameObject:
   m_ObjectHideFlags: 0
