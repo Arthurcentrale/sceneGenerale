@@ -36,7 +36,7 @@ public class Maladie : MonoBehaviour
     public string essenceMalade="aucune";
     
     void Start(){
-        arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
+        //arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
         //var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)"); // la liste contient aussi les objects inactifs qui portent ce nom, il faudra faire attention
         //print("nombre de chenes" + objects.Count()); //après test ça a l'air de bien marcher
         //DéclencherMaladie();
@@ -45,13 +45,16 @@ public class Maladie : MonoBehaviour
     
     public void DéclencherMaladie(){
         // Choix de l'essence de l'arbre qui sera contaminée 
+        arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
         var rand = UnityEngine.Random.Range(0f,1f);
         //print(rand);
         //On transforme nos bools en conséquence
         if (rand<probaMaladieChêne){
             // maladieSurChêne=true;
             // print("maladieSurChêne");
-            var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)");
+            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)");
+            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene");
+            var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){ //Pour éviter d'avoir des erreurs qui empêchent d'effectuer la sauvegarde
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Chene");
@@ -61,7 +64,7 @@ public class Maladie : MonoBehaviour
                 essenceMalade="chene";
                 prochainArbreMalade=premierArbreMalade;
                 while(nombreArbresMalades<=(0.25*(objects.Count()))){
-                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Chene(Clone)");
+                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Chene(Clone)","Chene");
                     nombreArbresMalades+=1;
                     RendreArbreMalade(prochainArbreMalade,"Chene");
                     //prochainArbreMalade.name="Chene Malade";
@@ -71,7 +74,9 @@ public class Maladie : MonoBehaviour
         if (probaMaladieChêne<rand && rand<probaMaladieChêne+probaMaladieHêtre){
             // maladieSurHêtre=true;
             // print("maladieSurHêtre");
-            var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre(Clone)");
+            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre(Clone)");
+            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre");
+            var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Hetre");
@@ -81,7 +86,7 @@ public class Maladie : MonoBehaviour
                 essenceMalade="hetre";
                 prochainArbreMalade=premierArbreMalade;
                 while(nombreArbresMalades<=(0.25*(objects.Count()))){
-                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Hetre(Clone)");
+                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Hetre(Clone)","Hetre");
                     nombreArbresMalades+=1;
                     RendreArbreMalade(prochainArbreMalade,"Hetre");
                     //premierArbreMalade.name="Hetre Malade";
@@ -91,7 +96,9 @@ public class Maladie : MonoBehaviour
         if (rand>probaMaladieChêne+probaMaladieHêtre && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin){
             // maladieSurPin=true;
             // print("maladieSurPin");
-            var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin(Clone)");
+            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin(Clone)");
+            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin");
+            var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Pin");
@@ -101,7 +108,7 @@ public class Maladie : MonoBehaviour
                 essenceMalade="pin";
                 prochainArbreMalade=premierArbreMalade;
                 while(nombreArbresMalades<=(0.25*(objects.Count()))){
-                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Pin(Clone)");
+                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Pin(Clone)","Pin");
                     nombreArbresMalades+=1;
                     RendreArbreMalade(prochainArbreMalade,"Pin");
                     //premierArbreMalade.name="Pin Malade";
@@ -111,7 +118,9 @@ public class Maladie : MonoBehaviour
         if (rand>probaMaladieChêne+probaMaladieHêtre+probaMaladiePin && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin+probaMaladieDouglas){
             // maladieSurDouglas=true;
             // print("maladieSurDouglas");
-            var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas(Clone)");
+            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas(Clone)");
+            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas");
+            var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Douglas");
@@ -121,7 +130,7 @@ public class Maladie : MonoBehaviour
                 essenceMalade="douglas";
                 prochainArbreMalade=premierArbreMalade;
                 while(nombreArbresMalades<=(0.25*(objects.Count()))){
-                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Douglas(Clone)");
+                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Douglas(Clone)","Douglas");
                     nombreArbresMalades+=1;
                     RendreArbreMalade(prochainArbreMalade,"Douglas");
                     //premierArbreMalade.name="Douglas Malade";
@@ -131,7 +140,9 @@ public class Maladie : MonoBehaviour
         if (rand>1-probaMaladieBouleau){
             // maladieSurBouleau=true;
             // print("maladieSurBouleau");
-            var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau(Clone)");
+            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau(Clone)");
+            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau");
+            var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Bouleau");
@@ -141,7 +152,7 @@ public class Maladie : MonoBehaviour
                 essenceMalade="bouleau";
                 prochainArbreMalade=premierArbreMalade;
                 while(nombreArbresMalades<=(0.25*(objects.Count()))){
-                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Bouleau(Clone)");
+                    prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Bouleau(Clone)","Bouleau");
                     nombreArbresMalades+=1;
                     RendreArbreMalade(prochainArbreMalade,"Bouleau");
                     //premierArbreMalade.name="Bouleau Malade";
@@ -162,7 +173,7 @@ public class Maladie : MonoBehaviour
         if (essenceMalade=="chene" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Chene Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){ //nous évite tout plein d'erreurs chiantes
-                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Chene(Clone)"); //on contamine un arbre à côté du précédent
+                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Chene(Clone)","Chene"); //on contamine un arbre à côté du précédent
                 //Comme prochainArbreMalade aura changé de nom, il ne sera plus dans la liste des "Chene(Clone)" donc on ne contaminera pas le même arbre en boucle
                 RendreArbreMalade(prochainArbreMalade,"Chene");
                 //premierArbreMalade.name="Chene Malade";
@@ -174,7 +185,7 @@ public class Maladie : MonoBehaviour
         if (essenceMalade=="hetre" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Hetre Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
-                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Hetre(Clone)"); //on contamine un arbre à côté du précédent
+                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Hetre(Clone)","Hetre"); //on contamine un arbre à côté du précédent
                 RendreArbreMalade(prochainArbreMalade,"Hetre");
                 //premierArbreMalade.name="Hetre Malade";
             }
@@ -182,7 +193,7 @@ public class Maladie : MonoBehaviour
         if (essenceMalade=="pin" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Pin Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
-                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Pin(Clone)"); //on contamine un arbre à côté du précédent
+                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Pin(Clone)","Pin"); //on contamine un arbre à côté du précédent
                 RendreArbreMalade(prochainArbreMalade,"Pin");
                 //premierArbreMalade.name="Pin Malade";
             }
@@ -190,7 +201,7 @@ public class Maladie : MonoBehaviour
         if (essenceMalade=="douglas" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Douglas Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){  
-                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Douglas(Clone)"); //on contamine un arbre à côté du précédent
+                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Douglas(Clone)","Douglas"); //on contamine un arbre à côté du précédent
                 RendreArbreMalade(prochainArbreMalade,"Douglas");
                 //premierArbreMalade.name="Douglas Malade";
             }
@@ -198,15 +209,17 @@ public class Maladie : MonoBehaviour
         if (essenceMalade=="bouleau" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Bouleau Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
-                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Bouleau(Clone)"); //on contamine un arbre à côté du précédent
+                prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Bouleau(Clone)","Bouleau"); //on contamine un arbre à côté du précédent
                 RendreArbreMalade(prochainArbreMalade,"Bouleau");
                 //premierArbreMalade.name="Bouleau Malade";
             }
         }
     }
 
-    private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1){
-        var objectscaca = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
+    private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1, string name2){
+        var objectsprout = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
+        var objectspipi = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name2);
+        var objectscaca=objectsprout.Concat(objectspipi);
         Vector3 prout=caca.transform.position;
         distancemini=(Vector3.Distance(caca.transform.position,objectscaca.ElementAt(0).transform.position));
         gameObjectProche=objectscaca.ElementAt(0);
