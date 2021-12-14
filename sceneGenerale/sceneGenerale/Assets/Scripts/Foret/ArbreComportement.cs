@@ -185,5 +185,12 @@ public class ArbreComportement : MonoBehaviour
         
         Destroy(gameObject);
     }
-    
+
+
+    public void tuerArbre()
+    {
+        Destroy(gameObject);
+
+    }
+
 }
