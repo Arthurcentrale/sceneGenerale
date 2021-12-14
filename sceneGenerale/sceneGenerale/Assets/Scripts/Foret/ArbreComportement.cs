@@ -15,6 +15,8 @@ public class ArbreComportement : MonoBehaviour
 
     private ArbreManager arbreManager;
 
+    private Transform dossierArbres;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,8 @@ public class ArbreComportement : MonoBehaviour
         absorptionCo2 = DefineAbsorptionCo2(essence);
         
         if (age < tempsCroissance) StartCoroutine(TestOne());
+
+        dossierArbres = GameObject.Find("Arbres").transform;
     }
 
     // Update is called once per frame
@@ -131,9 +135,9 @@ public class ArbreComportement : MonoBehaviour
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
             if (etat == "arbusteMalade")
             {
-                Instantiate(arbreManager.cheneMalade, pos, rot);
+                Instantiate(arbreManager.cheneMalade, pos, rot, dossierArbres);
             }
-            else Instantiate(arbreManager.cheneRobuste, pos, rot);
+            else Instantiate(arbreManager.cheneRobuste, pos, rot, dossierArbres);
         }
         else if (essence == "pin") 
         { 
@@ -142,9 +146,9 @@ public class ArbreComportement : MonoBehaviour
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
             if (etat == "arbusteMalade")
             {
-                Instantiate(arbreManager.pinMalade, pos, rot);
+                Instantiate(arbreManager.pinMalade, pos, rot, dossierArbres);
             }
-            else Instantiate(arbreManager.pinRobuste, pos, rot);
+            else Instantiate(arbreManager.pinRobuste, pos, rot, dossierArbres);
         }
         else if (essence == "douglas") 
         { 
@@ -153,9 +157,9 @@ public class ArbreComportement : MonoBehaviour
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
             if (etat == "arbusteMalade")
             {
-                Instantiate(arbreManager.douglasMalade, pos, rot);
+                Instantiate(arbreManager.douglasMalade, pos, rot, dossierArbres);
             }
-            else Instantiate(arbreManager.douglasRobuste, pos, rot);
+            else Instantiate(arbreManager.douglasRobuste, pos, rot, dossierArbres);
         }
         else if (essence == "hetre") 
         { 
@@ -164,9 +168,9 @@ public class ArbreComportement : MonoBehaviour
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
             if (etat == "arbusteMalade")
             {
-                Instantiate(arbreManager.hetreMalade, pos, rot);
+                Instantiate(arbreManager.hetreMalade, pos, rot, dossierArbres);
             }
-            else Instantiate(arbreManager.hetreRobuste, pos, rot);
+            else Instantiate(arbreManager.hetreRobuste, pos, rot, dossierArbres);
         }
         else { 
             arbreY = arbreManager.bouleauRobuste.transform.position.y; 
@@ -174,9 +178,9 @@ public class ArbreComportement : MonoBehaviour
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ);
             if (etat == "arbusteMalade")
             {
-                Instantiate(arbreManager.bouleauMalade, pos, rot);
+                Instantiate(arbreManager.bouleauMalade, pos, rot, dossierArbres);
             }
-            else Instantiate(arbreManager.bouleauRobuste, pos, rot);
+            else Instantiate(arbreManager.bouleauRobuste, pos, rot, dossierArbres);
         }
         
         Destroy(gameObject);
