@@ -31,6 +31,8 @@ public class Maladie : MonoBehaviour
     private GameObject gameObjectProche;
     private int nombreArbresMalades;
     private GameObject prochainArbreMalade;
+    public bool maladieEnCours=false;
+    public string essenceMalade;
     
     void Start(){
         arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
@@ -46,13 +48,15 @@ public class Maladie : MonoBehaviour
         print(rand);
         //On transforme nos bools en conséquence
         if (rand<probaMaladieChêne){
-            maladieSurChêne=true;
-            print("maladieSurChêne");
+            // maladieSurChêne=true;
+            // print("maladieSurChêne");
             var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)");
             premierArbreMalade=objects.ElementAt(0);
             RendreArbreMalade(premierArbreMalade,"Chene");
             //premierArbreMalade.name="Chene Malade";
             nombreArbresMalades=1;
+            maladieEnCours=true;
+            essenceMalade="chene";
             prochainArbreMalade=premierArbreMalade;
             while(nombreArbresMalades<=(0.25*(objects.Count()))){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Chene(Clone)");
@@ -62,13 +66,15 @@ public class Maladie : MonoBehaviour
             }
         }
         if (probaMaladieChêne<rand && rand<probaMaladieChêne+probaMaladieHêtre){
-            maladieSurHêtre=true;
-            print("maladieSurHêtre");
+            // maladieSurHêtre=true;
+            // print("maladieSurHêtre");
             var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre(Clone)");
             premierArbreMalade=objects.ElementAt(0);
             RendreArbreMalade(premierArbreMalade,"Hetre");
             //premierArbreMalade.name="Hetre Malade";
             nombreArbresMalades=1;
+            maladieEnCours=true;
+            essenceMalade="hetre";
             prochainArbreMalade=premierArbreMalade;
             while(nombreArbresMalades<=(0.25*(objects.Count()))){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Hetre(Clone)");
@@ -78,13 +84,15 @@ public class Maladie : MonoBehaviour
             }
         }
         if (rand>probaMaladieChêne+probaMaladieHêtre && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin){
-            maladieSurPin=true;
-            print("maladieSurPin");
+            // maladieSurPin=true;
+            // print("maladieSurPin");
             var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin(Clone)");
             premierArbreMalade=objects.ElementAt(0);
             RendreArbreMalade(premierArbreMalade,"Pin");
             //premierArbreMalade.name="Pin Malade";
             nombreArbresMalades=1;
+            maladieEnCours=true;
+            essenceMalade="pin";
             prochainArbreMalade=premierArbreMalade;
             while(nombreArbresMalades<=(0.25*(objects.Count()))){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Pin(Clone)");
@@ -94,8 +102,8 @@ public class Maladie : MonoBehaviour
             }
         }
         if (rand>probaMaladieChêne+probaMaladieHêtre+probaMaladiePin && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin+probaMaladieDouglas){
-            maladieSurDouglas=true;
-            print("maladieSurDouglas");
+            // maladieSurDouglas=true;
+            // print("maladieSurDouglas");
             var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas(Clone)");
             print("object count: ");
             print(objects.Count());
@@ -105,6 +113,8 @@ public class Maladie : MonoBehaviour
             RendreArbreMalade(premierArbreMalade,"Douglas");
             //premierArbreMalade.name="Douglas Malade";
             nombreArbresMalades=1;
+            maladieEnCours=true;
+            essenceMalade="douglas";
             prochainArbreMalade=premierArbreMalade;
             while(nombreArbresMalades<=(0.25*(objects.Count()))){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Douglas(Clone)");
@@ -114,13 +124,15 @@ public class Maladie : MonoBehaviour
             }
         }
         if (rand>1-probaMaladieBouleau){
-            maladieSurBouleau=true;
-            print("maladieSurBouleau");
+            // maladieSurBouleau=true;
+            // print("maladieSurBouleau");
             var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau(Clone)");
             premierArbreMalade=objects.ElementAt(0);
             RendreArbreMalade(premierArbreMalade,"Bouleau");
             //premierArbreMalade.name="Bouleau Malade";
             nombreArbresMalades=1;
+            maladieEnCours=true;
+            essenceMalade="bouleau";
             prochainArbreMalade=premierArbreMalade;
             while(nombreArbresMalades<=(0.25*(objects.Count()))){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(prochainArbreMalade,"Bouleau(Clone)");
@@ -138,34 +150,34 @@ public class Maladie : MonoBehaviour
 
 
     public void ActualisationMaladie(string essenceMalade) // toutes les 3 heures
-    //Note: je n'empêche pas d'avoir des maladies sur plusieurs essences différentes en même temps
+    
     {
-        if (essenceMalade=="Chene"){
+        if (essenceMalade=="chene" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Chene Malade(Clone)"); //on prend un arbre malade random
             prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Chene(Clone)"); //on contamine un arbre à côté du précédent
             //Comme prochainArbreMalade aura changé de nom, il ne sera plus dans la liste des "Chene(Clone)" donc on ne contaminera pas le même arbre en boucle
             RendreArbreMalade(prochainArbreMalade,"Chene");
             //premierArbreMalade.name="Chene Malade";
         }
-        if (essenceMalade=="Hetre"){
+        if (essenceMalade=="hetre" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Hetre Malade(Clone)"); //on prend un arbre malade random
             prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Hetre(Clone)"); //on contamine un arbre à côté du précédent
             RendreArbreMalade(prochainArbreMalade,"Hetre");
             //premierArbreMalade.name="Hetre Malade";
         }
-        if (essenceMalade=="Pin"){
+        if (essenceMalade=="pin" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Pin Malade(Clone)"); //on prend un arbre malade random
             prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Pin(Clone)"); //on contamine un arbre à côté du précédent
             RendreArbreMalade(prochainArbreMalade,"Pin");
             //premierArbreMalade.name="Pin Malade";
         }
-        if (essenceMalade=="Douglas"){
+        if (essenceMalade=="douglas" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Douglas Malade(Clone)"); //on prend un arbre malade random
             prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Douglas(Clone)"); //on contamine un arbre à côté du précédent
             RendreArbreMalade(prochainArbreMalade,"Douglas");
             //premierArbreMalade.name="Douglas Malade";
         }
-        if (essenceMalade=="Bouleau"){
+        if (essenceMalade=="bouleau" && maladieEnCours){
             premierArbreMalade=GameObject.Find("Bouleau Malade(Clone)"); //on prend un arbre malade random
             prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Bouleau(Clone)"); //on contamine un arbre à côté du précédent
             RendreArbreMalade(prochainArbreMalade,"Bouleau");
@@ -220,6 +232,16 @@ public class Maladie : MonoBehaviour
             Instantiate(arbreManager.bouleauMalade, coord, rot);
             Destroy(arbre);
         }
+    }
+
+
+
+
+    public void FonctionQuiSeDéclencheÀMinuit(){
+        if ((!maladieEnCours)){
+            DéclencherMaladie();
+        }
+        
     }
 
     
