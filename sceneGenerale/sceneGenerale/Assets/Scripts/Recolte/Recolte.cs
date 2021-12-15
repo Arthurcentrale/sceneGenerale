@@ -298,11 +298,11 @@ public class Recolte : MonoBehaviour
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
 
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
             }
@@ -323,11 +323,11 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
             }
@@ -347,11 +347,11 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
             }
@@ -371,11 +371,11 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
             }
@@ -396,11 +396,11 @@ public class Recolte : MonoBehaviour
                 AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
-            if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
             }
@@ -751,10 +751,16 @@ public class Recolte : MonoBehaviour
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
 
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
+            }
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Chene";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Souche";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le chêne se plait particulièrement au sein d'une fôret verdoyante et il pousse lentement.";
             }
             else
@@ -773,10 +779,16 @@ public class Recolte : MonoBehaviour
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
+            }
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Hetre";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Souche";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "L'hêtre n'a pas d'habitat favori et pousse assez rapidement.";
             }
             else
@@ -794,10 +806,16 @@ public class Recolte : MonoBehaviour
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Pin Maritime";
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
+            }
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Pin Maritime";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Souche";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le pin maritime se plait particulièrement à proximité de la mer, mais pousse assez lentement";
             }
             else
@@ -815,10 +833,16 @@ public class Recolte : MonoBehaviour
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
+            }
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Douglas";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Souche";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le douglas aime les zones en altitude et pousse assez rapidement.";
             }
             else
@@ -837,10 +861,16 @@ public class Recolte : MonoBehaviour
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Frêle";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
             }
-            if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            else if (cible.transform.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
                 menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Malade";
+                menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
+            }
+            else if (cible.transform.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                menuinfo.transform.GetChild(1).gameObject.GetComponent<Text>().text = "Bouleau";
+                menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Souche";
                 menuinfo.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Le bouleau n'a pas d'habitat favori et pousse rapidement.";
             }
             else

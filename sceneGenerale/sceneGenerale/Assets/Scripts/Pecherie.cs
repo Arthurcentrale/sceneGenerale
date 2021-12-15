@@ -434,7 +434,7 @@ public class Pecherie : MonoBehaviour
         {
             menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
             menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
-            menuinfo.transform.GetChild(4).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
             menuinfo.transform.GetChild(5).gameObject.SetActive(true);
             menuinfo.transform.GetChild(6).gameObject.SetActive(true);
             menuinfo.transform.GetChild(7).gameObject.SetActive(true);

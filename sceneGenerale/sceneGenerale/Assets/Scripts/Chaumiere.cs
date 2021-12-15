@@ -134,7 +134,7 @@ public class Chaumiere : MonoBehaviour
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
             CompteurBouffe.Data.NbrBouffe -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();
-            Debug.Log(compteurbouffe.CBouffe.text);
+            //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
     void FctButton2() // A copier manuellement pour les 4 boutons
@@ -152,7 +152,7 @@ public class Chaumiere : MonoBehaviour
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
             CompteurBouffe.Data.NbrBouffe -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();
-            Debug.Log(compteurbouffe.CBouffe.text);
+            //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
     void FctButton3() // A copier manuellement pour les 4 boutons
@@ -170,7 +170,7 @@ public class Chaumiere : MonoBehaviour
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
             CompteurBouffe.Data.NbrBouffe -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();
-            Debug.Log(compteurbouffe.CBouffe.text);
+            //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
     void FctButton4() // A copier manuellement pour les 4 boutons
@@ -188,7 +188,7 @@ public class Chaumiere : MonoBehaviour
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
             CompteurBouffe.Data.NbrBouffe -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();
-            Debug.Log(compteurbouffe.CBouffe.text);
+            //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
 
