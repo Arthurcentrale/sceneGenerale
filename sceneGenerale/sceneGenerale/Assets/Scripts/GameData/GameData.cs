@@ -55,7 +55,9 @@ public class GameData
     public List<Vector3> listePositionsRochers5;
     public List<Vector3> listePositionsRochers6;
     public List<Vector3> listePositionsRochers7;
-    public List<ItemAmount> listeItems;
+
+    public List<string> listeNomsItems;
+    public List<int> listeAmountItems;
     public List<bool> listeFavoris;
 
     public List<string> listeBatiments;
@@ -163,7 +165,14 @@ public class GameData
         this.listeBatiments = listeBatiments;
         this.listePosBatiments = listePosBatiments;
 
-        this.listeItems = itemList;
+        this.listeAmountItems = new List<int>();
+        this.listeNomsItems = new List<string>();
+
+        foreach (ItemAmount item in itemList)
+        {
+            this.listeAmountItems.Add(item.Amount);
+            this.listeNomsItems.Add(item.Item.name);
+        }
         this.listeFavoris = favList;
     }
 }

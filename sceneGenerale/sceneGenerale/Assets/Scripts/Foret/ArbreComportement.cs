@@ -187,6 +187,7 @@ public class ArbreComportement : MonoBehaviour
         }
         
         Destroy(gameObject);
+        treeLayersMag.updateTreeLayers();
     }
 
 

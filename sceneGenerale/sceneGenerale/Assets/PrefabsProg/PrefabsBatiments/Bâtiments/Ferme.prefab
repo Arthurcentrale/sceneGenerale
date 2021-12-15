@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 6894784228275584267}
   m_Layer: 5
   m_Name: Ferme
-  m_TagString: Untagged
+  m_TagString: Ferme
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,6 +873,7 @@ MonoBehaviour:
   niveauAgriculteur: 0
   panelLabourage: {fileID: 4217570220795048287}
   panelPlantage: {fileID: 3022278152920557227}
+  panelEngrais: {fileID: 0}
 --- !u!114 &6608605576627560973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +893,8 @@ MonoBehaviour:
   "productivit\xE9": 1
   player: {fileID: 0}
   "textBl\xE9": {fileID: 435808988940373400}
+  choixhabitant: {fileID: 0}
+  habitant: {fileID: 0}
 --- !u!114 &4737267281085543669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,6 +916,7 @@ MonoBehaviour:
     type: 3}
   fermeTransform: {fileID: 8734662669676178828}
   parcelleContainer: {fileID: 8144396217159888600}
+  panelLabourage: {fileID: 0}
 --- !u!114 &6894784228275584267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b28e49a4430ac4c926ff32738e5867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quantiteNourriture: 0
+  arrayQN_max: 000000000200000004000000050000000700000007000000
+  arrayCT: 
   blePf: {fileID: 8699560506783113702, guid: 90a4ac07b2968174c9876de68e102eb5, type: 3}
   maisPf: {fileID: 5104897714542334213, guid: b777bfb07c0c35b459f8248df3c84e8e, type: 3}
   saladePf: {fileID: 5104897714542334213, guid: b777bfb07c0c35b459f8248df3c84e8e,
@@ -938,7 +943,12 @@ MonoBehaviour:
   zoneBleuePf: {fileID: 3720845361410037777, guid: 19f9b4ade4ce16b4890752a3827c3163,
     type: 3}
   fermeTransform: {fileID: 8734662669676178828}
+  panelPlantage: {fileID: 0}
+  slider: {fileID: 0}
+  engraisSelectionne: 0
   engraisDispo: 0
+  panelEngrais: {fileID: 0}
+  textNombreEngraisNaturel: {fileID: 0}
 --- !u!1 &3022278152920557227
 GameObject:
   m_ObjectHideFlags: 0

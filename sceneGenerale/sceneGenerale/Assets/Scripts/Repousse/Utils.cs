@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,12 +13,12 @@ public class Utils : MonoBehaviour
         return rnd.Next(min, max);
     }
 
-    public static void creerGo(string tag, Vector3 position)
+    public static void creerGo(string tag, Vector3 position, GameObject[] listeGo) 
     {
         switch (tag)
         {
             case "Arbre":
-                creerArbre(position);
+                creerArbre(position, listeGo);
                 break;
 
             default:
@@ -31,16 +32,16 @@ public class Utils : MonoBehaviour
     /******************************************************************************************************/
     // Gestion de la création d'arbres
 
-    private static void creerArbre(Vector3 position)
+    private static void creerArbre(Vector3 position, GameObject[] listeArbres)
     {
-        string typeArbre = choixTypeArbre();
+        string typeArbre = choixTypeArbre(separationEssencesArbres(listeArbres));
 
         // On recupere le prefab correspondant à l'arbre qui va pousser
         GameObject newArbre = Resources.Load(typeArbre, typeof(GameObject)) as GameObject;
 
         if (newArbre == null)
         {
-            Debug.LogError("Pas d'arbre trouvé... path = " + typeArbre);
+            Debug.LogError("Pbm utils : l'arbuste " + typeArbre + "n'existe pas");
             return;
         }
 
@@ -55,32 +56,78 @@ public class Utils : MonoBehaviour
         newArbre.name = typeArbre;
     }
    
+    private static int[] separationEssencesArbres(GameObject[] liste)
+    {
+        int[] res = new int[5] { 0, 0, 0, 0, 0 };
+
+        foreach (GameObject arbre in liste)
+        {
+            string name = arbre.name;
+
+            if (name.IndexOf("chene", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                res[0]++;
+            }
+
+            else if (name.IndexOf("douglas", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                res[1]++;
+            }
+
+            else if (name.IndexOf("pin", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                res[2]++;
+            }
+
+            else if (name.IndexOf("bouleau", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                res[3]++;
+            }
+
+            else
+            {
+                res[4]++;
+            }
+        }
+        return res;
+    }
 
     // Fonction qui retourne aléatoirement un type d'arbre (de manière équiprobable)
-    private static string choixTypeArbre()
+    private static string choixTypeArbre(int[] listeParEssence)
     {
-        int x = Utils.GetRandom(1, 5);
+        int nbChenes = listeParEssence[0];
+        int nbDouglas = listeParEssence[1];
+        int nbPins = listeParEssence[2];
+        int nbBouleau = listeParEssence[3];
+        int nbHetres = listeParEssence[4];
 
-        switch (x)
+        int nbTotalArbres = nbChenes + nbDouglas + nbPins + nbBouleau + nbHetres;
+
+        int x = Utils.GetRandom(0, nbTotalArbres);
+
+        if (x < nbChenes)
         {
-            case 1:
-                return "Chene";
+            return "Chene Arbuste";
+        }
 
-            case 2:
-                return "Pin";
+        else if (x < nbDouglas + nbChenes && x >= nbChenes)
+        {
+            return "Douglas Arbuste";
+        }
 
-            case 3:
-                return "Platane";
+        else if (x < nbDouglas + nbChenes + nbPins && x >= nbChenes + nbDouglas)
+        {
+            return "Pin Arbuste";
+        }
 
-            case 4:
-                return "Connifere";
-    /*
-            case 5:
-                return "bouleau_OK";
-                */
+        else if (x < nbDouglas + nbChenes + nbPins + nbBouleau && x >= nbDouglas + nbChenes + nbPins)
+        {
+            return "Bouleau Arbuste";
+        }
 
-            default:
-                return "Chene";
+        else
+        {
+            return "Hetre arbuste";
         }
     }
 }

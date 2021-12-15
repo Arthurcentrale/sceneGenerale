@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
 
         // ------------------------------------------------------------------------- //
 
+        /*
         inventory = new Inventory(new List<ItemAmount>(), new List<bool>(new bool[24]), this);
         uiInventory = GameObject.Find("Inventaire2").transform.GetChild(0).gameObject.GetComponent<UI_Inventory>();
-        uiInventory.SetInventory(inventory);
+        uiInventory.SetInventory(inventory);*/
     }
 
     public void createInventory(List<ItemAmount> listeItems, List<bool> listeFavoris)        

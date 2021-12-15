@@ -3,7 +3,9 @@ using System;
 using UnityEngine.SceneManagement;
 
 public class scriptRepousse : MonoBehaviour
-{ 
+{
+    public int debug = 0;
+
     // les deux prochaines variables sont en public pour l'instant (pour les tests) mais seront privées à terme
     private int nbArbresSurTerrain = 0;
     private int nbArbres; // correspond au nombre d'arbres qui pousseront à minuit
@@ -29,7 +31,11 @@ public class scriptRepousse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (debug == 1)
+        {
+            majMinuit();
+            debug = 2;
+        }
     }
 
     public void majMinuit()
@@ -38,16 +44,43 @@ public class scriptRepousse : MonoBehaviour
         GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
 
         // On compte combien il y en a
-        nbArbresSurTerrain = ListeGO.Length;
+        GameObject[] listeArbresSurTerrain = getArbresSurTerrain(ListeGO);
+        nbArbresSurTerrain = listeArbresSurTerrain.Length;
 
         nbArbres = fonctionRepousse(nbArbresSurTerrain);
 
-        fairePousserArbre(nbArbres, ListeGO);
+        fairePousserArbre(nbArbres, listeArbresSurTerrain);
 
         nbArbresSurTerrain = 0;
 
         // On met à jour les sorting order des arbres
         treeLayersMag.updateTreeLayers();
+    }
+
+    private GameObject[] getArbresSurTerrain(GameObject[] liste)
+    {
+        int len = liste.Length;
+        GameObject[] resTmp = new GameObject[len];
+
+        int index = 0;
+        foreach (GameObject arbre in liste)
+        {
+            string name = arbre.name;
+            if (name.IndexOf("souche", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                continue;
+            }
+
+            resTmp[index] = arbre;
+            index++;
+        }
+
+        GameObject[] res = new GameObject[index];
+        for (int i = 0; i<index; i++)
+        {
+            res[i] = resTmp[i];
+        }
+        return res;
     }
 
 
@@ -59,17 +92,23 @@ public class scriptRepousse : MonoBehaviour
 
         else
         {
-            int x;
+            if (nbArbresSurLeTerrain >= 1 && nbArbresSurLeTerrain <= 25)
+            {
+                return 1;
+            }
 
-            if (nbArbresSurLeTerrain >= 0.6 * nbArbreMax)
-                x = nbArbreMax - nbArbresSurLeTerrain;
+            else if (nbArbresSurLeTerrain >= 26 && nbArbresSurLeTerrain <= 50)
+            {
+                return 2;
+            }
 
-            else if (nbArbresSurLeTerrain < 0.6 * nbArbreMax && nbArbresSurLeTerrain >= 0)
-                x = (int)Math.Exp(0.075 * nbArbresSurLeTerrain);
+            else if (nbArbresSurLeTerrain >= 51 && nbArbresSurLeTerrain <= 75)
+            {
+                return 3;
+            }
 
-            else return 0; // Cas impossible mais sinon la fonction donnait une erreur et je voulais preciser nbArbre >= 0 sur la condition précédente
-
-            return x;
+            else
+                return 0;
         }
     }
     
@@ -84,7 +123,7 @@ public class scriptRepousse : MonoBehaviour
             var rand = new System.Random();
 
             Vector2 position = positionAvailable(ListeGO);
-            Utils.creerGo(goTag, position);
+            Utils.creerGo(goTag, position, ListeGO) ;
         }
     }
 

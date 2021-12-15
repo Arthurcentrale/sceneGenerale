@@ -40,7 +40,17 @@ public class Inventory
     public Inventory(List<ItemAmount> itemList_, List<bool> favList_, Player player_)
     {
         this.itemList = itemList_;
-        this.favList = favList_;
+
+        if (favList_.Count == 0)
+        {
+            this.favList = new List<bool>() { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+        }
+
+        else
+        {
+            this.favList = favList_;
+        }
+        
         this.player = player_;
         this.sizeMaxStack = 5;
     }

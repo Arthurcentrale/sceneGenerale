@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6510699032363135273}
   m_Layer: 0
   m_Name: Chene Arbuste
-  m_TagString: Untagged
+  m_TagString: Arbre
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
+  contamination: 0
 --- !u!1001 &4213658495412733383
 PrefabInstance:
   m_ObjectHideFlags: 0

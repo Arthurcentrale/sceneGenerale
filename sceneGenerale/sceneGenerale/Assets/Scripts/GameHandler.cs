@@ -650,13 +650,19 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < gameData.listePosBatiments.Count; i++)
         {
             string nomBat = gameData.listeBatiments[i];
+
+            if (nomBat.IndexOf("Ferme", StringComparison.OrdinalIgnoreCase) >= 0 || nomBat.IndexOf("MoulinAEau", StringComparison.OrdinalIgnoreCase) >= 0 || nomBat.IndexOf("Boulangerie", StringComparison.OrdinalIgnoreCase) >= 0 || nomBat.IndexOf("MoulinAVent", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                continue;
+            }
+
             Vector3 positionBat = gameData.listePosBatiments[i];
 
             GameObject batiment = null;
 
             foreach (GameObject go in listeCompleteBatiments)
             {
-                if (go.name == nomBat)
+                if (nomBat.IndexOf(go.name, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     batiment = go;
                     break;
@@ -675,9 +681,21 @@ public class GameHandler : MonoBehaviour
             }
         }
 
+        List<ItemAmount> listeItems = new List<ItemAmount>();
+        List<string> listeNoms = gameData.listeNomsItems;
+        List<int> listeQuantites = gameData.listeAmountItems;
+
+        for (int i = 0; i<gameData.listeAmountItems.Count; i++)
+        {
+            listeItems.Add(new ItemAmount(Item: Resources.Load("items/" + listeNoms[i], typeof(Item)) as Item, Amount: listeQuantites[i]));
+        }
+
+
         // Demarrage de l'inventaire
-        player.createInventory(gameData.listeItems, gameData.listeFavoris);
+        player.createInventory(listeItems, gameData.listeFavoris);
         inventory = player.inventory;
+
+        BuildingLayerMag.updateBatLayers();
     }
 }
 
