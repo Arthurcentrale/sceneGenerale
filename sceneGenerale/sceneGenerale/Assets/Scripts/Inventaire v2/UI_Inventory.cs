@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class UI_Inventory : MonoBehaviour
 {
+
+    private ArbreManager arbreManager;
     public EventSystem eventSystem;
 
     private Inventory inventory;
@@ -55,6 +57,7 @@ public class UI_Inventory : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        arbreManager = GameObject.Find("GameManager").GetComponent<ArbreManager>();
     }
 
     public void Awake()
@@ -445,10 +448,15 @@ public class UI_Inventory : MonoBehaviour
     public void PlanterGraine(Item item)   //plante la graine
     {
         Debug.Log("On plante la graine");
-
+        if (item.name == "GraineChene")
+        {
+            Vector3 position = GameObject.Find("34_short_OK").transform.position;
+            Instantiate(arbreManager.arbusteChene, position, arbreManager.arbusteChene.transform.rotation);
+        }
         inventory.DelItem(new ItemAmount(Item: item, Amount: 1));
-        Vector3 position = GameObject.Find("34_short_OK").transform.position;
+        
 
+        
         //Utils.creerGo("Arbre", position);
     }
 
