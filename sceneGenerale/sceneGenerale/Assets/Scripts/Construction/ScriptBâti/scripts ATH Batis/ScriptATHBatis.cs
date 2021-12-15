@@ -283,7 +283,7 @@ public class ScriptATHBatis : MonoBehaviour
         permissionConstruction = false;
         constructionTerminee = true;
         RessourcesNécessairesDéposées = false;
-
+        BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int) (timeDepart - time);
     }

@@ -114,6 +114,7 @@ MonoBehaviour:
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
+  contamination: 0
 --- !u!1001 &45307092131768456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,10 +192,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 865096648307807765, guid: 38c522b19fa460142ac726b5a2348d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
     - target: {fileID: 1719011858533518795, guid: 38c522b19fa460142ac726b5a2348d45,
         type: 3}
       propertyPath: m_Name
       value: chene_frele
+      objectReference: {fileID: 0}
+    - target: {fileID: 3391476708219112276, guid: 38c522b19fa460142ac726b5a2348d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672393475949695647, guid: 38c522b19fa460142ac726b5a2348d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850191754277951162, guid: 38c522b19fa460142ac726b5a2348d45,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 7061707276387157830, guid: 38c522b19fa460142ac726b5a2348d45,
         type: 3}

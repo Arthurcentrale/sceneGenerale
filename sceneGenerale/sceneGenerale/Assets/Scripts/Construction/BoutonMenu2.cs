@@ -325,6 +325,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Chaumière = false;
         boutonValiderConstructionChaumière.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -387,6 +388,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Pêcherie = false;
         boutonValiderConstructionPêcherie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -451,6 +453,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_MoulinAEau = false;
         boutonValiderConstructionMoulinAEau.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -521,6 +524,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_MoulinAVent = false;
         boutonValiderConstructionMoulinAVent.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -589,6 +593,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Boulangerie = false;
         boutonValiderConstructionBoulangerie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -661,6 +666,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Cabanon = false;
         boutonValiderConstructionCabanon.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -731,6 +737,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Puits = false;
         boutonValiderConstructionPuits.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -800,6 +807,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Forge = false;
         boutonValiderConstructionForge.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -867,6 +875,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Fosse = false;
         boutonValiderConstructionFosse.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -929,6 +938,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_MaisonPierre = false;
         boutonValiderConstructionMaisonPierre.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -992,6 +1002,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_GardeManger = false;
         boutonValiderConstructionGardeManger.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -1054,6 +1065,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Ferme = false;
         boutonValiderConstructionFerme.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 
@@ -1093,7 +1105,7 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionEtabli.SetActive(true);
-
+        
 
 
 
@@ -1113,6 +1125,7 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Etabli = false;
         boutonValiderConstructionEtabli.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
+        BuildingLayerMag.updateBatLayers();
     }
 
 

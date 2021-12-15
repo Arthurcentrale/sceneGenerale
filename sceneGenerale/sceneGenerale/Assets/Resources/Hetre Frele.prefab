@@ -114,6 +114,7 @@ MonoBehaviour:
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
+  contamination: 0
 --- !u!1001 &1791072963170144341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,6 +152,21 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.z
       value: 5.2168048e-11
       objectReference: {fileID: 0}
+    - target: {fileID: 801082883601472761, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424586878165440584, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758063598789439020, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
     - target: {fileID: 1920689190398405882, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -180,6 +196,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.z
       value: 0.00000014897297
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951352317493888257, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125147915682264941, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 4453162395801179557, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
@@ -211,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.z
       value: 0.00000043516226
       objectReference: {fileID: 0}
+    - target: {fileID: 4514133807469021249, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
     - target: {fileID: 6008540855513830000, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -240,6 +271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.z
       value: 0.00000013562281
+      objectReference: {fileID: 0}
+    - target: {fileID: 6215220094563160543, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 6401595267928238256, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
@@ -361,6 +397,11 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.z
       value: 0.00000021271299
       objectReference: {fileID: 0}
+    - target: {fileID: 7573084546231111224, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
     - target: {fileID: 7915107394505897554, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -420,6 +461,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.z
       value: 0.0000000026341809
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254246348296728157, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379212246777019787, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772862444954242067, guid: f80cd684403980042b42c2b5a184376a,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 9153348463934992906, guid: f80cd684403980042b42c2b5a184376a,
         type: 3}
