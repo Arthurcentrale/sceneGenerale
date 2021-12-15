@@ -16,6 +16,8 @@ public class livre : MonoBehaviour
     private GameObject boutonMissions;
     private GameObject boutonProgression;
     private GameObject menuConstruPageDroite;
+    private GameObject menuConstruPageGauche;
+    private GameObject menuMissionsPageGauche;
     private GameObject fermetureBouton;
 
     //éléments plus spécifiques
@@ -64,6 +66,7 @@ public class livre : MonoBehaviour
     public GameObject emptydeArthur;
     private BoutonMenu2 fonctionsConstru;
     private bool constru;
+    private bool mission;
     private ScriptATHBatis athBati;
 
     // Start is called before the first frame update
@@ -75,7 +78,11 @@ public class livre : MonoBehaviour
         boutonInformations = GameObject.Find("InformationBouton");
         boutonMissions = GameObject.Find("MissionBouton");
         boutonProgression = GameObject.Find("ProgressionBouton");
+
         menuConstruPageDroite = GameObject.Find("menuConstructionPageDroite");
+        menuConstruPageGauche = GameObject.Find("menuConstructionPageGauche");
+        menuMissionsPageGauche = GameObject.Find("menuMissionsPageGauche");
+
         fermetureBouton = GameObject.Find("FermetureBouton");
         nom = GameObject.Find("nom").GetComponent<Image>();
         description = GameObject.Find("description").GetComponent<Image>();
@@ -97,11 +104,14 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(true);
         boutonInformations.SetActive(true);
         menuConstruPageDroite.SetActive(false);
+        menuConstruPageGauche.SetActive(false);
+        menuMissionsPageGauche.SetActive(false);
         fermetureBouton.SetActive(true);
     }
 
     public void ouvertureMenuConstru()
     {
+        menuConstruPageGauche.SetActive(true);
         animatorLivreOuvert.SetTrigger("OuvertureComplete");
         boutonConstruction.SetActive(false);
         boutonMissions.SetActive(false);
@@ -109,6 +119,18 @@ public class livre : MonoBehaviour
         boutonInformations.SetActive(false);
         fermetureBouton.SetActive(true);
         constru = true;
+    }
+
+    public void ouvertureMenuMissions()
+    {
+        animatorLivreOuvert.SetTrigger("OuvertureComplete");
+        boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
+        fermetureBouton.SetActive(true);
+        menuMissionsPageGauche.SetActive(true);
+        mission = true;
     }
 
     public void affichagePageDroiteMenuConstru()
@@ -119,15 +141,17 @@ public class livre : MonoBehaviour
     public void fermetureLivre()
     {
         animatorLivreFerme.SetTrigger("Return");
-        if (constru) 
+        if (constru || mission) 
         {
             animatorLivreOuvert.SetTrigger("FermetureComplete");
         }
         else animatorLivreOuvert.SetTrigger("Fermeture");
 
-
+        menuConstruPageGauche.SetActive(false);
+        menuMissionsPageGauche.SetActive(false);
         fermetureBouton.SetActive(false);
         constru = false;
+        mission = false;
     }
 
 
