@@ -440,7 +440,7 @@ public class Recolte : MonoBehaviour
     }
     private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
-        player.uiInventory.ReduitDuraEquip();
+        //player.uiInventory.ReduitDuraEquip();
         audioSource.clip = cassageRoche[UnityEngine.Random.Range(0, cassageRoche.Length)];
         audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);

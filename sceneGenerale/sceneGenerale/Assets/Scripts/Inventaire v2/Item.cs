@@ -11,7 +11,7 @@ public class Item : ScriptableObject
     public int Weight;
     public bool isFood;
     public GameObject prefab;
-    public int durability;
+    //public int durability;
 
 
     public void Init(string ItemName)
@@ -38,10 +38,10 @@ public class Item : ScriptableObject
     }
     */
 
-    public void ReduireDurabilite()
+    /*public void ReduireDurabilite()
     {
         this.durability -= 1;
-    }
+    }*/
 
     public virtual int GetPoints()  //fonction qui retourne 0 de base mais qui retournera les variables foodPoints ou burnPoints si l'item
     {                               //est dans une sous-classe Aliment ou Combustible
