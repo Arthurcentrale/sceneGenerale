@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class ArbreComportement : MonoBehaviour
 
     private Transform dossierArbres;
 
+    public int contamination = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,7 @@ public class ArbreComportement : MonoBehaviour
         tempsCroissance = DefineTempsCroissance(essence);
         age = DefineAge(etat);
         absorptionCo2 = DefineAbsorptionCo2(essence);
-        
+        StartCoroutine(testMalades());
         if (age < tempsCroissance) StartCoroutine(TestOne());
 
         dossierArbres = GameObject.Find("Arbres").transform;
@@ -39,7 +42,7 @@ public class ArbreComportement : MonoBehaviour
     void Update()
     {
         if (age >= tempsCroissance && etat=="arbuste" || age >= tempsCroissance && etat == "arbusteMalade") croissance();
-        
+        tuerArbreMalade();
     }
     
     
@@ -187,10 +190,22 @@ public class ArbreComportement : MonoBehaviour
     }
 
 
-    public void tuerArbre()
+    public void tuerArbreMalade()
     {
+        if (contamination ==12)
         Destroy(gameObject);
 
+    }
+
+    IEnumerator testMalades()
+    {
+        if (name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            yield return new WaitForSeconds(1);
+            contamination += 1;
+            StartCoroutine(testMalades());
+        }
+            
     }
 
 }
