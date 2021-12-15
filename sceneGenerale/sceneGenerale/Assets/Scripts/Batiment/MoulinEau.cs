@@ -36,6 +36,10 @@ public class MoulinEau : MonoBehaviour
     bool isBle = true;
     int QuantiteFarineNonValide;
     int QuantiteFarine;
+    bool isEmpty;
+
+    public GameObject menuinfo;
+    public GameObject choixhabitant;
 
     void Start()
     {
@@ -73,11 +77,13 @@ public class MoulinEau : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("MoulinEau"))
 
                 {
+                    Debug.Log("Click");
                     //Ajouter update valeur max du slider, etc..
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
+
 
                 }
 
@@ -115,6 +121,11 @@ public class MoulinEau : MonoBehaviour
     }
     int QuantiteMax(HabitantBehaviour habitant)
     {
+        if (habitant == null)
+        {
+            return 0;
+        }
+
         if (isBle)
         {
             if (habitant.ecoLevel == 1)
@@ -161,6 +172,7 @@ public class MoulinEau : MonoBehaviour
                 return Math.Max(10, nbParcelleMais);
             }
         }
+        
     }
     public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
@@ -239,6 +251,114 @@ public class MoulinEau : MonoBehaviour
         FonctionMinuit();
         validation.interactable = true;
         timer = 0;
+    }
+
+
+    public void FctInfo()
+    {
+        if (habitant == null)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = null;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Vacant";
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else if (habitant != null && habitant.isHoused == false)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+    }
+    GameObject TrouverMeunier()
+    {
+        GameObject ha = new GameObject();
+        GameObject habitant = GameObject.Find("habitants");
+        foreach (Transform child in habitant.transform)
+        {
+            HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
+            if (Behaviour.transform.name == "Meunier")
+            {
+                if (Behaviour.hasWorkplace == false)
+                {
+                    ha = child.gameObject;
+                }
+            }
+        }
+        return ha;
+    }
+
+    public void FctChoix()
+    {
+
+        GameObject PecheurDispo = TrouverMeunier();
+        if (PecheurDispo == null)
+        {
+
+            choixhabitant.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = PecheurDispo.GetComponent<HabitantBehaviour>().image;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = PecheurDispo.GetComponent<HabitantBehaviour>().name;
+        }
+        panel.SetActive(false);
+        choixhabitant.SetActive(true);
+    }
+
+    public void selectionartisan()
+    {
+        GameObject artisandispo = TrouverMeunier();
+        habitant = artisandispo.GetComponent<HabitantBehaviour>();
+        habitant.hasWorkplace = true;
+        isEmpty = false;
+        choixhabitant.SetActive(false);
+        if (habitant.isHoused == false)
+        {
+            panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        panel.SetActive(true);
+    }
+
+    public void quitter()
+    {
+        choixhabitant.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
+    }
+    public void quitter2()
+    {
+        menuinfo.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
     }
 
 }
