@@ -523,7 +523,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void ReduitDuraEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
+    /*public void ReduitDuraEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
     {
         if (slotEquipé == 0);
         else
@@ -543,5 +543,5 @@ public class UI_Inventory : MonoBehaviour
                 inventory.DelItem(inventory.GetItemList()[slot - 1]);
             }
         }
-    }
+    }*/
 }
