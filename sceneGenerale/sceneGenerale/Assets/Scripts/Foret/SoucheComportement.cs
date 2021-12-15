@@ -35,9 +35,9 @@ public class SoucheComportement : MonoBehaviour
 
     IEnumerator TestOne()
     {
-        while (age < tempsCroissance)
+        if (age < tempsCroissance)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
             age += 1;
             StartCoroutine(TestOne());
         }

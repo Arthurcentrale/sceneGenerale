@@ -50,7 +50,7 @@ public class ArbreComportement : MonoBehaviour
     {
         while(age < tempsCroissance)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
             age += 1;
             StartCoroutine(TestOne());
         }

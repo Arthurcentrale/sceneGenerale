@@ -279,7 +279,7 @@ public class ScriptATHBatis : MonoBehaviour
         else if (bati.CompareTag("BatiMoulinAEau")) moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
-        ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -5);
+        ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -6);
         permissionConstruction = false;
         constructionTerminee = true;
         RessourcesNécessairesDéposées = false;
