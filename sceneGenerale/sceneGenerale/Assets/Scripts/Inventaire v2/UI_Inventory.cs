@@ -7,9 +7,8 @@ using UnityEngine.EventSystems;
 
 public class UI_Inventory : MonoBehaviour
 {
-
-    private ArbreManager arbreManager;
     public EventSystem eventSystem;
+    private ArbreManager arbreManager;
 
     private Inventory inventory;
     private Transform itemSlotContainer;
@@ -57,7 +56,7 @@ public class UI_Inventory : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        arbreManager = GameObject.Find("GameManager").GetComponent<ArbreManager>();
+        arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
     }
 
     public void Awake()
@@ -447,17 +446,34 @@ public class UI_Inventory : MonoBehaviour
 
     public void PlanterGraine(Item item)   //plante la graine
     {
-        Debug.Log("On plante la graine");
-        if (item.name == "GraineChene")
-        {
-            Vector3 position = GameObject.Find("34_short_OK").transform.position;
-            Instantiate(arbreManager.arbusteChene, position, arbreManager.arbusteChene.transform.rotation);
-        }
-        inventory.DelItem(new ItemAmount(Item: item, Amount: 1));
-        
+        GameObject arbuste;
+        Vector3 position = GameObject.Find("34_short_OK").transform.position + new Vector3(0f, 4f, 0f);
 
-        
-        //Utils.creerGo("Arbre", position);
+        switch (item.name)
+        {
+            case "GraineChene": 
+                arbuste = arbreManager.arbusteChene;
+                Instantiate(arbuste, position, arbuste.transform.rotation);
+                break;
+            case "GraineHetre":
+                arbuste = arbreManager.arbusteHetre;
+                Instantiate(arbuste, position, arbuste.transform.rotation);
+                break;
+            case "GraineDouglas":
+                arbuste = arbreManager.arbusteDouglas;
+                Instantiate(arbuste, position, arbuste.transform.rotation);
+                break;
+            case "GrainePin":
+                arbuste = arbreManager.arbustePin;
+                Instantiate(arbuste, position, arbuste.transform.rotation);
+                break;
+            case "GraineBouleau":
+                arbuste = arbreManager.arbusteBouleau;
+                Instantiate(arbuste, position, arbuste.transform.rotation);
+                break;
+        }
+
+        inventory.DelItem(new ItemAmount(Item: item, Amount: 1));
     }
 
     public int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire
