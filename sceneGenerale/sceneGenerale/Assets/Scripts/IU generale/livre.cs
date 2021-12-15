@@ -18,6 +18,7 @@ public class livre : MonoBehaviour
     private GameObject menuConstruPageDroite;
     private GameObject menuConstruPageGauche;
     private GameObject menuMissionsPageGauche;
+    private GameObject menuInfosPageGauche;
     private GameObject fermetureBouton;
 
     //éléments plus spécifiques
@@ -67,6 +68,7 @@ public class livre : MonoBehaviour
     private BoutonMenu2 fonctionsConstru;
     private bool constru;
     private bool mission;
+    private bool info;
     private ScriptATHBatis athBati;
 
     // Start is called before the first frame update
@@ -82,6 +84,7 @@ public class livre : MonoBehaviour
         menuConstruPageDroite = GameObject.Find("menuConstructionPageDroite");
         menuConstruPageGauche = GameObject.Find("menuConstructionPageGauche");
         menuMissionsPageGauche = GameObject.Find("menuMissionsPageGauche");
+        menuInfosPageGauche = GameObject.Find("menuInfosPageGauche");
 
         fermetureBouton = GameObject.Find("FermetureBouton");
         nom = GameObject.Find("nom").GetComponent<Image>();
@@ -106,6 +109,7 @@ public class livre : MonoBehaviour
         menuConstruPageDroite.SetActive(false);
         menuConstruPageGauche.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
+        menuInfosPageGauche.SetActive(false);
         fermetureBouton.SetActive(true);
     }
 
@@ -133,6 +137,18 @@ public class livre : MonoBehaviour
         mission = true;
     }
 
+    public void ouvertureMenuInfos()
+    {
+        animatorLivreOuvert.SetTrigger("OuvertureComplete");
+        boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
+        fermetureBouton.SetActive(true);
+        menuInfosPageGauche.SetActive(true);
+        info = true;
+    }
+
     public void affichagePageDroiteMenuConstru()
     {
         menuConstruPageDroite.SetActive(true);
@@ -141,7 +157,7 @@ public class livre : MonoBehaviour
     public void fermetureLivre()
     {
         animatorLivreFerme.SetTrigger("Return");
-        if (constru || mission) 
+        if (constru || mission || info) 
         {
             animatorLivreOuvert.SetTrigger("FermetureComplete");
         }
@@ -152,6 +168,7 @@ public class livre : MonoBehaviour
         fermetureBouton.SetActive(false);
         constru = false;
         mission = false;
+        info = false;
     }
 
 
