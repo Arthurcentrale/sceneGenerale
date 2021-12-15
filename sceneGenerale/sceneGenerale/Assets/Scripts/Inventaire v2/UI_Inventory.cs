@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 
 public class UI_Inventory : MonoBehaviour
 {
-
-    private ArbreManager arbreManager;
     public EventSystem eventSystem;
     private ArbreManager arbreManager;
 
