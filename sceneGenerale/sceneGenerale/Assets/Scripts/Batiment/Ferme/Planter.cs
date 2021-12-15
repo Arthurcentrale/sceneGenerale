@@ -77,7 +77,7 @@ public class Planter : MonoBehaviour
     public GameObject panelEngrais;
     public Text textNombreEngraisNaturel;
 
-
+    public static bool isOccupied;
 
     void Start()
     {

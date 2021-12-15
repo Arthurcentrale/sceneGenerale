@@ -24,6 +24,10 @@ public class Ferme : MonoBehaviour
     public static int compteurBlé = 0;
     public Text textBlé;
 
+    //Gestion habitant
+    public GameObject choixhabitant;
+    public HabitantBehaviour habitant;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +71,7 @@ public class Ferme : MonoBehaviour
 
 
         }
-        if (isOccupied)
+        if (isOccupied && habitant != null && habitant.isHoused)
         {
             timer += Time.deltaTime;
             if (timer >= delai)
@@ -77,6 +81,7 @@ public class Ferme : MonoBehaviour
                 textBlé.text = compteurBlé.ToString();
 
             }
+            Planter.isOccupied = true;
         }
 
     }
@@ -97,5 +102,61 @@ public class Ferme : MonoBehaviour
     public void RendreOccupe()
     {
         isOccupied = !isOccupied;
+    }
+
+
+    //CHOIX HABITANT
+
+    public void FctChoix()
+    {
+        GameObject FermierDispo = TrouverFermier();
+        if (FermierDispo == null)
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = FermierDispo.GetComponent<HabitantBehaviour>().image;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = FermierDispo.GetComponent<HabitantBehaviour>().name;
+        }
+        panel.SetActive(false);
+        choixhabitant.SetActive(true);
+    }
+
+    public GameObject TrouverFermier()
+    {
+        GameObject ha = new GameObject();
+        GameObject habitant = GameObject.Find("habitants");
+        foreach (Transform child in habitant.transform)
+        {
+            HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
+            if (Behaviour.transform.name == "fermier")
+            {
+                if (Behaviour.hasWorkplace == false)
+                {
+                    ha = child.gameObject;
+                }
+            }
+        }
+        return ha;
+    }
+
+    public void SelectionFermier()
+    {
+        GameObject fermierDispo = TrouverFermier();
+        habitant = fermierDispo.GetComponent<HabitantBehaviour>();
+        habitant.hasWorkplace = true;
+        isOccupied = true;
+        choixhabitant.SetActive(false);
+        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        panel.SetActive(true);
+    }
+
+    public void Quitter()
+    {
+        choixhabitant.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
     }
 }
