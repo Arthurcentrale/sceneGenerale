@@ -9,12 +9,16 @@ public class SoucheComportement : MonoBehaviour
     private ArbreManager arbreManager;
     public string essence;
     public bool malade = false;
+    private Transform dossierArbres;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
         tempsCroissance = DefineTempsCroissance(gameObject.name);
+        dossierArbres = GameObject.Find("Arbres").transform;
         StartCoroutine(TestOne());
         if (gameObject.name =="Souche Douglas Malade(Clone)" || gameObject.name == "Souche Chene Malade(Clone)" || gameObject.name == "Souche Pin Malade(Clone)" || gameObject.name == "Souche Bouleau Malade(Clone)" || gameObject.name == "Souche Hetre Malade(Clone)")
         {
@@ -79,35 +83,35 @@ public class SoucheComportement : MonoBehaviour
             arbreY = arbreManager.cheneRobuste.transform.position.y;
             rot = arbreManager.cheneRobuste.transform.rotation;
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
-            Instantiate(arbreManager.cheneFrele, pos, rot);
+            Instantiate(arbreManager.cheneFrele, pos, rot, dossierArbres);
         }
         else if (essence == "pin")
         {
             arbreY = arbreManager.pinRobuste.transform.position.y;
             rot = arbreManager.pinRobuste.transform.rotation;
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
-            Instantiate(arbreManager.pinFrele, pos, rot);
+            Instantiate(arbreManager.pinFrele, pos, rot, dossierArbres);
         }
         else if (essence == "douglas")
         {
             arbreY = arbreManager.douglasRobuste.transform.position.y;
             rot = arbreManager.douglasRobuste.transform.rotation;
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
-            Instantiate(arbreManager.douglasFrele, pos, rot);
+            Instantiate(arbreManager.douglasFrele, pos, rot, dossierArbres);
         }
         else if (essence == "hetre")
         {
             arbreY = arbreManager.hetreRobuste.transform.position.y;
             rot = arbreManager.hetreRobuste.transform.rotation;
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
-            Instantiate(arbreManager.hetreFrele, pos, rot);
+            Instantiate(arbreManager.hetreFrele, pos, rot, dossierArbres);
         }
         else
         {
             arbreY = arbreManager.bouleauRobuste.transform.position.y;
             rot = arbreManager.bouleauRobuste.transform.rotation;
             Vector3 pos = new Vector3(arbreX, arbreY, arbreZ +5);
-            Instantiate(arbreManager.bouleauFrele, pos, rot);
+            Instantiate(arbreManager.bouleauFrele, pos, rot, dossierArbres);
         }
 
         Destroy(gameObject);

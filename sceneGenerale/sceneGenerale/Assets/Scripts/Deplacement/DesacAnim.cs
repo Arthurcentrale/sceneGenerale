@@ -42,15 +42,21 @@ public class DesacAnim : MonoBehaviour
         gameobjectAnimes = GameObject.FindGameObjectsWithTag("Arbre");
         foreach (GameObject Animes in gameobjectAnimes)
         {
-            
-            if (distance(position, Animes.transform.position) > 40)
+            Animator animator = Animes.transform.GetChild(0).gameObject.GetComponent<Animator>();
+
+            if (animator != null)
             {
-                Animes.transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+                if (distance(position, Animes.transform.position) > 40)
+                {
+                    animator.enabled = false;
+                }
+
+                else
+                {
+                    animator.enabled = true;
+                }
             }
-            else
-            {
-                Animes.transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = true;
-            }
+               
         }
     }
 }
