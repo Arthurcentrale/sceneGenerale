@@ -485,6 +485,7 @@ public class Pecherie : MonoBehaviour
         panel.SetActive(false);
         open = false;
         animator.SetTrigger("ouverture1BulleCouper");
+        Deplacement.enMenu = false;
     }
     public void selectionpecheur()
     {
@@ -502,6 +503,7 @@ public class Pecherie : MonoBehaviour
         panel.SetActive(false);
         open = false;
         animator.SetTrigger("ouverture1BulleCouper");
+        Deplacement.enMenu = false;
     }
 
 }

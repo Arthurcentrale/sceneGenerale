@@ -130,46 +130,46 @@ public class MoulinEau : MonoBehaviour
         {
             if (habitant.ecoLevel == 1)
             {
-                return Math.Max(3, nbParcelleBle);
+                return Math.Min(3, nbParcelleBle);
             }
             if (habitant.ecoLevel == 2)
             {
-                return Math.Max(6, nbParcelleBle);
+                return Math.Min(6, nbParcelleBle);
             }
             if (habitant.ecoLevel == 3)
             {
-                return Math.Max(9, nbParcelleBle);
+                return Math.Min(9, nbParcelleBle);
             }
             if (habitant.ecoLevel == 4)
             {
-                return Math.Max(12, nbParcelleBle);
+                return Math.Min(12, nbParcelleBle);
             }
             else
             {
-                return Math.Max(15, nbParcelleBle);
+                return Math.Min(15, nbParcelleBle);
             }
         }
         else
         {
             if (habitant.ecoLevel == 1)
             {
-                return Math.Max(2, nbParcelleMais);
+                return Math.Min(2, nbParcelleMais);
             }
             if (habitant.ecoLevel == 2)
             {
-                return Math.Max(4, nbParcelleMais);
+                return Math.Min(4, nbParcelleMais);
             }
             if (habitant.ecoLevel == 3)
             {
-                return Math.Max(6, nbParcelleMais);
+                return Math.Min(6, nbParcelleMais);
             }
             if (habitant.ecoLevel == 4)
             {
-                return Math.Max(8, nbParcelleMais);
+                return Math.Min(8, nbParcelleMais);
             }
             else
             {
-                return Math.Max(10, nbParcelleMais);
+                return Math.Min(10, nbParcelleMais);
             }
         }
         
@@ -266,6 +266,8 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(false);
             menuinfo.transform.GetChild(8).gameObject.SetActive(false);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -279,6 +281,8 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(false);
             menuinfo.transform.GetChild(8).gameObject.SetActive(false);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -292,6 +296,8 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(true);
             menuinfo.transform.GetChild(8).gameObject.SetActive(true);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(true);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -352,12 +358,14 @@ public class MoulinEau : MonoBehaviour
         panel.SetActive(false);
         open = false;
         animator.SetTrigger("ouverture1BulleCouper");
+        Deplacement.enMenu = false;
     }
     public void quitter2()
     {
         menuinfo.SetActive(false);
         panel.SetActive(false);
         open = false;
+        Deplacement.enMenu = false;
         animator.SetTrigger("ouverture1BulleCouper");
     }
 
