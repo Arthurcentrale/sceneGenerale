@@ -393,11 +393,15 @@ public class UI_Inventory : MonoBehaviour
         string name = slotInv.gameObject.name;
         int slot = name[name.Length - 1] - '0';
 
+
+
         if (slot == slotEquipé)
         {
             slotEquipé = 0;
             Debug.Log("On déséquipe l'item n" + slot.ToString());
-            animPlayer.SetBool(NomItemEquip(), false);
+            animPlayer.SetBool("Pioche", false);
+            animPlayer.SetBool("Sac", false);
+            animPlayer.SetBool("Hache", false);
         }
         else
         {
@@ -405,12 +409,27 @@ public class UI_Inventory : MonoBehaviour
             slotEquipé = slot;
             Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
             audioSource.PlayOneShot(equipOutil);
-            animPlayer.SetBool(NomItemEquip(), true);
+            if (slot == 1)
+            {
+                animPlayer.SetBool("Pioche", false);
+                animPlayer.SetBool("Sac", false);
+                animPlayer.SetBool("Hache", true);
+            }
+            else if (slot == 2)
+            {
+                animPlayer.SetBool("Hache", false);
+                animPlayer.SetBool("Sac", false);
+                animPlayer.SetBool("Pioche", true);
+            }
         }
+
+        //partie animation
         
+
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
+
         Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
