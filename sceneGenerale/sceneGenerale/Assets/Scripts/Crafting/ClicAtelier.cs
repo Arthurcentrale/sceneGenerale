@@ -159,7 +159,7 @@ public class ClicAtelier : MonoBehaviour
         foreach (Transform child in habitant.transform)
         {
             HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
-            if (Behaviour.transform.name == "Artisan")
+            if (child.gameObject.name == "Artisan")
             {
                 if (Behaviour.hasWorkplace == false)
                 {
