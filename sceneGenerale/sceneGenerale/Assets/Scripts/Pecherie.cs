@@ -21,7 +21,6 @@ public class Pecherie : MonoBehaviour
     //Gestion des paramètres globaux
 
     public HabitantBehaviour habitant;
-    public GameObject go;
 
 
     //Booleens pour savoir si la pecherie est habité / Si on a validé une nouvelle valeur à produire dans la journée
@@ -70,6 +69,7 @@ public class Pecherie : MonoBehaviour
     {
         slider.minValue = 0;
         slider.maxValue = QuantiteMax(habitant);
+        AffichageSlider();
 
         var ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit Hit;

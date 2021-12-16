@@ -83,10 +83,12 @@ public class Mairie : MonoBehaviour
         Transform jauges = PanelTableau.transform.GetChild(1);
         //List<float> valeurs = new List<float> { 80,52,12,52,84,1};
         List<float> valeurs = new List<float>{ GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol , GameManager.environnementManager.qualiteEau,GameManager.socialManager.qualiteDeVie,GameManager.socialManager.ecoSensibilisation,GameManager.developpementManager.navireConstruit };
+        Debug.Log("Qualité eau : "+valeurs[2]);
         for(int i = 0; i <= 5; i++)
         {
             Slider slider = jauges.GetChild(i).gameObject.GetComponent<Slider>();
             slider.value = valeurs[i];
+            Debug.Log("Valeur slider"+slider.value);
             if (valeurs[i] / slider.maxValue > 0.65f)
             {
                 slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.green;

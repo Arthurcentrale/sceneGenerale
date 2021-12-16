@@ -229,9 +229,14 @@ public class Chaumiere : MonoBehaviour
             menuinfo.transform.GetChild(2).gameObject.GetComponent<Text>().text = cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().nom;
             for(int i =0;i<3; i++)
             {
-                if (i > cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodVariety -1 )
+                if (i > cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodVariety.Count - 1)
                     menuinfo.transform.GetChild(4 + i).gameObject.SetActive(false);
-                else menuinfo.transform.GetChild(4 + i).gameObject.SetActive(true); 
+                else
+                {
+                    menuinfo.transform.GetChild(4 + i).gameObject.SetActive(true);
+                    menuinfo.transform.GetChild(4 + i).GetComponent<Image>().sprite = cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodVariety[i].Icon;
+                }
+
             }
             menuinfo.transform.GetChild(8).gameObject.GetComponent<Image>().sprite = cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().image ;
             menuinfo.transform.GetChild(8).gameObject.SetActive(true);
