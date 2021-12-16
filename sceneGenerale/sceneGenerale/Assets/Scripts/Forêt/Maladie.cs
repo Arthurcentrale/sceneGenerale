@@ -232,7 +232,7 @@ public class Maladie : MonoBehaviour
         var objectsprout = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
         var objectspipi = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name2);
         var objectscaca=objectsprout.Concat(objectspipi);
-        if (objectscaca.Count()==1){
+        if (objectscaca.Count()<=1){
             return(null); //me demande pas pourquoi mais ça marche, quand le count est à 1 ya plus d'arbre non malade donc juste je retourne null et je vis ma vie
         }
         Vector3 prout=caca.transform.position;

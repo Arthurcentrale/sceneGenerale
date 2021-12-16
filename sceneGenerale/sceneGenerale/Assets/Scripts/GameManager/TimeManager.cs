@@ -16,12 +16,14 @@ public class TimeManager : MonoBehaviour
     Boulangerie boulangerie;
     MoulinVent moulinVent;
     MoulinEau moulinEau;
+    //GFForet gfforet; //script du garde forestier
 
     void Start()
     {
         planter = GameObject.Find("Ferme").GetComponent<Planter>();
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
         maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
+        //gfforet=GameObject.Find("Garde Forestier").transform.GetChild(2).GetComponent<GFForet>();
 
         repousse = GameObject.Find("Terrain").GetComponent<scriptRepousse>();
         boulangerie = GameObject.FindGameObjectWithTag("Boulangerie").GetComponent<Boulangerie>();
@@ -108,6 +110,10 @@ public class TimeManager : MonoBehaviour
         if (rand<=0.03 && !(maladie.maladieEnCours)){ //3% de chance de déclencher une maladie si ya pas déjà une maladie en cours
             maladie.FonctionQuiSeDéclencheÀMinuit();
         }
+
+
+        //Garde Forestier
+        //gfforet.graineDéjàDonnée=false;  //on reset la graine que donne le garde forestier
     }
 
     void Fonctions3Heures(){
