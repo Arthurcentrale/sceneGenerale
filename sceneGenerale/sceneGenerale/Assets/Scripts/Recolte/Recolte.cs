@@ -110,37 +110,38 @@ public class Recolte : MonoBehaviour
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                     {
-                        mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
-                        //rect = new Rect(mP.x - width /3, mP.y - height/2, width, height);
-                        //rectransform.rect = RectTransformToScreenSpace(rectransform);// on crée le rectangle du menus pour vérifier avec le contains
+                    Debug.Log(hit.transform.tag);
+                    mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
+                                                                                    //rect = new Rect(mP.x - width /3, mP.y - height/2, width, height);
+                                                                                    //rectransform.rect = RectTransformToScreenSpace(rectransform);// on crée le rectangle du menus pour vérifier avec le contains
 
-                        if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
-                        {
+                    if (hit.collider.CompareTag("Arbre")) // si on touche un arbre :
+                    {
                         if (onPanel == true || IsCraftArbre == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
                         {
 
-                                audioSource.PlayOneShot(apparitionBulle); 
-                                if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
-                                {                                   
-                                    cible = hit;
-                                    R = ray;
-                                    IsCraftFleur = false;
-                                    IsCraftRoche = false;
-                                    IsCraftArbre = true;
-                                
-                                }
-                                else
-                                {                              
-                                    cible = hit;
-                                    R = ray;
-                                    IsCraftArbre = false;
-                                    IsCraftArbre = true;
-                                    
+                            audioSource.PlayOneShot(apparitionBulle);
+                            if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftFleur = false;
+                                IsCraftRoche = false;
+                                IsCraftArbre = true;
+
                             }
+                            else
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftArbre = false;
+                                IsCraftArbre = true;
+
                             }
+
 
                         }
-
+                    }
                         if (hit.collider.CompareTag("Bois")) // si on clic sur une buche et qu'on a assez de place dans l'inventaire, on la récupère
                         {
                             if (NbrPlace(boisR) > 0) // a changer lorsque l'inventaire sera fonctionnelle
@@ -149,40 +150,44 @@ public class Recolte : MonoBehaviour
                                 AjouterInventaire(boisR, 1); // à changer lorsque l'inventaire sera terminé
                             }
                         }
+                    if (hit.collider.CompareTag("Rocher")) // si on touche un arbre :
+                    {
+                        if (onPanel == true || IsCraftArbre == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
+                        {
 
-                        if ((hit.collider.CompareTag("Roche1")) || (hit.collider.CompareTag("Roche2")) || (hit.collider.CompareTag("Roche3"))) //pareil avec les roches
-                        {
-                        if (onPanel == true || IsCraftRoche == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
-                        {
-                            audioSource.PlayOneShot(apparitionBulle);                          
-                            if (IsCraftRoche == false)
-                                {
-                                    cible = hit;
-                                    R = ray;
-                                    IsCraftArbre = false;
-                                    IsCraftFleur = false;
-                                    IsCraftRoche = true;
-                                }
-                                else
-                                {
-                                    cible = hit;
-                                    R = ray;
-                                    IsCraftRoche = false;
-                                    IsCraftRoche = true;
-                                }
+                            audioSource.PlayOneShot(apparitionBulle);
+                            if (IsCraftArbre == false) // si un autre menu est ouvert alors qu'on a cliqué sur l'arbre, on le ferme
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftFleur = false;
+                                IsCraftArbre = false;
+                                IsCraftRoche = true;
+
                             }
+                            else
+                            {
+                                cible = hit;
+                                R = ray;
+                                IsCraftRoche = false;
+                                IsCraftRoche = true;
+
+                            }
+
+
                         }
+                    }
 
-                        /* if (hit.collider.CompareTag("Rocher")) // pareil que les buches
+                    /* if (hit.collider.CompareTag("Rocher")) // pareil que les buches
+                     {
+                         if (NbrPlace(rocher) > 0)
                          {
-                             if (NbrPlace(rocher) > 0)
-                             {
-                                 Destroy(hit.transform.gameObject);
-                                 AjouterInventaire(rocher, 1); // a changer plus tard selon le fonctionnement de l'inventaire
-                             }
-                         }*/
+                             Destroy(hit.transform.gameObject);
+                             AjouterInventaire(rocher, 1); // a changer plus tard selon le fonctionnement de l'inventaire
+                         }
+                     }*/
 
-                        if (hit.collider.CompareTag("Fleurs")) //same
+                    if (hit.collider.CompareTag("Fleurs")) //same
                         {
                         if (onPanel == true || IsCraftFleur == false)
                         {
@@ -214,7 +219,7 @@ public class Recolte : MonoBehaviour
                             }
                         }
 
-                    if (onPanel == false && (hit.collider.tag != "Arbre" && hit.collider.tag != "Roche1" && hit.collider.tag != "Roche2" && hit.collider.tag != "Roche3" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
+                    if (onPanel == false && (hit.collider.tag !="Rocher" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
                         {
                             animatorA.SetTrigger("fermetture1BulleCouper");
                             animatorR.SetTrigger("fermetture1BulleCouper");
