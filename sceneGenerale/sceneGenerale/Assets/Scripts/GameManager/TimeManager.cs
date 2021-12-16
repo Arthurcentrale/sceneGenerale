@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +27,8 @@ public class TimeManager : MonoBehaviour
         boulangerie = GameObject.FindGameObjectWithTag("Boulangerie").GetComponent<Boulangerie>();
         moulinVent = GameObject.FindGameObjectWithTag("MoulinVent").GetComponent<MoulinVent>();
         moulinEau = GameObject.FindGameObjectWithTag("MoulinEau").GetComponent<MoulinEau>();
-        StartCoroutine(Coroutine());
+        StartCoroutine(Coroutine()); 
+        StartCoroutine(CoroutineTroisHeures());
     }
 
     IEnumerator AttenteMinuit() // On bloque jusqu'a minuit
@@ -44,14 +45,17 @@ public class TimeManager : MonoBehaviour
 
 
 
-    IEnumerator AttenteTroisHeures() // On bloque jusqu'a minuit
+    IEnumerator AttenteTroisHeures() // On bloque jusqu'au prochain créneau de 3 heures
     {
-        current = DateTime.Now;  //Donne le jour et l'heure
-        tomorrow = current.AddDays(0.125).Date;   //AddDays marche prend en paramètre un double, donc normalement ça correspond bien à une attente de 3 heures
-        seconds = (tomorrow - current).TotalSeconds;
+        // current = DateTime.Now;  //Donne le jour et l'heure
+        // //print(current);
+        // tomorrow = current.AddDays(0.125).Date;   //AddDays marche prend en paramètre un double, donc normalement ça correspond bien à une attente de 3 heures
+        // //print(tomorrow);
+        // seconds = (tomorrow - current).TotalSeconds; //3600*3
 
-        yield return new WaitForSeconds((float) seconds);
-        //yield return new WaitForSeconds(5f); //Pour test que tout marche
+        
+        //yield return new WaitForSeconds((float) seconds);
+        yield return new WaitForSeconds(5f); //L'actualisation de la maladie (on test à 5s)
 
         Fonctions3Heures();
     }
@@ -64,6 +68,13 @@ public class TimeManager : MonoBehaviour
         while(true)
         {
             yield return StartCoroutine(AttenteMinuit());
+            //yield return StartCoroutine(AttenteTroisHeures());
+        }
+    }
+
+
+    IEnumerator CoroutineTroisHeures(){//Coroutine qui active les fonctions toutes les 3 heures miam on se régale
+        while(true){
             yield return StartCoroutine(AttenteTroisHeures());
         }
     }
@@ -92,8 +103,10 @@ public class TimeManager : MonoBehaviour
 
         //Maladie
         var rand= UnityEngine.Random.Range(0f,1f);
+        //print(rand);
+        //print(maladie.maladieEnCours);
         if (rand<=0.03 && !(maladie.maladieEnCours)){ //3% de chance de déclencher une maladie si ya pas déjà une maladie en cours
-            maladie.FonctionQuiSeDéclencheÀMinuit();    
+            maladie.FonctionQuiSeDéclencheÀMinuit();
         }
     }
 

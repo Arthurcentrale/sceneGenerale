@@ -27,6 +27,7 @@ public class Maladie : MonoBehaviour
     private ArbreManager arbreManager; 
 
     //Les variables
+    private GameObject imposteur;
     private GameObject premierArbreMalade;
     private float distancemini;
     private GameObject gameObjectProche;
@@ -34,13 +35,14 @@ public class Maladie : MonoBehaviour
     private GameObject prochainArbreMalade;
     public bool maladieEnCours=false;
     public string essenceMalade="aucune";
+    private Transform dossierArbres;
     
     void Start(){
         //arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
         //var objects = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)"); // la liste contient aussi les objects inactifs qui portent ce nom, il faudra faire attention
         //print("nombre de chenes" + objects.Count()); //après test ça a l'air de bien marcher
         //DéclencherMaladie();
-
+        dossierArbres=GameObject.Find("Arbres").transform;
     }
     
     public void DéclencherMaladie(){
@@ -175,7 +177,9 @@ public class Maladie : MonoBehaviour
             if (premierArbreMalade!=null){ //nous évite tout plein d'erreurs chiantes
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Chene(Clone)","Chene"); //on contamine un arbre à côté du précédent
                 //Comme prochainArbreMalade aura changé de nom, il ne sera plus dans la liste des "Chene(Clone)" donc on ne contaminera pas le même arbre en boucle
-                RendreArbreMalade(prochainArbreMalade,"Chene");
+                if (prochainArbreMalade!=null){
+                    RendreArbreMalade(prochainArbreMalade,"Chene");
+                }
                 //premierArbreMalade.name="Chene Malade";
             }
             {
@@ -186,7 +190,9 @@ public class Maladie : MonoBehaviour
             premierArbreMalade=GameObject.Find("Hetre Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Hetre(Clone)","Hetre"); //on contamine un arbre à côté du précédent
-                RendreArbreMalade(prochainArbreMalade,"Hetre");
+                if (prochainArbreMalade!=null){
+                    RendreArbreMalade(prochainArbreMalade,"Hetre");
+                }
                 //premierArbreMalade.name="Hetre Malade";
             }
         }
@@ -194,7 +200,9 @@ public class Maladie : MonoBehaviour
             premierArbreMalade=GameObject.Find("Pin Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Pin(Clone)","Pin"); //on contamine un arbre à côté du précédent
-                RendreArbreMalade(prochainArbreMalade,"Pin");
+                if (prochainArbreMalade!=null){
+                    RendreArbreMalade(prochainArbreMalade,"Pin");
+                }
                 //premierArbreMalade.name="Pin Malade";
             }
         }
@@ -202,7 +210,9 @@ public class Maladie : MonoBehaviour
             premierArbreMalade=GameObject.Find("Douglas Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){  
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Douglas(Clone)","Douglas"); //on contamine un arbre à côté du précédent
-                RendreArbreMalade(prochainArbreMalade,"Douglas");
+                if (prochainArbreMalade!=null){
+                    RendreArbreMalade(prochainArbreMalade,"Douglas");
+                }
                 //premierArbreMalade.name="Douglas Malade";
             }
         }
@@ -210,16 +220,21 @@ public class Maladie : MonoBehaviour
             premierArbreMalade=GameObject.Find("Bouleau Malade(Clone)"); //on prend un arbre malade random
             if (premierArbreMalade!=null){
                 prochainArbreMalade=PlusProcheGameObjectAvecNom(premierArbreMalade,"Bouleau(Clone)","Bouleau"); //on contamine un arbre à côté du précédent
-                RendreArbreMalade(prochainArbreMalade,"Bouleau");
+                if (prochainArbreMalade!=null){
+                    RendreArbreMalade(prochainArbreMalade,"Bouleau");
+                }
                 //premierArbreMalade.name="Bouleau Malade";
             }
         }
     }
 
-    private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1, string name2){
+    private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1, string name2){ //pardon
         var objectsprout = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
         var objectspipi = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name2);
         var objectscaca=objectsprout.Concat(objectspipi);
+        if (objectscaca.Count()==1){
+            return(null); //me demande pas pourquoi mais ça marche, quand le count est à 1 ya plus d'arbre non malade donc juste je retourne null et je vis ma vie
+        }
         Vector3 prout=caca.transform.position;
         distancemini=(Vector3.Distance(caca.transform.position,objectscaca.ElementAt(0).transform.position));
         gameObjectProche=objectscaca.ElementAt(0);
@@ -234,35 +249,35 @@ public class Maladie : MonoBehaviour
     }
 
     private void RendreArbreMalade(GameObject arbre, string nom){
-        if (nom=="Chene"){
+        if (nom=="Chene" && arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.cheneRobuste.transform.rotation;
-            Instantiate(arbreManager.cheneMalade, coord, rot);
+            Instantiate(arbreManager.cheneMalade, coord, rot,dossierArbres);
             Destroy(arbre);
 
         }
-        if (nom=="Hetre"){
+        if (nom=="Hetre"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.hetreRobuste.transform.rotation;
-            Instantiate(arbreManager.hetreMalade, coord, rot);
+            Instantiate(arbreManager.hetreMalade, coord, rot,dossierArbres);
             Destroy(arbre);
         }
-        if (nom=="Pin"){
+        if (nom=="Pin"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.pinRobuste.transform.rotation;
-            Instantiate(arbreManager.pinMalade, coord, rot);
+            Instantiate(arbreManager.pinMalade, coord, rot,dossierArbres);
             Destroy(arbre);
         }
-        if (nom=="Douglas"){
+        if (nom=="Douglas"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.douglasRobuste.transform.rotation;
-            Instantiate(arbreManager.douglasMalade, coord, rot);
+            Instantiate(arbreManager.douglasMalade, coord, rot,dossierArbres);
             Destroy(arbre);
         }
-        if (nom=="Bouleau"){
+        if (nom=="Bouleau"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.bouleauRobuste.transform.rotation;
-            Instantiate(arbreManager.bouleauMalade, coord, rot);
+            Instantiate(arbreManager.bouleauMalade, coord, rot,dossierArbres);
             Destroy(arbre);
         }
     }
@@ -281,8 +296,9 @@ public class Maladie : MonoBehaviour
     public void VérifierMaladie(){
         GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
         maladieEnCours=false;
+        
         foreach(GameObject item in ListeGO){
-            if (item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >= 0){ //S'il reste un arbre malade (marche aussi avec les arbustes!!), alors la maladie est toujours en cours
+            if (item.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0){ //S'il reste un arbre malade (marche aussi avec les arbustes!!), alors la maladie est toujours en cours
             maladieEnCours=true; 
             }
         }
