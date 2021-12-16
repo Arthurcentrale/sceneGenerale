@@ -10,6 +10,8 @@ public class UI_Inventory : MonoBehaviour
     public EventSystem eventSystem;
     private ArbreManager arbreManager;
 
+    private Animator animPlayer;
+
     private Inventory inventory;
     private Transform itemSlotContainer;
     private GameObject itemSlotTemplate;
@@ -57,6 +59,7 @@ public class UI_Inventory : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
+        animPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
 
     public void Awake()
@@ -394,6 +397,7 @@ public class UI_Inventory : MonoBehaviour
         {
             slotEquipé = 0;
             Debug.Log("On déséquipe l'item n" + slot.ToString());
+            animPlayer.SetBool(NomItemEquip(), false);
         }
         else
         {
@@ -401,12 +405,12 @@ public class UI_Inventory : MonoBehaviour
             slotEquipé = slot;
             Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
             audioSource.PlayOneShot(equipOutil);
+            animPlayer.SetBool(NomItemEquip(), true);
         }
         
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
-
         Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
