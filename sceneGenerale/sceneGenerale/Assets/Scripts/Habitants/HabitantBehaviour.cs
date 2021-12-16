@@ -16,7 +16,7 @@ public class HabitantBehaviour : MonoBehaviour
 
     //besoins et déchets
     public int foodQuantity;
-    public float foodVariety;
+    public List<Item> foodVariety;
     public float waste;
 
     //niveau d'écosensibilisation

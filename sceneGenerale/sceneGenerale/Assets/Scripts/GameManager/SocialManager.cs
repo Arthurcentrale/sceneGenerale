@@ -48,7 +48,7 @@ public class SocialManager
         int sommeSatisfactionNourriture = nombreAlimentsDifferents * habitants.Count;
         foreach (GameObject habitantGO in habitants)
         {
-            sommeSatisfactionNourriture -= (int) habitantGO.GetComponent<HabitantBehaviour>().foodVariety; //on fait la somme des satisfaction pour chaque habitant
+            sommeSatisfactionNourriture -= (int) habitantGO.GetComponent<HabitantBehaviour>().foodVariety.Count; //on fait la somme des satisfaction pour chaque habitant
         }
         int sommeChauffage = 0;
         foreach (GameObject batimentGO in listeBatiment)
