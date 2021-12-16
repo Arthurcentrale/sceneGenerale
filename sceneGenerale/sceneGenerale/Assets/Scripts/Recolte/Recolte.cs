@@ -291,7 +291,6 @@ public class Recolte : MonoBehaviour
 
     public void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
-        Debug.Log("cc");
         //player.uiInventory.ReduitDuraEquip();
         audioSource.PlayOneShot(treeChop);
         if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -395,10 +394,8 @@ public class Recolte : MonoBehaviour
         }
         if (cible.transform.name.IndexOf("Bouleau", StringComparison.OrdinalIgnoreCase) >= 0)
         {
-            Debug.Log("Coucou");
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                Debug.Log("salut");
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
                 AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);

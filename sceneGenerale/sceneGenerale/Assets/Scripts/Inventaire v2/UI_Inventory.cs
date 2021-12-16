@@ -170,15 +170,12 @@ public class UI_Inventory : MonoBehaviour
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
 
-
-
         //inventory.AddItem(new ItemAmount(Item: Hache, Amount: 1));
-        
-        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 15));    
+        inventory.AddItem(new ItemAmount(Item: Bois, Amount: 5));    
         
         //inventory.AddItem(new ItemAmount(Item: Pioche, Amount: 1));
         
-        inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 15));
+        inventory.AddItem(new ItemAmount(Item: Pierre, Amount: 5));
         //inventory.AddItem(new ItemAmount(Item: GraineChene, Amount: 1));
         
 
@@ -473,7 +470,7 @@ public class UI_Inventory : MonoBehaviour
     public void PlanterGraine(Item item)   //plante la graine
     {
         GameObject arbuste;
-        Vector3 position = GameObject.Find("34_short_OK").transform.position + new Vector3(0f, 1.4f, 0f);
+        Vector3 position = GameObject.Find("Principal_OK").transform.position + new Vector3(0f, 1.4f, 0f);
 
         switch (item.name)
         {
