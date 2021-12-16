@@ -1,13 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class GFForet : MonoBehaviour
 {
     //Les scripts 
     public UI_Inventory ui_inventory;
     public Player player;
+    Maladie maladie;
 
     //Les items graines
     public Item graineCerisier;
@@ -18,19 +20,57 @@ public class GFForet : MonoBehaviour
     public Item graineBouleau;
 
     //Les variables
-    public int nombreChenes;
-    public int nombreHetres;
-    public int nombrePins;
-    public int nombreDouglas;
-    public int nombreBouleaux;
+    private int nombreChenes;
+    private int nombreHetres;
+    private int nombrePins;
+    private int nombreDouglas;
+    private int nombreBouleaux;
+    private int[] liste;
+    public bool graineDéjàDonnée=false;
+    //private string essenceMaladeOui; //ça bug si je récupère directement avec maladie.essenceMalade
+
+    //Les GameObjects Dialogue
+    public GameObject dialogueBoite;
+    public GameObject boite; //Panel dans lequel ya le texte
+    public Text textDialogue;
+    
+    
+    
 
 
+    void Start(){//on récupère les GameObject dont on a besoin  
+        dialogueBoite = GameObject.Find("DialogueBoite");
+        textDialogue=dialogueBoite.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
+        
+    }
+
+    public void LancementDialogueGardeForestier(){
+        liste=CompterLesArbres();
+        nombreChenes=liste[0];
+        nombreHetres=liste[1];
+        nombrePins=liste[2];
+        nombreDouglas=liste[3];
+        nombreBouleaux=liste[4];
+        //nombreChenes,nombreHetres,nombrePins,nombreDouglas,nombreBouleaux=liste[0],liste[1],liste[2],liste[3],liste[4]; il me clc quand je fais comme ça 
+        textDialogue.text="Bonjour mon grand, je suis le garde forestier. J'adore les arbres! Sur ton île, il y a " +nombreChenes.ToString() + " chênes, "
+        + nombreHetres.ToString()+ " hêtres, " +nombrePins.ToString() + " pins, " +nombreDouglas.ToString() + " douglas, et " +nombreBouleaux.ToString() + "bouleaux!";
+        if (maladie.maladieEnCours){
+            textDialogue.text+= " Au fait, j'ai apperçu quelques " +maladie.essenceMalade+ "s malades ce matin. Débarasse-t-en le plus vite possible avant qu'ils ne disparaissent tous'!";
+        }
+        if (!graineDéjàDonnée){
+            textDialogue.text+= " Tiens! Voilà une graine que j'ai trouvée tout à l'heure, j'espère qu'elle te sera utile! ";
+            DonnerGraine();
+            graineDéjàDonnée=true;
+        }
+        
+    }
 
     
 
 
 
-    public int[] CompterLesArbres(){
+    public int[] CompterLesArbres(){ //cette fonction compte tout ce qui a pour tag "arbre" donc les arbustes aussi il me semble (mais pas les souches!)
         // On stocke tous les Arbres du terrain dans une liste
         GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
         //on initialise le nombre d'arbres à 0
