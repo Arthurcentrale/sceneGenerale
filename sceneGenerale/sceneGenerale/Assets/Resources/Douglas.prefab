@@ -51,6 +51,7 @@ MonoBehaviour:
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
+  contamination: 0
 --- !u!65 &3546015591835907185
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 7020754567601111883, guid: 4d06eff4b31e9eb42bb6e40e18b313cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 7365347506064878842, guid: 4d06eff4b31e9eb42bb6e40e18b313cc,
         type: 3}
