@@ -171,6 +171,13 @@ public class livre : MonoBehaviour
         info = false;
     }
 
+    //public void jeSuisUneMairieMalAimee()
+    //{
+    //    animatorLivreFerme.SetTrigger("Selected");
+    //    animatorLivreOuvert.SetTrigger("FermetureComplete");
+
+    //}
+
 
     public void construire()
     {

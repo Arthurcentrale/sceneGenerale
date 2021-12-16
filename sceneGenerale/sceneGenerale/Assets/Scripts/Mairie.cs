@@ -5,13 +5,12 @@ using System.Collections.Generic;
 public class Mairie : MonoBehaviour
 {
     public GameObject panel;
-    bool open;
-    bool onPanel;
+    public bool open;
+    public bool onPanel;
     Vector2 mP;
     new public Camera camera;
     private Animator animator;
-    public Player player;
-
+    Player player;
     public GameObject PanelTableau;
     
 
@@ -19,6 +18,7 @@ public class Mairie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         open = false;
         onPanel = false;
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
@@ -32,6 +32,7 @@ public class Mairie : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+        
             mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             if (onPanel == false)
             {
@@ -46,6 +47,7 @@ public class Mairie : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Mairie"))
 
                 {
+                    Debug.Log(Hit.transform.tag);
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
@@ -75,8 +77,9 @@ public class Mairie : MonoBehaviour
         Deplacement.enMenu = false;
     }
 
-    void FctTableau()
+    public void FctTableau()
     {
+        
         Transform jauges = PanelTableau.transform.GetChild(1);
         //List<float> valeurs = new List<float> { 80,52,12,52,84,1};
         List<float> valeurs = new List<float>{ GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol , GameManager.environnementManager.qualiteEau,GameManager.socialManager.qualiteDeVie,GameManager.socialManager.ecoSensibilisation,GameManager.developpementManager.navireConstruit };
@@ -97,5 +100,6 @@ public class Mairie : MonoBehaviour
                 slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
             }
         }
+        PanelTableau.SetActive(true);
     }
 }

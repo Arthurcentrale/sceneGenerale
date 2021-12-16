@@ -110,7 +110,6 @@ public class Recolte : MonoBehaviour
                     Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit)) // on verifie si le raycast a touché un gameobject
                     {
-                    Debug.Log(hit.transform.tag);
                     mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y); // on prend les coordonnées du clic pour créer le menu où on clic
                                                                                     //rect = new Rect(mP.x - width /3, mP.y - height/2, width, height);
                                                                                     //rectransform.rect = RectTransformToScreenSpace(rectransform);// on crée le rectangle du menus pour vérifier avec le contains
@@ -219,7 +218,7 @@ public class Recolte : MonoBehaviour
                             }
                         }
 
-                    if (onPanel == false && (hit.collider.tag !="Rocher" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
+                    if (onPanel == false && (hit.collider.tag != "Arbre" && hit.collider.tag !="Rocher" && hit.collider.tag != "Fleurs")|| (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) > 1))
                         {
                             animatorA.SetTrigger("fermetture1BulleCouper");
                             animatorR.SetTrigger("fermetture1BulleCouper");
@@ -290,8 +289,9 @@ public class Recolte : MonoBehaviour
         }
     }
 
-    private void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
+    public void SpawnBuche() //fonction qui fait détruit cible et fait remplit l'inventaire ou fait spawn le bois dont on a pas la place dans l'inventaire
     {
+        Debug.Log("cc");
         //player.uiInventory.ReduitDuraEquip();
         audioSource.PlayOneShot(treeChop);
         if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -428,7 +428,7 @@ public class Recolte : MonoBehaviour
         Destroy(cible.transform.gameObject);//detruit cible
         IsCraftArbre = false;  
     }
-    private void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
+    public void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
         Destroy(cible.transform.gameObject);
         IsCraftFleur = false;//detruit cible

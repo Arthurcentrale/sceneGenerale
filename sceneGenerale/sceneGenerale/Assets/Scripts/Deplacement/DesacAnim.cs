@@ -6,7 +6,6 @@ public class DesacAnim : MonoBehaviour
 {
 
     public GameObject player;
-    public GameObject perso;
     private Vector3 position;
     public GameObject[] gameobjectAnimes;
 

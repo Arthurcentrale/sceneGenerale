@@ -8,12 +8,13 @@ public class ChangeSceneMairie : MonoBehaviour
     AsyncOperation loadingOperation;
     public Slider slider;
     public GameObject loadingScreen;
-    public Player player;
+    Player player;
     public Vector3 positiondevantmairie;
     static Vector3 positionactuelle;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //positionactuelle = player.transform.position;
         if(positionactuelle != new Vector3(0, 0, 0))
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ArbreComportement : MonoBehaviour
 {
-    public GameObject arbre;
 
     public string etat;
     public string essence;

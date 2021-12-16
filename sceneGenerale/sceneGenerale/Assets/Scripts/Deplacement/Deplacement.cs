@@ -16,14 +16,12 @@ public class Deplacement : MonoBehaviour
     new public Camera camera;//Touch regarde si on touche l'écran, outside regarde si click a été fait en dehors de la zone ou non
     float c;
 
-    public Recolte recolte;
 
     public Player player;
     // Start is called before the first frame update
     void Start()
     {
         Touch = false;
-        recolte = recolte.GetComponent<Recolte>();
         canmove = true;
         animator = player.GetComponent<Animator>();
         player = this.GetComponent<Player>();
