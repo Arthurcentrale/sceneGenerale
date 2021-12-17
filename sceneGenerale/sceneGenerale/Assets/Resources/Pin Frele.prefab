@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8814322108762674074}
   - component: {fileID: 5422522752047166187}
   - component: {fileID: 6256945402051446660}
+  - component: {fileID: 5374275414807353504}
   m_Layer: 0
   m_Name: Pin Frele
   m_TagString: Arbre
@@ -109,13 +110,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arbre: {fileID: 0}
   etat: 
   essence: 
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
   contamination: 0
+--- !u!65 &5374275414807353504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487724431439320273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.556072, y: 4.9999995, z: 1.7055118}
+  m_Center: {x: -0.44517055, y: 0.0000009971429, z: -4.252985}
 --- !u!1 &3709930247771940690
 GameObject:
   m_ObjectHideFlags: 0

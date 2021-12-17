@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5003916575026443582}
   - component: {fileID: 1779486545912603805}
   - component: {fileID: 3770751196329413183}
+  - component: {fileID: 9214692386915000348}
   m_Layer: 0
   m_Name: Hetre Frele
   m_TagString: Arbre
@@ -109,13 +110,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arbre: {fileID: 0}
   etat: 
   essence: 
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
   contamination: 0
+--- !u!65 &9214692386915000348
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206365153380630258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.914836, y: 5, z: 1.3945884}
+  m_Center: {x: -0.3925079, y: -0.0000044099424, z: -4.482913}
 --- !u!1 &6892344546775156431
 GameObject:
   m_ObjectHideFlags: 0

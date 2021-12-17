@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 196790031049953788}
   - component: {fileID: 6657289001524693144}
   - component: {fileID: 3994893828452794034}
+  - component: {fileID: 7405699458904103269}
   m_Layer: 0
   m_Name: Chene Frele
   m_TagString: Arbre
@@ -190,13 +191,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arbre: {fileID: 0}
   etat: 
   essence: 
   age: 0
   tempsCroissance: 0
   absorptionCo2: 0
   contamination: 0
+--- !u!65 &7405699458904103269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744423923383731935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1.6937498, z: 2.9234924}
+  m_Center: {x: 0, y: -0.35327554, z: -3.5382488}
 --- !u!1001 &45307092131768456
 PrefabInstance:
   m_ObjectHideFlags: 0
