@@ -65,7 +65,8 @@ public class Deplacement : MonoBehaviour
 
             }
             if (direction.x < 0) { c = -1; }
-            else { c = 1; }
+            else if (direction.x > 0) { c = 1; }
+            
 
         }
 
@@ -106,4 +107,5 @@ public class Deplacement : MonoBehaviour
     {
         enMenu = false;
     }
+
 }
