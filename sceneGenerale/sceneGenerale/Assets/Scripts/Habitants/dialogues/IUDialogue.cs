@@ -12,8 +12,7 @@ public class IUDialogue : MonoBehaviour
     new public Camera camera;
     public Animator animator;
 
-
-
+    public Dialogue dialogue;
 
 
     // Start is called before the first frame update
@@ -22,6 +21,7 @@ public class IUDialogue : MonoBehaviour
         panel = GameObject.Find("PanelDialogue");
         camera = GameObject.Find("Camera").GetComponent<Camera>();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
+        dialogue = camera.GetComponent<Dialogue>();
 
         onPanel = false;
         open = false;
@@ -53,7 +53,8 @@ public class IUDialogue : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("Selected");
                     open = true;
-                   
+                    dialogue.choixHabitant(Hit.collider.name);
+                    
 
                 }
 
