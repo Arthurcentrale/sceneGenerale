@@ -22,6 +22,7 @@ public class Crafting2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         BoutonsCrafting = GameObject.Find("Menus/Crafting/MenuCrafting/MenuAtelierFabrication/BoutonsCrafting");
         itemList = player.inventory.GetItemList();
         bFond = bFond.GetComponent<Button>();
