@@ -20,6 +20,7 @@ public class livre : MonoBehaviour
     private GameObject menuMissionsPageGauche;
     private GameObject menuInfosPageGauche;
     private GameObject fermetureBouton;
+    private GameObject menuConstruction;
 
     //éléments plus spécifiques
     private Image nom;
@@ -85,6 +86,7 @@ public class livre : MonoBehaviour
         menuConstruPageGauche = GameObject.Find("menuConstructionPageGauche");
         menuMissionsPageGauche = GameObject.Find("menuMissionsPageGauche");
         menuInfosPageGauche = GameObject.Find("menuInfosPageGauche");
+        menuConstruction = GameObject.Find("menuConstruction");
 
         fermetureBouton = GameObject.Find("FermetureBouton");
         nom = GameObject.Find("nom").GetComponent<Image>();
@@ -107,6 +109,7 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(true);
         boutonInformations.SetActive(true);
         menuConstruPageDroite.SetActive(false);
+        menuConstruction.SetActive(false);
         menuConstruPageGauche.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
         menuInfosPageGauche.SetActive(false);
@@ -116,35 +119,21 @@ public class livre : MonoBehaviour
     public void ouvertureMenuConstru()
     {
         menuConstruPageGauche.SetActive(true);
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        menuConstruction.SetActive(true);
+        ouvreNimporteQuelMenu();
         constru = true;
     }
 
     public void ouvertureMenuMissions()
     {
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        ouvreNimporteQuelMenu();
         menuMissionsPageGauche.SetActive(true);
         mission = true;
     }
 
     public void ouvertureMenuInfos()
     {
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        ouvreNimporteQuelMenu();
         menuInfosPageGauche.SetActive(true);
         info = true;
     }
@@ -164,6 +153,7 @@ public class livre : MonoBehaviour
         else animatorLivreOuvert.SetTrigger("Fermeture");
 
         menuConstruPageGauche.SetActive(false);
+        menuConstruction.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
         fermetureBouton.SetActive(false);
         constru = false;
@@ -171,12 +161,13 @@ public class livre : MonoBehaviour
         info = false;
     }
 
-    //public void jeSuisUneMairieMalAimee()
-    //{
-    //    animatorLivreFerme.SetTrigger("Selected");
-    //    animatorLivreOuvert.SetTrigger("FermetureComplete");
-
-    //}
+    public void ouvertureApercuMissions()
+    {
+        boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
+    }
 
 
     public void construire()
@@ -277,5 +268,15 @@ public class livre : MonoBehaviour
         else if (second == 13) qteR2.sprite = treize;
         else if (second == 14) qteR2.sprite = quatorze;
         else if (second == 15) qteR2.sprite = quinze;
+    }
+
+    private void ouvreNimporteQuelMenu()
+    {
+        animatorLivreOuvert.SetTrigger("OuvertureComplete");
+        boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
+        fermetureBouton.SetActive(true);
     }
 }

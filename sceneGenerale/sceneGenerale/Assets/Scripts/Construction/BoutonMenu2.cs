@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoutonMenu2 : MonoBehaviour
 {
@@ -181,8 +182,14 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject PanelInformationFerme;
     public GameObject PanelInformationEtabli;
 
+    private Text ouvrierOccupe;
+    private GameObject batimentsConstruBoutons;
 
-
+    void Start()
+    {
+        ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
+        batimentsConstruBoutons = GameObject.Find("menuConstructionPageGauche");
+    }
 
     // Update is called once per frame
     void Update()
@@ -266,6 +273,22 @@ public class BoutonMenu2 : MonoBehaviour
         OnEstEnPage2 = false;
     }
 
+    public void desacBoutonsConstru()
+    {
+        foreach (Transform child in batimentsConstruBoutons.transform)
+        {
+            child.gameObject.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void acBoutonsConstru()
+    {
+        foreach (Transform child in batimentsConstruBoutons.transform)
+        {
+            child.gameObject.GetComponent<Button>().interactable = true;
+        }
+    }
+
 
     /////////////////////////////////////////////////////DÉBUT CHAUMIERE/////////////////////////////////////////////////////////////////
     public void ConstruireChaumièreDepuisMenuInformation()
@@ -326,6 +349,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionChaumière.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true ;
+        desacBoutonsConstru();
     }
 
 
@@ -389,6 +415,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionPêcherie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -454,6 +483,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionMoulinAEau.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -525,6 +557,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionMoulinAVent.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -594,6 +629,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionBoulangerie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -667,6 +705,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionCabanon.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -738,6 +779,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionPuits.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -808,6 +852,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionForge.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -876,6 +923,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionFosse.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -939,6 +989,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionMaisonPierre.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -1003,6 +1056,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionGardeManger.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -1066,6 +1122,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionFerme.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 
@@ -1126,6 +1185,9 @@ public class BoutonMenu2 : MonoBehaviour
         boutonValiderConstructionEtabli.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
+
+        ouvrierOccupe.enabled = true;
+        desacBoutonsConstru();
     }
 
 

@@ -89,6 +89,9 @@ public class ScriptATHBatis : MonoBehaviour
     public bool constructionTerminee = false;
     public bool depotEnCours = false;
 
+    private Text ouvrierOccupe;
+    private BoutonMenu2 Emptyscriptconstru;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -102,6 +105,8 @@ public class ScriptATHBatis : MonoBehaviour
         texteTemps = temps.GetComponent<Text>();
         nombreItemTwoRestants = nombreItemTwoNécessaire;
         nombreItemOneRestants = nombreItemOneNécessaire;
+        ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
+        Emptyscriptconstru = GameObject.Find("Empty script constru 2").GetComponent<BoutonMenu2>();
 
     }
 
@@ -286,6 +291,25 @@ public class ScriptATHBatis : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int) (timeDepart - time);
+        ouvrierOccupe.enabled = false;
+        Emptyscriptconstru.acBoutonsConstru();
+
+
+    }
+
+    public void abandonnerConstruction()
+    {
+        Destroy(bati.gameObject);
+        ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
+        ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z - 6);
+        permissionConstruction = false;
+        constructionTerminee = true;
+        RessourcesNécessairesDéposées = false;
+        BuildingLayerMag.updateBatLayers();
+        timeDepart = time;
+        ecartTime = (int)(timeDepart - time);
+        ouvrierOccupe.enabled = false;
+        Emptyscriptconstru.acBoutonsConstru();
     }
 
     //fonction pour ajouter un item à l'inventaire

@@ -444,14 +444,16 @@ public class Recolte : MonoBehaviour
     }
     private void SpawnRoche() //fonction qui fait détruit cible et fait spawn spawned
     {
+        Debug.Log("entree SpawnRoche");
         //player.uiInventory.ReduitDuraEquip();
         audioSource.clip = cassageRoche[UnityEngine.Random.Range(0, cassageRoche.Length)];
         audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);
         IsCraftRoche = false;//detruit cible
-        float x = UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
+        float x = 0.2f; //UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
+            Debug.Log("cas1");
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
@@ -469,8 +471,10 @@ public class Recolte : MonoBehaviour
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
             {
+                
                 if (NbrPlace(rocher) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
+                    
                     AjouterInventaire(rocher, 4);
                 }
                 else //sinon, on remplit l'inventaire et le reste va par terre
@@ -502,6 +506,7 @@ public class Recolte : MonoBehaviour
 
         else if (0.25 <= x && x < 0.75) // 4 spawns
         {
+            
             if (cible.collider.CompareTag("Roche1"))
             {
                 if (NbrPlace(rocher) >= 3) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
@@ -519,6 +524,7 @@ public class Recolte : MonoBehaviour
             }
             if (cible.collider.CompareTag("Roche2"))
             {
+                
                 if (NbrPlace(rocher) >= 5) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
                 {
                     AjouterInventaire(rocher, 5);
@@ -552,6 +558,7 @@ public class Recolte : MonoBehaviour
 
         else
         {
+            
             if (cible.collider.CompareTag("Roche1"))
             {
                 if (NbrPlace(rocher) >= 4) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans

@@ -21,7 +21,7 @@ public class IUDialogue : MonoBehaviour
         panel = GameObject.Find("PanelDialogue");
         camera = GameObject.Find("Camera").GetComponent<Camera>();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
-        dialogue = camera.GetComponent<Dialogue>();
+        dialogue = GameObject.Find("DialogueManager").GetComponent<Dialogue>();
 
         onPanel = false;
         open = false;
