@@ -59,6 +59,8 @@ public class IUBatis : MonoBehaviour
                     animator.SetTrigger("Ouverture");
                     open = true;
 
+
+
                 }
 
             }
