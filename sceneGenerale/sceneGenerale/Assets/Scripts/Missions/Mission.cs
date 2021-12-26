@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class Mission : ScriptableObject
 {
+    [System.Serializable]
     public struct Info
     {
         public string Name;

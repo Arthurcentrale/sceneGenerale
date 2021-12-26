@@ -23,7 +23,7 @@ public class MissionManager : MonoBehaviour
 
             missionObj.GetComponent<Button>().onClick.AddListener(delegate
             {
-                missionHolder.GetComponent<MissionWindow>().Initialize(mission);
+                //missionHolder.GetComponent<MissionWindow>().Initialize(mission);
                 missionHolder.SetActive(true);
             });
 
