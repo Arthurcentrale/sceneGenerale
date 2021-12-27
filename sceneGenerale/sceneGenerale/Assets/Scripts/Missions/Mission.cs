@@ -101,6 +101,109 @@ public class MissionCompletedEvent : UnityEvent<Mission> { }
 public class MissionEditor : Editor
 {
     SerializedProperty m_MissionInfoProperty;
+    SerializedProperty m_MissionStatProperty;
+
+    List<string> m_MissionGoalType;
+    SerializedProperty m_MissionGoalListProperty;
+
+    [MenuItem("Assets/Mission", priority = 0)]
+    public static void CreateMission()
+    {
+        var newMission = CreateInstance<Mission>();
+
+        ProjectWindowUtil.CreateAsset(newMission, "mission.asset");
+    }
+
+    void OnEnable()
+    {
+        m_MissionInfoProperty = serializedObject.FindProperty(nameof(Mission.Information));
+        m_MissionStatProperty = serializedObject.FindProperty(nameof(Mission.Reward));
+
+        m_MissionGoalListProperty = serializedObject.FindProperty(nameof(Mission.Goals));
+
+        var lookup = typeof(Mission.MissionGoal);
+        m_MissionGoalType = System.AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(x => x.IsClass && !x.IsAbstract && x.IsSubclassOf(lookup))
+            .Select(type => type.Name)
+            .ToList();
+    }
+
+    public override void OnInspectorGUI()
+    {
+        var child = m_MissionInfoProperty.Copy();
+        var depth = child.depth;
+        child.NextVisible(true);
+
+        EditorGUILayout.LabelField("Mission info", EditorStyles.boldLabel);
+        while (child.depth > depth)
+        {
+            EditorGUILayout.PropertyField(child, true);
+            child.NextVisible(false);
+
+        }
+
+        child = m_MissionStatProperty.Copy();
+        depth = child.depth;
+        child.NextVisible(true);
+
+        EditorGUILayout.LabelField("Mission Reward", EditorStyles.boldLabel);
+        while (child.depth > depth)
+        {
+            EditorGUILayout.PropertyField(child, true);
+            child.NextVisible(false);
+        }
+
+        int choice = EditorGUILayout.Popup("Add new Mission Goal", -1, m_MissionGoalType.ToArray());
+
+        if (choice != -1)
+        {
+            var newInstance = ScriptableObject.CreateInstance(m_MissionGoalType[choice]);
+
+            AssetDatabase.AddObjectToAsset(newInstance, target);
+
+            m_MissionGoalListProperty.InsertArrayElementAtIndex(m_MissionGoalListProperty.arraySize);
+            m_MissionGoalListProperty.GetArrayElementAtIndex(m_MissionGoalListProperty.arraySize - 1).objectReferenceValue = newInstance;
+
+        }
+
+        Editor ed = null;
+        int toDelete = -1;
+
+        for (int i = 0; i < m_MissionGoalListProperty.arraySize; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginVertical();
+            var item = m_MissionGoalListProperty.GetArrayElementAtIndex(i);
+            SerializedObject obj = new SerializedObject(item.objectReferenceValue);
+
+            Editor.CreateCachedEditor(item.objectReferenceValue, null, ref ed);
+
+            ed.OnInspectorGUI();
+            EditorGUILayout.EndVertical();
+
+            if (GUILayout.Button("-", GUILayout.Width(32)))
+            {
+                toDelete = i;
+            }
+            EditorGUILayout.EndHorizontal();
+
+        }
+
+        if (toDelete != -1)
+        {
+            var item = m_MissionGoalListProperty.GetArrayElementAtIndex(toDelete).objectReferenceValue;
+            DestroyImmediate(item, true);
+
+            m_MissionGoalListProperty.DeleteArrayElementAtIndex(toDelete);
+            m_MissionGoalListProperty.DeleteArrayElementAtIndex(toDelete);
+
+        }
+
+        serializedObject.ApplyModifiedProperties();
+
+
+    }
 }
 
 #endif

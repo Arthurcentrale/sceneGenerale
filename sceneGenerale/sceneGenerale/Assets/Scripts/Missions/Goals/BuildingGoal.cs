@@ -19,7 +19,12 @@ public class BuildingGoal : Mission.MissionGoal
 
     private void OnBuilding(BuildingGameEvent eventInfo)
     {
-        CurrentAmount++;
-        Evaluate();
+
+        if (eventInfo.BuildingName == Building)
+        {
+            CurrentAmount++;
+            Evaluate();
+        }
+        
     }
 }
