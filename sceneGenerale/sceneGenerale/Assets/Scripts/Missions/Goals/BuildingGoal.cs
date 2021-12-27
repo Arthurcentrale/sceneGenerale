@@ -11,7 +11,7 @@ public class BuildingGoal : Mission.MissionGoal
         return $"Build a {Building}";
     }
 
-    public void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
         EventManager.Instance.AddListener<BuildingGameEvent>(OnBuilding);
