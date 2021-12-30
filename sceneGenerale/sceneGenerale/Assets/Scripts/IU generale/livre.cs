@@ -18,6 +18,7 @@ public class livre : MonoBehaviour
     private GameObject menuConstruPageDroite;
     private GameObject menuConstruPageGauche;
     private GameObject menuMissionsPageGauche;
+    private GameObject menuMissionsPageDroite;
     private GameObject menuInfosPageGauche;
     private GameObject fermetureBouton;
     private GameObject menuConstruction;
@@ -85,6 +86,7 @@ public class livre : MonoBehaviour
         menuConstruPageDroite = GameObject.Find("menuConstructionPageDroite");
         menuConstruPageGauche = GameObject.Find("menuConstructionPageGauche");
         menuMissionsPageGauche = GameObject.Find("menuMissionsPageGauche");
+        menuMissionsPageDroite = GameObject.Find("menuMissionsPageDroite");
         menuInfosPageGauche = GameObject.Find("menuInfosPageGauche");
         menuConstruction = GameObject.Find("menuConstruction");
 
@@ -112,6 +114,7 @@ public class livre : MonoBehaviour
         menuConstruction.SetActive(false);
         menuConstruPageGauche.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
+        menuMissionsPageDroite.SetActive(false);
         menuInfosPageGauche.SetActive(false);
         fermetureBouton.SetActive(true);
     }
@@ -128,6 +131,7 @@ public class livre : MonoBehaviour
     {
         ouvreNimporteQuelMenu();
         menuMissionsPageGauche.SetActive(true);
+        menuMissionsPageDroite.SetActive(true);
         mission = true;
     }
 
@@ -155,6 +159,7 @@ public class livre : MonoBehaviour
         menuConstruPageGauche.SetActive(false);
         menuConstruction.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
+        menuMissionsPageDroite.SetActive(false);
         fermetureBouton.SetActive(false);
         constru = false;
         mission = false;
