@@ -93,8 +93,6 @@ GameObject:
   - component: {fileID: 4756643233601618658}
   - component: {fileID: 4756643233601618669}
   - component: {fileID: 4756643233601618668}
-  - component: {fileID: 4756643233601618671}
-  - component: {fileID: 4756643233601618659}
   m_Layer: 5
   m_Name: PrefabBatiBoulangerie
   m_TagString: BatiBoulangerie
@@ -183,66 +181,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4756643233601618671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4756643233601618665}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a16267113ad36424c90c4cd3c3ac4cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "menuB\xE2tiPasD\xE9j\xE0Affich\xE9": 1
-  "menuConstructionPasD\xE9j\xE0Affich\xE9": 0
-  inventaire: {fileID: 0}
-  NbrBois: 0
-  NbrPierre: 0
-  "RessourcesN\xE9cessairesD\xE9pos\xE9es": 0
-  boutonsMenuConstruction: {fileID: 0}
-  OnCliqueDehors: 0
-  moving: 0
-  "OnAfficheLeMenuDuB\xE2ti": 1
-  "prefabChaumi\xE8re": {fileID: 0}
-  "Chaumi\xE8re": {fileID: 0}
-  "BatiChaumi\xE8re": {fileID: 0}
-  "onAPasEncoreD\xE9truitLeB\xE2ti": 1
-  ui_inventory: {fileID: 0}
-  Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
-  Pierre: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
-  player: {fileID: 0}
-  lePapaDePlayer: {fileID: 0}
---- !u!114 &4756643233601618659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4756643233601618665}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7919ef0ed124e4f44a5e553520a38d49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "menuB\xE2tiPasD\xE9j\xE0Affich\xE9": 1
-  "menuConstructionPasD\xE9j\xE0Affich\xE9": 0
-  inventaire: {fileID: 0}
-  NbrBois: 0
-  NbrPierre: 0
-  "RessourcesN\xE9cessairesD\xE9pos\xE9es": 0
-  boutonsMenuConstruction: {fileID: 0}
-  OnCliqueDehors: 0
-  moving: 0
-  "OnAfficheLeMenuDuB\xE2ti": 1
-  prefabBoulangerie: {fileID: 2368282837567213044, guid: dd47f69cee082664cbb94b98899cfbe0,
-    type: 3}
-  Boulangerie: {fileID: 0}
-  BatiBoulangerie: {fileID: 0}
-  "onAPasEncoreD\xE9truitLeB\xE2ti": 1
-  ui_inventory: {fileID: 0}
-  Bois: {fileID: 11400000, guid: 74741548623a8fa41b605d316228c3af, type: 2}
-  Pierre: {fileID: 11400000, guid: 5e9d6dc4b1d062643a05178de1b03cdc, type: 2}
-  player: {fileID: 0}
-  lePapaDePlayer: {fileID: 0}
