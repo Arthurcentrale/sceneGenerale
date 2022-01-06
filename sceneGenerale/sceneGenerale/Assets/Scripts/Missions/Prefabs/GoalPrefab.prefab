@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 5335715775934993549}
   - component: {fileID: 4615032879575537088}
   m_Layer: 5
-  m_Name: CheckMark
+  m_Name: Done
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &628235482644078987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 2002543438741213433}
   - component: {fileID: 9106524327747496709}
   m_Layer: 5
-  m_Name: GoalDescription
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 717990190499630528}
   - component: {fileID: 6616486926584754307}
   m_Layer: 5
-  m_Name: ComplitionDescription
+  m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

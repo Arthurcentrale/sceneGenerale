@@ -13,12 +13,15 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
+        Vector3 placement = new Vector3(0, 0, 0);
+        Quaternion rotation = new Quaternion(0, 0, 0, 0);
+
         foreach(var mission in CurrentMissions)
         {
             mission.Initialize();
             mission.MissionCompleted.AddListener(OnMissionCompleted);
 
-            GameObject missionObj = Instantiate(missionPrefab, missionsContent);
+            GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
             missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
 
             missionObj.GetComponent<Button>().onClick.AddListener(delegate
