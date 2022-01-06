@@ -13,7 +13,7 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        Vector3 placement = new Vector3(0, 0, 0);
+        Vector3 placement = new Vector3(-1450, 750, 0);
         Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
         foreach(var mission in CurrentMissions)
@@ -22,6 +22,7 @@ public class MissionManager : MonoBehaviour
             mission.MissionCompleted.AddListener(OnMissionCompleted);
 
             GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
+            missionObj.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
             missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
 
             missionObj.GetComponent<Button>().onClick.AddListener(delegate
@@ -29,7 +30,7 @@ public class MissionManager : MonoBehaviour
                 missionHolder.GetComponent<MissionWindow>().Initialize(mission);
                 missionHolder.SetActive(true);
             });
-
+            placement.y -= 130;
         }
     }
 

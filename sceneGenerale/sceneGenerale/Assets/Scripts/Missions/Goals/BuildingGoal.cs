@@ -8,7 +8,7 @@ public class BuildingGoal : Mission.MissionGoal
 
     public override string GetDescription()
     {
-        return $"Build a {Building}";
+        return $"Construis un(e) {Building}";
     }
 
     public override void Initialize()
