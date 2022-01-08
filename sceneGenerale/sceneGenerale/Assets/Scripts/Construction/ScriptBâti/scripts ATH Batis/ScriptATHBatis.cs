@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class ScriptATHBatis : MonoBehaviour
 {
+    //IU
     private GameObject panel;
+    public Sprite bulleNotready;
+    public Sprite bulleReady;
+    private GameObject infoBulle;
 
     public UI_Inventory ui_inventory;
     public Player player;
@@ -103,6 +107,7 @@ public class ScriptATHBatis : MonoBehaviour
     void Start()
     {
         panel = GameObject.Find("PanelBatisConstruction");
+        infoBulle = GameObject.Find("PanelBatisConstruction").transform.GetChild(0).gameObject;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         texteTemps = temps.GetComponent<Text>();
         nombreItemTwoRestants = nombreItemTwoNécessaire;
@@ -178,6 +183,7 @@ public class ScriptATHBatis : MonoBehaviour
 
     public void resetConstruction()
     {
+        infoBulle.GetComponent<Button>().image.sprite = bulleNotready;
         imageOne.SetActive(true);
         imageTwo.SetActive(true);
         bulleConstruire.interactable = false;
@@ -243,6 +249,7 @@ public class ScriptATHBatis : MonoBehaviour
 
         if (nombreItemOneNécessaire == 0 && nombreItemTwoNécessaire == 0)
         {
+            infoBulle.GetComponent<Button>().image.sprite = bulleReady;
             RessourcesNécessairesDéposées = !RessourcesNécessairesDéposées;
             imageOne.SetActive(false);
             imageTwo.SetActive(false);
