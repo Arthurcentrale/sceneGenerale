@@ -93,6 +93,7 @@ public class ScriptATHBatis : MonoBehaviour
     public bool permissionConstruction = false;
     public bool constructionTerminee = false;
     public bool depotEnCours = false;
+    private MissionManager missionManager;
 
     private Text ouvrierOccupe;
     private BoutonMenu2 Emptyscriptconstru;
@@ -106,6 +107,7 @@ public class ScriptATHBatis : MonoBehaviour
     }
     void Start()
     {
+        missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         panel = GameObject.Find("PanelBatisConstruction");
         infoBulle = GameObject.Find("PanelBatisConstruction").transform.GetChild(0).gameObject;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -286,11 +288,35 @@ public class ScriptATHBatis : MonoBehaviour
 
     void finirConstruction()
     {
-        if (bati.CompareTag("BatiChaumière")) Instantiate(chaumiere, new Vector3 (bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
-        else if (bati.CompareTag("BatiFerme")) ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
-        else if (bati.CompareTag("BatiPêcherie")) Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
-        else if (bati.CompareTag("BatiBoulangerie")) boulangerie.transform.position = new Vector3(bati.transform.position.x, boulangerie.transform.position.y, bati.transform.position.z);
-        else if (bati.CompareTag("BatiMoulinAEau")) moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
+        if (bati.CompareTag("BatiChaumière"))
+        {
+            Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
+            missionManager.Build("chaumière");
+        }
+
+        else if (bati.CompareTag("BatiFerme"))
+        {
+            ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
+            missionManager.Build("ferme");
+        }
+
+        else if (bati.CompareTag("BatiPêcherie"))
+        {
+            Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
+            missionManager.Build("pêcherie");
+        }
+
+        else if (bati.CompareTag("BatiBoulangerie"))
+        {
+            boulangerie.transform.position = new Vector3(bati.transform.position.x, boulangerie.transform.position.y, bati.transform.position.z);
+            missionManager.Build("boulangerie");
+        }
+        else if (bati.CompareTag("BatiMoulinAEau")) 
+        {
+            moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
+            missionManager.Build("moulin à eau");
+        }
+        
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -6);

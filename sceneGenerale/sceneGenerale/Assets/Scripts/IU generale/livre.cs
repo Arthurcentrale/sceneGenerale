@@ -131,7 +131,6 @@ public class livre : MonoBehaviour
     {
         ouvreNimporteQuelMenu();
         menuMissionsPageGauche.SetActive(true);
-        menuMissionsPageDroite.SetActive(true);
         mission = true;
     }
 

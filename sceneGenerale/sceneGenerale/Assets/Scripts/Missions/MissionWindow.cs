@@ -12,14 +12,20 @@ public class MissionWindow : MonoBehaviour
     [SerializeField] private Text xpText;
     [SerializeField] private Text coinsText;
 
+    public GameObject pageDroite;
+
     public void Initialize(Mission mission)
     {
+        pageDroite.SetActive(true);
         titleText.text = mission.Information.Name;
         descriptionText.text = mission.Information.Description;
 
+        Vector3 placement = new Vector3(1440, 530, 0);
+        Quaternion rotation = new Quaternion(0, 0, 0, 0);
+
         foreach (var goal in mission.Goals)
         {
-            GameObject goalObj = Instantiate(goalPrefab, goalsContent);
+            GameObject goalObj = Instantiate(goalPrefab, placement, rotation, goalsContent);
             goalObj.transform.Find("Text").GetComponent<Text>().text = goal.GetDescription();
 
             GameObject countObj = goalObj.transform.Find("Count").gameObject;
@@ -34,6 +40,8 @@ public class MissionWindow : MonoBehaviour
             {
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
+
+            placement.y -= 100;
         }
 
         xpText.text = mission.Reward.XP.ToString();

@@ -13,12 +13,16 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
+        Vector3 placement = new Vector3(-1450, 750, 0);
+        Quaternion rotation = new Quaternion(0, 0, 0, 0);
+
         foreach(var mission in CurrentMissions)
         {
             mission.Initialize();
             mission.MissionCompleted.AddListener(OnMissionCompleted);
 
-            GameObject missionObj = Instantiate(missionPrefab, missionsContent);
+            GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
+            missionObj.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
             missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
 
             missionObj.GetComponent<Button>().onClick.AddListener(delegate
@@ -26,13 +30,28 @@ public class MissionManager : MonoBehaviour
                 missionHolder.GetComponent<MissionWindow>().Initialize(mission);
                 missionHolder.SetActive(true);
             });
-
+            placement.y -= 130;
         }
     }
 
     public void Build(string buildingName)
     {
         EventManager.Instance.QueueEvent(new BuildingGameEvent(buildingName));
+    }
+
+    public void Talk(string habitantName)
+    {
+        EventManager.Instance.QueueEvent(new TalkingGameEvent(habitantName));
+    }
+
+    public void RenovMairie()
+    {
+        EventManager.Instance.QueueEvent(new MairieGameEvent());
+    }
+
+    public void Craft(string craftName)
+    {
+        EventManager.Instance.QueueEvent(new CraftingGameEvent(craftName));
     }
 
     private void OnMissionCompleted(Mission mission)
