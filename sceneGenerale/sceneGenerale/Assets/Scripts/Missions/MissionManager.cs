@@ -49,6 +49,11 @@ public class MissionManager : MonoBehaviour
         EventManager.Instance.QueueEvent(new MairieGameEvent());
     }
 
+    public void Craft(string craftName)
+    {
+        EventManager.Instance.QueueEvent(new CraftingGameEvent(craftName));
+    }
+
     private void OnMissionCompleted(Mission mission)
     {
         missionsContent.GetChild(CurrentMissions.IndexOf(mission)).Find("checkmark").gameObject.SetActive(true);

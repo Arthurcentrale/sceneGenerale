@@ -35,3 +35,13 @@ public class MairieGameEvent : GameEvent
         mairieName = "mairie";
     }
 }
+
+public class CraftingGameEvent : GameEvent
+{
+    public string craftName;
+    
+    public CraftingGameEvent(string name)
+    {
+        craftName = name;
+    }
+}
