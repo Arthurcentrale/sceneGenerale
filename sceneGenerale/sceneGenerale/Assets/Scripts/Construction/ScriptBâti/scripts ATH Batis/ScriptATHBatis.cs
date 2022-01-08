@@ -53,6 +53,34 @@ public class ScriptATHBatis : MonoBehaviour
     public int nombreItemOneMoulinEau;
     public int nombreItemTwoMoulinEau;
 
+    //Moulin à vent
+    public GameObject moulinVent;
+    public Item itemOneMoulinVent;
+    public Item itemTwoMoulinVent;
+    public int nombreItemOneMoulinVent;
+    public int nombreItemTwoMoulinVent;
+
+    //Puit
+    public GameObject puit;
+    public Item itemOnePuit;
+    public Item itemTwoPuit;
+    public int nombreItemOnePuit;
+    public int nombreItemTwoPuit;
+
+    //Verrerie
+    public GameObject verrerie;
+    public Item itemOneVerrerie;
+    public Item itemTwoVerrerie;
+    public int nombreItemOneVerrerie;
+    public int nombreItemTwoVerrerie;
+
+    //Decharge
+    public GameObject decharge;
+    public Item itemOneDecharge;
+    public Item itemTwoDecharge;
+    public int nombreItemOneDecharge;
+    public int nombreItemTwoDecharge;
+
     //les boutons
     public Button bulleInfo;
     public Button bulleConstruire;
@@ -338,6 +366,7 @@ public class ScriptATHBatis : MonoBehaviour
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z - 6);
+        panel.SetActive(false);
         permissionConstruction = false;
         constructionTerminee = true;
         RessourcesNécessairesDéposées = false;
@@ -346,7 +375,7 @@ public class ScriptATHBatis : MonoBehaviour
         ecartTime = (int)(timeDepart - time);
         ouvrierOccupe.enabled = false;
         Emptyscriptconstru.acBoutonsConstru();
-        panel.SetActive(false);
+        
     }
 
     //fonction pour ajouter un item à l'inventaire

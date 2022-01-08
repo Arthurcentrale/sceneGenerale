@@ -38,6 +38,10 @@ public class livre : MonoBehaviour
     public Sprite nomPecherie;
     public Sprite nomMoulinEau;
     public Sprite nomBoulangerie;
+    public Sprite nomMoulinVent;
+    public Sprite nomPuit;
+    public Sprite nomVerrerie;
+    public Sprite nomDecharge;
 
     public Sprite descriptionChaumiere;
     public Sprite descriptionEtabli;
@@ -45,6 +49,10 @@ public class livre : MonoBehaviour
     public Sprite descriptionPecherie;
     public Sprite descriptionMoulinEau;
     public Sprite descriptionBoulangerie;
+    public Sprite descriptionMoulinVent;
+    public Sprite descriptionPuit;
+    public Sprite descriptionVerrerie;
+    public Sprite descriptionDecharge;
 
     //nombres
     public Sprite un;
@@ -203,7 +211,6 @@ public class livre : MonoBehaviour
         nom.sprite = nomEtabli;
         description.sprite = descriptionEtabli;
         constructeur = "etabli";
-        
     }
 
     public void ferme()
@@ -236,6 +243,38 @@ public class livre : MonoBehaviour
         description.sprite = descriptionBoulangerie;
         constructeur = "boulangerie";
         selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+    }
+
+    public void moulinVent()
+    {
+        nom.sprite = nomMoulinVent;
+        description.sprite = descriptionMoulinVent;
+        constructeur = "moulinVent";
+        selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+    }
+
+    public void puit()
+    {
+        nom.sprite = nomPuit;
+        description.sprite = descriptionPuit;
+        constructeur = "puit";
+        selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+    }
+
+    public void verrerie()
+    {
+        nom.sprite = nomVerrerie;
+        description.sprite = descriptionVerrerie;
+        constructeur = "verrerie";
+        selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
+    }
+
+    public void decharge()
+    {
+        nom.sprite = nomDecharge;
+        description.sprite = descriptionDecharge;
+        constructeur = "decharge";
+        selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
     }
 
 

@@ -13,10 +13,30 @@ MonoBehaviour:
   m_Name: craft hache
   m_EditorClassIdentifier: 
   Information:
-    Name: 
-    Icon: {fileID: 0}
-    Description: 
+    Name: "Ma premi\xE8re hache"
+    Icon: {fileID: 2377484414017366246, guid: 842406e897822c542b747df064a3b807, type: 3}
+    Description: "Je suis certes un enfant mais j'aimerai avoir une hache avec moi
+      pour d\xE9couper des choses. C'est rigolo de d\xE9couper des choses. Moi j'aime
+      bien. Vraiment beaucoup. Surout quand \xE7a gicle"
   Reward:
     Currency: 10
     XP: 10
-  Goals: []
+  Goals:
+  - {fileID: 7036094756527857966}
+--- !u!114 &7036094756527857966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99965258ddc40954bb62c2685b262917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Craft: hache
