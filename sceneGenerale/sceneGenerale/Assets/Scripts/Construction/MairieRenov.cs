@@ -224,6 +224,7 @@ public class MairieRenov : MonoBehaviour
         ouvrierOccupe.enabled = false;
         bulleInfo.gameObject.SetActive(false);
         mairie.SetActive(true);
+        panel.SetActive(false);
 
 
     }
