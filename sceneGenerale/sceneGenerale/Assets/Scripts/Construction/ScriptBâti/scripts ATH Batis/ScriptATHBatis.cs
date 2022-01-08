@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScriptATHBatis : MonoBehaviour
 {
+    private GameObject panel;
 
     public UI_Inventory ui_inventory;
     public Player player;
@@ -101,6 +102,7 @@ public class ScriptATHBatis : MonoBehaviour
     }
     void Start()
     {
+        panel = GameObject.Find("PanelBatisConstruction");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         texteTemps = temps.GetComponent<Text>();
         nombreItemTwoRestants = nombreItemTwoNécessaire;
@@ -293,6 +295,7 @@ public class ScriptATHBatis : MonoBehaviour
         ecartTime = (int) (timeDepart - time);
         ouvrierOccupe.enabled = false;
         Emptyscriptconstru.acBoutonsConstru();
+        panel.SetActive(false);
 
 
     }
@@ -310,6 +313,7 @@ public class ScriptATHBatis : MonoBehaviour
         ecartTime = (int)(timeDepart - time);
         ouvrierOccupe.enabled = false;
         Emptyscriptconstru.acBoutonsConstru();
+        panel.SetActive(false);
     }
 
     //fonction pour ajouter un item à l'inventaire
