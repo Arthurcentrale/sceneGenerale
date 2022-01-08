@@ -66,6 +66,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     PêcherieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
+                    
                 }
             }
 
@@ -235,4 +236,6 @@ public class TerrainRayonYoupi : MonoBehaviour
         }
         //moving = true;
     }
+
+    
 }
