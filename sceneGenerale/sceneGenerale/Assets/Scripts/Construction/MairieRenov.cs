@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class MairieRenov : MonoBehaviour
 {
     public GameObject panel;
+    public Sprite bulleNotready;
+    public Sprite bulleReady;
+    private GameObject infoBulle;
+
     bool open;
     bool onPanel;
     public bool isOccupied;
@@ -67,6 +71,7 @@ public class MairieRenov : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        infoBulle = GameObject.Find("PanelMairieRenov").transform.GetChild(0).gameObject;
         panel = GameObject.Find("PanelMairieRenov");
         camera = GameObject.Find("Camera").GetComponent<Camera>();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
@@ -131,7 +136,7 @@ public class MairieRenov : MonoBehaviour
 
     public void resetConstruction()
     {
-
+        infoBulle.GetComponent<Button>().image.sprite = bulleNotready;
         bulleConstruire.interactable = false;
         bordereauConstruire.interactable = false;
         bulleDeposer.interactable = true;
@@ -177,6 +182,7 @@ public class MairieRenov : MonoBehaviour
 
         if (nombreBoisNecessaire == 0)
         {
+            infoBulle.GetComponent<Button>().image.sprite = bulleReady;
             RessourcesNécessairesDéposées = !RessourcesNécessairesDéposées;
             texteBois.SetActive(false);
             bulleConstruire.interactable = true;
