@@ -39,6 +39,16 @@ public class MissionManager : MonoBehaviour
         EventManager.Instance.QueueEvent(new BuildingGameEvent(buildingName));
     }
 
+    public void Talk(string habitantName)
+    {
+        EventManager.Instance.QueueEvent(new TalkingGameEvent(habitantName));
+    }
+
+    public void RenovMairie()
+    {
+        EventManager.Instance.QueueEvent(new MairieGameEvent());
+    }
+
     private void OnMissionCompleted(Mission mission)
     {
         missionsContent.GetChild(CurrentMissions.IndexOf(mission)).Find("checkmark").gameObject.SetActive(true);

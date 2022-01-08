@@ -16,3 +16,22 @@ public class BuildingGameEvent : GameEvent
         BuildingName = name;
     }
 }
+
+public class TalkingGameEvent : GameEvent
+{
+    public string HabitantName;
+
+    public TalkingGameEvent(string name)
+    {
+        HabitantName = name;
+    }
+}
+
+public class MairieGameEvent : GameEvent
+{
+    public string mairieName;
+    public MairieGameEvent()
+    {
+        mairieName = "mairie";
+    }
+}

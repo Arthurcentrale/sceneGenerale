@@ -52,6 +52,7 @@ public class MairieRenov : MonoBehaviour
     public bool permissionConstruction = false;
     public bool constructionTerminee = false;
     public bool depotEnCours = false;
+    private MissionManager missionManager;
 
     private int tempsConstru = 30;
 
@@ -67,6 +68,7 @@ public class MairieRenov : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         panel = GameObject.Find("PanelMairieRenov");
         camera = GameObject.Find("Camera").GetComponent<Camera>();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
@@ -212,6 +214,7 @@ public class MairieRenov : MonoBehaviour
 
     void finirConstruction()
     {
+        missionManager.RenovMairie();
         gameObject.SetActive(false);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z - 6);

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5341335832229994842
+--- !u!114 &-5743665911837172880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a8dbbbf17a27440a0b25a2b8b39456, type: 3}
+  m_Script: {fileID: 11500000, guid: eba16f571b36f9944a75102d34970c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RequiredAmount: 1
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  Building: Chaumiere
+  habitant: ouvrier
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,11 +30,31 @@ MonoBehaviour:
   m_Name: mission
   m_EditorClassIdentifier: 
   Information:
-    Name: c'est parti
-    Icon: {fileID: 21300000, guid: 6b4247edabf89714db9a4d6a91cdcd74, type: 3}
-    Description: "Cr\xE9e une maison pour Julien."
+    Name: La mairie
+    Icon: {fileID: 21300000, guid: 7714de1b16acc6d48b76c1186cf65f20, type: 3}
+    Description: "C'est le d\xE9but d'une toute nouvelle aventure. Sur cette \xEEle,
+      je suis enfin loin de toute cette pollution. Il est maintenant temps de prendre
+      mes marques. Je vais commencer par retrouver ouvrierNom. Il semble avoir d\xE9couvert
+      quelque chose."
   Reward:
     Currency: 10
     XP: 10
   Goals:
-  - {fileID: -5341335832229994842}
+  - {fileID: -5743665911837172880}
+  - {fileID: 1833448016072176717}
+--- !u!114 &1833448016072176717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b222be178eda044eaf12f8735136b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
