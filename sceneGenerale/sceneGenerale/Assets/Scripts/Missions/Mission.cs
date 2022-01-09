@@ -29,6 +29,7 @@ public class Mission : ScriptableObject
     public bool Completed { get; protected set; }
     public MissionCompletedEvent MissionCompleted;
 
+
     public abstract class MissionGoal : ScriptableObject
     {
         protected string Description;
@@ -199,6 +200,8 @@ public class MissionEditor : Editor
             m_MissionGoalListProperty.DeleteArrayElementAtIndex(toDelete);
 
         }
+
+        
 
         serializedObject.ApplyModifiedProperties();
 
