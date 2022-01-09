@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.000030517578, y: 0.000006198883, z: 0}
+  m_Size: {x: 0.8812154, y: 1, z: 0.5266795}
+  m_Center: {x: 0.059361942, y: 0.0000062026575, z: -0.38068023}
 --- !u!114 &814681510776557219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f66afff7897074689b9139114798b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detecteurTerre: {fileID: 0}
   autorisation: 0
 --- !u!1 &3615469359777240891
 GameObject:
@@ -307,6 +308,7 @@ GameObject:
   - component: {fileID: 8595710049696200997}
   - component: {fileID: 8657745882937439762}
   - component: {fileID: 2575577190422241292}
+  - component: {fileID: 5836659450102280855}
   m_Layer: 5
   m_Name: Detecteur Terre
   m_TagString: Untagged
@@ -391,5 +393,18 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.000030517578, y: 0.000006198883, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.5663442}
+  m_Center: {x: -0.000030511921, y: 0.0000061879987, z: -0.21682833}
+--- !u!114 &5836659450102280855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794166948488027916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a0679dff4005e43a7bcddb12a0f359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autorisation: 1
