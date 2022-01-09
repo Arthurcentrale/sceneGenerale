@@ -485,12 +485,16 @@ public class GameHandler : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(gameData, true);
 
-        File.WriteAllText(Application.dataPath + "/sauvegarde.json", jsonData);
+        File.WriteAllText(Application.dataPath + "Resources/sauvegarde.json", jsonData);
+        //File.WriteAllText(Application.persistentDataPath + "/sauvegarde.json", jsonData); 
     }
 
     private void Load()
     {
+        Debug.Log(Application.persistentDataPath);
         string donneesEnregistrees = File.ReadAllText(Application.dataPath + "/sauvegarde.json");
+        //string donneesEnregistrees = File.ReadAllText(Application.persistentDataPath + "/sauvegarde.json");
+        //string donneesEnregistrees = (Resources.Load("sauvegarde.json") as TextAsset).ToString();
 
         // Si il n'y a rien à charger
         if (donneesEnregistrees == "{}" || donneesEnregistrees == "")
