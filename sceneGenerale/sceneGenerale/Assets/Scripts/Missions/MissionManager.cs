@@ -13,9 +13,9 @@ public class MissionManager : MonoBehaviour
     public List<Mission> IncomingMissions;
 
     public int totalCurrency = 0;
-    private int gap = 130;
+    private int gap = 95;
 
-    private Vector3 placement = new Vector3(-1450, 750, 0);
+    private Vector3 placement = new Vector3(-1450, 800, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
     private void Awake()

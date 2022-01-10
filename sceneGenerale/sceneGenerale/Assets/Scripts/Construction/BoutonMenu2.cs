@@ -199,6 +199,12 @@ public class BoutonMenu2 : MonoBehaviour
             Deplacement.enMenu = true;
         }
     }
+
+    public void empecherConstru()
+    {
+        ouvrierOccupe.enabled = true;
+    }
+
     void AfficherMenuConstructionsPage1()
     {
 
@@ -275,7 +281,11 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void desacBoutonsConstru()
     {
-        foreach (Transform child in batimentsConstruBoutons.transform)
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(2))
+        {
+            child.gameObject.GetComponent<Button>().interactable = false;
+        }
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(3))
         {
             child.gameObject.GetComponent<Button>().interactable = false;
         }
@@ -283,7 +293,11 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void acBoutonsConstru()
     {
-        foreach (Transform child in batimentsConstruBoutons.transform)
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(2))
+        {
+            child.gameObject.GetComponent<Button>().interactable = true;
+        }
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(3))
         {
             child.gameObject.GetComponent<Button>().interactable = true;
         }
@@ -350,7 +364,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true ;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -420,7 +434,7 @@ public class BoutonMenu2 : MonoBehaviour
             Deplacement.enMenu = false;
             BuildingLayerMag.updateBatLayers();
 
-            ouvrierOccupe.enabled = true;
+            empecherConstru();
             desacBoutonsConstru();
         }
         
@@ -493,7 +507,7 @@ public class BoutonMenu2 : MonoBehaviour
             Deplacement.enMenu = false;
             BuildingLayerMag.updateBatLayers();
 
-            ouvrierOccupe.enabled = true;
+            empecherConstru();
             desacBoutonsConstru();
         }
 
@@ -569,7 +583,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -641,7 +655,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -717,7 +731,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -791,7 +805,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -864,7 +878,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -935,7 +949,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -1001,7 +1015,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -1068,7 +1082,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -1134,7 +1148,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 

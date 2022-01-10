@@ -125,6 +125,16 @@ public class ScriptATHBatis : MonoBehaviour
 
     private Text ouvrierOccupe;
     private BoutonMenu2 Emptyscriptconstru;
+    public bool fermeConstruit = false;
+    [HideInInspector] public bool pecherieConstruit = false;
+    [HideInInspector] public bool moulinEauConstruit = false;
+    [HideInInspector] public bool moulinVentConstruit = false;
+    [HideInInspector] public bool boulangerieConstruit = false;
+    [HideInInspector] public bool dechargeConstruit = false;
+    [HideInInspector] public bool puitConstruit = false;
+    [HideInInspector] public bool etabliConstruit = false;
+    [HideInInspector] public bool verrerieConstruit = false;
+
 
     // Start is called before the first frame update
 
@@ -326,23 +336,27 @@ public class ScriptATHBatis : MonoBehaviour
         {
             ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
             missionManager.Build("ferme");
+            fermeConstruit = true;
         }
 
         else if (bati.CompareTag("BatiPêcherie"))
         {
             Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
             missionManager.Build("pêcherie");
+            pecherieConstruit = true;
         }
 
         else if (bati.CompareTag("BatiBoulangerie"))
         {
             boulangerie.transform.position = new Vector3(bati.transform.position.x, boulangerie.transform.position.y, bati.transform.position.z);
             missionManager.Build("boulangerie");
+            boulangerieConstruit = true;
         }
         else if (bati.CompareTag("BatiMoulinAEau")) 
         {
             moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
             missionManager.Build("moulin à eau");
+            moulinEauConstruit = true;
         }
         
         Destroy(bati.gameObject);
@@ -354,7 +368,7 @@ public class ScriptATHBatis : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int) (timeDepart - time);
-        ouvrierOccupe.enabled = false;
+        permettreConstru();
         Emptyscriptconstru.acBoutonsConstru();
         panel.SetActive(false);
 
@@ -373,9 +387,16 @@ public class ScriptATHBatis : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int)(timeDepart - time);
-        ouvrierOccupe.enabled = false;
+        permettreConstru();
         Emptyscriptconstru.acBoutonsConstru();
         
+    }
+
+    
+
+    public void permettreConstru()
+    {
+        ouvrierOccupe.enabled = false;
     }
 
     //fonction pour ajouter un item à l'inventaire

@@ -67,7 +67,7 @@ public class Dialogue : MonoBehaviour
         {
             if (numConvOuvrier == 1)
             {
-                texteBoiteDialogue.text = "Salut l'ami ! Moi, c'est l'ouvrier de la communauté. Je serais heureux de t'aider à bâtir toutes sortes de structures pour que le village s'étende. Cette île est une occasion merveilleuse de répartir de zéro dans ce monde pourri jusqu'à l'os.";
+                texteBoiteDialogue.text = " Tu en as mis du temps ! Cette île est vraiment merveilleuse, je n'avais pas vu autant d'arbres différents depuis... des années ! Regarde ce que j’ai trouvé au milieu de l’île. On pourrait en faire le centre du village si on la retape un peu. Apporte moi un peu de bois.";
                 
             }
             else if(numConvOuvrier > 1)

@@ -55,14 +55,18 @@ public class Mission : ScriptableObject
             if (CurrentAmount >= RequiredAmount)
             {
                 Complete();
+                
             }
         }
 
         private void Complete()
         {
             Completed = true;
+
+
             GoalCompleted.Invoke();
             GoalCompleted.RemoveAllListeners();
+
         }
 
         
