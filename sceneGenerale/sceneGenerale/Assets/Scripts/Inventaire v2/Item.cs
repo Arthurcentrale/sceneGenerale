@@ -11,7 +11,7 @@ public class Item : ScriptableObject
     public int Weight;
     public bool isFood;
     public GameObject prefab;
-    //public int durability;
+    public int durability;
 
 
     public void Init(string ItemName)

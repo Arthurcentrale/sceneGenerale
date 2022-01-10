@@ -24,7 +24,7 @@ public class Crafting2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
+        //missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         BoutonsCrafting = GameObject.Find("Menus/Crafting/MenuCrafting/MenuAtelierFabrication/BoutonsCrafting");
         itemList = player.inventory.GetItemList();
@@ -124,7 +124,8 @@ public class Crafting2 : MonoBehaviour
             }
             foreach (ItemAmount ItemAmount in recettecraft.Results)
             {
-                player.inventory.AddItem(ItemAmount); // on ajoute les résultats
+                player.inventory.AddItem(ItemAmount);
+                ItemAmount.Item.durability = 5;// on ajoute les résultats
             }
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();
             missionManager.Craft(nomItemCraft);

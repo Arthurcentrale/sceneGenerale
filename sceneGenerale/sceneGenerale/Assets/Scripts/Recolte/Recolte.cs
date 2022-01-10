@@ -423,7 +423,14 @@ public class Recolte : MonoBehaviour
 
         }
         Destroy(cible.transform.gameObject);//detruit cible
+        UpdateDurabilite();
         IsCraftArbre = false;  
+    }
+
+    void UpdateDurabilite()
+    {
+        //itemequip.durability -=5;
+        //if(itemequip.durability <= 0)  player.inventory.DelItem(new ItemAmount(Item: itemequip, Amount: 1));
     }
     public void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
