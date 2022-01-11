@@ -108,6 +108,7 @@ public class UI_Inventory : MonoBehaviour
             boutonPlanterGraine.SetActive(false);
         }
 
+        /*
         // Regarde si on est au dessus d'un element de l'UI pour voir si on a cliqué en dehors des boutons de l'inventaire
         if (!eventSystem.IsPointerOverGameObject() && (stadeAffichage == 1) && Input.GetMouseButton(0))
         {
@@ -115,6 +116,7 @@ public class UI_Inventory : MonoBehaviour
             stadeAffichage -= 1;
             Debug.Log("On a cliqué en dehors et on ferme le panneau des favoris");
         }
+        */
     }
 
     public void BouttonOuverture()   //on clique sur le bouton inventaire
