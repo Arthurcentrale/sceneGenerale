@@ -294,16 +294,16 @@ public class Boulangerie : MonoBehaviour
     public void FctChoix()
     {
 
-        GameObject PecheurDispo = TrouverBoulanger();
-        if (PecheurDispo == null)
+        GameObject BoulangerDispo = TrouverBoulanger();
+        if (BoulangerDispo == null)
         {
 
             choixhabitant.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         }
         else
         {
-            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = PecheurDispo.GetComponent<HabitantBehaviour>().image;
-            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = PecheurDispo.GetComponent<HabitantBehaviour>().name;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = BoulangerDispo.GetComponent<HabitantBehaviour>().image;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = BoulangerDispo.GetComponent<HabitantBehaviour>().name;
         }
         panel.SetActive(false);
         choixhabitant.SetActive(true);
@@ -318,6 +318,7 @@ public class Boulangerie : MonoBehaviour
         if (habitant.isHoused == false)
         {
             panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+
         }
         panel.SetActive(true);
     }
