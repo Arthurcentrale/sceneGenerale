@@ -328,7 +328,7 @@ public class ScriptATHBatis : MonoBehaviour
     {
         if (bati.CompareTag("BatiChaumière"))
         {
-            Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z), chaumiere.transform.rotation);
+            Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z + 5), chaumiere.transform.rotation);
             missionManager.Build("chaumière");
         }
 
