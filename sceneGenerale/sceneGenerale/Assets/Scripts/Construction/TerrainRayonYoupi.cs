@@ -67,6 +67,7 @@ public class TerrainRayonYoupi : MonoBehaviour
                 {
                     PêcherieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
                     
+                    
                 }
             }
 

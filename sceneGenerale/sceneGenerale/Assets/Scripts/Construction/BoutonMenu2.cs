@@ -199,6 +199,12 @@ public class BoutonMenu2 : MonoBehaviour
             Deplacement.enMenu = true;
         }
     }
+
+    public void empecherConstru()
+    {
+        ouvrierOccupe.enabled = true;
+    }
+
     void AfficherMenuConstructionsPage1()
     {
 
@@ -275,7 +281,11 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void desacBoutonsConstru()
     {
-        foreach (Transform child in batimentsConstruBoutons.transform)
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(2))
+        {
+            child.gameObject.GetComponent<Button>().interactable = false;
+        }
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(3))
         {
             child.gameObject.GetComponent<Button>().interactable = false;
         }
@@ -283,7 +293,11 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void acBoutonsConstru()
     {
-        foreach (Transform child in batimentsConstruBoutons.transform)
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(2))
+        {
+            child.gameObject.GetComponent<Button>().interactable = true;
+        }
+        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(3))
         {
             child.gameObject.GetComponent<Button>().interactable = true;
         }
@@ -350,7 +364,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true ;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -404,20 +418,26 @@ public class BoutonMenu2 : MonoBehaviour
     public void ValiderConstructionPêcherie()
     {
         PêcherieDéplaçable = GameObject.Find("nouvellePêcherie");
-        //print(MoulinDéplaçable.transform.position.x);
-        //print(MoulinDéplaçable.transform.position.y);
-        //print(MoulinDéplaçable.transform.position.z);
-        BatiPêcherie = Instantiate(prefabBatiPêcherie, PêcherieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiPêcherie.name = ("Bati");
-        Destroy(nouvellePêcherie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
-        en_construction = false;
-        en_construction_Pêcherie = false;
-        boutonValiderConstructionPêcherie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
-        Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
-        desacBoutonsConstru();
+        bool autorisation1 = PêcherieDéplaçable.transform.GetChild(2).gameObject.GetComponent<CollisionRiviere>().autorisation;
+        bool autorisation2 = PêcherieDéplaçable.transform.GetChild(1).gameObject.GetComponent<CollisionTerre>().autorisation;
+
+
+        if (autorisation1 && autorisation2)
+        {
+            BatiPêcherie = Instantiate(prefabBatiPêcherie, PêcherieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+            BatiPêcherie.name = ("Bati");
+            Destroy(nouvellePêcherie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
+            en_construction = false;
+            en_construction_Pêcherie = false;
+            boutonValiderConstructionPêcherie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
+            Deplacement.enMenu = false;
+            BuildingLayerMag.updateBatLayers();
+
+            empecherConstru();
+            desacBoutonsConstru();
+        }
+        
     }
 
 
@@ -451,7 +471,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleMoulinAEau = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMoulinAEau = Instantiate(prefabMoulinAEauDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMoulinAEau.name = "nouvelleMoulinAEau";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -472,20 +492,25 @@ public class BoutonMenu2 : MonoBehaviour
     public void ValiderConstructionMoulinAEau()
     {
         MoulinAEauDéplaçable = GameObject.Find("nouvelleMoulinAEau");
-        //print(MoulinDéplaçable.transform.position.x);
-        //print(MoulinDéplaçable.transform.position.y);
-        //print(MoulinDéplaçable.transform.position.z);
-        BatiMoulinAEau = Instantiate(prefabBatiMoulinAEau, MoulinAEauDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
-        BatiMoulinAEau.name = ("Bati");
-        Destroy(nouvelleMoulinAEau); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
-        en_construction = false;
-        en_construction_MoulinAEau = false;
-        boutonValiderConstructionMoulinAEau.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
-        Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
-        desacBoutonsConstru();
+        bool autorisation1 = MoulinAEauDéplaçable.transform.GetChild(2).gameObject.GetComponent<CollisionRiviere>().autorisation;
+        bool autorisation2 = MoulinAEauDéplaçable.transform.GetChild(1).gameObject.GetComponent<CollisionTerre>().autorisation;
+
+        if (autorisation1 && autorisation2)
+        {
+            BatiMoulinAEau = Instantiate(prefabBatiMoulinAEau, MoulinAEauDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+            BatiMoulinAEau.name = ("Bati");
+            Destroy(nouvelleMoulinAEau); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
+            en_construction = false;
+            en_construction_MoulinAEau = false;
+            boutonValiderConstructionMoulinAEau.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
+            Deplacement.enMenu = false;
+            BuildingLayerMag.updateBatLayers();
+
+            empecherConstru();
+            desacBoutonsConstru();
+        }
+
     }
 
 
@@ -558,7 +583,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -630,7 +655,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -706,7 +731,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -780,7 +805,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -853,7 +878,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -924,7 +949,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -990,7 +1015,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -1057,7 +1082,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 
@@ -1123,7 +1148,7 @@ public class BoutonMenu2 : MonoBehaviour
         Deplacement.enMenu = false;
         BuildingLayerMag.updateBatLayers();
 
-        ouvrierOccupe.enabled = true;
+        empecherConstru();
         desacBoutonsConstru();
     }
 

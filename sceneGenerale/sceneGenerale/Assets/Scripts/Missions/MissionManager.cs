@@ -10,27 +10,20 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private GameObject missionHolder;
 
     public List<Mission> CurrentMissions;
+    public List<Mission> IncomingMissions;
+
+    public int totalCurrency = 0;
+    private int gap = 95;
+
+    private Vector3 placement = new Vector3(-1450, 800, 0);
+    private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
     private void Awake()
     {
-        Vector3 placement = new Vector3(-1450, 750, 0);
-        Quaternion rotation = new Quaternion(0, 0, 0, 0);
-
+        
         foreach(var mission in CurrentMissions)
         {
-            mission.Initialize();
-            mission.MissionCompleted.AddListener(OnMissionCompleted);
-
-            GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
-            missionObj.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
-            missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
-
-            missionObj.GetComponent<Button>().onClick.AddListener(delegate
-            {
-                missionHolder.GetComponent<MissionWindow>().Initialize(mission);
-                missionHolder.SetActive(true);
-            });
-            placement.y -= 130;
+            updateMissionsWindow(mission);
         }
     }
 
@@ -57,5 +50,53 @@ public class MissionManager : MonoBehaviour
     private void OnMissionCompleted(Mission mission)
     {
         missionsContent.GetChild(CurrentMissions.IndexOf(mission)).Find("checkmark").gameObject.SetActive(true);
+        totalCurrency += mission.Reward.Currency;
+        manageMissions();
+    }
+
+    private void manageMissions()
+    {
+        if (totalCurrency == 10)
+        {
+            CurrentMissions.Add(IncomingMissions[0]);
+            updateMissionsWindow(IncomingMissions[0]);
+        }
+        else if (totalCurrency == 20)
+        {
+            CurrentMissions.Add(IncomingMissions[1]);
+            updateMissionsWindow(IncomingMissions[1]);
+        }
+        else if (totalCurrency == 30)
+        {
+            CurrentMissions.Add(IncomingMissions[2]);
+            updateMissionsWindow(IncomingMissions[2]);
+        }
+        else if (totalCurrency == 40)
+        {
+            CurrentMissions.Add(IncomingMissions[3]);
+            updateMissionsWindow(IncomingMissions[3]);
+        }
+        else if (totalCurrency == 50)
+        {
+            CurrentMissions.Add(IncomingMissions[4]);
+            updateMissionsWindow(IncomingMissions[4]);
+        }
+    }
+
+    private void updateMissionsWindow(Mission mission)
+    {
+        mission.Initialize();
+        mission.MissionCompleted.AddListener(OnMissionCompleted);
+
+        GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
+        missionObj.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
+        missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
+
+        missionObj.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            missionHolder.GetComponent<MissionWindow>().Initialize(mission);
+            missionHolder.SetActive(true);
+        });
+        placement.y -= gap;
     }
 }

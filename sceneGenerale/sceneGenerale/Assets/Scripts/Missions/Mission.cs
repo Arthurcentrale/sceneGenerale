@@ -29,6 +29,7 @@ public class Mission : ScriptableObject
     public bool Completed { get; protected set; }
     public MissionCompletedEvent MissionCompleted;
 
+
     public abstract class MissionGoal : ScriptableObject
     {
         protected string Description;
@@ -54,14 +55,18 @@ public class Mission : ScriptableObject
             if (CurrentAmount >= RequiredAmount)
             {
                 Complete();
+                
             }
         }
 
         private void Complete()
         {
             Completed = true;
+
+
             GoalCompleted.Invoke();
             GoalCompleted.RemoveAllListeners();
+
         }
 
         
@@ -199,6 +204,8 @@ public class MissionEditor : Editor
             m_MissionGoalListProperty.DeleteArrayElementAtIndex(toDelete);
 
         }
+
+        
 
         serializedObject.ApplyModifiedProperties();
 

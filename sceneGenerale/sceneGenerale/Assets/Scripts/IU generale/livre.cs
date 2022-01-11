@@ -195,86 +195,131 @@ public class livre : MonoBehaviour
 
     public void chaumiere()
     {
+        affichagePageDroiteMenuConstru();
         print("chaumiere");
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
         selectivite(athBati.nombreItemOneChaumiere, athBati.nombreItemTwoChaumiere);
 
-
-
     }
 
     public void etabli()
     {
-        print("etabli");
-        nom.sprite = nomEtabli;
-        description.sprite = descriptionEtabli;
-        constructeur = "etabli";
+        if (!athBati.etabliConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            print("etabli");
+            nom.sprite = nomEtabli;
+            description.sprite = descriptionEtabli;
+            constructeur = "etabli";
+        }
+        
     }
 
     public void ferme()
     {
-        nom.sprite = nomFerme;
-        description.sprite = descriptionFerme;
-        constructeur = "ferme";
-        selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
+        
+        if (!athBati.fermeConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomFerme;
+            description.sprite = descriptionFerme;
+            constructeur = "ferme";
+            selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
+        }
+        
     }
 
     public void pecherie()
     {
-        nom.sprite = nomPecherie;
-        description.sprite = descriptionPecherie;
-        constructeur = "pecherie";
-        selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+        if (!athBati.pecherieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomPecherie;
+            description.sprite = descriptionPecherie;
+            constructeur = "pecherie";
+            selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+        }
+        
     }
 
     public void moulinEau()
     {
-        nom.sprite = nomMoulinEau;
-        description.sprite = descriptionMoulinEau;
-        constructeur = "moulinEau";
-        selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+        if (!athBati.moulinEauConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomMoulinEau;
+            description.sprite = descriptionMoulinEau;
+            constructeur = "moulinEau";
+            selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+        }
+        
     }
 
     public void boulangerie()
     {
-        nom.sprite = nomBoulangerie;
-        description.sprite = descriptionBoulangerie;
-        constructeur = "boulangerie";
-        selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+        if (!athBati.boulangerieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomBoulangerie;
+            description.sprite = descriptionBoulangerie;
+            constructeur = "boulangerie";
+            selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+        }
+        
     }
 
     public void moulinVent()
     {
-        nom.sprite = nomMoulinVent;
-        description.sprite = descriptionMoulinVent;
-        constructeur = "moulinVent";
-        selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+        if (!athBati.moulinVentConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomMoulinVent;
+            description.sprite = descriptionMoulinVent;
+            constructeur = "moulinVent";
+            selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+        }
+        
     }
 
     public void puit()
     {
-        nom.sprite = nomPuit;
-        description.sprite = descriptionPuit;
-        constructeur = "puit";
-        selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+        if (athBati.puitConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomPuit;
+            description.sprite = descriptionPuit;
+            constructeur = "puit";
+            selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+        }
+        
     }
 
     public void verrerie()
     {
-        nom.sprite = nomVerrerie;
-        description.sprite = descriptionVerrerie;
-        constructeur = "verrerie";
-        selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
+        if (athBati.verrerieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomVerrerie;
+            description.sprite = descriptionVerrerie;
+            constructeur = "verrerie";
+            selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
+        }
+        
     }
 
     public void decharge()
     {
-        nom.sprite = nomDecharge;
-        description.sprite = descriptionDecharge;
-        constructeur = "decharge";
-        selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
+        if (athBati.dechargeConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomDecharge;
+            description.sprite = descriptionDecharge;
+            constructeur = "decharge";
+            selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
+        }
+       
     }
 
 
@@ -322,4 +367,6 @@ public class livre : MonoBehaviour
         boutonInformations.SetActive(false);
         fermetureBouton.SetActive(true);
     }
+
+    
 }

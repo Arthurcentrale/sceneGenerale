@@ -13,6 +13,12 @@ public class Recolte : MonoBehaviour
     public AudioClip[] cassageRoche;
     private AudioSource audioSource;
 
+    //anims items part
+    public GameObject itemAnime;
+    public Sprite bois;
+    public Sprite pierre;
+    public Transform recolte;
+
     //Concrete part
     public bool IsCraftArbre; //bool pour ouvrir le menu pour couper l'arbre
     public bool IsCraftRoche; //same
@@ -45,6 +51,7 @@ public class Recolte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        recolte = GameObject.Find("Recolte").transform;
         audioSource = GetComponent<AudioSource>();
         onPanel = false ;
         inventaire = inventaire.GetComponent<Inventaire>();
@@ -293,6 +300,7 @@ public class Recolte : MonoBehaviour
     {
         //player.uiInventory.ReduitDuraEquip();
         audioSource.PlayOneShot(treeChop);
+        animerItems(bois, new Vector2(mP.x - width / 3, mP.y + height));
         if (cible.transform.name.IndexOf("Chene", StringComparison.OrdinalIgnoreCase) >= 0)
         {
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -456,6 +464,7 @@ public class Recolte : MonoBehaviour
         Debug.Log("entree SpawnRoche");
         //player.uiInventory.ReduitDuraEquip();
         audioSource.clip = cassageRoche[UnityEngine.Random.Range(0, cassageRoche.Length)];
+        animerItems(pierre, new Vector2(mP.x - width / 3, mP.y + height));
         audioSource.PlayOneShot(audioSource.clip);
         Destroy(cible.transform.gameObject);
         IsCraftRoche = false;//detruit cible
@@ -903,6 +912,15 @@ public class Recolte : MonoBehaviour
         FondA.SetActive(false);
         menuinfo.SetActive(true);
     }
+
+    private void animerItems(Sprite item, Vector2 position)
+    {
+        GameObject itemQuiBouge = Instantiate(itemAnime, position, new Quaternion(0, 0, 0, 0), recolte);
+        itemQuiBouge.GetComponent<Image>().sprite = item;
+        itemQuiBouge.GetComponent<Animator>().SetTrigger("bouge");
+        Destroy(itemQuiBouge, 0.7f);
+    }
+
 
 
 }
