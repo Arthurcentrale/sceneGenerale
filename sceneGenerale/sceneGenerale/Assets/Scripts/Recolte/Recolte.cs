@@ -429,9 +429,11 @@ public class Recolte : MonoBehaviour
 
     void UpdateDurabilite()
     {
-        //itemequip.durability -=5;
-        //if(itemequip.durability <= 0)  player.inventory.DelItem(new ItemAmount(Item: itemequip, Amount: 1));
+        Item itemequipe = ui_inventory.ItemEquip();
+        itemequipe.durability -=5;
+        if(itemequipe.durability <= 0)  player.inventory.DelItem(new ItemAmount(Item: itemequipe, Amount: 1));
     }
+
     public void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
     {
         Destroy(cible.transform.gameObject);
@@ -460,7 +462,6 @@ public class Recolte : MonoBehaviour
         float x = 0.2f; //UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
-            Debug.Log("cas1");
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
@@ -508,6 +509,7 @@ public class Recolte : MonoBehaviour
                     }
                 }
             }
+            UpdateDurabilite();
 
         }
 

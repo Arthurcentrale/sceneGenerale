@@ -545,6 +545,19 @@ public class UI_Inventory : MonoBehaviour
             return inventory.GetItemList()[slot-1].Item.name;
         }
     }
+    public Item ItemEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
+    {
+            // 1<=slotEquipé<=4 ; on cherche a retrouver la place dans favList a laquel correspond ce slot equipé
+            List<bool> favList = inventory.GetFavList();
+            int count = 0;  //on compte le nombre de true qu'on rencontre
+            int slot = 0;   //vraie position de l'item dans favList
+            while (count < slotEquipé)
+            {
+                if (favList[slot]) count++;
+                slot++;
+            }
+            return inventory.GetItemList()[slot - 1].Item;
+    }
 
     /*public void ReduitDuraEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
     {
