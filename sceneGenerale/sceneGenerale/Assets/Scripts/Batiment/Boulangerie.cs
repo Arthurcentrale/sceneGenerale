@@ -34,6 +34,9 @@ public class Boulangerie : MonoBehaviour
     int QuantitePainBle;
     int QuantitePainBleNonValide;
     public CompteurBouffe compteurbouffe;
+    public GameObject menuinfo;
+    public GameObject choixhabitant;
+
 
     void Start()
     {
@@ -76,6 +79,7 @@ public class Boulangerie : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Boulangerie"))
 
                 {
+                    Debug.Log("fkqnfsl");
                     //Ajouter update valeur max du slider, etc..
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
@@ -108,6 +112,11 @@ public class Boulangerie : MonoBehaviour
 
     int QuantiteMax(HabitantBehaviour habitant, bool isBle)
     {
+        if (habitant == null)
+        {
+            return 0;
+        }
+
         if (isBle)
         {
             if (habitant.ecoLevel == 1)
@@ -209,5 +218,124 @@ public class Boulangerie : MonoBehaviour
         FonctionMinuit();
         validation.interactable = true;
         timer = 0;
+    }
+    public void FctInfo()
+    {
+        if (habitant == null)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = null;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Vacant";
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else if (habitant != null && habitant.isHoused == false)
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+        else
+        {
+            menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
+            menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
+            menuinfo.transform.GetChild(4).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(5).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(6).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(7).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(8).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(true);
+            panel.SetActive(false);
+            menuinfo.SetActive(true);
+        }
+    }
+    GameObject TrouverBoulanger()
+    {
+        GameObject ha = new GameObject();
+        GameObject habitant = GameObject.Find("habitants");
+        foreach (Transform child in habitant.transform)
+        {
+            HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
+            if (Behaviour.transform.name == "Boulanger")
+            {
+                if (Behaviour.hasWorkplace == false)
+                {
+                    ha = child.gameObject;
+                }
+            }
+        }
+        return ha;
+    }
+
+    public void FctChoix()
+    {
+
+        GameObject PecheurDispo = TrouverBoulanger();
+        if (PecheurDispo == null)
+        {
+
+            choixhabitant.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = PecheurDispo.GetComponent<HabitantBehaviour>().image;
+            choixhabitant.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>().text = PecheurDispo.GetComponent<HabitantBehaviour>().name;
+        }
+        panel.SetActive(false);
+        choixhabitant.SetActive(true);
+    }
+
+    public void selectionartisan()
+    {
+        GameObject artisandispo = TrouverBoulanger();
+        habitant = artisandispo.GetComponent<HabitantBehaviour>();
+        habitant.hasWorkplace = true;
+        choixhabitant.SetActive(false);
+        if (habitant.isHoused == false)
+        {
+            panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        panel.SetActive(true);
+    }
+
+    public void quitter()
+    {
+        choixhabitant.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        animator.SetTrigger("ouverture1BulleCouper");
+        Deplacement.enMenu = false;
+    }
+    public void quitter2()
+    {
+        menuinfo.SetActive(false);
+        panel.SetActive(false);
+        open = false;
+        Deplacement.enMenu = false;
+        animator.SetTrigger("ouverture1BulleCouper");
     }
 }

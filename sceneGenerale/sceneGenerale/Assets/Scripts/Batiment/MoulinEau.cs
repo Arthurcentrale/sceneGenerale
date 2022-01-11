@@ -77,7 +77,7 @@ public class MoulinEau : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("MoulinEau"))
 
                 {
-                    Debug.Log("Click");
+                    
                     //Ajouter update valeur max du slider, etc..
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
                     panel.gameObject.SetActive(true);
