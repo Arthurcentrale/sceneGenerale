@@ -185,6 +185,9 @@ public class BoutonMenu2 : MonoBehaviour
     private Text ouvrierOccupe;
     private GameObject batimentsConstruBoutons;
 
+    public GameObject boutonInventaire;
+    public GameObject favorisInventaire;
+
     void Start()
     {
         ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
@@ -366,6 +369,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -436,6 +441,9 @@ public class BoutonMenu2 : MonoBehaviour
 
             empecherConstru();
             desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+
         }
         
     }
@@ -509,6 +517,8 @@ public class BoutonMenu2 : MonoBehaviour
 
             empecherConstru();
             desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
         }
 
     }
@@ -585,6 +595,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -657,6 +669,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -733,6 +747,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -807,6 +823,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -880,6 +898,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -951,6 +971,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -1017,6 +1039,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -1084,6 +1108,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -1150,6 +1176,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         empecherConstru();
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 
@@ -1213,6 +1241,8 @@ public class BoutonMenu2 : MonoBehaviour
 
         ouvrierOccupe.enabled = true;
         desacBoutonsConstru();
+        boutonInventaire.SetActive(true);
+        favorisInventaire.SetActive(true);
     }
 
 

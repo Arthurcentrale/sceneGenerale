@@ -81,6 +81,9 @@ public class livre : MonoBehaviour
     private bool info;
     private ScriptATHBatis athBati;
 
+    public GameObject boutonInventaire;
+    public GameObject favorisInventaire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -184,6 +187,8 @@ public class livre : MonoBehaviour
 
     public void construire()
     {
+        boutonInventaire.SetActive(false);
+        favorisInventaire.SetActive(false);
         if (constructeur == "chaumiere") fonctionsConstru.ConstruireChaumièreDepuisMenuConstruction();
         else if (constructeur == "etabli") print("pas encore craftable");
         else if (constructeur == "ferme") fonctionsConstru.ConstruireFermeDepuisMenuConstruction();
