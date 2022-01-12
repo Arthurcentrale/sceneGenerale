@@ -125,7 +125,7 @@ public class Crafting2 : MonoBehaviour
             foreach (ItemAmount ItemAmount in recettecraft.Results)
             {
                 player.inventory.AddItem(ItemAmount);
-                ItemAmount.Item.durability = 5;// on ajoute les résultats
+                ItemAmount.durability = 5;// on ajoute les résultats
             }
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();
             missionManager.Craft(nomItemCraft);

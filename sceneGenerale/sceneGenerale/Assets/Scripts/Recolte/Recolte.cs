@@ -437,9 +437,11 @@ public class Recolte : MonoBehaviour
 
     void UpdateDurabilite()
     {
-        Item itemequipe = ui_inventory.ItemEquip();
-        itemequipe.durability -=5;
-        if(itemequipe.durability <= 0)  player.inventory.DelItem(new ItemAmount(Item: itemequipe, Amount: 1));
+        ItemAmount itemequipe = ui_inventory.ItemEquip();
+        Debug.Log(itemequipe.durability);
+        itemequipe.Item.durability -=5;
+        Debug.Log(itemequipe.durability);
+        if(itemequipe.durability <= 0)  player.inventory.DelItem(itemequipe);
     }
 
     public void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns

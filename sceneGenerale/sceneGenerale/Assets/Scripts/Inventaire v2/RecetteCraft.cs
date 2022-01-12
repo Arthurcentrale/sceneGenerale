@@ -8,6 +8,7 @@ public class ItemAmount
 {
     public Item Item;
     public int Amount;
+    public int durability;
 
     /*
     public void Init(Item Item, int Amount)
