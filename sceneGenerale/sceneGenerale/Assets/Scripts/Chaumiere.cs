@@ -19,8 +19,12 @@ public class Chaumiere : MonoBehaviour
     public GameObject menuinfo;
     public Button Buttoninfo,ButtonClose;
     public Button button1,button2,button3,button4;
+    public Button gauche, droite;
 
     public CompteurBouffe compteurbouffe;
+
+    public int page = 0; //permet de parcourir la liste des habitants sans maisons et d'afficher 4 par 4
+    public int maxpage;
 
 
     // Start is called before the first frame update
@@ -47,6 +51,10 @@ public class Chaumiere : MonoBehaviour
         Buttoninfo.onClick.AddListener(FctInfo);
         ButtonClose = ButtonClose.GetComponent<Button>();
         ButtonClose.onClick.AddListener(quitter);
+        gauche = gauche.GetComponent<Button>();
+        gauche.onClick.AddListener(AllerPagePrecedente);
+        droite = droite.GetComponent<Button>();
+        droite.onClick.AddListener(AllerPageSuivante);
 
     }
 
@@ -78,6 +86,7 @@ public class Chaumiere : MonoBehaviour
                     {
                         panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
                         panel.gameObject.SetActive(true);
+                        page = 0;
                         animator.SetTrigger("ouverture1BulleCouper");
                         open = true;
                     }
@@ -124,8 +133,8 @@ public class Chaumiere : MonoBehaviour
         List<GameObject> liste = TrouverHabitantSansMaison();
         if (liste.Count >= 1)
         {
-            liste[0].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
-            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[0].gameObject;
+            liste[0+4*page].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
+            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[0 + 4 * page].gameObject;
             panelmenu.SetActive(false);
             panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
@@ -142,8 +151,8 @@ public class Chaumiere : MonoBehaviour
         List<GameObject> liste = TrouverHabitantSansMaison();
         if (liste.Count >= 2)
         {
-            liste[1].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
-            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[1].gameObject;
+            liste[1 + 4 * page].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
+            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[1 + 4 * page].gameObject;
             panelmenu.SetActive(false);
             panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
@@ -160,8 +169,8 @@ public class Chaumiere : MonoBehaviour
         List<GameObject> liste = TrouverHabitantSansMaison();
         if (liste.Count >= 3)
         {
-            liste[2].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
-            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[2].gameObject;
+            liste[2 + 4 * page].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
+            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[2 + 4 * page].gameObject;
             panelmenu.SetActive(false);
             panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
@@ -178,8 +187,8 @@ public class Chaumiere : MonoBehaviour
         List<GameObject> liste = TrouverHabitantSansMaison();
         if (liste.Count >= 4)
         {
-            liste[3].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
-            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[3].gameObject;
+            liste[3 + 4 * page].gameObject.GetComponent<HabitantBehaviour>().isHoused = true;
+            cible.GetComponent<HabitantChaumiere>().habitantActuel = liste[3 + 4 * page].gameObject;
             panelmenu.SetActive(false);
             panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
@@ -196,19 +205,31 @@ public class Chaumiere : MonoBehaviour
     {
         List<GameObject> liste = TrouverHabitantSansMaison();
         int i = liste.Count;
+        maxpage = (i-1) / 4;
         int h= 0;
         foreach (Transform child in panelmenu.transform.GetChild(0))
         {
             h++;
-            if (h > i)
+            if (h + 4*page > i)
             {
                 child.gameObject.SetActive(false);
             }
             else
             {
-                child.GetChild(0).gameObject.GetComponent<Image>().sprite = liste[h - 1].GetComponent<HabitantBehaviour>().image;
-                child.GetChild(1).gameObject.GetComponent<Text>().text = liste[h - 1].name;
+                child.gameObject.SetActive(true);
+                child.GetChild(0).gameObject.GetComponent<Image>().sprite = liste[4*page + h - 1].GetComponent<HabitantBehaviour>().image;
+                child.GetChild(1).gameObject.GetComponent<Text>().text = liste[4*page + h - 1].name;
             }
+        }
+        if (page == 0)
+        {
+            droite.gameObject.SetActive(true);
+            gauche.gameObject.SetActive(false);
+        }
+        if (page == maxpage)
+        {
+            droite.gameObject.SetActive(false);
+            gauche.gameObject.SetActive(true);
         }
     }
 
@@ -245,6 +266,22 @@ public class Chaumiere : MonoBehaviour
 
         }
     }
+
+
+
+    void AllerPageSuivante()
+    {
+        page += 1;
+        FctPanel();
+    }
+
+
+    void AllerPagePrecedente()
+    {
+        page -= 1;
+        FctPanel();
+    }
+
 
     void quitter()
     {
