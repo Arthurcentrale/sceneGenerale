@@ -72,6 +72,8 @@ public class GameHandler : MonoBehaviour
 
     public float intervalleSauvegarde = 5.0f;
 
+    string donneesEnregistrees;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -485,16 +487,36 @@ public class GameHandler : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(gameData, true);
 
-        File.WriteAllText(Application.dataPath + "Resources/sauvegarde.json", jsonData);
-        //File.WriteAllText(Application.persistentDataPath + "/sauvegarde.json", jsonData); 
+#if UNITY_EDITOR
+
+        File.WriteAllText(Application.dataPath + "/sauvegarde.json", jsonData);
+#else
+
+    
+
+#endif
     }
+
+    private void setDonneesEnregistrees()
+    {
+        // Les données ne sont pas stockées au même endroit dans unity et android
+        // (pour être plus précis les chemins d'accès différent un peu)
+        // On fait donc une discjonction de cas 
+#if UNITY_EDITOR
+
+        donneesEnregistrees = File.ReadAllText(Application.dataPath + "/sauvegarde.json");
+        return;
+
+#endif
+
+        string filePath = "jar:file://" + Application.dataPath + "!/Assets/sauvegarde.json";
+        StartCoroutine(GetDataInAndroid(filePath));
+    }
+
 
     private void Load()
     {
-        Debug.Log(Application.persistentDataPath);
-        string donneesEnregistrees = File.ReadAllText(Application.dataPath + "/sauvegarde.json");
-        //string donneesEnregistrees = File.ReadAllText(Application.persistentDataPath + "/sauvegarde.json");
-        //string donneesEnregistrees = (Resources.Load("sauvegarde.json") as TextAsset).ToString();
+        setDonneesEnregistrees();
 
         // Si il n'y a rien à charger
         if (donneesEnregistrees == "{}" || donneesEnregistrees == "")
@@ -689,16 +711,31 @@ public class GameHandler : MonoBehaviour
         List<string> listeNoms = gameData.listeNomsItems;
         List<int> listeQuantites = gameData.listeAmountItems;
 
-        for (int i = 0; i<gameData.listeAmountItems.Count; i++)
+        for (int i = 0; i < gameData.listeAmountItems.Count; i++)
         {
             listeItems.Add(new ItemAmount(Item: Resources.Load("items/" + listeNoms[i], typeof(Item)) as Item, Amount: listeQuantites[i]));
         }
-
 
         // Demarrage de l'inventaire
         player.createInventory(listeItems, gameData.listeFavoris);
         inventory = player.inventory;
         BuildingLayerMag.updateBatLayers();
     }
+
+
+    IEnumerator GetDataInAndroid(string url)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        if (www.text != null)
+        {
+            donneesEnregistrees = www.text;
+        }
+        else
+        {
+            Debug.LogError("Problème sauvegarde : impossible d'acceder aux données");
+        }
+    }
+
 }
 
