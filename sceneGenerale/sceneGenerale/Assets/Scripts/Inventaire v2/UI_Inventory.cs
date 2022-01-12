@@ -29,6 +29,10 @@ public class UI_Inventory : MonoBehaviour
 
     private GameObject boutonPlanterGraine;
 
+    private GameObject boutonJeterItem;
+    private GameObject menuJeterItem;
+    private ItemAmount itemAJeter;
+
     GameObject Background;
     GameObject BouttonOuvertureGO;
 
@@ -81,6 +85,9 @@ public class UI_Inventory : MonoBehaviour
 
         boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
 
+        boutonJeterItem = gameObject.transform.GetChild(0).GetChild(5).gameObject;
+        menuJeterItem = gameObject.transform.GetChild(0).GetChild(6).gameObject;
+
         Background = transform.GetChild(0).gameObject;
         Background.SetActive(false);
         BouttonOuvertureGO = transform.GetChild(2).gameObject;
@@ -103,9 +110,10 @@ public class UI_Inventory : MonoBehaviour
         {
             prevoirAffichage = false;
             boutonFavAffiche = false;
-            moveToFav.SetActive(false);
 
+            moveToFav.SetActive(false);
             boutonPlanterGraine.SetActive(false);
+            boutonJeterItem.SetActive(false);
         }
 
         /*
@@ -336,19 +344,41 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void AfficheBoutonFavOuGraine(Transform slotInv) //apelle les fonctions qui permettent d'ajouter un objet aux favoris ou de planter une graine
+    public void AfficheBoutonsItem(Transform slotInv) //apelle toutes les fonctions qui permettent d'afficher les dífférents boutons spécifiques au tag de l'item
     {
         if (slotInv.tag == "Objet")
         {
-            AfficheBoutonFav(slotInv);
+            AfficheBoutonObjet(slotInv);
         }
         else if (slotInv.tag == "Graine")
         {
             AfficheBoutonPlanterGraine(slotInv);
         }
+        else if (slotInv.tag == "Outil")
+        {
+            AfficheBoutonFav(slotInv);
+        }
     }
 
-    public void AfficheBoutonFav(Transform slotInv)   //on affiche le bouton qui permet d'ajouter un objet aux favoris
+    private void AfficheBoutonObjet(Transform slotInv)
+    {
+        string name = slotInv.gameObject.name;
+        Vector3 pos = slotInv.position;
+
+        boutonJeterItem.transform.position = pos;
+        slotSelected = int.Parse(name);  //position de l'item à supprimer dans l'inventaire principal
+
+        boutonFavAffiche = true;
+        moveToFav.SetActive(true);
+    }
+
+    private void AfficheMenuJeterItem()
+    {
+
+
+    }
+
+    private void AfficheBoutonFav(Transform slotInv)   //on affiche le bouton qui permet d'ajouter un objet aux favoris
     {
         string name = slotInv.gameObject.name;
         Vector3 pos = slotInv.position;
