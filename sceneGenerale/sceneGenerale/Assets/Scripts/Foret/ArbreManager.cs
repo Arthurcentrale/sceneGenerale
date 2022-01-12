@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,9 +76,10 @@ public class ArbreManager : MonoBehaviour
     public float absorptionDouglas = 0.1f;
     public float absorptionBouleau = 0.2f;
 
-    
 
 
+    //liste des arbres dans le jeu
+    public GameObject[] arbres;
 
     // Start is called before the first frame update
     void Start()
@@ -94,11 +96,11 @@ public class ArbreManager : MonoBehaviour
 
     public void declencherEpidemie()
     {
-        int declencheur = Random.Range(1, 100);
+        int declencheur = UnityEngine.Random.Range(1, 100);
 
         if (declencheur < 4)
         {
-            int randomNumber = Random.Range(1, 100);
+            int randomNumber = UnityEngine.Random.Range(1, 100);
             string essenceMalade;
             if (randomNumber < 31) essenceMalade = "Chene";
             else if (randomNumber >= 31 && randomNumber < 41) essenceMalade = "Hetre";
@@ -109,6 +111,20 @@ public class ArbreManager : MonoBehaviour
         }
         int nombreArbres = 0;
         GameObject.Find("");
+    }
+
+    public void ageArbresPlus()
+    {
+        arbres = GameObject.FindGameObjectsWithTag("Arbre");
+
+        foreach(var arbre in arbres)
+        {
+            if (arbre.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                arbre.GetComponent<SoucheComportement>().age += 1;
+            }
+            else arbre.GetComponent<ArbreComportement>().age += 1;
+        }
     }
 
     

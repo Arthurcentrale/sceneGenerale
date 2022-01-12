@@ -19,7 +19,6 @@ public class SoucheComportement : MonoBehaviour
         arbreManager = GameObject.Find("Game Manager").GetComponent<ArbreManager>();
         tempsCroissance = DefineTempsCroissance(gameObject.name);
         dossierArbres = GameObject.Find("Arbres").transform;
-        StartCoroutine(TestOne());
         if (gameObject.name =="Souche Douglas Malade(Clone)" || gameObject.name == "Souche Chene Malade(Clone)" || gameObject.name == "Souche Pin Malade(Clone)" || gameObject.name == "Souche Bouleau Malade(Clone)" || gameObject.name == "Souche Hetre Malade(Clone)")
         {
             malade = true;
@@ -32,17 +31,6 @@ public class SoucheComportement : MonoBehaviour
         if (age >= tempsCroissance && malade == false) croissanceSouche();
     }
 
-
-    IEnumerator TestOne()
-    {
-        if (age < tempsCroissance)
-        {
-            yield return new WaitForSeconds(5);
-            age += 1;
-            StartCoroutine(TestOne());
-        }
-
-    }
 
     int DefineTempsCroissance(string name)
     {

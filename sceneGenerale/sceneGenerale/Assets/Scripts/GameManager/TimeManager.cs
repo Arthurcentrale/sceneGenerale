@@ -18,8 +18,11 @@ public class TimeManager : MonoBehaviour
     MoulinEau moulinEau;
     //GFForet gfforet; //script du garde forestier
 
+    ArbreManager arbreManager;
+
     void Start()
     {
+        arbreManager = GetComponent<ArbreManager>();
         planter = GameObject.Find("Ferme").GetComponent<Planter>();
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
         maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
@@ -100,8 +103,11 @@ public class TimeManager : MonoBehaviour
             moulinEau.FonctionMinuit();
          */
         // Repousse
+
         //repousse.majMinuit();
 
+        //croissance des arbres, arbustes et souches
+        arbreManager.ageArbresPlus();
 
         //Maladie
         var rand= UnityEngine.Random.Range(0f,1f);

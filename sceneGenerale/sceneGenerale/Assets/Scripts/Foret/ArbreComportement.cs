@@ -31,7 +31,6 @@ public class ArbreComportement : MonoBehaviour
         age = DefineAge(etat);
         absorptionCo2 = DefineAbsorptionCo2(essence);
         StartCoroutine(testMalades());
-        if (age < tempsCroissance) StartCoroutine(TestOne());
 
         dossierArbres = GameObject.Find("Arbres").transform;
     }
@@ -44,17 +43,6 @@ public class ArbreComportement : MonoBehaviour
         tuerArbreMalade();
     }
     
-    
-    IEnumerator TestOne()
-    {
-        while(age < tempsCroissance)
-        {
-            yield return new WaitForSeconds(5);
-            age += 1;
-            StartCoroutine(TestOne());
-        }
-        
-    }
     
 
     string DefineEssence(string name)
