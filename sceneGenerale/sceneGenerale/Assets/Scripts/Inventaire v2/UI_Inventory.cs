@@ -29,6 +29,10 @@ public class UI_Inventory : MonoBehaviour
 
     private GameObject boutonPlanterGraine;
 
+    private GameObject boutonJeterItem;
+    private GameObject menuJeterItem;
+    private GameObject boutonEquiper;
+
     GameObject Background;
     GameObject BouttonOuvertureGO;
 
@@ -81,6 +85,10 @@ public class UI_Inventory : MonoBehaviour
 
         boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
 
+        boutonJeterItem = gameObject.transform.GetChild(0).GetChild(5).gameObject;
+        menuJeterItem = gameObject.transform.GetChild(0).GetChild(6).gameObject;
+        boutonEquiper = gameObject.transform.GetChild(0).GetChild(7).gameObject;
+
         Background = transform.GetChild(0).gameObject;
         Background.SetActive(false);
         BouttonOuvertureGO = transform.GetChild(2).gameObject;
@@ -103,9 +111,11 @@ public class UI_Inventory : MonoBehaviour
         {
             prevoirAffichage = false;
             boutonFavAffiche = false;
-            moveToFav.SetActive(false);
 
+            moveToFav.SetActive(false);
             boutonPlanterGraine.SetActive(false);
+            boutonJeterItem.SetActive(false);
+            boutonEquiper.SetActive(false);
         }
 
         /*
@@ -218,11 +228,15 @@ public class UI_Inventory : MonoBehaviour
             {
                 itemSlotRectTransform.tag = "Graine";
             }
+            else if ((3 <= int.Parse(item.Item.id)) && (int.Parse(item.Item.id) <= 6))
+            {
+                itemSlotRectTransform.tag = "Outil";
+            }
             else
             {
                 itemSlotRectTransform.tag = "Objet";
             }
-            
+
             Image image = itemSlotRectTransform.transform.GetChild(0).gameObject.GetComponent<Image>();
             image.sprite = item.Item.Icon;
             Text amountText = itemSlotRectTransform.transform.GetChild(1).gameObject.GetComponent<Text>();
@@ -336,34 +350,119 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void AfficheBoutonFavOuGraine(Transform slotInv) //apelle les fonctions qui permettent d'ajouter un objet aux favoris ou de planter une graine
+
+    public void AfficheBoutonsItem(Transform slotInv) //apelle toutes les fonctions qui permettent d'afficher les dífférents boutons spécifiques au tag de l'item
     {
         if (slotInv.tag == "Objet")
         {
-            AfficheBoutonFav(slotInv);
+            AfficheBoutonObjet(slotInv);
         }
         else if (slotInv.tag == "Graine")
         {
             AfficheBoutonPlanterGraine(slotInv);
         }
+        else if (slotInv.tag == "Outil")
+        {
+            AfficheBoutonFav(slotInv);
+        }
     }
 
-    public void AfficheBoutonFav(Transform slotInv)   //on affiche le bouton qui permet d'ajouter un objet aux favoris
+    //Fonctions pour gérer les items avec le tag "Objet"
+
+    private void AfficheBoutonObjet(Transform slotInv)   
     {
         string name = slotInv.gameObject.name;
         Vector3 pos = slotInv.position;
-        //pos.x += 10f;
-        //pos.y += 25f;
-        moveToFav.transform.position = pos;
-        slotSelected = int.Parse(name);  //position de l'item à ajouter dans l'inventaire principal
-        moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Mettre en favoris";
 
+        boutonJeterItem.transform.position = pos;
+        slotSelected = int.Parse(name);  //position de l'item à supprimer dans l'inventaire principal
+
+        boutonFavAffiche = true;
+        boutonJeterItem.SetActive(true);
+    }
+
+    public void AfficheMenuJeterItem()
+    {
+        menuJeterItem.SetActive(true);
+    }
+
+    public void OuiJeterItem()
+    {
+        menuJeterItem.SetActive(false);
+        inventory.DelItemAtPos(slotSelected);
+    }
+
+    public void NonJeterItem()
+    {
+        menuJeterItem.SetActive(false);
+    }
+
+
+    //Fonctions pour gérer les items avec le tag "Outil"
+
+    private void AfficheBoutonFav(Transform slotInv)   //on affiche le bouton qui permet d'ajouter un objet aux favoris
+    {
+        string name = slotInv.gameObject.name;
+        Vector3 pos = slotInv.position;
+        slotSelected = int.Parse(name);
+
+        //bouton ajouter aux favoris
+        
+        moveToFav.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Mettre en favoris";
         Button button = moveToFav.GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(CopyToFav);
 
-        boutonFavAffiche = true;
+        moveToFav.transform.position = pos + new Vector3(0f, 50f, 0f);
         moveToFav.SetActive(true);
+
+        //bouton equiper
+
+        boutonEquiper.transform.position = pos;
+        boutonEquiper.SetActive(true);
+
+        //bouton jeter
+
+        boutonJeterItem.transform.position = pos - new Vector3(0f, 50f, 0f);
+        boutonJeterItem.SetActive(true);
+
+        boutonFavAffiche = true;
+    }
+
+    public void EquiperItem()
+    {
+        CopyToFav();
+
+        int slot = slotSelected + 1;
+
+        if (slot == slotEquipé) //l'item est déja équipé
+        {
+            slotEquipé = 0;
+            Debug.Log("On déséquipe l'item n" + slot.ToString());
+            animPlayer.SetBool("Pioche", false);
+            animPlayer.SetBool("Sac", false);
+            animPlayer.SetBool("Hache", false);
+        }
+        else  //on équipe l'objet
+        {
+            slotEquipé = slot;
+            Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+            audioSource.PlayOneShot(equipOutil);
+            if (slot == 1)
+            {
+                animPlayer.SetBool("Pioche", false);
+                animPlayer.SetBool("Sac", false);
+                animPlayer.SetBool("Hache", true);
+            }
+            else if (slot == 2)
+            {
+                animPlayer.SetBool("Hache", false);
+                animPlayer.SetBool("Sac", false);
+                animPlayer.SetBool("Pioche", true);
+            }
+        }
+
+        Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
     public void AfficheBoutonEnleverFav(Transform slotInv)   //on affiche le bouton qui permet d'enlever un objet des favoris
@@ -391,8 +490,6 @@ public class UI_Inventory : MonoBehaviour
     {
         string name = slotInv.gameObject.name;
         int slot = name[name.Length - 1] - '0';
-
-
 
         if (slot == slotEquipé)
         {
@@ -433,40 +530,31 @@ public class UI_Inventory : MonoBehaviour
     }
 
 
+    //Fonctions pour gérer les items avec le tag "Graine"
 
-    public void CopyToFav()   //ajoute un item au favoris si on peut
-    {
-        if (!inventory.AddToFav(slotSelected))
-        {
-            Debug.Log("Item deja ajouté aux favoris");
-        }
-        //boutonFavAffiche = false;
-        //moveToFav.SetActive(false);
-    }
-
-    public void DelFromFav()     //enleve un item des favoris
-    {
-        inventory.DelFav(slotSelected);
-        //boutonFavAffiche = false;
-        //moveToFav.SetActive(false);
-    }
-
-    public void AfficheBoutonPlanterGraine(Transform slotInv)   //on affiche le bouton qui permet de planter une graine
+    public void AfficheBoutonPlanterGraine(Transform slotInv)
     {
         string name = slotInv.gameObject.name;
         Vector3 pos = slotInv.position;
-
-        boutonPlanterGraine.transform.position = pos;
-
         slotSelected = int.Parse(name);
+
+        //bouton planter graine
+
         Item item = inventory.GetItemList()[slotSelected].Item;
 
         Button button = boutonPlanterGraine.GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => { PlanterGraine(item); });
 
-        boutonFavAffiche = true;
+        boutonPlanterGraine.transform.position = pos + new Vector3(0f, 30f, 0f);
         boutonPlanterGraine.SetActive(true);
+
+        //bouton jeter
+
+        boutonJeterItem.transform.position = pos - new Vector3(0f,30f,0f);
+        boutonJeterItem.SetActive(true);
+
+        boutonFavAffiche = true;
     }
 
     public void PlanterGraine(Item item)   //plante la graine
@@ -499,6 +587,24 @@ public class UI_Inventory : MonoBehaviour
         }
 
         inventory.DelItem(new ItemAmount(Item: item, Amount: 1));
+    }
+
+
+    public void CopyToFav()   //ajoute un item au favoris si on peut
+    {
+        if (!inventory.AddToFav(slotSelected))
+        {
+            Debug.Log("Item deja ajouté aux favoris");
+        }
+        //boutonFavAffiche = false;
+        //moveToFav.SetActive(false);
+    }
+
+    public void DelFromFav()     //enleve un item des favoris
+    {
+        inventory.DelFav(slotSelected);
+        //boutonFavAffiche = false;
+        //moveToFav.SetActive(false);
     }
 
     public int CountItem(string itemname) // On compte le nombre de d'item qui s'appellent itemname dans l'inventaire

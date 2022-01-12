@@ -122,18 +122,27 @@ public class Inventory
                 else if (j == i)
                 {
                     itemList.RemoveAt(n);
+                    DecaleFav(n);
                     OnItemListChanged?.Invoke();
                     return true;
                 }
                 else
                 {
                     itemList.RemoveAt(n);
+                    DecaleFav(n);
                     item.Amount = i - j;
                 }
             }
             n++;
         }
         return false;
+    }
+
+    public void DelItemAtPos(int slot)  //supprime les items de l'inventaire à un certain emplacement
+    {
+        itemList.RemoveAt(slot);
+        DecaleFav(slot);
+        OnItemListChanged?.Invoke();
     }
 
     public List<ItemAmount> GetItemList()
@@ -180,6 +189,18 @@ public class Inventory
             favList[slot] = false;
             OnItemListChanged?.Invoke();
             return true;
+        }
+    }
+
+    private void DecaleFav(int slot)  //decale les favoris à partir d'un certain rang (pour les mettres à jour quand on supprime un item de l'inventaire)
+    {
+        for (int i = slot; i < favList.Count; i++)
+        {
+            if (favList[i])
+            {
+                favList[i - 1] = true;
+                favList[i] = false;
+            }
         }
     }
 }
