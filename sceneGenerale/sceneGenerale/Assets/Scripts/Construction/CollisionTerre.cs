@@ -17,7 +17,7 @@ public class CollisionTerre : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.IndexOf("RiverTrigger", StringComparison.OrdinalIgnoreCase) >= 0)
+        if (other.name.IndexOf("Trigger", StringComparison.OrdinalIgnoreCase) >= 0)
         {
             autorisation = false;
             
@@ -26,7 +26,7 @@ public class CollisionTerre : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name.IndexOf("RiverTrigger", StringComparison.OrdinalIgnoreCase) >= 0)
+        if (other.name.IndexOf("Trigger", StringComparison.OrdinalIgnoreCase) >= 0)
         {
             autorisation = true;
             

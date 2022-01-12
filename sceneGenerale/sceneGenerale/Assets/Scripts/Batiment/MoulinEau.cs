@@ -268,6 +268,8 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
             menuinfo.transform.GetChild(10).gameObject.SetActive(false);
             menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -283,6 +285,8 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
             menuinfo.transform.GetChild(10).gameObject.SetActive(false);
             menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -297,7 +301,9 @@ public class MoulinEau : MonoBehaviour
             menuinfo.transform.GetChild(8).gameObject.SetActive(true);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
             menuinfo.transform.GetChild(10).gameObject.SetActive(true);
-            menuinfo.transform.GetChild(11).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(true); 
+            menuinfo.transform.GetChild(12).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(true);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
