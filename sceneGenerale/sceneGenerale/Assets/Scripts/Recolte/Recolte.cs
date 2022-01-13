@@ -9,6 +9,7 @@ public class Recolte : MonoBehaviour
 {
     //SoundDesign part
     public AudioClip treeChop;
+    public AudioClip outilCasse;
     public AudioClip apparitionBulle;
     public AudioClip[] cassageRoche;
     private AudioSource audioSource;
@@ -48,9 +49,12 @@ public class Recolte : MonoBehaviour
 
     private Transform dossierArbres;
 
+    private Animator animPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
+        animPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         recolte = GameObject.Find("Recolte").transform;
         audioSource = GetComponent<AudioSource>();
         onPanel = false ;
@@ -441,7 +445,14 @@ public class Recolte : MonoBehaviour
         Debug.Log(itemequipe.durability);
         itemequipe.Item.durability -=5;
         Debug.Log(itemequipe.durability);
-        if(itemequipe.durability <= 0)  player.inventory.DelItem(itemequipe);
+        if (itemequipe.durability <= 0)
+        {
+            audioSource.PlayOneShot(outilCasse, 0.5f);
+            animPlayer.SetBool("Pioche", false);
+            animPlayer.SetBool("Sac", false);
+            animPlayer.SetBool("Hache", false);
+            player.inventory.DelItem(itemequipe);
+        }
     }
 
     public void SpawnFleurs() //Pour les fleurs, on a toujours 3 spawns
