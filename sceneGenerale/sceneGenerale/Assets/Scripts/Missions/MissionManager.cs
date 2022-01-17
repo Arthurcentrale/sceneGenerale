@@ -12,6 +12,8 @@ public class MissionManager : MonoBehaviour
     public List<Mission> CurrentMissions;
     public List<Mission> IncomingMissions;
 
+    new public GameObject camera;
+
     public int totalCurrency = 0;
     private int gap = 95;
 
@@ -60,16 +62,24 @@ public class MissionManager : MonoBehaviour
         {
             CurrentMissions.Add(IncomingMissions[0]);
             updateMissionsWindow(IncomingMissions[0]);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(0);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(1);
         }
         else if (totalCurrency == 20)
         {
             CurrentMissions.Add(IncomingMissions[1]);
             updateMissionsWindow(IncomingMissions[1]);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(2);
         }
         else if (totalCurrency == 30)
         {
             CurrentMissions.Add(IncomingMissions[2]);
             updateMissionsWindow(IncomingMissions[2]);
+            for (int i =3; i < 10; i++)
+            {
+                camera.GetComponent<ConstructionDebloquage>().majConstru(i);
+            }
+            
         }
         else if (totalCurrency == 40)
         {
