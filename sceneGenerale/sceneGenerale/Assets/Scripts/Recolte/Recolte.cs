@@ -7,6 +7,10 @@ using System;
 
 public class Recolte : MonoBehaviour
 {
+    //partie missions
+    public MissionManager missionManager;
+
+
     //SoundDesign part
     public AudioClip treeChop;
     public AudioClip outilCasse;
@@ -54,6 +58,7 @@ public class Recolte : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         animPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         recolte = GameObject.Find("Recolte").transform;
         audioSource = GetComponent<AudioSource>();
@@ -436,7 +441,8 @@ public class Recolte : MonoBehaviour
         }
         Destroy(cible.transform.gameObject);//detruit cible
         UpdateDurabilite();
-        IsCraftArbre = false;  
+        IsCraftArbre = false;
+        //missionManager
     }
 
     void UpdateDurabilite()

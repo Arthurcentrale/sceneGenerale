@@ -20,11 +20,13 @@ public class MissionWindow : MonoBehaviour
         titleText.text = mission.Information.Name;
         descriptionText.text = mission.Information.Description;
 
-        Vector3 placement = new Vector3(1440, 530, 0);
+        Vector3 placement = new Vector3(865, 300, 0);
         Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
+        CloseWindow();
         foreach (var goal in mission.Goals)
         {
+            
             GameObject goalObj = Instantiate(goalPrefab, placement, rotation, goalsContent);
             goalObj.transform.Find("Text").GetComponent<Text>().text = goal.GetDescription();
 
@@ -41,7 +43,7 @@ public class MissionWindow : MonoBehaviour
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
 
-            placement.y -= 100;
+            placement.y -= 70;
         }
 
         xpText.text = mission.Reward.XP.ToString();

@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class optiObjetsStatics : MonoBehaviour
 {
+    public bool visibilite = true;
     // Start is called before the first frame update
-    void Start()
+
+
+    private void Start()
     {
-        
+        visibilite = false;
+        gameObject.GetComponent<Animator>().enabled = false;
+    }
+    public void OnBecameInvisible()
+    {
+        visibilite = false;
+        gameObject.GetComponent<Animator>().enabled = false;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnBecameVisible()
     {
-        
+        visibilite = true;
+        gameObject.GetComponent<Animator>().enabled = true;
     }
 }
