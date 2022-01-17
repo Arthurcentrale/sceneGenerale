@@ -22,7 +22,7 @@ public class BuildingLayerMag : MonoBehaviour
     {
         foreach (string nom in listeNomsBat)
         {
-            Debug.Log(nom);
+            //Debug.Log(nom);
             GameObject bat = GameObject.FindGameObjectWithTag(nom);
             if (bat != null)
             {

@@ -41,7 +41,6 @@ public class ChangeSceneMairie : MonoBehaviour
     }
     private IEnumerator FadeToBlackCoroutine()
     {
-        Debug.Log("Fading");
         float fade = 1.0f;
         loadingScreen.SetActive(true);
         do
@@ -52,7 +51,6 @@ public class ChangeSceneMairie : MonoBehaviour
             fade -= 1.5f * Time.deltaTime;
             yield return null;
         } while (fade >= 0.0f);
-        Debug.Log("Faded");
 
     }
     /*private void Awake()
