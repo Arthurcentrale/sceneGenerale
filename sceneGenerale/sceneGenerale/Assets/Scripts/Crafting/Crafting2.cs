@@ -128,7 +128,7 @@ public class Crafting2 : MonoBehaviour
                 ItemAmount.durability = 5;// on ajoute les résultats
             }
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();
-            missionManager.GetComponent<MissionManager>().Gather(nomItemCraft);
+            missionManager.GetComponent<MissionManager>().Gather(recettecraft.Results[0].Item.name);
         }
         else
         // Si CanCraft est false

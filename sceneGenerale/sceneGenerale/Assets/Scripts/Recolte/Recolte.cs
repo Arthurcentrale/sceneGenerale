@@ -441,7 +441,7 @@ public class Recolte : MonoBehaviour
         }
         Destroy(cible.transform.gameObject);//detruit cible
         missionManager.Gather("Bois");
-        UpdateDurabilite();
+        //UpdateDurabilite();
         IsCraftArbre = false;
         
     }
@@ -538,7 +538,7 @@ public class Recolte : MonoBehaviour
                     }
                 }
             }
-            UpdateDurabilite();
+            //UpdateDurabilite();
 
         }
 
