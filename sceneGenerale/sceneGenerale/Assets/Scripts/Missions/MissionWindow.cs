@@ -20,7 +20,7 @@ public class MissionWindow : MonoBehaviour
         titleText.text = mission.Information.Name;
         descriptionText.text = mission.Information.Description;
 
-        Vector3 placement = new Vector3(865, 300, 0);
+        Vector3 placement = new Vector3(820, 300, 0);
         Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
         CloseWindow();
