@@ -253,32 +253,32 @@ public class Maladie : MonoBehaviour
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.cheneRobuste.transform.rotation;
             Instantiate(arbreManager.cheneMalade, coord, rot,dossierArbres);
-            Destroy(arbre);
+            //Destroy(arbre);
 
         }
         if (nom=="Hetre"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.hetreRobuste.transform.rotation;
             Instantiate(arbreManager.hetreMalade, coord, rot,dossierArbres);
-            Destroy(arbre);
+            //Destroy(arbre);
         }
         if (nom=="Pin"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.pinRobuste.transform.rotation;
             Instantiate(arbreManager.pinMalade, coord, rot,dossierArbres);
-            Destroy(arbre);
+            //Destroy(arbre);
         }
         if (nom=="Douglas"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.douglasRobuste.transform.rotation;
             Instantiate(arbreManager.douglasMalade, coord, rot,dossierArbres);
-            Destroy(arbre);
+            //Destroy(arbre);
         }
         if (nom=="Bouleau"&& arbre!=null){
             Vector3 coord=arbre.transform.position;
             Quaternion rot = arbreManager.bouleauRobuste.transform.rotation;
             Instantiate(arbreManager.bouleauMalade, coord, rot,dossierArbres);
-            Destroy(arbre);
+            //Destroy(arbre);
         }
     }
 

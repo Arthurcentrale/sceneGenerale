@@ -25,7 +25,7 @@ public class scriptRepousse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class scriptRepousse : MonoBehaviour
         }
 
         GameObject[] res = new GameObject[index];
-        for (int i = 0; i<index; i++)
+        for (int i = 0; i < index; i++)
         {
             res[i] = resTmp[i];
         }
@@ -111,7 +111,7 @@ public class scriptRepousse : MonoBehaviour
                 return 0;
         }
     }
-    
+
     // Fonction qui fait pousser un arbre de manière cohérente par rapport à la forêt
     private void fairePousserArbre(int nbArbre, GameObject[] ListeGO)
     {
@@ -123,7 +123,7 @@ public class scriptRepousse : MonoBehaviour
             var rand = new System.Random();
 
             Vector2 position = positionAvailable(ListeGO);
-            Utils.creerGo(goTag, position, ListeGO) ;
+            Utils.creerGo(goTag, position, ListeGO);
         }
     }
 
@@ -153,7 +153,7 @@ public class scriptRepousse : MonoBehaviour
         // Création d'une variable pour éviter une boucle infinie
         int i = 100;
 
-        while (test == false && i>0)
+        while (test == false && i > 0)
         {
             numProcheObjet = Utils.GetRandom(0, lengthListeGO);
 

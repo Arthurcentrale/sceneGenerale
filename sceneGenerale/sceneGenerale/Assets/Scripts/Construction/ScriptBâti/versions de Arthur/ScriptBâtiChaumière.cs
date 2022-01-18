@@ -246,7 +246,7 @@ public class ScriptBâtiChaumière : MonoBehaviour
 
                             BatiChaumière = GameObject.Find("BatiChaumière");
 
-                            Chaumière = Instantiate(prefabChaumière, BatiChaumière.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0)); //Le moulin final
+                            Chaumière = Instantiate(prefabChaumière, BatiChaumière.transform.position + new Vector3(0f, 2f, 0f), Quaternion.Euler(-20, 0, 0), GameObject.Find("Batiments").transform); //Le moulin final
                             Destroy(BatiChaumière);
                             onAPasEncoreDétruitLeBâti = false;
                             débuterConstruction = false;

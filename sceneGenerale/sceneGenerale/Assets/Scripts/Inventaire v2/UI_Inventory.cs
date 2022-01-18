@@ -83,7 +83,7 @@ public class UI_Inventory : MonoBehaviour
         slotSelected = 0;
         prevoirAffichage = false;
 
-        boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
+        //boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
 
         boutonJeterItem = gameObject.transform.GetChild(0).GetChild(5).gameObject;
         menuJeterItem = gameObject.transform.GetChild(0).GetChild(6).gameObject;

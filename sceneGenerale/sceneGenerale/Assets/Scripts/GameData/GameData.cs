@@ -63,6 +63,8 @@ public class GameData
     public List<string> listeBatiments;
     public List<Vector3> listePosBatiments;
 
+    public bool isMairieRenovee;
+
     // Constructeur par données    
     public GameData(List<Vector3> LPPins,
                     List<Vector3> LPDouglas,
@@ -109,7 +111,8 @@ public class GameData
                     List<string> listeBatiments,
                     List<Vector3> listePosBatiments,
                     List<ItemAmount> itemList,
-                    List<bool> favList)
+                    List<bool> favList,
+                    bool isMairieRenovee)
     {
         this.listePositionsChenes = LPChenes;
         this.listePositionsPins = LPPins;
@@ -174,5 +177,7 @@ public class GameData
             this.listeNomsItems.Add(item.Item.name);
         }
         this.listeFavoris = favList;
+
+        this.isMairieRenovee = isMairieRenovee;
     }
 }

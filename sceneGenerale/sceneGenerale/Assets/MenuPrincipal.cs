@@ -13,7 +13,11 @@ public class MenuPrincipal : MonoBehaviour
 
     public void BoutonQuitter()
     {
-         
         Application.Quit();
+    }
+
+    public void BoutonReset()
+    {
+        GameHandler.resetGame();
     }
 }
