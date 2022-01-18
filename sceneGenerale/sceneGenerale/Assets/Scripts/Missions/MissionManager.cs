@@ -13,6 +13,7 @@ public class MissionManager : MonoBehaviour
     public List<Mission> IncomingMissions;
 
     new public GameObject camera;
+    public GameObject player;
 
     public int totalCurrency = 0;
     private int gap = 75;
@@ -49,8 +50,10 @@ public class MissionManager : MonoBehaviour
         EventManager.Instance.QueueEvent(new CraftingGameEvent(craftName));
     }
 
-    public void Gather(string itemName, int amount)
+    public void Gather(string itemName)
     {
+        int amount = player.GetComponent<Player>().uiInventory.CountItem(itemName);
+        Debug.Log("Qté bois : " + amount);
         EventManager.Instance.QueueEvent(new GatheringGameEvent(itemName, amount));
     }
 

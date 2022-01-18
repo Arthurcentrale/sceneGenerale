@@ -23,7 +23,6 @@ public class testdesacAnim : MonoBehaviour
     public void OnBecameVisible()
     {
         visibilite = true;
-        Debug.Log("visible");
         gameObject.GetComponent<Animator>().enabled = true;
     }
 }

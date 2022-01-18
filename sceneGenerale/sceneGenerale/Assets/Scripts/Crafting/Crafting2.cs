@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Crafting2 : MonoBehaviour
 {
     public string nomItemCraft;
-    private MissionManager missionManager;
+    public MissionManager missionManager;
 
     List<ItemAmount> itemList;
     public GameObject Fond;
@@ -24,7 +24,7 @@ public class Crafting2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
+        missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         BoutonsCrafting = GameObject.Find("Menus/Crafting/MenuCrafting/MenuAtelierFabrication/BoutonsCrafting");
         itemList = player.inventory.GetItemList();

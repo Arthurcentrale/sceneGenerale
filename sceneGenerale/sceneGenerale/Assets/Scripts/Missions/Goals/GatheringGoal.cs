@@ -5,11 +5,10 @@ using UnityEngine;
 public class GatheringGoal : Mission.MissionGoal
 {
     public string Item;
-    public int Amount;
 
     public override string GetDescription()
     {
-        return "Obtenir " + Amount +" "+ Item;
+        return "Obtenir " + RequiredAmount +" "+ Item;
     }
 
     public override void Initialize()
@@ -21,9 +20,9 @@ public class GatheringGoal : Mission.MissionGoal
     private void OnGathering(GatheringGameEvent eventInfo)
     {
 
-        if (eventInfo.itemName == Item && eventInfo.amountName == Amount)
+        if (eventInfo.itemName == Item)
         {
-            CurrentAmount++;
+            CurrentAmount+= eventInfo.amountName;
             Evaluate();
         }
 

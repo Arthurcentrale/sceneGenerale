@@ -440,9 +440,10 @@ public class Recolte : MonoBehaviour
 
         }
         Destroy(cible.transform.gameObject);//detruit cible
+        missionManager.Gather("Bois");
         UpdateDurabilite();
         IsCraftArbre = false;
-        //missionManager
+        
     }
 
     void UpdateDurabilite()

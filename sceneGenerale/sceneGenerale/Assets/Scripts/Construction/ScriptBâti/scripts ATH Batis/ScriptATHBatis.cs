@@ -243,8 +243,7 @@ public class ScriptATHBatis : MonoBehaviour
         ui_inventory = player.uiInventory;
         nombreItemTwo = player.uiInventory.CountItem("Bois");
         nombreItemOne = player.uiInventory.CountItem("Pierre");
-        print("pierre du joueur : " + nombreItemOne);
-        print("bois du joueur : " + nombreItemTwo);
+        
         //if ya du bois et nombre bois inventaire< nombre bois nécessaire à la constru du bâtiment
         if (nombreItemOne > 0)
         {
