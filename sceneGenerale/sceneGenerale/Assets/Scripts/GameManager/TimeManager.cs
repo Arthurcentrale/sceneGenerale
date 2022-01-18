@@ -43,7 +43,7 @@ public class TimeManager : MonoBehaviour
         seconds = (tomorrow - current).TotalSeconds;
 
         //yield return new WaitForSeconds((float) seconds);
-        yield return new WaitForSeconds(5f); //Pour test que tout marche
+        yield return new WaitForSeconds(0.5f); //Pour test que tout marche
 
         FonctionsMinuit();
     }

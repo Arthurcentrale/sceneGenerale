@@ -12,10 +12,13 @@ public class MissionManager : MonoBehaviour
     public List<Mission> CurrentMissions;
     public List<Mission> IncomingMissions;
 
-    public int totalCurrency = 0;
-    private int gap = 95;
+    new public GameObject camera;
+    public GameObject player;
 
-    private Vector3 placement = new Vector3(-1450, 800, 0);
+    public int totalCurrency = 0;
+    private int gap = 75;
+
+    private Vector3 placement = new Vector3(- 865, 488, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
     private void Awake()
@@ -47,6 +50,13 @@ public class MissionManager : MonoBehaviour
         EventManager.Instance.QueueEvent(new CraftingGameEvent(craftName));
     }
 
+    public void Gather(string itemName)
+    {
+        int amount = player.GetComponent<Player>().uiInventory.CountItem(itemName);
+        Debug.Log("Qté bois : " + amount);
+        EventManager.Instance.QueueEvent(new GatheringGameEvent(itemName, amount));
+    }
+
     private void OnMissionCompleted(Mission mission)
     {
         missionsContent.GetChild(CurrentMissions.IndexOf(mission)).Find("checkmark").gameObject.SetActive(true);
@@ -60,16 +70,24 @@ public class MissionManager : MonoBehaviour
         {
             CurrentMissions.Add(IncomingMissions[0]);
             updateMissionsWindow(IncomingMissions[0]);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(0);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(1);
         }
         else if (totalCurrency == 20)
         {
             CurrentMissions.Add(IncomingMissions[1]);
             updateMissionsWindow(IncomingMissions[1]);
+            camera.GetComponent<ConstructionDebloquage>().majConstru(2);
         }
         else if (totalCurrency == 30)
         {
             CurrentMissions.Add(IncomingMissions[2]);
             updateMissionsWindow(IncomingMissions[2]);
+            for (int i =3; i < 10; i++)
+            {
+                camera.GetComponent<ConstructionDebloquage>().majConstru(i);
+            }
+            
         }
         else if (totalCurrency == 40)
         {

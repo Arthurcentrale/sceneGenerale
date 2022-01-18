@@ -45,3 +45,15 @@ public class CraftingGameEvent : GameEvent
         craftName = name;
     }
 }
+
+public class GatheringGameEvent : GameEvent
+{
+    public string itemName;
+    public int amountName;
+
+    public GatheringGameEvent(string name, int amount)
+    {
+        itemName = name;
+        amountName = amount;
+    }
+}
