@@ -13,10 +13,28 @@ MonoBehaviour:
   m_Name: test gather hache
   m_EditorClassIdentifier: 
   Information:
-    Name: 
-    Icon: {fileID: 0}
+    Name: fabrique une hache
+    Icon: {fileID: 21300000, guid: 7714de1b16acc6d48b76c1186cf65f20, type: 3}
     Description: 
   Reward:
-    Currency: 10
+    Currency: 1
     XP: 10
-  Goals: []
+  Goals:
+  - {fileID: 6989463527953780884}
+--- !u!114 &6989463527953780884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636cb25bd5d5ada4e8837b76c45c31fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 2
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Item: Hache
