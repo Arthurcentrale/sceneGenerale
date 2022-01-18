@@ -51,7 +51,10 @@ public class Planter : MonoBehaviour
                                        //de base on va le remplir de -1 quand il n'y a pas de culture
     private int planteSelectionnee;  //de base aucune, donc 6
     public GameObject[,] arrayPrefabsPlantes;  //array qui contient les prefabs des plantes qui sont instanciées pour pouvoir les enlever
-    
+
+    private Player player;
+    public Item Paille;
+
     //prefab des images que l'on va afficher sur les parcelles
     public GameObject blePf;
     public GameObject maisPf;
@@ -97,6 +100,8 @@ public class Planter : MonoBehaviour
         for (int i = 0; i < xNbrParcelles * yNbrParcelles; i++) cultureParcelles[i % xNbrParcelles, i / xNbrParcelles] = -1;
         SelectionAucunePlante();
         arrayPrefabsPlantes = new GameObject[xNbrParcelles, yNbrParcelles];
+
+        player = GameObject.Find("Principal_OK").GetComponent<Player>();
 
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
@@ -297,7 +302,8 @@ public class Planter : MonoBehaviour
 
                 if (q == (int)Culture.Ble)
                 {
-                    //coder un truc pour mettre du blé et de la paille dans le coffre
+                    //coder un truc pour mettre de la paille dans le coffre
+                    player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: 1));
                 }
 
                 // On regarde ensuite si il y a de l'engrais 
@@ -311,6 +317,7 @@ public class Planter : MonoBehaviour
                     if (q == (int)Culture.Ble)   //Blé sur parcelle
                     {
                         GameManager.socialManager.quantiteNourriture += q;
+
                     }
                     else if (((int)Culture.Mais <= q) && (q <= (int)Culture.Salade))  //Mais ou Salade..
                     {

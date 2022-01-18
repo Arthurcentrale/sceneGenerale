@@ -117,6 +117,8 @@ public class TimeManager : MonoBehaviour
             maladie.FonctionQuiSeDéclencheÀMinuit();
         }
 
+        //Mise à jour de la quantité de nourriture en fonction de ce qui est planté dans la ferme
+        planter.MajQuantiteNourriture();
 
         //Garde Forestier
         //gfforet.graineDéjàDonnée=false;  //on reset la graine que donne le garde forestier

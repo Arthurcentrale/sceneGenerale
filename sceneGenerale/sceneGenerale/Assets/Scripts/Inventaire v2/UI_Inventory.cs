@@ -119,14 +119,32 @@ public class UI_Inventory : MonoBehaviour
         }
 
         /*
+        if (IsPointerOverUIObject()) Debug.Log("OUI");
+        else Debug.Log("NON");
+        */
+
         // Regarde si on est au dessus d'un element de l'UI pour voir si on a cliqué en dehors des boutons de l'inventaire
-        if (!eventSystem.IsPointerOverGameObject() && (stadeAffichage == 1) && Input.GetMouseButton(0))
+        if (!IsPointerOverUIObject() && (stadeAffichage == 1) && Input.GetMouseButton(0))
         {
             animator.SetTrigger("fermerInvFavs");
             stadeAffichage -= 1;
             Debug.Log("On a cliqué en dehors et on ferme le panneau des favoris");
         }
-        */
+    }
+
+    private bool IsPointerOverUIObject() //fonction qui permet de savoir si on a le curseur au dessus d'un objet de l'UI
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        bool val = false;
+        foreach (RaycastResult hit in results)
+        {
+            if (hit.gameObject.layer == 5) val = true;  //Layer 5 = UI
+        }
+        return val;
     }
 
     public void BouttonOuverture()   //on clique sur le bouton inventaire

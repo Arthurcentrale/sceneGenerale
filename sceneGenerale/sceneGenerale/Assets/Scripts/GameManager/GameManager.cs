@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     //On initialise toute les instances uniques (singletons) des différents managers
     public static SocialManager socialManager = new SocialManager(0,0,0);
-    public static EnvironnementManager environnementManager = new EnvironnementManager(70,42f,10f);
-    public static DeveloppementManager developpementManager = new DeveloppementManager(100);
+    public static EnvironnementManager environnementManager = new EnvironnementManager(100,maxQE,100f);
+    public static DeveloppementManager developpementManager = new DeveloppementManager(0);
     //public HabitantManager habitantManager = new HabitantManager(new List<GameObject>());
 
     private void MajScore()
