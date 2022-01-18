@@ -65,6 +65,10 @@ public class GameHandler : MonoBehaviour
     public Player player;
     [SerializeField] public UI_Inventory uiInventory;
 
+    // Mairies
+    public GameObject mairieRuine;
+    public GameObject mairie;
+
     // Dossiers
     private Transform dossierArbres;
     private Transform dossierRochers;
@@ -74,6 +78,9 @@ public class GameHandler : MonoBehaviour
 
     string donneesEnregistrees;
 
+    // Chemin vers le fichier bdd
+    string path;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +88,9 @@ public class GameHandler : MonoBehaviour
         dossierRochers = GameObject.Find("Rocher").transform;
         dossierBatiments = GameObject.Find("Batiments").transform;
 
-        //fillListeCompleteBatiments();
+        InitSauvegarde.initSauvegarde();
+
+        path = Application.persistentDataPath + "/Assets/sauvegarde";
 
         Load();
         treeLayersMag.updateTreeLayers();
@@ -96,11 +105,12 @@ public class GameHandler : MonoBehaviour
 
     IEnumerator SaveGame()
     {
-        Debug.Log("Sauvegarde");
+        //Debug.Log("Sauvegarde");
         yield return new WaitForSeconds(intervalleSauvegarde);
         Save();
         StartCoroutine(SaveGame());
     }
+
 
     // Enregistre les données sur le fichier sauvegarde.txt
     private void Save()
@@ -424,7 +434,7 @@ public class GameHandler : MonoBehaviour
         for (int i = 0; i < dossierBatiments.childCount; i++)
         {
             Transform currentBat = dossierBatiments.GetChild(i);
-
+          
             if (currentBat.name.IndexOf("Déplaçable", StringComparison.OrdinalIgnoreCase) >= 0)
                 continue;
 
@@ -436,6 +446,10 @@ public class GameHandler : MonoBehaviour
 
         List<ItemAmount> listeItems = inventory.GetItemList();
         List<bool> listeFavoris = inventory.GetFavList();
+
+        /** ------------------ Sauvegarde de l'état de la mairie ------------------ **/
+
+        bool isMairieRenovee = MairieRenov.isMairieRenovee; 
 
         // Objet que l'on transformera en JSON
         GameData gameData = new GameData(listePositionsPins,
@@ -483,40 +497,22 @@ public class GameHandler : MonoBehaviour
                                          listeBatiments,
                                          listePosBatiments,
                                          listeItems,
-                                         listeFavoris);
+                                         listeFavoris,
+                                         isMairieRenovee);
 
         string jsonData = JsonUtility.ToJson(gameData, true);
 
-#if UNITY_EDITOR
-
-        File.WriteAllText(Application.dataPath + "/sauvegarde.json", jsonData);
-#else
-
-    
-
-#endif
+        File.WriteAllText(path + "/sauvegarde.json", jsonData);
     }
 
-    private void setDonneesEnregistrees()
-    {
-        // Les données ne sont pas stockées au même endroit dans unity et android
-        // (pour être plus précis les chemins d'accès différent un peu)
-        // On fait donc une discjonction de cas 
-#if UNITY_EDITOR
 
-        donneesEnregistrees = File.ReadAllText(Application.dataPath + "/sauvegarde.json");
-        return;
 
-#endif
 
-        string filePath = "jar:file://" + Application.dataPath + "!/Assets/sauvegarde.json";
-        StartCoroutine(GetDataInAndroid(filePath));
-    }
 
 
     private void Load()
     {
-        setDonneesEnregistrees();
+        donneesEnregistrees = File.ReadAllText(path + "/sauvegarde.json");
 
         // Si il n'y a rien à charger
         if (donneesEnregistrees == "{}" || donneesEnregistrees == "")
@@ -697,7 +693,7 @@ public class GameHandler : MonoBehaviour
 
             if (batiment == null)
             {
-                print("Problème load : le nom du batiment (\"" + nomBat + "\") enregistré ne correspond à aucun batiment");
+                //print("Problème load : le nom du batiment (\"" + nomBat + "\") enregistré ne correspond à aucun batiment");
                 continue;
             }
 
@@ -705,6 +701,14 @@ public class GameHandler : MonoBehaviour
             {
                 Instantiate(batiment, positionBat, batiment.transform.rotation, dossierBatiments);
             }
+        }
+
+        // Si la mairie a déjà été rénovée
+        if (gameData.isMairieRenovee)
+        {
+            mairieRuine.SetActive(false);
+            mairie.SetActive(true);
+            MairieRenov.isMairieRenovee = true;
         }
 
         List<ItemAmount> listeItems = new List<ItemAmount>();
@@ -722,20 +726,9 @@ public class GameHandler : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
     }
 
-
-    IEnumerator GetDataInAndroid(string url)
+    public static void resetGame()
     {
-        WWW www = new WWW(url);
-        yield return www;
-        if (www.text != null)
-        {
-            donneesEnregistrees = www.text;
-        }
-        else
-        {
-            Debug.LogError("Problème sauvegarde : impossible d'acceder aux données");
-        }
+        File.WriteAllText(Application.persistentDataPath + "/Assets/sauvegarde/sauvegarde.json", "{\"listePositionsPins\":[{\"x\":511.29998779296877,\"y\":5.650816917419434,\"z\":246.39999389648438},{\"x\":489.260009765625,\"y\":5.650816917419434,\"z\":246.39999389648438},{\"x\":542.2999877929688,\"y\":5.650816917419434,\"z\":261.3999938964844},{\"x\":398.29998779296877,\"y\":5.650816917419434,\"z\":261.3999938964844},{\"x\":447.5,\"y\":5.650816917419434,\"z\":245.80999755859376},{\"x\":395.1000061035156,\"y\":5.650816917419434,\"z\":402.70001220703127}],\"listePositionsDouglas\":[{\"x\":466.97808837890627,\"y\":0.0,\"z\":257.1081237792969},{\"x\":488.70001220703127,\"y\":0.0,\"z\":257.1081237792969},{\"x\":464.989990234375,\"y\":0.0,\"z\":240.0},{\"x\":464.989990234375,\"y\":0.0,\"z\":240.0},{\"x\":355.6000061035156,\"y\":0.0,\"z\":276.20001220703127},{\"x\":371.1000061035156,\"y\":0.0,\"z\":276.20001220703127},{\"x\":390.70001220703127,\"y\":0.0,\"z\":306.1000061035156},{\"x\":434.79998779296877,\"y\":0.0,\"z\":395.0},{\"x\":434.79998779296877,\"y\":0.0,\"z\":383.3999938964844},{\"x\":446.8999938964844,\"y\":0.0,\"z\":389.79998779296877},{\"x\":452.79998779296877,\"y\":0.0,\"z\":389.79998779296877},{\"x\":452.79998779296877,\"y\":0.0,\"z\":372.1000061035156},{\"x\":477.79998779296877,\"y\":0.0,\"z\":372.1000061035156},{\"x\":495.0,\"y\":0.0,\"z\":352.6000061035156},{\"x\":514.0,\"y\":0.0,\"z\":352.6000061035156},{\"x\":525.7999877929688,\"y\":0.0,\"z\":335.1000061035156}],\"listePositionsChenes\":[{\"x\":385.4255676269531,\"y\":5.650818824768066,\"z\":355.9426574707031},{\"x\":316.5,\"y\":5.650818824768066,\"z\":435.1000061035156},{\"x\":334.79998779296877,\"y\":5.650818824768066,\"z\":441.79998779296877},{\"x\":441.1000061035156,\"y\":5.650818824768066,\"z\":324.29998779296877},{\"x\":502.20001220703127,\"y\":5.650818824768066,\"z\":339.8999938964844},{\"x\":489.5,\"y\":5.650818824768066,\"z\":301.20001220703127},{\"x\":517.7999877929688,\"y\":5.650818824768066,\"z\":292.3999938964844},{\"x\":531.2999877929688,\"y\":5.650818824768066,\"z\":298.20001220703127},{\"x\":418.29998779296877,\"y\":5.650818824768066,\"z\":257.20001220703127}],\"listePositionsHetres\":[{\"x\":526.8411865234375,\"y\":4.0,\"z\":309.40313720703127},{\"x\":491.6000061035156,\"y\":4.0,\"z\":309.40313720703127},{\"x\":461.6000061035156,\"y\":4.0,\"z\":353.8999938964844},{\"x\":414.79998779296877,\"y\":4.0,\"z\":292.6000061035156},{\"x\":414.79998779296877,\"y\":4.0,\"z\":324.0},{\"x\":464.29998779296877,\"y\":4.0,\"z\":324.0},{\"x\":517.2999877929688,\"y\":4.0,\"z\":324.0}],\"listePositionsBouleaux\":[{\"x\":473.7300109863281,\"y\":4.639999866485596,\"z\":309.7200012207031},{\"x\":485.0,\"y\":4.639999866485596,\"z\":325.0},{\"x\":400.5,\"y\":4.639999866485596,\"z\":337.6000061035156},{\"x\":403.1000061035156,\"y\":4.639999866485596,\"z\":328.20001220703127},{\"x\":333.8999938964844,\"y\":4.639999866485596,\"z\":427.20001220703127}],\"listePositionsPinsFrele\":[{\"x\":507.29998779296877,\"y\":5.099999904632568,\"z\":266.30999755859377},{\"x\":529.730224609375,\"y\":5.099999904632568,\"z\":245.50999450683595}],\"listePositionsDouglasFrele\":[],\"listePositionsChenesFrele\":[{\"x\":381.20001220703127,\"y\":6.929999828338623,\"z\":338.1499938964844}],\"listePositionsHetresFrele\":[{\"x\":472.5,\"y\":4.400000095367432,\"z\":292.6000061035156}],\"listePositionsBouleauxFrele\":[],\"listePositionsPinsMalade\":[],\"listePositionsDouglasMalade\":[],\"listePositionsChenesMalade\":[],\"listePositionsHetresMalade\":[],\"listePositionsBouleauxMalade\":[],\"listePositionsPinsArbuste\":[],\"listePositionsDouglasArbuste\":[],\"listePositionsChenesArbuste\":[],\"listePositionsHetresArbuste\":[],\"listePositionsBouleauxArbuste\":[],\"listePositionsPinsArbusteMalade\":[],\"listePositionsDouglasArbusteMalade\":[],\"listePositionsChenesArbusteMalade\":[],\"listePositionsHetresArbusteMalade\":[],\"listePositionsBouleauxArbusteMalade\":[],\"listePositionsPinsSouche\":[],\"listePositionsDouglasSouche\":[],\"listePositionsChenesSouche\":[],\"listePositionsHetresSouche\":[],\"listePositionsBouleauxSouche\":[],\"listePositionsPinsSoucheMalade\":[],\"listePositionsDouglasSoucheMalade\":[],\"listePositionsChenesSoucheMalade\":[],\"listePositionsHetresSoucheMalade\":[],\"listePositionsBouleauxSoucheMalade\":[],\"listePositionsRochers1\":[{\"x\":504.3999938964844,\"y\":2.5899999141693117,\"z\":389.8999938964844},{\"x\":486.3999938964844,\"y\":2.5899999141693117,\"z\":379.4599914550781},{\"x\":419.1000061035156,\"y\":2.5899999141693117,\"z\":379.4599914550781},{\"x\":530.5999755859375,\"y\":2.5899999141693117,\"z\":349.1000061035156},{\"x\":519.4000244140625,\"y\":2.5899999141693117,\"z\":368.8999938964844},{\"x\":528.5,\"y\":2.5899999141693117,\"z\":364.3999938964844},{\"x\":554.7999877929688,\"y\":2.5899999141693117,\"z\":330.0},{\"x\":563.9000244140625,\"y\":2.5899999141693117,\"z\":298.8999938964844},{\"x\":563.9000244140625,\"y\":2.5899999141693117,\"z\":266.79998779296877},{\"x\":529.2000122070313,\"y\":2.5899999141693117,\"z\":266.79998779296877},{\"x\":461.8999938964844,\"y\":2.5899999141693117,\"z\":266.79998779296877},{\"x\":461.8999938964844,\"y\":2.5899999141693117,\"z\":294.5},{\"x\":375.70001220703127,\"y\":2.5899999141693117,\"z\":274.6000061035156},{\"x\":375.70001220703127,\"y\":2.5899999141693117,\"z\":241.60000610351563},{\"x\":407.70001220703127,\"y\":2.5899999141693117,\"z\":241.60000610351563},{\"x\":407.70001220703127,\"y\":2.5899999141693117,\"z\":224.3000030517578}],\"listePositionsRochers2\":[{\"x\":592.27099609375,\"y\":2.9000000953674318,\"z\":252.5},{\"x\":569.0999755859375,\"y\":2.9000000953674318,\"z\":309.29998779296877},{\"x\":546.5,\"y\":2.9000000953674318,\"z\":346.5},{\"x\":512.7999877929688,\"y\":2.9000000953674318,\"z\":359.79998779296877},{\"x\":473.6000061035156,\"y\":2.9000000953674318,\"z\":382.70001220703127},{\"x\":414.3999938964844,\"y\":2.9000000953674318,\"z\":382.70001220703127},{\"x\":377.0,\"y\":2.9000000953674318,\"z\":382.70001220703127},{\"x\":377.0,\"y\":2.9000000953674318,\"z\":344.20001220703127},{\"x\":433.1000061035156,\"y\":2.9000000953674318,\"z\":338.20001220703127},{\"x\":433.1000061035156,\"y\":2.9000000953674318,\"z\":282.20001220703127},{\"x\":433.1000061035156,\"y\":2.9000000953674318,\"z\":227.10000610351563},{\"x\":511.3999938964844,\"y\":2.9000000953674318,\"z\":227.10000610351563},{\"x\":527.5,\"y\":2.9000000953674318,\"z\":255.60000610351563}],\"listePositionsRochers3\":[{\"x\":429.86822509765627,\"y\":2.5999999046325685,\"z\":306.561279296875},{\"x\":513.7999877929688,\"y\":2.5999999046325685,\"z\":306.561279296875},{\"x\":514.7999877929688,\"y\":2.5999999046325685,\"z\":225.60000610351563},{\"x\":565.7000122070313,\"y\":2.5999999046325685,\"z\":276.79998779296877},{\"x\":586.5999755859375,\"y\":2.5999999046325685,\"z\":276.79998779296877},{\"x\":563.7999877929688,\"y\":2.5999999046325685,\"z\":333.20001220703127},{\"x\":542.2999877929688,\"y\":2.5999999046325685,\"z\":356.6000061035156},{\"x\":517.5999755859375,\"y\":2.5999999046325685,\"z\":356.6000061035156}],\"listePositionsRochers4\":[],\"listePositionsRochers5\":[{\"x\":417.2364501953125,\"y\":0.6700000166893005,\"z\":295.35845947265627},{\"x\":490.2300109863281,\"y\":0.6700000166893005,\"z\":281.57000732421877},{\"x\":490.2300109863281,\"y\":0.6700000166893005,\"z\":233.10000610351563},{\"x\":572.7999877929688,\"y\":0.6700000166893005,\"z\":271.79998779296877},{\"x\":562.5999755859375,\"y\":0.6700000166893005,\"z\":321.5},{\"x\":523.5999755859375,\"y\":0.6700000166893005,\"z\":367.20001220703127},{\"x\":377.8999938964844,\"y\":0.6700000166893005,\"z\":367.20001220703127}],\"listePositionsRochers6\":[{\"x\":407.9100036621094,\"y\":1.5,\"z\":300.0},{\"x\":544.2000122070313,\"y\":1.5,\"z\":338.6000061035156},{\"x\":501.6000061035156,\"y\":1.5,\"z\":375.29998779296877},{\"x\":575.0,\"y\":1.5,\"z\":258.5}],\"listePositionsRochers7\":[],\"listeNomsItems\":[\"Hache\",\"BoisRobuste\",\"Pioche\",\"Pierre\",\"GraineChene\",\"BoisRobuste\",\"BoisFrele\",\"GraineHetre\",\"BoisRobuste\",\"BoisFrele\",\"BoisFrele\",\"GraineBouleau\",\"BoisFrele\",\"BoisRobuste\",\"GrainePinM\",\"BoisRobuste\",\"BoisFrele\",\"GraineDouglas\",\"BoisRobuste\",\"BoisFrele\"],\"listeAmountItems\":[1,5,1,5,3,5,5,2,5,5,5,1,5,5,2,5,5,1,3,1],\"listeFavoris\":[true,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],\"listeBatiments\":[\"MairieRuine\",\"Mairie\",\"Ferme\",\"MoulinAEau\",\"MoulinAVent\",\"Boulangerie\"],\"listePosBatiments\":[{\"x\":330.79998779296877,\"y\":12.75,\"z\":617.7000122070313},{\"x\":376.48724365234377,\"y\":12.744438171386719,\"z\":300.4572448730469},{\"x\":456.6700134277344,\"y\":4.440000057220459,\"z\":552.9000244140625},{\"x\":352.0,\"y\":5.809999942779541,\"z\":494.6499938964844},{\"x\":300.79998779296877,\"y\":7.849999904632568,\"z\":498.17999267578127},{\"x\":446.79998779296877,\"y\":5.829999923706055,\"z\":495.3999938964844}]}");
     }
-
 }
 

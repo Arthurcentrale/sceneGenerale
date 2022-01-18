@@ -188,8 +188,13 @@ public class BoutonMenu2 : MonoBehaviour
     public GameObject boutonInventaire;
     public GameObject favorisInventaire;
 
+    // Dossier des batiments
+    // Permet d'instantier chque batiment dedans
+    private Transform dossierBatiments;
+
     void Start()
     {
+        dossierBatiments = GameObject.Find("Batiments").transform;
         ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
         batimentsConstruBoutons = GameObject.Find("menuConstructionPageGauche");
     }
@@ -311,7 +316,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireChaumièreDepuisMenuInformation()
     {
 
-        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleChaumière.name = "nouvelleChaumière";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -334,7 +339,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleChaumière = Instantiate(prefabChaumièreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleChaumière.name = "nouvelleChaumière";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -346,9 +351,6 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenuEstAffiche = true;
         boutonValiderConstructionChaumière.SetActive(true);
 
-
-
-
     }
 
 
@@ -358,7 +360,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiChaumière = Instantiate(prefabBatiChaumière, ChaumièreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiChaumière = Instantiate(prefabBatiChaumière, ChaumièreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiChaumière.name = ("Bati");
         Destroy(nouvelleChaumière); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -381,7 +383,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruirePêcherieDepuisMenuInformation()
     {
 
-        nouvellePêcherie = Instantiate(prefabPêcherieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvellePêcherie = Instantiate(prefabPêcherieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvellePêcherie.name = "nouvellePêcherie";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -402,7 +404,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvellePêcherie = Instantiate(prefabPêcherieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvellePêcherie = Instantiate(prefabPêcherieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvellePêcherie.name = "nouvellePêcherie";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -430,7 +432,7 @@ public class BoutonMenu2 : MonoBehaviour
 
         if (autorisation1 && autorisation2)
         {
-            BatiPêcherie = Instantiate(prefabBatiPêcherie, PêcherieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+            BatiPêcherie = Instantiate(prefabBatiPêcherie, PêcherieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
             BatiPêcherie.name = ("Bati");
             Destroy(nouvellePêcherie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
             en_construction = false;
@@ -458,7 +460,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireMoulinAEauDepuisMenuInformation()
     {
 
-        nouvelleMoulinAEau = Instantiate(prefabMoulinAEauDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMoulinAEau = Instantiate(prefabMoulinAEauDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMoulinAEau.name = "nouvelleMoulinAEau"; // oui nouvelle :) 
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -479,7 +481,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleMoulinAEau = Instantiate(prefabMoulinAEauDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMoulinAEau = Instantiate(prefabMoulinAEauDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMoulinAEau.name = "nouvelleMoulinAEau";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -506,7 +508,7 @@ public class BoutonMenu2 : MonoBehaviour
 
         if (autorisation1 && autorisation2)
         {
-            BatiMoulinAEau = Instantiate(prefabBatiMoulinAEau, MoulinAEauDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+            BatiMoulinAEau = Instantiate(prefabBatiMoulinAEau, MoulinAEauDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
             BatiMoulinAEau.name = ("Bati");
             Destroy(nouvelleMoulinAEau); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
             en_construction = false;
@@ -539,7 +541,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireMoulinAVentDepuisMenuInformation()
     {
 
-        nouvelleMoulinAVent = Instantiate(prefabMoulinAVentDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMoulinAVent = Instantiate(prefabMoulinAVentDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMoulinAVent.name = "nouvelleMoulinAVent";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -560,7 +562,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleMoulinAVent = Instantiate(prefabMoulinAVentDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMoulinAVent = Instantiate(prefabMoulinAVentDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMoulinAVent.name = "nouvelleChaumière";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -584,7 +586,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiMoulinAVent = Instantiate(prefabBatiMoulinAVent, MoulinAVentDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiMoulinAVent = Instantiate(prefabBatiMoulinAVent, MoulinAVentDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiMoulinAVent.name = ("Bati");
         Destroy(nouvelleMoulinAVent); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -613,7 +615,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireBoulangerieDepuisMenuInformation()
     {
 
-        nouvelleBoulangerie = Instantiate(prefabBoulangerieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleBoulangerie = Instantiate(prefabBoulangerieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleBoulangerie.name = "nouvelleBoulangerie";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -634,7 +636,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleBoulangerie = Instantiate(prefabBoulangerieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleBoulangerie = Instantiate(prefabBoulangerieDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleBoulangerie.name = "nouvelleBoulangerie";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -658,7 +660,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiBoulangerie = Instantiate(prefabBatiBoulangerie, BoulangerieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiBoulangerie = Instantiate(prefabBatiBoulangerie, BoulangerieDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiBoulangerie.name = ("Bati");
         Destroy(nouvelleBoulangerie); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -691,7 +693,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireCabanonDepuisMenuInformation()
     {
 
-        nouvelleCabanon = Instantiate(prefabCabanonDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleCabanon = Instantiate(prefabCabanonDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleCabanon.name = "nouvelleCabanon";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -712,7 +714,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleCabanon = Instantiate(prefabCabanonDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleCabanon = Instantiate(prefabCabanonDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleCabanon.name = "nouvelleCabanon";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -736,7 +738,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiCabanon = Instantiate(prefabBatiCabanon, CabanonDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiCabanon = Instantiate(prefabBatiCabanon, CabanonDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiCabanon.name = ("Bati");
         Destroy(nouvelleCabanon); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -767,7 +769,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruirePuitsDepuisMenuInformation()
     {
 
-        nouvellePuits = Instantiate(prefabPuitsDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvellePuits = Instantiate(prefabPuitsDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvellePuits.name = "nouvellePuits";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -788,7 +790,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvellePuits = Instantiate(prefabPuitsDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvellePuits = Instantiate(prefabPuitsDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvellePuits.name = "nouvellePuits";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -812,7 +814,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiPuits = Instantiate(prefabBatiPuits, PuitsDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiPuits = Instantiate(prefabBatiPuits, PuitsDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiPuits.name = ("Bati");
         Destroy(nouvellePuits); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -842,7 +844,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireForgeDepuisMenuInformation()
     {
 
-        nouvelleForge = Instantiate(prefabForgeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleForge = Instantiate(prefabForgeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleForge.name = "nouvelleForge";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -863,7 +865,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleForge = Instantiate(prefabForgeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleForge = Instantiate(prefabForgeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleForge.name = "nouvelleForge";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -887,7 +889,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiForge = Instantiate(prefabBatiForge, ForgeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiForge = Instantiate(prefabBatiForge, ForgeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiForge.name = ("Bati");
         Destroy(nouvelleForge); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -915,7 +917,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireFosseDepuisMenuInformation()
     {
 
-        nouvelleFosse = Instantiate(prefabFosseDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleFosse = Instantiate(prefabFosseDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleFosse.name = "nouvelleFosse";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -936,7 +938,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleFosse = Instantiate(prefabFosseDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleFosse = Instantiate(prefabFosseDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleFosse.name = "nouvelleFosse";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -960,7 +962,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiFosse = Instantiate(prefabBatiFosse, FosseDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiFosse = Instantiate(prefabBatiFosse, FosseDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiFosse.name = ("Bati");
         Destroy(nouvelleFosse); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -983,7 +985,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireMaisonPierreDepuisMenuInformation()
     {
 
-        nouvelleMaisonPierre = Instantiate(prefabMaisonPierreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMaisonPierre = Instantiate(prefabMaisonPierreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMaisonPierre.name = "nouvelleMaisonPierre";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1004,7 +1006,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleMaisonPierre = Instantiate(prefabMaisonPierreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleMaisonPierre = Instantiate(prefabMaisonPierreDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleMaisonPierre.name = "nouvelleMaisonPierre";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1028,7 +1030,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiMaisonPierre = Instantiate(prefabBatiMaisonPierre, MaisonPierreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiMaisonPierre = Instantiate(prefabBatiMaisonPierre, MaisonPierreDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiMaisonPierre.name = ("Bati");
         Destroy(nouvelleMaisonPierre); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -1052,7 +1054,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireGardeMangerDepuisMenuInformation()
     {
 
-        nouvelleGardeManger = Instantiate(prefabGardeMangerDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleGardeManger = Instantiate(prefabGardeMangerDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleGardeManger.name = "nouvelleGardeManger";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1073,7 +1075,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleGardeManger = Instantiate(prefabGardeMangerDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleGardeManger = Instantiate(prefabGardeMangerDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleGardeManger.name = "nouvelleGardeManger";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1097,7 +1099,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiGardeManger = Instantiate(prefabBatiGardeManger, GardeMangerDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiGardeManger = Instantiate(prefabBatiGardeManger, GardeMangerDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiGardeManger.name = ("Bati");
         Destroy(nouvelleGardeManger); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -1120,7 +1122,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireFermeDepuisMenuInformation()
     {
 
-        nouvelleFerme = Instantiate(prefabFermeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleFerme = Instantiate(prefabFermeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleFerme.name = "nouvelleFerme";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1141,7 +1143,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleFerme = Instantiate(prefabFermeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleFerme = Instantiate(prefabFermeDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleFerme.name = "nouvelleFerme";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1165,7 +1167,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiFerme = Instantiate(prefabBatiFerme, FermeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiFerme = Instantiate(prefabBatiFerme, FermeDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiFerme.name = ("Bati");
         Destroy(nouvelleFerme); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;
@@ -1185,7 +1187,7 @@ public class BoutonMenu2 : MonoBehaviour
     public void ConstruireEtabliDepuisMenuInformation()
     {
 
-        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleEtabli.name = "nouvelleEtabli";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1206,7 +1208,7 @@ public class BoutonMenu2 : MonoBehaviour
     {
 
 
-        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0)); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
+        nouvelleEtabli = Instantiate(prefabEtabliDéplaçable, player.transform.position + 3 * Vector3.forward + new Vector3(0, (float)5, 0), Quaternion.Euler(-20, 0, 0), dossierBatiments); // Quaternion Euler c'est pour les angles, pour qu'on garde bien la bonne vue
         nouvelleEtabli.name = "nouvelleEtabli";
         //print("console");
         //col = nouveauMoulin.GetComponent<BoxCollider>(); // c'était utile quand on travaillait avec des cubes, mais là c'est des planes il faudra adapter avec le nouveau système d'hitibox
@@ -1230,7 +1232,7 @@ public class BoutonMenu2 : MonoBehaviour
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
         //print(MoulinDéplaçable.transform.position.z);
-        BatiEtabli = Instantiate(prefabBatiEtabli, EtabliDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0)); //Le vrai bâti
+        BatiEtabli = Instantiate(prefabBatiEtabli, EtabliDéplaçable.transform.position + new Vector3(0f, -2.7f, -5f), Quaternion.Euler(-20, 0, 0), dossierBatiments); //Le vrai bâti
         BatiEtabli.name = ("Bati");
         Destroy(nouvelleEtabli); // On détruit le plane qui permet de valider la position du bâtiment (Si on passe pas par un plane intermédiaire, quand on cliquera sur le plane un menu s'affichera du coup on pourra pas placer précisément le bâtiment
         en_construction = false;

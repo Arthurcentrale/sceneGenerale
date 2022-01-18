@@ -62,6 +62,8 @@ public class MairieRenov : MonoBehaviour
 
     public GameObject mairie;
 
+    public static bool isMairieRenovee = false;
+
 
     private void Awake()
     {
@@ -116,7 +118,6 @@ public class MairieRenov : MonoBehaviour
                     ui_inventory = player.uiInventory;
                     nombreBois = player.uiInventory.CountItem("Bois");
                     textBois.text = nombreBoisNecessaire.ToString();
-
 
                 }
 
@@ -234,8 +235,7 @@ public class MairieRenov : MonoBehaviour
         bulleInfo.gameObject.SetActive(false);
         mairie.SetActive(true);
         panel.SetActive(false);
-
-
+        isMairieRenovee = true;
     }
 
     //fonction pour retirer un item de l'inventaire

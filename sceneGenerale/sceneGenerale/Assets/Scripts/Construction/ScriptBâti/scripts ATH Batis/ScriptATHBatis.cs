@@ -135,6 +135,8 @@ public class ScriptATHBatis : MonoBehaviour
     [HideInInspector] public bool etabliConstruit = false;
     [HideInInspector] public bool verrerieConstruit = false;
 
+    private Transform dossierbatiments;
+
 
     // Start is called before the first frame update
 
@@ -154,6 +156,7 @@ public class ScriptATHBatis : MonoBehaviour
         nombreItemOneRestants = nombreItemOneNécessaire;
         ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
         Emptyscriptconstru = GameObject.Find("Empty script constru 2").GetComponent<BoutonMenu2>();
+        dossierbatiments = GameObject.Find("Batiments").transform;
 
     }
 
@@ -308,6 +311,8 @@ public class ScriptATHBatis : MonoBehaviour
         depotEnCours = false;
         ouvrier.transform.position = new Vector3 (bati.transform.position.x+6,ouvrier.transform.position.y,bati.transform.position.z-5);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 1);
+
+        BuildingLayerMag.updateBatLayers();
     }
 
     void ConstructionInProgress()
@@ -327,7 +332,7 @@ public class ScriptATHBatis : MonoBehaviour
     {
         if (bati.CompareTag("BatiChaumière"))
         {
-            Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z + 5), chaumiere.transform.rotation);
+            Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z + 5), chaumiere.transform.rotation, dossierbatiments);
             missionManager.Build("chaumière");
         }
 
@@ -340,7 +345,7 @@ public class ScriptATHBatis : MonoBehaviour
 
         else if (bati.CompareTag("BatiPêcherie"))
         {
-            Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation);
+            Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation, dossierbatiments);
             missionManager.Build("pêcherie");
             pecherieConstruit = true;
         }

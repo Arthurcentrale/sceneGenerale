@@ -108,7 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469ca90b9efe2f9429eb44c346183242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arbre: {fileID: 0}
   etat: 
   essence: 
   age: 0
@@ -191,6 +190,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -460852073074212262, guid: 5a406eea0a3f99148a1ea201310bae1f,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
+      objectReference: {fileID: 0}
+    - target: {fileID: 4628145376807566545, guid: 5a406eea0a3f99148a1ea201310bae1f,
+        type: 3}
+      propertyPath: m_TagString
+      value: treePart
       objectReference: {fileID: 0}
     - target: {fileID: 5266766062023746498, guid: 5a406eea0a3f99148a1ea201310bae1f,
         type: 3}

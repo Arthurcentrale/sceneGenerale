@@ -13,7 +13,7 @@ public class Utils : MonoBehaviour
         return rnd.Next(min, max);
     }
 
-    public static void creerGo(string tag, Vector3 position, GameObject[] listeGo) 
+    public static void creerGo(string tag, Vector3 position, GameObject[] listeGo)
     {
         switch (tag)
         {
@@ -41,7 +41,7 @@ public class Utils : MonoBehaviour
 
         if (newArbre == null)
         {
-            Debug.LogError("Pbm utils : l'arbuste " + typeArbre + "n'existe pas");
+            Debug.LogError("Pbm utils (repousse) : l'objet " + typeArbre + "n'existe pas");
             return;
         }
 
@@ -55,7 +55,7 @@ public class Utils : MonoBehaviour
         // Puis on change son nom
         newArbre.name = typeArbre;
     }
-   
+
     private static int[] separationEssencesArbres(GameObject[] liste)
     {
         int[] res = new int[5] { 0, 0, 0, 0, 0 };
