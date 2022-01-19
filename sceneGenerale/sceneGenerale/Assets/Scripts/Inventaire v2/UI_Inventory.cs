@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class UI_Inventory : MonoBehaviour
     private GameObject boutonJeterItem;
     private GameObject menuJeterItem;
     private GameObject boutonEquiper;
+    private GameObject boutonNomItem;
 
     GameObject Background;
     GameObject BouttonOuvertureGO;
@@ -88,6 +90,7 @@ public class UI_Inventory : MonoBehaviour
         boutonJeterItem = gameObject.transform.GetChild(0).GetChild(5).gameObject;
         menuJeterItem = gameObject.transform.GetChild(0).GetChild(6).gameObject;
         boutonEquiper = gameObject.transform.GetChild(0).GetChild(7).gameObject;
+        boutonNomItem = gameObject.transform.GetChild(0).GetChild(8).gameObject;
 
         Background = transform.GetChild(0).gameObject;
         Background.SetActive(false);
@@ -116,6 +119,7 @@ public class UI_Inventory : MonoBehaviour
             boutonPlanterGraine.SetActive(false);
             boutonJeterItem.SetActive(false);
             boutonEquiper.SetActive(false);
+            boutonNomItem.SetActive(false);
         }
 
         /*
@@ -371,7 +375,7 @@ public class UI_Inventory : MonoBehaviour
     }
 
 
-    public void AfficheBoutonsItem(Transform slotInv) //apelle toutes les fonctions qui permettent d'afficher les dífférents boutons spécifiques au tag de l'item
+    public void AfficheBoutonsItem(Transform slotInv) //apelle toutes les fonctions qui permettent d'afficher les dífférents boutons spécifiques au tag de l'item + affiche en bas le nom de l'item
     {
         if (slotInv.tag == "Objet")
         {
@@ -385,6 +389,13 @@ public class UI_Inventory : MonoBehaviour
         {
             AfficheBoutonFav(slotInv);
         }
+
+        //affiche le nom de l'item en bas
+        Text texteNomItem = boutonNomItem.transform.GetChild(0).gameObject.GetComponent<Text>();
+        texteNomItem.text = inventory.GetItemList()[int.Parse(slotInv.gameObject.name)].Item.ItemName;
+
+        boutonNomItem.SetActive(true);
+
     }
 
     //Fonctions pour gérer les items avec le tag "Objet"
@@ -439,6 +450,18 @@ public class UI_Inventory : MonoBehaviour
 
         //bouton equiper
 
+        Text textEquiper = boutonEquiper.transform.GetChild(0).gameObject.GetComponent<Text>();
+        //Debug.Log("SLOT EQUIPÉ : " + slotEquipé.ToString());
+        //Debug.Log("SLOT SELECTED : " + (slotSelected + 1).ToString());
+        if (slotSelected + 1 == slotEquipé)
+        {
+            textEquiper.text = "Déséquiper";
+        }
+        else
+        {
+            textEquiper.text = "Équiper";
+        }
+
         boutonEquiper.transform.position = pos;
         boutonEquiper.SetActive(true);
 
@@ -454,12 +477,13 @@ public class UI_Inventory : MonoBehaviour
     {
         CopyToFav();
 
-        int slot = slotSelected + 1;
+        int slot = CountPosItemFav();
 
         if (slot == slotEquipé) //l'item est déja équipé
         {
-            slotEquipé = 0;
             Debug.Log("On déséquipe l'item n" + slot.ToString());
+            Debug.Log("C'est l'item : " + NomItemEquip());
+            slotEquipé = 0;
             animPlayer.SetBool("Pioche", false);
             animPlayer.SetBool("Sac", false);
             animPlayer.SetBool("Hache", false);
@@ -467,7 +491,8 @@ public class UI_Inventory : MonoBehaviour
         else  //on équipe l'objet
         {
             slotEquipé = slot;
-            Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+            Debug.Log("L'item du slot n"  + slotEquipé.ToString() + " est équipé");
+            Debug.Log("C'est l'item : " + NomItemEquip());
             audioSource.PlayOneShot(equipOutil);
             if (slot == 1)
             {
@@ -482,8 +507,6 @@ public class UI_Inventory : MonoBehaviour
                 animPlayer.SetBool("Pioche", true);
             }
         }
-
-        Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
     public void AfficheBoutonEnleverFav(Transform slotInv)   //on affiche le bouton qui permet d'enlever un objet des favoris
@@ -511,6 +534,8 @@ public class UI_Inventory : MonoBehaviour
     {
         string name = slotInv.gameObject.name;
         int slot = name[name.Length - 1] - '0';
+
+        Debug.Log("C'est l'item : " + NomItemEquip());
 
         if (slot == slotEquipé)
         {
@@ -546,8 +571,6 @@ public class UI_Inventory : MonoBehaviour
         //on repasse au stade 0 de l'affichage
         animator.SetTrigger("fermerInvFavs");
         stadeAffichage -= 1;
-
-        Debug.Log("C'est l'item : " + NomItemEquip());
     }
 
 
@@ -624,6 +647,7 @@ public class UI_Inventory : MonoBehaviour
     public void DelFromFav()     //enleve un item des favoris
     {
         inventory.DelFav(slotSelected);
+        slotEquipé = 0;
         //boutonFavAffiche = false;
         //moveToFav.SetActive(false);
     }
@@ -657,6 +681,30 @@ public class UI_Inventory : MonoBehaviour
         return Count;
     }
 
+    private int CountPosItemFav()   //on compte la position d'un item dans les favoris 
+    {
+        List<bool> favList = inventory.GetFavList();
+
+        /*
+        slotSelected : position item dans l'inventaire normal, pioche : 1 (2eme pos)
+        string favListPrint = "";
+        foreach (bool b in favList) favListPrint += b.ToString() + ",";
+        Debug.Log(favListPrint);
+        */
+
+        int count = 0;  //on compte le nombre de true qu'on rencontre
+        int slot = 0;   //vraie position de l'item dans favList
+
+        while (slot <= slotSelected)
+        {
+            if (favList[slot]) count++;
+            slot++;
+            //Debug.Log("COUNT : " + count.ToString());
+            //Debug.Log("SLOT : " + slot.ToString());
+        }
+        return count;
+    }
+
     public string NomItemEquip() //Retourne le nom de l'item equipé et le string vide si il n'y en a pas
     {
         if (slotEquipé == 0) return "";
@@ -666,10 +714,13 @@ public class UI_Inventory : MonoBehaviour
             List<bool> favList = inventory.GetFavList();
             int count = 0;  //on compte le nombre de true qu'on rencontre
             int slot = 0;   //vraie position de l'item dans favList
+            Debug.Log(slotEquipé.ToString());
             while (count < slotEquipé)
             {
                 if (favList[slot]) count++;
                 slot++;
+                //Debug.Log("COUNT : " + count.ToString());
+                //Debug.Log("SLOT : " + slot.ToString());
             }
             return inventory.GetItemList()[slot-1].Item.name;
         }
