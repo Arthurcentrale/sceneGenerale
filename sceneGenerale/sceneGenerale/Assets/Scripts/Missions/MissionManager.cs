@@ -127,7 +127,7 @@ public class MissionManager : MonoBehaviour
 
     public void VerifierEpingle(Mission mission)
     {
-        if (mission.name == missionEpinglee)
+        if (mission.Information.Name == missionEpinglee)
         {
             punaise.SetActive(true);
             epingléBool = true;
