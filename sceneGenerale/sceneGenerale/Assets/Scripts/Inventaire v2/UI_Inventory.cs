@@ -83,7 +83,7 @@ public class UI_Inventory : MonoBehaviour
         slotSelected = 0;
         prevoirAffichage = false;
 
-        //boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
+        boutonPlanterGraine = gameObject.transform.GetChild(0).GetChild(4).gameObject;
 
         boutonJeterItem = gameObject.transform.GetChild(0).GetChild(5).gameObject;
         menuJeterItem = gameObject.transform.GetChild(0).GetChild(6).gameObject;
@@ -233,12 +233,12 @@ public class UI_Inventory : MonoBehaviour
         int x = 0;
         int y = 0;
         float itemSlotSize = 66.84f;
-        foreach(ItemAmount item in inventory.GetItemList())
+        foreach (ItemAmount item in inventory.GetItemList())
         {
             //Debug.Log(item.Item.ItemName);
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate,itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.gameObject.name = (x + y*x).ToString();
+            itemSlotRectTransform.gameObject.name = (x + y*xSizeMaxInv).ToString();
             itemSlotRectTransform.anchoredPosition = new Vector2(43.5f + x * itemSlotSize,-47f -y * itemSlotSize);
 
             //on met le tag objet ou graine pour savoir si on affiche le bouton "mettre aux favoris" ou "planter graine" si on clique dessus
@@ -274,6 +274,8 @@ public class UI_Inventory : MonoBehaviour
                 y++;
             }
         }
+
+        //reste des slots vides
         while (y < ySizeMaxInv)
         {
             RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
@@ -408,6 +410,7 @@ public class UI_Inventory : MonoBehaviour
     {
         menuJeterItem.SetActive(false);
         inventory.DelItemAtPos(slotSelected);
+        Debug.Log("On jete l'item n :" + slotSelected.ToString());
     }
 
     public void NonJeterItem()
