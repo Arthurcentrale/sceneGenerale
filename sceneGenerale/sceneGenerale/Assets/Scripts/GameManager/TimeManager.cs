@@ -20,6 +20,9 @@ public class TimeManager : MonoBehaviour
 
     ArbreManager arbreManager;
 
+    public float dureeJournee;
+    public float nombreDeJoursPassés;
+
     void Start()
     {
         arbreManager = GetComponent<ArbreManager>();
@@ -43,7 +46,7 @@ public class TimeManager : MonoBehaviour
         seconds = (tomorrow - current).TotalSeconds;
 
         //yield return new WaitForSeconds((float) seconds);
-        yield return new WaitForSeconds(0.5f); //Pour test que tout marche
+        yield return new WaitForSeconds(dureeJournee); //Pour test que tout marche
 
         FonctionsMinuit();
     }
@@ -60,7 +63,7 @@ public class TimeManager : MonoBehaviour
 
         
         //yield return new WaitForSeconds((float) seconds);
-        yield return new WaitForSeconds(5f); //L'actualisation de la maladie (on test à 5s)
+        yield return new WaitForSeconds(dureeJournee/8); //L'actualisation de la maladie (on test à 5s)
 
         Fonctions3Heures();
     }
@@ -83,6 +86,7 @@ public class TimeManager : MonoBehaviour
             yield return StartCoroutine(AttenteTroisHeures());
         }
     }
+
 
     void FonctionsMinuit()
     {
@@ -122,17 +126,24 @@ public class TimeManager : MonoBehaviour
 
         //Garde Forestier
         //gfforet.graineDéjàDonnée=false;  //on reset la graine que donne le garde forestier
+
+
+
+        //finir par maj le nbre de jours passés
+        nombreDeJoursPassés ++;
     }
 
     void Fonctions3Heures(){
         // Toutes les fonctions à éxécuter toutes les 3 heures
-
+        
         //Maladie
         //on vérifie d'abord que ya encore la maladie
         maladie.VérifierMaladie();
         if (maladie.maladieEnCours){
+            arbreManager.contaminationArbresPlus();
             maladie.ActualisationMaladie(maladie.essenceMalade);
         }
+
     }
 
 

@@ -16,9 +16,9 @@ public class MissionManager : MonoBehaviour
     public GameObject player;
 
     public int totalCurrency = 0;
-    private int gap = 65;
+    private int gap = 105;
 
-    private Vector3 placement = new Vector3(- 825, 468, 0);
+    private Vector3 placement = new Vector3(- 1440, 808, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
     private void Awake()

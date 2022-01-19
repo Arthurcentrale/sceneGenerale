@@ -113,7 +113,7 @@ public class ArbreManager : MonoBehaviour
         GameObject.Find("");
     }
 
-    public void ageArbresPlus()
+    public void ageArbresPlus() //augmente l'âge des arbres chaque jour
     {
         arbres = GameObject.FindGameObjectsWithTag("Arbre");
 
@@ -124,6 +124,21 @@ public class ArbreManager : MonoBehaviour
                 arbre.GetComponent<SoucheComportement>().age += 1;
             }
             else arbre.GetComponent<ArbreComportement>().age += 1;
+        }
+    }
+
+    public void contaminationArbresPlus() //fonction exécutée toutes les 3 heures, qui accentue la maladie des arbres malades pour les rapprocher de la mort
+    {
+        arbres = GameObject.FindGameObjectsWithTag("Arbre");
+        Debug.Log("fonction contamination");
+        foreach(var arbre in arbres)
+        {
+            if (name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                arbre.GetComponent<ArbreComportement>().contamination += 3;
+
+                arbre.GetComponent<ArbreComportement>().tuerArbreMalade();
+            }
         }
     }
 
