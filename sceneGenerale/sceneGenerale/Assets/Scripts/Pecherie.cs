@@ -174,6 +174,10 @@ public class Pecherie : MonoBehaviour
             compteurbouffe.CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
             compteurbouffe.CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString("F1");
         }
+        Debug.Log("qe"+GameManager.environnementManager.qualiteEau);
+        Debug.Log("qn"+GameManager.socialManager.quantiteNourriture);
+        Debug.Log("v"+GameManager.socialManager.nombreAlimentsDifferents);
+
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
     {

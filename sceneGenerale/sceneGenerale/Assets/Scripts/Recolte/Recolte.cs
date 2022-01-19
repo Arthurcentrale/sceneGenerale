@@ -315,6 +315,8 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 6)  AjouterInventaire(boisF, 6);
+                Item item = itemlist[FindInlist("GraineChene")];
+                Debug.Log(item.name);
                 AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
 
@@ -491,6 +493,66 @@ public class Recolte : MonoBehaviour
         float x = 0.2f; //UnityEngine.Random.Range(0f, 1f); // variable pour le nombre de spawned a faire apparaitre
         if (0 <= x && x < 0.25) //3 spawns
         {
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher7", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                {
+                    AjouterInventaire(rocher, 2);
+                }
+                else //sinon, on remplit l'inventaire et le reste va par terre
+                {
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 2 - NbrPlace(rocher); i++)
+                    {
+                        Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    }
+                }
+            }
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher4", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                {
+                    AjouterInventaire(rocher, 2);
+                }
+                else //sinon, on remplit l'inventaire et le reste va par terre
+                {
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 2 - NbrPlace(rocher); i++)
+                    {
+                        Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    }
+                }
+            }
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher5", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                {
+                    AjouterInventaire(rocher, 2);
+                }
+                else //sinon, on remplit l'inventaire et le reste va par terre
+                {
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 2 - NbrPlace(rocher); i++)
+                    {
+                        Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    }
+                }
+            }
+            if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher6", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
+                {
+                    AjouterInventaire(rocher, 2);
+                }
+                else //sinon, on remplit l'inventaire et le reste va par terre
+                {
+                    AjouterInventaire(rocher, NbrPlace(rocher));
+                    for (int i = 0; i < 2 - NbrPlace(rocher); i++)
+                    {
+                        Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
+                    }
+                }
+            }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (NbrPlace(rocher) >= 2) // A remplacer quand l'inventaire sera fonctionnel, mais en gros si on a plus de trois places dans le bon slot de l'inventaire, tout va directement dedans
@@ -506,6 +568,7 @@ public class Recolte : MonoBehaviour
                     }
                 }
             }
+
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 
