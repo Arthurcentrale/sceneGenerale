@@ -18,6 +18,12 @@ public class MissionManager : MonoBehaviour
     public int totalCurrency = 0;
     private int gap = 105;
 
+    //objets liés au système d'épingle des missions
+    public GameObject punaise;
+    public string missionEpinglee = "aucune";
+    public bool epingléBool = false;
+
+    //variables spatiales pour placer les missions dans le livre
     private Vector3 placement = new Vector3(- 1440, 808, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
@@ -114,7 +120,29 @@ public class MissionManager : MonoBehaviour
         {
             missionHolder.GetComponent<MissionWindow>().Initialize(mission);
             missionHolder.SetActive(true);
+            VerifierEpingle(mission);
         });
         placement.y -= gap;
     }
+
+    public void VerifierEpingle(Mission mission)
+    {
+        if (mission.name == missionEpinglee)
+        {
+            punaise.SetActive(true);
+            epingléBool = true;
+            
+        }
+
+        else 
+        {
+            punaise.SetActive(false);
+            epingléBool = false;
+        }
+        
+    }
+
+
+
+
 }

@@ -130,7 +130,6 @@ public class ArbreManager : MonoBehaviour
     public void contaminationArbresPlus() //fonction exécutée toutes les 3 heures, qui accentue la maladie des arbres malades pour les rapprocher de la mort
     {
         arbres = GameObject.FindGameObjectsWithTag("Arbre");
-        Debug.Log("fonction contamination");
         foreach(var arbre in arbres)
         {
             if (name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)

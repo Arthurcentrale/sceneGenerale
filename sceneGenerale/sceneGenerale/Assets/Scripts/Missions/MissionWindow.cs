@@ -13,6 +13,8 @@ public class MissionWindow : MonoBehaviour
     [SerializeField] private Text coinsText;
 
     public GameObject pageDroite;
+    public GameObject pageGauche;
+    //[HideInInspector] public MissionManager missionManager;
 
     public void Initialize(Mission mission)
     {
@@ -61,4 +63,24 @@ public class MissionWindow : MonoBehaviour
             Destroy(goalsContent.GetChild(i).gameObject);
         }
     }
+
+    public void epingler()
+    {
+        
+        if (!pageGauche.GetComponent<MissionManager>().epingléBool)
+        {
+            pageGauche.GetComponent<MissionManager>().missionEpinglee = GetComponent<MissionWindow>().titleText.text;
+            pageGauche.GetComponent<MissionManager>().punaise.SetActive(true);
+            pageGauche.GetComponent<MissionManager>().epingléBool = true;
+        }
+        else
+        {
+            pageGauche.GetComponent<MissionManager>().missionEpinglee = "aucune";
+            pageGauche.GetComponent<MissionManager>().punaise.SetActive(false);
+            pageGauche.GetComponent<MissionManager>().epingléBool = false;
+        }
+
+    }
+
+
 }
