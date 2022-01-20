@@ -186,7 +186,7 @@ public class Boulangerie : MonoBehaviour
     {
         QuantitePainBle = QuantitePainBleNonValide;
         QuantitePainMais = QuantitePainMaisNonValide;
-        CompteurBouffe.Data.NbrBouffe += QuantitePainMais;
+        CompteurBouffe.Data.NbrBouffe += QuantitePainMais*3;
         CompteurBouffe.Data.NbrBouffe += QuantitePainBle;
         valider = true;
         StartCoroutine(Coroutine());
