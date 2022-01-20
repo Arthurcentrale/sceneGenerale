@@ -201,7 +201,7 @@ public class MoulinEau : MonoBehaviour
         {
             malus = 0.2f;
         }
-        GameManager.environnementManager.qualiteEau -= malus;
+        EnvironnementManager.instance.qualiteEau -= malus;
     }
     public void ClickOnPanel()
     {

@@ -124,7 +124,7 @@ public class Labourage : MonoBehaviour
             if ((y < yNbrParcelles - 1) && !parcellesLabourees[x, y + 1]) parcellesAdjacentes[x, y + 1] = true;
             
 
-            GameManager.environnementManager.qualiteSol -= 0.2f;
+            EnvironnementManager.instance.qualiteSol -= 0.2f;
 
             nbreParcelles.text = nbreParcellesPlacees.ToString() + "/" + nbreParcellesPlacables.ToString();
         }

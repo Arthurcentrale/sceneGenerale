@@ -171,12 +171,12 @@ public class Pecherie : MonoBehaviour
             CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite();
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
-            compteurbouffe.CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
-            compteurbouffe.CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString("F1");
+            compteurbouffe.CompteurVariete.text = SocialManager.instance.nombreAlimentsDifferents.ToString();
+            compteurbouffe.CompteurQualiteEau.text = EnvironnementManager.instance.qualiteEau.ToString("F1");
         }
-        Debug.Log("qe"+GameManager.environnementManager.qualiteEau);
-        Debug.Log("qn"+GameManager.socialManager.quantiteNourriture);
-        Debug.Log("v"+GameManager.socialManager.nombreAlimentsDifferents);
+        Debug.Log("qe" + EnvironnementManager.instance.qualiteEau);
+        Debug.Log("qn" + SocialManager.instance.quantiteNourriture);
+        Debug.Log("v" + SocialManager.instance.nombreAlimentsDifferents);
 
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
@@ -197,61 +197,61 @@ public class Pecherie : MonoBehaviour
 
     void UpdateVariete() //A utiliser que quand on level up
     {
-        float QE = GameManager.environnementManager.qualiteEau;
+        float QE = EnvironnementManager.instance.qualiteEau;
         if (habitant.ecoLevel == 3 && levelactuel < 3 )
         {
-            GameManager.socialManager.nombreAlimentsDifferents+= 1;
+            SocialManager.instance.nombreAlimentsDifferents += 1;
         }
         if (habitant.ecoLevel == 5 && levelactuel < 5)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
+            SocialManager.instance.nombreAlimentsDifferents += 1;
         }
-        if (!limite1 && QE < 60 && GameManager.socialManager.nombreAlimentsDifferents >1 )
+        if (!limite1 && QE < 60 && SocialManager.instance.nombreAlimentsDifferents >1 )
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
             limite1 = true;
             if(nbrdiminutionQE == 0)
             {
-                GameManager.maxQE -= 5;
+                EnvironnementManager.instance.maxQE -= 5;
                 nbrdiminutionQE++;
             }
             //Qualité max de l'eau -5 a voir dans le script gamemanager
         }
         if(limite1 && QE > 70)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
+            SocialManager.instance.nombreAlimentsDifferents += 1;
             limite1 = false;
         }
-        if (!limite2 && QE < 40 && GameManager.socialManager.nombreAlimentsDifferents > 1)
+        if (!limite2 && QE < 40 && SocialManager.instance.nombreAlimentsDifferents > 1)
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
             limite2 = true;
             if(nbrdiminutionQE == 1)
             {
-                GameManager.maxQE -= 5;
+                EnvironnementManager.instance.maxQE -= 5;
                 nbrdiminutionQE++;
             }
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite2 && QE > 50)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
+            SocialManager.instance.nombreAlimentsDifferents += 1;
             limite2 = false;
         }
-        if (!limite3 && QE < 20 && GameManager.socialManager.nombreAlimentsDifferents > 1)
+        if (!limite3 && QE < 20 && SocialManager.instance.nombreAlimentsDifferents > 1)
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
             limite3 = true;
             if(nbrdiminutionQE == 2)
             {
-                GameManager.maxQE -= 5;
+                EnvironnementManager.instance.maxQE -= 5;
                 nbrdiminutionQE++;
             }
             //Qualité max de l'eau -1 a voir dans le script gamemanager
         }
         if (limite3 && QE > 30)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
+            SocialManager.instance.nombreAlimentsDifferents += 1;
             limite3 = false;
         }
     }
@@ -260,15 +260,15 @@ public class Pecherie : MonoBehaviour
     {
         if (habitant.ecoLevel == 1)
         {
-            GameManager.socialManager.nombreAlimentsDifferents=1;
+            SocialManager.instance.nombreAlimentsDifferents =1;
         }
         if(habitant.ecoLevel == 3)
         {
-            GameManager.socialManager.nombreAlimentsDifferents=2;
+            SocialManager.instance.nombreAlimentsDifferents =2;
         }
         if(habitant.ecoLevel == 5)
         {
-            GameManager.socialManager.nombreAlimentsDifferents =3;
+            SocialManager.instance.nombreAlimentsDifferents =3;
         }
         levelactuel = habitant.ecoLevel;
     }
@@ -308,7 +308,7 @@ public class Pecherie : MonoBehaviour
 
     int MalusQualite()
     {
-        float QE = GameManager.environnementManager.qualiteEau;
+        float QE = EnvironnementManager.instance.qualiteEau;
         if(QE >= 80)
         {
             return 0;
@@ -343,11 +343,11 @@ public class Pecherie : MonoBehaviour
     {
         if(QuantitePoisson > 8)
         {
-            GameManager.environnementManager.qualiteEau = Mathf.Max( GameManager.environnementManager.qualiteEau -(float) 0.1 * (QuantitePoisson - 8),0);
+            EnvironnementManager.instance.qualiteEau = Mathf.Max( EnvironnementManager.instance.qualiteEau -(float) 0.1 * (QuantitePoisson - 8),0);
         }
         else
         {
-            GameManager.environnementManager.qualiteEau = Mathf.Min( GameManager.environnementManager.qualiteEau - (float)0.1 * (QuantitePoisson - 8), GameManager.maxQE);
+            EnvironnementManager.instance.qualiteEau = Mathf.Min( EnvironnementManager.instance.qualiteEau - (float)0.1 * (QuantitePoisson - 8), EnvironnementManager.instance.maxQE);
         }
     } 
 

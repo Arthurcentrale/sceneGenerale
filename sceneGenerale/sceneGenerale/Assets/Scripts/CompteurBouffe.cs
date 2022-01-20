@@ -19,8 +19,8 @@ public class CompteurBouffe : MonoBehaviour
     {
         //Data.NbrBouffe = 0;
         CBouffe.text = Data.NbrBouffe.ToString();
-        CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
-        CompteurQualiteEau.text = GameManager.environnementManager.qualiteEau.ToString();
+        CompteurVariete.text = SocialManager.instance.nombreAlimentsDifferents.ToString();
+        CompteurQualiteEau.text = EnvironnementManager.instance.qualiteEau.ToString();
     }
 
     // Update is called once per frame

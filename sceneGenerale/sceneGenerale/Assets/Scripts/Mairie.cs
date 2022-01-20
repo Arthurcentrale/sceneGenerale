@@ -29,7 +29,7 @@ public class Mairie : MonoBehaviour
     void Update()
     {
         //mise a jour constante des valeurs des managers sur le livre
-        valeursManagers = new List<float> { GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol, GameManager.environnementManager.qualiteEau, GameManager.socialManager.qualiteDeVie, GameManager.socialManager.ecoSensibilisation, GameManager.developpementManager.navireConstruit };
+        valeursManagers = new List<float> { EnvironnementManager.instance.qualiteAir, EnvironnementManager.instance.qualiteSol, EnvironnementManager.instance.qualiteEau, SocialManager.instance.qualiteDeVie, SocialManager.instance.ecoSensibilisation, DeveloppementManager.instance.navireConstruit };
 
         //--------//
         var ray = camera.ScreenPointToRay(Input.mousePosition);
@@ -86,7 +86,7 @@ public class Mairie : MonoBehaviour
     {
         Transform jauges = PanelTableau.transform.GetChild(1);
         //List<float> valeurs = new List<float> { 80,52,12,52,84,1};
-        valeursManagers = new List<float>{ GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol , GameManager.environnementManager.qualiteEau,GameManager.socialManager.qualiteDeVie,GameManager.socialManager.ecoSensibilisation,GameManager.developpementManager.navireConstruit };
+        valeursManagers = new List<float>{ EnvironnementManager.instance.qualiteAir, EnvironnementManager.instance.qualiteSol , EnvironnementManager.instance.qualiteEau, SocialManager.instance.qualiteDeVie, SocialManager.instance.ecoSensibilisation, DeveloppementManager.instance.navireConstruit };
 
         for(int i = 0; i <= 5; i++)
         {

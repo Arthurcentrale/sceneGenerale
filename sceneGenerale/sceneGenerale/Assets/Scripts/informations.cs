@@ -45,13 +45,13 @@ public class informations : MonoBehaviour
         boolquantité = new namedBoolean(name = "quantité", quantité);
         boolquantité2 = new namedBoolean(name = "quantité2", quantité2);
         namedBoolean boolquisertarien = new namedBoolean(name = "menuInformations", inutile);
-        qeau = GameManager.environnementManager.qualiteEau;
-        qair = GameManager.environnementManager.qualiteAir;
-        qsol = GameManager.environnementManager.qualiteSol;
+        qeau = EnvironnementManager.instance.qualiteEau;
+        qair = EnvironnementManager.instance.qualiteAir;
+        qsol = EnvironnementManager.instance.qualiteSol;
         qeau = 100f;
         qair = 100f;
-        quantiténourriture = GameManager.socialManager.quantiteNourriture;
-        varietenourriture = GameManager.socialManager.nombreAlimentsDifferents;
+        quantiténourriture = SocialManager.instance.quantiteNourriture;
+        varietenourriture = SocialManager.instance.nombreAlimentsDifferents;
         listeinfos.Push(Associer(boolenrien));
         // ???? quantitéchauffage = GameManager.socialManager.chauffage
     }
@@ -140,11 +140,11 @@ public class informations : MonoBehaviour
     }
     void UpdateValeur()
     {
-        float qe = GameManager.environnementManager.qualiteEau;
-        float qa = GameManager.environnementManager.qualiteAir;
-        float qs = GameManager.environnementManager.qualiteSol;
-        int qn = GameManager.socialManager.quantiteNourriture;
-        int vn = GameManager.socialManager.nombreAlimentsDifferents;
+        float qe = EnvironnementManager.instance.qualiteEau;
+        float qa = EnvironnementManager.instance.qualiteAir;
+        float qs = EnvironnementManager.instance.qualiteSol;
+        int qn = SocialManager.instance.quantiteNourriture;
+        int vn = SocialManager.instance.nombreAlimentsDifferents;
         if (qeau > 50f && qe < 50f) eau = true;
         if (qeau > 20f && qe < 20f) eau2 = true;
         if (qair > 50f && qa < 50f) air = true;

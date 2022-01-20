@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            GameObject.Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
     /*
     //variables globales de gestion
     public float globalFoodQuantity;
     public float globalFoodVariety;
     public float globalWaste;
     */
-    public static float maxQE = 100f;
+
+    public float score;
+    private bool victoire;
 
     private void Start()
     {
+        score = 0f;
+        victoire = false;
     }
-    public float score { get; set; }
-    private bool victoire;
-
-    //On initialise toute les instances uniques (singletons) des différents managers
-    public static SocialManager socialManager = new SocialManager(0,70,0);
-    public static EnvironnementManager environnementManager = new EnvironnementManager(100,maxQE,100f);
-    public static DeveloppementManager developpementManager = new DeveloppementManager(0);
-    //public HabitantManager habitantManager = new HabitantManager(new List<GameObject>());
 
     private void MajScore()
     {
         //On met a jour les autres managers
-        socialManager.MajSocial();
-        environnementManager.MajEnviro();
-        this.score = environnementManager.qualiteAir + environnementManager.qualiteEau + environnementManager.qualiteSol + socialManager.ecoSensibilisation + socialManager.qualiteDeVie;
+        SocialManager.instance.MajSocial();
+        EnvironnementManager.instance.MajEnviro();
+        score = EnvironnementManager.instance.qualiteAir + EnvironnementManager.instance.qualiteEau + EnvironnementManager.instance.qualiteSol + SocialManager.instance.ecoSensibilisation + SocialManager.instance.qualiteDeVie;
     }
 }

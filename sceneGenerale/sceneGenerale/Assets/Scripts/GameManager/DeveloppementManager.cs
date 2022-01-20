@@ -2,16 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeveloppementManager
+public class DeveloppementManager : MonoBehaviour
 {
+    public static DeveloppementManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            GameObject.Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
+
     public int progression;
     public List<GameObject> listeBatiment;
-    public int navireConstruit { get; set; }
+    public int navireConstruit;
 
-    public DeveloppementManager(int navire)
+    private void Start()
     {
-        this.progression = 0;
-        this.listeBatiment = new List<GameObject>();
-        this.navireConstruit = navire;
+        progression = 0;
+        listeBatiment = new List<GameObject>();
+        navireConstruit = 0;
     }
 }
