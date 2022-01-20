@@ -82,6 +82,8 @@ public class Planter : MonoBehaviour
 
     public static bool isOccupied;
 
+    public int nombreDeMais;
+
     void Start()
     {
         arrayCT = new int[7] { 10, 12, 15, 17, 20, 20, 0 };   //on met un 0 à la fin pour que quand planteSelectionee == 6, ça update la CT de 0 en appellant arrayCT[6]
@@ -110,6 +112,8 @@ public class Planter : MonoBehaviour
         engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
         engraisDispo = 5;
+
+        nombreDeMais = 0;
     }
 
     void Update()
@@ -293,6 +297,11 @@ public class Planter : MonoBehaviour
 
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
+        //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
+        GameManager.socialManager.quantiteNourriture += nombreDeMais;
+        //puis on reset cette variable et on va l'augmenter par la suite
+        nombreDeMais = 0;
+
         int q; //quantité nourriture sur les parcelle
         for (int i = 0; i < xNbrParcelles; i++)
         {
@@ -319,7 +328,21 @@ public class Planter : MonoBehaviour
                         GameManager.socialManager.quantiteNourriture += q;
 
                     }
-                    else if (((int)Culture.Mais <= q) && (q <= (int)Culture.Salade))  //Mais ou Salade..
+                    else if (q == (int)Culture.Mais)   //Mais
+                    {
+                        //on check les 4 parcelles autour si il y a au moins une culture
+                        if (
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           )
+                        {
+                            nombreDeMais += q + 1;
+                        }
+                        else nombreDeMais += q;
+                    }
+                    else if (q == (int)Culture.Salade)  //Salade..
                     {
                         //on check les 4 parcelles autour si il y a au moins une culture
                         if (
