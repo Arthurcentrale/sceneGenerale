@@ -45,7 +45,7 @@ public class MissionWindow : MonoBehaviour
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
 
-            placement.y -= 70;
+            placement.y -= 110;
         }
 
         xpText.text = mission.Reward.XP.ToString();
@@ -72,15 +72,21 @@ public class MissionWindow : MonoBehaviour
             pageGauche.GetComponent<MissionManager>().missionEpinglee = GetComponent<MissionWindow>().titleText.text;
             pageGauche.GetComponent<MissionManager>().punaise.SetActive(true);
             pageGauche.GetComponent<MissionManager>().epingléBool = true;
+            pageGauche.GetComponent<MissionManager>().remplirMissionEpingle();
         }
         else
         {
             pageGauche.GetComponent<MissionManager>().missionEpinglee = "aucune";
             pageGauche.GetComponent<MissionManager>().punaise.SetActive(false);
             pageGauche.GetComponent<MissionManager>().epingléBool = false;
+            pageGauche.GetComponent<MissionManager>().nettoyageRaccourciMission();
+            pageGauche.GetComponent<MissionManager>().lieuMissionRaccourci.transform.GetChild(0).GetComponent<Text>().text = "Aucune mission épinglée";
+
         }
 
     }
+
+    
 
 
 }
