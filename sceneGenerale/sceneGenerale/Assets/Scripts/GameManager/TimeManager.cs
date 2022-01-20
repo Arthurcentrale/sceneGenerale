@@ -16,6 +16,7 @@ public class TimeManager : MonoBehaviour
     Boulangerie boulangerie;
     MoulinVent moulinVent;
     MoulinEau moulinEau;
+    Pecherie pecherie;
     //GFForet gfforet; //script du garde forestier
 
     ArbreManager arbreManager;
@@ -35,6 +36,7 @@ public class TimeManager : MonoBehaviour
         boulangerie = GameObject.FindGameObjectWithTag("Boulangerie").GetComponent<Boulangerie>();
         moulinVent = GameObject.FindGameObjectWithTag("MoulinVent").GetComponent<MoulinVent>();
         moulinEau = GameObject.FindGameObjectWithTag("MoulinEau").GetComponent<MoulinEau>();
+        //pecherie = GameObject.FindGameObjectWithTag("Pecherie").GetComponent<Pecherie>();
         StartCoroutine(Coroutine()); 
         StartCoroutine(CoroutineTroisHeures());
     }
@@ -112,7 +114,7 @@ public class TimeManager : MonoBehaviour
 
         //croissance des arbres, arbustes et souches
         arbreManager.ageArbresPlus();
-
+        //pecherie.FonctionMinuit();
         //Maladie
         var rand= UnityEngine.Random.Range(0f,1f);
         //print(rand);

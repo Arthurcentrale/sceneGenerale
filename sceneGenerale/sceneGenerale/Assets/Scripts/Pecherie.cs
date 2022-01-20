@@ -18,10 +18,11 @@ public class Pecherie : MonoBehaviour
     public Button validation;
     public Text textslider;
 
+    int varietepecherie;
     //Gestion des paramètres globaux
 
     public HabitantBehaviour habitant;
-
+    public TimeManager timemanager;
 
     //Booleens pour savoir si la pecherie est habité / Si on a validé une nouvelle valeur à produire dans la journée
 
@@ -36,6 +37,7 @@ public class Pecherie : MonoBehaviour
     int levelactuel;
     bool limite;
     bool limite1, limite2, limite3;
+    bool validerfirsttime;
     //Timer pour le délai a changer
 
     float timer = 0f;
@@ -63,6 +65,11 @@ public class Pecherie : MonoBehaviour
         compteurbouffe = compteurbouffe.GetComponent<CompteurBouffe>();
         validation = validation.GetComponent<Button>();
         //validation.onClick.AddListener(ValiderValeur);
+
+        timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
+        //test
+        varietepecherie = 0;
+        validerfirsttime = false;
     }
 
     void Update()
@@ -105,10 +112,10 @@ public class Pecherie : MonoBehaviour
 
 
         }
-        
+
         //¨Partie si on ne valide pas dans la journée
 
-        if(isOccupied && habitant != null && habitant.isHoused && valider == false)
+        /*if (isOccupied && habitant != null && habitant.isHoused && valider == false && validerfirsttime == true )
         {
             timer += Time.deltaTime;
             if (timer >= delai)
@@ -117,7 +124,8 @@ public class Pecherie : MonoBehaviour
                 timer = 0;
             }
 
-        }
+        }*/
+
         /*if (isOccupied) //Fonctionnement de la pecherie que si un pecheur est présent ++ Blocage jusqu'à minuit quand on valide
         {
             timer += Time.deltaTime;
@@ -151,6 +159,7 @@ public class Pecherie : MonoBehaviour
     //Fonction quand on clique sur le bouton du milieu
     public void RecupererPoisson()
     {
+        if (validerfirsttime == false) validerfirsttime = true;
         if (isOccupied)
         {
             if (QuantitePoisson  > 20)
@@ -165,10 +174,10 @@ public class Pecherie : MonoBehaviour
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            CompteurBouffe.Data.NbrBouffe -= AnciennequantitePoisson - MalusQualite();
+            GameManager.socialManager.quantiteNourriture-= AnciennequantitePoisson - MalusQualite();
             UpdateQE();
             UpdateVariete();
-            CompteurBouffe.Data.NbrBouffe += QuantitePoisson - MalusQualite();
+            GameManager.socialManager.quantiteNourriture += QuantitePoisson - MalusQualite();
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
             compteurbouffe.CompteurVariete.text = GameManager.socialManager.nombreAlimentsDifferents.ToString();
@@ -177,6 +186,7 @@ public class Pecherie : MonoBehaviour
         Debug.Log("qe"+GameManager.environnementManager.qualiteEau);
         Debug.Log("qn"+GameManager.socialManager.quantiteNourriture);
         Debug.Log("v"+GameManager.socialManager.nombreAlimentsDifferents);
+        Debug.Log("variete que dans pecherie" + varietepecherie);
 
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
@@ -186,6 +196,7 @@ public class Pecherie : MonoBehaviour
         habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
         InitVariete(habitant);
+        Debug.Log("coucouc");
 
         // Si non, on affiche que personne est disponible
     }
@@ -201,14 +212,17 @@ public class Pecherie : MonoBehaviour
         if (habitant.ecoLevel == 3 && levelactuel < 3 )
         {
             GameManager.socialManager.nombreAlimentsDifferents+= 1;
+            varietepecherie += 1;
         }
         if (habitant.ecoLevel == 5 && levelactuel < 5)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
         }
-        if (!limite1 && QE < 60 && GameManager.socialManager.nombreAlimentsDifferents >1 )
+        if (!limite1 && QE < 60 && varietepecherie > 1 )
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            varietepecherie -= 1;
             limite1 = true;
             if(nbrdiminutionQE == 0)
             {
@@ -220,11 +234,13 @@ public class Pecherie : MonoBehaviour
         if(limite1 && QE > 70)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
             limite1 = false;
         }
-        if (!limite2 && QE < 40 && GameManager.socialManager.nombreAlimentsDifferents > 1)
+        if (!limite2 && QE < 40 && varietepecherie > 1)
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            varietepecherie -= 1;
             limite2 = true;
             if(nbrdiminutionQE == 1)
             {
@@ -236,11 +252,13 @@ public class Pecherie : MonoBehaviour
         if (limite2 && QE > 50)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
             limite2 = false;
         }
-        if (!limite3 && QE < 20 && GameManager.socialManager.nombreAlimentsDifferents > 1)
+        if (!limite3 && QE < 20 && varietepecherie > 1)
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            varietepecherie -= 1;
             limite3 = true;
             if(nbrdiminutionQE == 2)
             {
@@ -252,23 +270,28 @@ public class Pecherie : MonoBehaviour
         if (limite3 && QE > 30)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
             limite3 = false;
         }
+        levelactuel = habitant.ecoLevel;
     }
 
     void InitVariete(HabitantBehaviour habitant)
     {
-        if (habitant.ecoLevel == 1)
+        if (habitant.ecoLevel < 3)
         {
-            GameManager.socialManager.nombreAlimentsDifferents=1;
+            GameManager.socialManager.nombreAlimentsDifferents+=1;
+            varietepecherie += 1;
         }
-        if(habitant.ecoLevel == 3)
+        if(habitant.ecoLevel <5 && habitant.ecoLevel >=3)
         {
-            GameManager.socialManager.nombreAlimentsDifferents=2;
+            GameManager.socialManager.nombreAlimentsDifferents+=2;
+            varietepecherie += 2;
         }
         if(habitant.ecoLevel == 5)
         {
-            GameManager.socialManager.nombreAlimentsDifferents =3;
+            GameManager.socialManager.nombreAlimentsDifferents +=3;
+            varietepecherie += 3;
         }
         levelactuel = habitant.ecoLevel;
     }
@@ -354,9 +377,10 @@ public class Pecherie : MonoBehaviour
     public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
         QuantitePoisson = QuantitePoissonNonValide;
-        RecupererPoisson();
+        //RecupererPoisson();
         valider = true;
-        StartCoroutine(Coroutine());
+        validation.interactable = false;
+        StartCoroutine(AttenteMinuit());
         //Lancer le blocage de la valeur jusqu'à minuit
     }
 
@@ -376,9 +400,9 @@ public class Pecherie : MonoBehaviour
         }
     }
 
-    void FonctionMinuit() //Fonction à lancer à minuit tous les jours qui permet de pouvoir modifier la valeur qu'on a validé le jour d'avant
+    public void FonctionMinuit() //Fonction à lancer à minuit tous les jours qui permet de pouvoir modifier la valeur qu'on a validé le jour d'avant
     {
-        if (valider)
+        /*if (valider)
         {
             valider = false;
             AnciennequantitePoisson = QuantitePoisson;
@@ -387,7 +411,9 @@ public class Pecherie : MonoBehaviour
         {
             RecupererPoisson();
             AnciennequantitePoisson = QuantitePoisson;
-        }
+        }*/
+        RecupererPoisson();
+        AnciennequantitePoisson = QuantitePoisson;
     }
 
     IEnumerator Coroutine() // On bloque jusqu'a minuit
@@ -418,6 +444,11 @@ public class Pecherie : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(false);
             menuinfo.transform.GetChild(8).gameObject.SetActive(false);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
+
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -431,6 +462,10 @@ public class Pecherie : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(false);
             menuinfo.transform.GetChild(8).gameObject.SetActive(false);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
             panel.SetActive(false);
             menuinfo.SetActive(true);
         }
@@ -444,8 +479,17 @@ public class Pecherie : MonoBehaviour
             menuinfo.transform.GetChild(7).gameObject.SetActive(true);
             menuinfo.transform.GetChild(8).gameObject.SetActive(true);
             menuinfo.transform.GetChild(9).gameObject.SetActive(true);
+            menuinfo.transform.GetChild(10).gameObject.SetActive(true);
             panel.SetActive(false);
+            for (int i = 1; i < 4; i++)
+            {
+                if (i <= varietepecherie) menuinfo.transform.GetChild(10 + i).gameObject.SetActive(true);
+                else menuinfo.transform.GetChild(10 + i).gameObject.SetActive(false);
+            }
             menuinfo.SetActive(true);
+
+
+
         }
     }
 
@@ -500,6 +544,7 @@ public class Pecherie : MonoBehaviour
         choixhabitant.SetActive(false);
         panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         panel.SetActive(true);
+        InitVariete(habitant);
     }
     public void quitter2()
     {
@@ -509,5 +554,18 @@ public class Pecherie : MonoBehaviour
         animator.SetTrigger("ouverture1BulleCouper");
         Deplacement.enMenu = false;
     }
+    IEnumerator AttenteMinuit() // On bloque jusqu'a minuit
+    {
+        DateTime current = DateTime.Now;  //Donne le jour et l'heure
+        DateTime tomorrow = current.AddDays(1).Date;
+        double seconds = (tomorrow - current).TotalSeconds;
 
+        //yield return new WaitForSeconds((float) seconds);
+        yield return new WaitForSeconds(timemanager.dureeJournee);
+        //Pour test que tout marche
+        FonctionMinuit();
+        validation.interactable = true;
+        StartCoroutine(AttenteMinuit());
+
+    }
 }

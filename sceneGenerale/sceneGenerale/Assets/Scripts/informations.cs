@@ -31,7 +31,6 @@ public class informations : MonoBehaviour
     }
     void Start()
     {
-        panelinfo = transform.gameObject;
         Rien = true;
         boolenrien = new namedBoolean(name = "Rien",Rien);
         booleau = new namedBoolean(name = "eau", eau);
@@ -44,7 +43,7 @@ public class informations : MonoBehaviour
         boolvariete2 = new namedBoolean(name = "variete2", variete2);
         boolquantité = new namedBoolean(name = "quantité", quantité);
         boolquantité2 = new namedBoolean(name = "quantité2", quantité2);
-        namedBoolean boolquisertarien = new namedBoolean(name = "menuInformations", inutile);
+        namedBoolean boolquisertarien = new namedBoolean(name = "InformationBouton", inutile);
         qeau = GameManager.environnementManager.qualiteEau;
         qair = GameManager.environnementManager.qualiteAir;
         qsol = GameManager.environnementManager.qualiteSol;
@@ -120,7 +119,7 @@ public class informations : MonoBehaviour
         int j = 0;
         listeinfos = Inverser(listeinfos);
         Stack<string> burner = new Stack<string>(listeinfos);// On crée une copie pour ne pas supprimer la pile lors de l'affichage
-        foreach (Transform child in panelinfo.transform.GetChild(0).transform)
+        foreach (Transform child in panelinfo.transform)
         {
             if(j < i)
             {
