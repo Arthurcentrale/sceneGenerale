@@ -63,7 +63,6 @@ public class MissionManager : MonoBehaviour
     public void Gather(string itemName)
     {
         int amount = player.GetComponent<Player>().uiInventory.CountItem(itemName);
-        Debug.Log("Qté bois : " + amount);
         EventManager.Instance.QueueEvent(new GatheringGameEvent(itemName, amount));
     }
 
@@ -171,6 +170,8 @@ public class MissionManager : MonoBehaviour
 
             if (goal.Completed)
             {
+                missionHolder.GetComponent<MissionWindow>().pointsGoals += goal.points;
+                goal.points = 0;
                 countObj.SetActive(false);
                 goalObj.transform.Find("Done").gameObject.SetActive(true);
             }

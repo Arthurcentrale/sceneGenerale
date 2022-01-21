@@ -14,6 +14,9 @@ public class MissionWindow : MonoBehaviour
 
     public GameObject pageDroite;
     public GameObject pageGauche;
+
+    public int pointsGoals = 0;
+
     //[HideInInspector] public MissionManager missionManager;
 
     public void Initialize(Mission mission)
@@ -24,7 +27,7 @@ public class MissionWindow : MonoBehaviour
 
         Vector3 placement = new Vector3(1445, 520, 0);
         Quaternion rotation = new Quaternion(0, 0, 0, 0);
-
+        int i = 0;
         CloseWindow();
         foreach (var goal in mission.Goals)
         {
@@ -36,6 +39,8 @@ public class MissionWindow : MonoBehaviour
             
             if (goal.Completed)
             {
+                pointsGoals += goal.points;
+                goal.points = 0;
                 countObj.SetActive(false);
                 goalObj.transform.Find("Done").gameObject.SetActive(true);
             }
@@ -44,8 +49,9 @@ public class MissionWindow : MonoBehaviour
             {
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
-
+            if (i > pointsGoals) goalObj.SetActive(false);
             placement.y -= 110;
+            i++;
         }
 
         xpText.text = mission.Reward.XP.ToString();
