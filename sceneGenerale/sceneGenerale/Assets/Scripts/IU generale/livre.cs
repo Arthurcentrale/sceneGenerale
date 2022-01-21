@@ -176,13 +176,7 @@ public class livre : MonoBehaviour
         info = false;
     }
 
-    public void ouvertureApercuMissions()
-    {
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-    }
+ 
 
 
     public void construire()

@@ -72,7 +72,7 @@ public class MissionWindow : MonoBehaviour
             pageGauche.GetComponent<MissionManager>().missionEpinglee = GetComponent<MissionWindow>().titleText.text;
             pageGauche.GetComponent<MissionManager>().punaise.SetActive(true);
             pageGauche.GetComponent<MissionManager>().epingléBool = true;
-            pageGauche.GetComponent<MissionManager>().remplirMissionEpingle();
+            //pageGauche.GetComponent<MissionManager>().remplirMissionEpingle();
         }
         else
         {
