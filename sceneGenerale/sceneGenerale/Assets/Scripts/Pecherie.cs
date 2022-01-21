@@ -48,6 +48,9 @@ public class Pecherie : MonoBehaviour
     public CompteurBouffe compteurbouffe;
     public Slider slider;
 
+
+
+    public FoodManager foodmanager;
     void Start()
     {
         limite1 = false;
@@ -65,7 +68,7 @@ public class Pecherie : MonoBehaviour
         compteurbouffe = compteurbouffe.GetComponent<CompteurBouffe>();
         validation = validation.GetComponent<Button>();
         //validation.onClick.AddListener(ValiderValeur);
-
+        foodmanager = GameObject.Find("Game Manager").GetComponent<FoodManager>();
         timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
         //test
         varietepecherie = 0;
@@ -222,7 +225,9 @@ public class Pecherie : MonoBehaviour
         if (!limite1 && QE < 60 && varietepecherie > 1 )
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.Listevariete.Remove(foodmanager.Findinlist("Truite"));
             varietepecherie -= 1;
+            menuinfo.transform.GetChild(13).gameObject.SetActive(false);
             limite1 = true;
             if(nbrdiminutionQE == 0)
             {
@@ -234,13 +239,17 @@ public class Pecherie : MonoBehaviour
         if(limite1 && QE > 70)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Truite"));
+            menuinfo.transform.GetChild(13).gameObject.SetActive(true) ;
             varietepecherie += 1;
             limite1 = false;
         }
         if (!limite2 && QE < 40 && varietepecherie > 1)
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
             varietepecherie -= 1;
+            menuinfo.transform.GetChild(12).gameObject.SetActive(false);
             limite2 = true;
             if(nbrdiminutionQE == 1)
             {
@@ -252,12 +261,16 @@ public class Pecherie : MonoBehaviour
         if (limite2 && QE > 50)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            menuinfo.transform.GetChild(12).gameObject.SetActive(true); ;
             varietepecherie += 1;
             limite2 = false;
         }
         if (!limite3 && QE < 20 && varietepecherie > 1)
         {
             GameManager.socialManager.nombreAlimentsDifferents -= 1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            menuinfo.transform.GetChild(11).gameObject.SetActive(false);
             varietepecherie -= 1;
             limite3 = true;
             if(nbrdiminutionQE == 2)
@@ -270,6 +283,8 @@ public class Pecherie : MonoBehaviour
         if (limite3 && QE > 30)
         {
             GameManager.socialManager.nombreAlimentsDifferents += 1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            menuinfo.transform.GetChild(11).gameObject.SetActive(true);
             varietepecherie += 1;
             limite3 = false;
         }
@@ -281,16 +296,22 @@ public class Pecherie : MonoBehaviour
         if (habitant.ecoLevel < 3)
         {
             GameManager.socialManager.nombreAlimentsDifferents+=1;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
             varietepecherie += 1;
         }
         if(habitant.ecoLevel <5 && habitant.ecoLevel >=3)
         {
             GameManager.socialManager.nombreAlimentsDifferents+=2;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
             varietepecherie += 2;
         }
         if(habitant.ecoLevel == 5)
         {
             GameManager.socialManager.nombreAlimentsDifferents +=3;
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            GameManager.Listevariete.Add(foodmanager.Findinlist("Truite"));
             varietepecherie += 3;
         }
         levelactuel = habitant.ecoLevel;

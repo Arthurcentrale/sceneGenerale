@@ -20,7 +20,15 @@ public class FoodManager : MonoBehaviour
             }
         }
     }
-
+    public Item Findinlist(string texte)
+    {
+        Item item = new Item();
+        for(int i = 0; i < ListeNourriture.Count; i++)
+        {
+            if (texte == ListeNourriture[i].ItemName) item = ListeNourriture[i];
+        }
+        return item;
+    }
     // Update is called once per frame
     void Update()
     {

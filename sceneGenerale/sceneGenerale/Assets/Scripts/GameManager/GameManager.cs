@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public float globalWaste;
     */
     public static float maxQE = 100f;
-
+    public static List<Item> Listevariete;
     private void Start()
     {
     }
