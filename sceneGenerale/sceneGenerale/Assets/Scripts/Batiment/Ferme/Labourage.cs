@@ -40,7 +40,6 @@ public class Labourage : MonoBehaviour
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
 
-        nbreParcellesPlacables = 40;
 
         nbreParcelles = panelLabourage.transform.GetChild(0).gameObject.GetComponent<Text>();
 
