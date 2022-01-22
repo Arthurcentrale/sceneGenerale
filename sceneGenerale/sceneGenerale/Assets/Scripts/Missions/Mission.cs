@@ -36,6 +36,8 @@ public class Mission : ScriptableObject
         public int CurrentAmount { get; protected set; }
         public int RequiredAmount = 1;
 
+        public int points;
+
         public bool Completed { get; protected set; }
         [HideInInspector] public UnityEvent GoalCompleted;
 
@@ -62,7 +64,6 @@ public class Mission : ScriptableObject
         private void Complete()
         {
             Completed = true;
-
 
             GoalCompleted.Invoke();
             GoalCompleted.RemoveAllListeners();

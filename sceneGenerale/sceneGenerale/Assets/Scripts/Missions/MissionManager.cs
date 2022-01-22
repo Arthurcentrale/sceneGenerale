@@ -22,10 +22,14 @@ public class MissionManager : MonoBehaviour
     public GameObject punaise;
     public string missionEpinglee = "aucune";
     public bool epingléBool = false;
+    public GameObject goalPrefabEpingle;
+    public GameObject lieuMissionRaccourci;
 
     //variables spatiales pour placer les missions dans le livre
     private Vector3 placement = new Vector3(- 1440, 808, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
+
+
 
     private void Awake()
     {
@@ -59,7 +63,6 @@ public class MissionManager : MonoBehaviour
     public void Gather(string itemName)
     {
         int amount = player.GetComponent<Player>().uiInventory.CountItem(itemName);
-        Debug.Log("Qté bois : " + amount);
         EventManager.Instance.QueueEvent(new GatheringGameEvent(itemName, amount));
     }
 
@@ -127,11 +130,10 @@ public class MissionManager : MonoBehaviour
 
     public void VerifierEpingle(Mission mission)
     {
-        if (mission.name == missionEpinglee)
+        if (mission.Information.Name == missionEpinglee)
         {
             punaise.SetActive(true);
             epingléBool = true;
-            
         }
 
         else 
@@ -140,6 +142,55 @@ public class MissionManager : MonoBehaviour
             epingléBool = false;
         }
         
+    }
+
+    public void remplirMissionEpingle()
+    {
+        foreach (Mission mission in CurrentMissions)
+        {
+            if (mission.Information.Name == missionEpinglee)
+            {
+                Order66(mission);
+                lieuMissionRaccourci.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
+            } 
+        }     
+    }
+
+    private void Order66(Mission mission)
+    {
+        nettoyageRaccourciMission();
+        Vector3 position = lieuMissionRaccourci.transform.position;
+        position.y += 80;
+        foreach (var goal in mission.Goals)
+        {
+            GameObject goalObj = Instantiate(goalPrefabEpingle, position, rotation, lieuMissionRaccourci.transform);
+            goalObj.transform.Find("Text").GetComponent<Text>().text = goal.GetDescription();
+
+            GameObject countObj = goalObj.transform.Find("Count").gameObject;
+
+            if (goal.Completed)
+            {
+                missionHolder.GetComponent<MissionWindow>().pointsGoals += goal.points;
+                goal.points = 0;
+                countObj.SetActive(false);
+                goalObj.transform.Find("Done").gameObject.SetActive(true);
+            }
+
+            else
+            {
+                countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
+            }
+
+            position.y -= 90;
+        }
+    }
+
+    public void nettoyageRaccourciMission()
+    {
+        for (int i = 0; i < lieuMissionRaccourci.transform.childCount - 2; i++)
+        {
+            Destroy(lieuMissionRaccourci.transform.GetChild(i + 2).gameObject);
+        }
     }
 
 
