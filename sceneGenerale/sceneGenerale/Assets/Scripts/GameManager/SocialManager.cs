@@ -34,7 +34,7 @@ public class SocialManager : MonoBehaviour
     {
         quantiteNourriture = 0;
         ecoSensibilisation = 70;
-        qualiteDeVie = 0f;
+        qualiteDeVie = 5f;
 
         nombreAlimentsDifferents = 0;
     }
@@ -43,6 +43,7 @@ public class SocialManager : MonoBehaviour
     {
         //On met à jour quantiteNourriture
         listeBatiment = DeveloppementManager.instance.listeBatiment;
+        quantiteNourriture = 0;
         foreach(GameObject batimentGO in listeBatiment)
         {
             quantiteNourriture += batimentGO.GetComponent<Batiment>().productionFood(); //on ajoute la production de nourriture de chaque batiment de la liste lors d'une maj
