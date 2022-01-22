@@ -194,7 +194,8 @@ public class Inventory
 
     private void DecaleFav(int slot)  //decale les favoris à partir d'un certain rang (pour les mettres à jour quand on supprime un item de l'inventaire)
     {
-        for (int i = slot; i < favList.Count; i++)
+        favList[slot] = false;
+        for (int i = slot + 1; i < favList.Count; i++)
         {
             if (favList[i])
             {

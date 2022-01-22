@@ -10,7 +10,7 @@ public class Defaite : MonoBehaviour
     public Gradient grad;
     void Start()
     {
-        List<float> valeurs = new List<float> { GameManager.environnementManager.qualiteEau, GameManager.environnementManager.qualiteAir, GameManager.environnementManager.qualiteSol, GameManager.socialManager.qualiteDeVie, GameManager.developpementManager.navireConstruit };
+        List<float> valeurs = new List<float> { EnvironnementManager.instance.qualiteEau, EnvironnementManager.instance.qualiteAir, EnvironnementManager.instance.qualiteSol, SocialManager.instance.qualiteDeVie, DeveloppementManager.instance.navireConstruit };
         bulles = GameObject.Find("Bulles");
         for(int i = 0; i < 5; i++)
         {

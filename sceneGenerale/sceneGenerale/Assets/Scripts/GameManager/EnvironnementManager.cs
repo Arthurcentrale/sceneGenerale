@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironnementManager
+public class EnvironnementManager : MonoBehaviour
 {
-    public int qualiteAir { get; set; }
-    public float qualiteEau { get; set; }
-    public float qualiteSol { get; set; }
+    public static EnvironnementManager instance;
 
-    public EnvironnementManager(int air, float eau, float sol)
+    private void Awake()
     {
-        this.qualiteAir = air;
-        this.qualiteEau = eau;
-        this.qualiteSol = sol;
+        if (instance != null)
+        {
+            GameObject.Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
+
+    public float qualiteAir;
+    public float qualiteEau;
+    public float qualiteSol;
+
+    public float maxQE = 100f;
+
+    private void Start()
+    {
+        qualiteAir = 100f;
+        qualiteEau = maxQE;
+        qualiteSol = 100f;
     }
 
     public void MajEnviro()

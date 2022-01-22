@@ -2,28 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SocialManager
+public class SocialManager : MonoBehaviour
 {
-    public int quantiteNourriture { get; set; } 
-    public int ecoSensibilisation { get; set; }
-    public float qualiteDeVie { get; set; }
+    public static SocialManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            GameObject.Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
+    }
+
+
+    public int quantiteNourriture;
+    public int ecoSensibilisation;
+    public float qualiteDeVie;
 
     public int nombreAlimentsDifferents;
 
     public List<GameObject> listeBatiment;  //copie de la liste des batiments de DeveloppementManager qu'on va update avec la fonction MajSocial()
     public List<GameObject> habitants;      //copie de la liste des habitants de HabitantManager qu'on va update avec la fonction MajSocial()
 
-    public SocialManager(int nourriture, int sensibilisation, int qualite)
+
+    private void Start()
     {
-        this.quantiteNourriture = nourriture;
-        this.ecoSensibilisation = sensibilisation;
-        this.qualiteDeVie = qualite;
+        quantiteNourriture = 0;
+        ecoSensibilisation = 70;
+        qualiteDeVie = 0f;
+
+        nombreAlimentsDifferents = 0;
     }
 
     public void MajSocial()
     {
         //On met à jour quantiteNourriture
-        listeBatiment = GameManager.developpementManager.listeBatiment;
+        listeBatiment = DeveloppementManager.instance.listeBatiment;
         foreach(GameObject batimentGO in listeBatiment)
         {
             quantiteNourriture += batimentGO.GetComponent<Batiment>().productionFood(); //on ajoute la production de nourriture de chaque batiment de la liste lors d'une maj

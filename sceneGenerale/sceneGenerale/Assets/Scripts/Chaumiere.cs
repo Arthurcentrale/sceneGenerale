@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -141,8 +141,8 @@ public class Chaumiere : MonoBehaviour
             open = false;
             animator.SetTrigger("ouverture1BulleCouper");
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
-            GameManager.socialManager.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
-            compteurbouffe.CBouffe.text = GameManager.socialManager.quantiteNourriture.ToString();
+            SocialManager.instance.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
+            compteurbouffe.CBouffe.text = SocialManager.instance.quantiteNourriture.ToString();
             //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
@@ -159,8 +159,8 @@ public class Chaumiere : MonoBehaviour
             open = false;
             animator.SetTrigger("ouverture1BulleCouper");
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
-            GameManager.socialManager.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
-            compteurbouffe.CBouffe.text = GameManager.socialManager.quantiteNourriture.ToString();
+            SocialManager.instance.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
+            compteurbouffe.CBouffe.text = SocialManager.instance.quantiteNourriture.ToString();
             //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
@@ -177,8 +177,8 @@ public class Chaumiere : MonoBehaviour
             open = false;
             animator.SetTrigger("ouverture1BulleCouper");
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
-            GameManager.socialManager.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
-            compteurbouffe.CBouffe.text = GameManager.socialManager.quantiteNourriture.ToString();
+            SocialManager.instance.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
+            compteurbouffe.CBouffe.text = SocialManager.instance.quantiteNourriture.ToString();
             //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }
@@ -195,8 +195,8 @@ public class Chaumiere : MonoBehaviour
             open = false;
             animator.SetTrigger("ouverture1BulleCouper");
             cible.GetComponent<HabitantChaumiere>().isEmpty = false;
-            GameManager.socialManager.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
-            compteurbouffe.CBouffe.text = GameManager.socialManager.quantiteNourriture.ToString();
+            SocialManager.instance.quantiteNourriture -= cible.GetComponent<HabitantChaumiere>().habitantActuel.GetComponent<HabitantBehaviour>().foodQuantity;
+            compteurbouffe.CBouffe.text = SocialManager.instance.quantiteNourriture.ToString();
             //Debug.Log(compteurbouffe.CBouffe.text);
         }
     }

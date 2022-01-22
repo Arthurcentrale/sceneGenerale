@@ -190,7 +190,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
                 plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                GameManager.environnementManager.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -200,7 +200,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                GameManager.environnementManager.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -210,7 +210,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                GameManager.environnementManager.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -220,7 +220,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                GameManager.environnementManager.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -230,7 +230,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                GameManager.environnementManager.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol -= 1;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -318,14 +318,14 @@ public class Planter : MonoBehaviour
                 // On regarde ensuite si il y a de l'engrais 
                 else if (engraisParcelles[i,j] > 0)
                 {
-                    GameManager.socialManager.quantiteNourriture += arrayQN_max[q];
+                    SocialManager.instance.quantiteNourriture += arrayQN_max[q];
                 }
 
                 else // Sinon on met les autres valeurs en prenant compte la pluriculture
                 {
                     if (q == (int)Culture.Ble)   //Blé sur parcelle
                     {
-                        GameManager.socialManager.quantiteNourriture += q;
+                        SocialManager.instance.quantiteNourriture += q;
 
                     }
                     else if (q == (int)Culture.Mais)   //Mais
@@ -352,9 +352,9 @@ public class Planter : MonoBehaviour
                         || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
                            )
                         {
-                            GameManager.socialManager.quantiteNourriture += q + 1;
+                            SocialManager.instance.quantiteNourriture += q + 1;
                         }
-                        else GameManager.socialManager.quantiteNourriture += q;
+                        else SocialManager.instance.quantiteNourriture += q;
                     }
                     else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
                     {
@@ -364,8 +364,8 @@ public class Planter : MonoBehaviour
                         else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
                         else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
 
-                        if (n > 1) GameManager.socialManager.quantiteNourriture = q + 1;
-                        else GameManager.socialManager.quantiteNourriture = q;
+                        if (n > 1) SocialManager.instance.quantiteNourriture = q + 1;
+                        else SocialManager.instance.quantiteNourriture = q;
                     }
                 }
             }
@@ -400,7 +400,7 @@ public class Planter : MonoBehaviour
 
     public void MajQS()   //La qualité du sol augmente tous les jours de 0.1 à minuit
     {
-        GameManager.environnementManager.qualiteSol += 0.1f;
+        EnvironnementManager.instance.qualiteSol += 0.1f;
     }
 
     public void ToutesMAJ()
@@ -415,14 +415,14 @@ public class Planter : MonoBehaviour
         if (engraisSelectionne == 0) //chimique
         {
             engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
-            GameManager.environnementManager.qualiteSol -= 0.5f;
-            GameManager.environnementManager.qualiteEau -= 0.5f;
+            EnvironnementManager.instance.qualiteSol -= 0.5f;
+            EnvironnementManager.instance.qualiteEau -= 0.5f;
             return true;
         }
         else if (engraisDispo > 0)  //naturel
         {
             engraisParcelles[x, y] += 4;
-            GameManager.environnementManager.qualiteSol += 0.2f;
+            EnvironnementManager.instance.qualiteSol += 0.2f;
             engraisDispo -= 1;
             return true;
         }
