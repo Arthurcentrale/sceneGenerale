@@ -452,8 +452,8 @@ public class UI_Inventory : MonoBehaviour
 
         Text textEquiper = boutonEquiper.transform.GetChild(0).gameObject.GetComponent<Text>();
         //Debug.Log("SLOT EQUIPÉ : " + slotEquipé.ToString());
-        //Debug.Log("SLOT SELECTED : " + (slotSelected + 1).ToString());
-        if (slotSelected + 1 == slotEquipé)
+        //Debug.Log("SLOT SELECTED : " + CountPosItemFav().ToString());
+        if (CountPosItemFav() == slotEquipé)
         {
             textEquiper.text = "Déséquiper";
         }
@@ -479,34 +479,32 @@ public class UI_Inventory : MonoBehaviour
 
         int slot = CountPosItemFav();
 
+        string nomItem = inventory.GetItemList()[slotSelected].Item.ItemName;
+
         if (slot == slotEquipé) //l'item est déja équipé
         {
             Debug.Log("On déséquipe l'item n" + slot.ToString());
             Debug.Log("C'est l'item : " + NomItemEquip());
             slotEquipé = 0;
-            animPlayer.SetBool("Pioche", false);
-            animPlayer.SetBool("Sac", false);
-            animPlayer.SetBool("Hache", false);
+            ResetAnimOutils();
         }
         else  //on équipe l'objet
         {
             slotEquipé = slot;
             Debug.Log("L'item du slot n"  + slotEquipé.ToString() + " est équipé");
             Debug.Log("C'est l'item : " + NomItemEquip());
+
             audioSource.PlayOneShot(equipOutil);
-            if (slot == 1)
-            {
-                animPlayer.SetBool("Pioche", false);
-                animPlayer.SetBool("Sac", false);
-                animPlayer.SetBool("Hache", true);
-            }
-            else if (slot == 2)
-            {
-                animPlayer.SetBool("Hache", false);
-                animPlayer.SetBool("Sac", false);
-                animPlayer.SetBool("Pioche", true);
-            }
+            ResetAnimOutils();
+            animPlayer.SetBool(nomItem, true);
         }
+    }
+
+    private void ResetAnimOutils()
+    {
+        animPlayer.SetBool("Pioche", false);
+        animPlayer.SetBool("Sac", false);
+        animPlayer.SetBool("Hache", false);
     }
 
     public void AfficheBoutonEnleverFav(Transform slotInv)   //on affiche le bouton qui permet d'enlever un objet des favoris
@@ -524,7 +522,7 @@ public class UI_Inventory : MonoBehaviour
             Button button = moveToFav.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(DelFromFav);
-
+            
             boutonFavAffiche = true;
             moveToFav.SetActive(true);
         }
@@ -535,34 +533,25 @@ public class UI_Inventory : MonoBehaviour
         string name = slotInv.gameObject.name;
         int slot = name[name.Length - 1] - '0';
 
+
+
         Debug.Log("C'est l'item : " + NomItemEquip());
 
         if (slot == slotEquipé)
         {
             slotEquipé = 0;
             Debug.Log("On déséquipe l'item n" + slot.ToString());
-            animPlayer.SetBool("Pioche", false);
-            animPlayer.SetBool("Sac", false);
-            animPlayer.SetBool("Hache", false);
+            ResetAnimOutils();
         }
         else
         {
             //on équipe l'objet
             slotEquipé = slot;
             Debug.Log("L'item du slot n" + slotEquipé.ToString() + " est équipé");
+
             audioSource.PlayOneShot(equipOutil);
-            if (slot == 1)
-            {
-                animPlayer.SetBool("Pioche", false);
-                animPlayer.SetBool("Sac", false);
-                animPlayer.SetBool("Hache", true);
-            }
-            else if (slot == 2)
-            {
-                animPlayer.SetBool("Hache", false);
-                animPlayer.SetBool("Sac", false);
-                animPlayer.SetBool("Pioche", true);
-            }
+            ResetAnimOutils();
+            animPlayer.SetBool(NomItemEquip(),true);
         }
 
         //partie animation

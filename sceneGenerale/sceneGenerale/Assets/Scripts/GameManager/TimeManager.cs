@@ -129,7 +129,7 @@ public class TimeManager : MonoBehaviour
         //Garde Forestier
         //gfforet.graineDéjàDonnée=false;  //on reset la graine que donne le garde forestier
 
-
+        SocialManager.instance.MajSocial();
 
         //finir par maj le nbre de jours passés
         nombreDeJoursPassés ++;
