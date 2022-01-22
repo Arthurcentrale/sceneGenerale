@@ -11,6 +11,8 @@ public class GFForet : MonoBehaviour
     public Player player;
     Maladie maladie;
 
+    public Chauffage chauffage;
+
     //Les items graines
     public Item graineCerisier;
     public Item graineChene;
@@ -42,10 +44,11 @@ public class GFForet : MonoBehaviour
         dialogueBoite = GameObject.Find("DialogueBoite");
         textDialogue=dialogueBoite.transform.GetChild(0).GetChild(0).GetComponent<Text>();
         maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
+        //chauffage=chauffage.GetComponent<Chauffage>();
         
     }
 
-    public void LancementDialogueGardeForestier(){
+    public void LancementDialogueGardeForestier(){  //du coup je fais la partie chauffage en même temps
         liste=CompterLesArbres();
         nombreChenes=liste[0];
         nombreHetres=liste[1];
@@ -54,7 +57,7 @@ public class GFForet : MonoBehaviour
         nombreBouleaux=liste[4];
         //nombreChenes,nombreHetres,nombrePins,nombreDouglas,nombreBouleaux=liste[0],liste[1],liste[2],liste[3],liste[4]; il me clc quand je fais comme ça 
         textDialogue.text="Bonjour mon grand, je suis le garde forestier. J'adore les arbres! Sur ton île, il y a " +nombreChenes.ToString() + " chênes, "
-        + nombreHetres.ToString()+ " hêtres, " +nombrePins.ToString() + " pins, " +nombreDouglas.ToString() + " douglas, et " +nombreBouleaux.ToString() + "bouleaux!";
+        + nombreHetres.ToString()+ " hêtres, " +nombrePins.ToString() + " pins, " +nombreDouglas.ToString() + " douglas, et " +nombreBouleaux.ToString() + " bouleaux!";
         if (maladie.maladieEnCours){
             textDialogue.text+= " Au fait, j'ai apperçu quelques " +maladie.essenceMalade+ "s malades ce matin. Débarasse-t-en le plus vite possible avant qu'ils ne disparaissent tous'!";
         }
@@ -63,6 +66,13 @@ public class GFForet : MonoBehaviour
             DonnerGraine();
             graineDéjàDonnée=true;
         }
+        if(chauffage.boisDeChauffage==0){
+            textDialogue.text+="Nous n’avons plus de bois pour nous chauffer! Si vous ne m’en apportez pas, je devrai couper moi-même certains arbres. Je me débrouillerai certainement moins bien que vous…";
+        }
+        if(chauffage.boisDeChauffage>0){
+            textDialogue.text+="Il reste encore des bûches pour nous chauffer. Surveillez le stock pour que nous ne tombions pas à court!";
+        }
+        chauffage.AfficherChauffage();
         
     }
 
