@@ -18,6 +18,10 @@ public class ScriptATHBatis : MonoBehaviour
     //le bati
     public GameObject bati;
 
+    
+    //Pour le Chauffage:
+    public int nombreDeBâtimentsConstruits=0;
+
     //chaumière
     public GameObject chaumiere;
     public Item itemOneChaumiere;
@@ -334,6 +338,7 @@ public class ScriptATHBatis : MonoBehaviour
         {
             Instantiate(chaumiere, new Vector3(bati.transform.position.x, 5.81f, bati.transform.position.z + 5), chaumiere.transform.rotation, dossierbatiments);
             missionManager.Build("chaumière");
+            nombreDeBâtimentsConstruits+=1;
         }
 
         else if (bati.CompareTag("BatiFerme"))
@@ -341,6 +346,7 @@ public class ScriptATHBatis : MonoBehaviour
             ferme.transform.position = new Vector3(bati.transform.position.x, ferme.transform.position.y, bati.transform.position.z);
             missionManager.Build("ferme");
             fermeConstruit = true;
+            nombreDeBâtimentsConstruits+=1;
         }
 
         else if (bati.CompareTag("BatiPêcherie"))
@@ -348,6 +354,7 @@ public class ScriptATHBatis : MonoBehaviour
             Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation, dossierbatiments);
             missionManager.Build("pêcherie");
             pecherieConstruit = true;
+            nombreDeBâtimentsConstruits+=1;
         }
 
         else if (bati.CompareTag("BatiBoulangerie"))
@@ -355,12 +362,14 @@ public class ScriptATHBatis : MonoBehaviour
             boulangerie.transform.position = new Vector3(bati.transform.position.x, boulangerie.transform.position.y, bati.transform.position.z);
             missionManager.Build("boulangerie");
             boulangerieConstruit = true;
+            nombreDeBâtimentsConstruits+=2;
         }
         else if (bati.CompareTag("BatiMoulinAEau")) 
         {
             moulinEau.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
             missionManager.Build("moulin à eau");
             moulinEauConstruit = true;
+            nombreDeBâtimentsConstruits+=1;
         }
         
         Destroy(bati.gameObject);
