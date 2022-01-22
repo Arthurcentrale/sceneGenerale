@@ -298,7 +298,7 @@ public class Planter : MonoBehaviour
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
         //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
-        GameManager.socialManager.quantiteNourriture += nombreDeMais;
+        SocialManager.instance.quantiteNourriture += nombreDeMais;
         //puis on reset cette variable et on va l'augmenter par la suite
         nombreDeMais = 0;
 

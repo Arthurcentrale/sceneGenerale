@@ -174,10 +174,10 @@ public class Pecherie : MonoBehaviour
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            GameManager.socialManager.quantiteNourriture-= AnciennequantitePoisson - MalusQualite();
+            SocialManager.instance.quantiteNourriture-= AnciennequantitePoisson - MalusQualite();
             UpdateQE();
             UpdateVariete();
-            GameManager.socialManager.quantiteNourriture += QuantitePoisson - MalusQualite();
+            SocialManager.instance.quantiteNourriture += QuantitePoisson - MalusQualite();
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
             compteurbouffe.CompteurVariete.text = SocialManager.instance.nombreAlimentsDifferents.ToString();

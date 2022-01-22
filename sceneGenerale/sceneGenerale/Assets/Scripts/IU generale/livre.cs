@@ -12,7 +12,7 @@ public class livre : MonoBehaviour
 
     //éléments principaux de l'IU
     private GameObject boutonConstruction;
-    private GameObject boutonInformations;
+    public GameObject boutonInformations;
     private GameObject boutonMissions;
     private GameObject boutonProgression;
     private GameObject menuConstruPageDroite;
@@ -90,7 +90,7 @@ public class livre : MonoBehaviour
         animatorLivreFerme = GameObject.Find("LivreFerme").GetComponent<Animator>();
         animatorLivreOuvert = GameObject.Find("LivreOuvert").GetComponent<Animator>();
         boutonConstruction = GameObject.Find("ConstructionBouton");
-        boutonInformations = GameObject.Find("InformationBouton");
+        
         boutonMissions = GameObject.Find("MissionBouton");
         boutonProgression = GameObject.Find("ProgressionBouton");
 
