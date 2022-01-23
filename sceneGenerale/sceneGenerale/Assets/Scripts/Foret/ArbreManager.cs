@@ -119,6 +119,7 @@ public class ArbreManager : MonoBehaviour
 
         foreach(var arbre in arbres)
         {
+            Debug.Log(arbre.name);
             if (arbre.name.IndexOf("Souche", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 arbre.GetComponent<SoucheComportement>().age += 1;
