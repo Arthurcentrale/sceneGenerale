@@ -29,6 +29,8 @@ public class Boulangerie : MonoBehaviour
     public HabitantBehaviour habitant;
     public GameObject go;
 
+    bool ProdPainBleAvant = false;
+    bool ProdPainMaisAvant = false;
     int QuantitePainMais;
     int QuantitePainMaisNonValide;
     int QuantitePainBle;
@@ -203,6 +205,26 @@ public class Boulangerie : MonoBehaviour
         {
             CompteurBouffe.Data.NbrBouffe += QuantitePainBle;
             CompteurBouffe.Data.NbrBouffe += QuantitePainMais * 3;
+            if ((QuantitePainBle >= 3) & (ProdPainBleAvant = false))
+            {
+                SocialManager.instance.nombreAlimentsDifferents += 1;
+                ProdPainBleAvant = true;
+            }
+            if ((QuantitePainBle < 3) & (ProdPainBleAvant))
+            {
+                SocialManager.instance.nombreAlimentsDifferents -= 1;
+                ProdPainBleAvant = false;
+            }
+            if ((QuantitePainMais >= 2) & (ProdPainMaisAvant = false))
+            {
+                SocialManager.instance.nombreAlimentsDifferents += 1;
+                ProdPainMaisAvant = true;
+            }
+            if ((QuantitePainMais < 2) & (ProdPainMaisAvant))
+            {
+                SocialManager.instance.nombreAlimentsDifferents -= 1;
+                ProdPainMaisAvant = false;
+            }
         }
     }
 
