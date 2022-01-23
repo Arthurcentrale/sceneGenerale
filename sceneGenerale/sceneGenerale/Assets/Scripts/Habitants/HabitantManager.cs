@@ -42,9 +42,23 @@ public class HabitantManager : MonoBehaviour
             {
                 habitant.SetActive(true);
                 habitant.GetComponent<HabitantBehaviour>().isVillager = true;
+                habitant.transform.position = habitant.GetComponent<HabitantBehaviour>().mairiePosition;
             }
         }
     }
+    
+    void AllerTravail(string habitantname)
+    {
+        foreach (GameObject habitant in habitants)
+        {
+            if (habitant.CompareTag(habitantname))
+            {
+                habitant.transform.position = habitant.GetComponent<HabitantBehaviour>().originalPosition;
+            }
+        }
+    }
+
+
 
     void DesactiverHabitant(string habitantname)
     {
