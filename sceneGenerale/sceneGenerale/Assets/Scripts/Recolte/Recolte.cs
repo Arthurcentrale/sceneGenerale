@@ -315,9 +315,7 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 6)  AjouterInventaire(boisF, 6);
-                Item item = itemlist[FindInlist("GraineChene")];
-                Debug.Log(item.name);
-                AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                if(UnityEngine.Random.Range(0,1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
             }
@@ -345,7 +343,7 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 5)  AjouterInventaire(boisF, 5);
-                AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
                 Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
             }
@@ -372,6 +370,7 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
+                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
                 AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0), dossierArbres);
@@ -399,6 +398,7 @@ public class Recolte : MonoBehaviour
             if(cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 3) AjouterInventaire(boisF, 3);
+                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
                 AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
@@ -428,6 +428,8 @@ public class Recolte : MonoBehaviour
             {
                 Debug.Log("bouleau frêle");
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
+                if (UnityEngine.Random.Range(0, 1) > 0.5f) AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                Debug.Log(NbrPlace(Find))
                 AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
@@ -514,14 +516,14 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 2);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
                         Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher4", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -529,14 +531,14 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 2);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
                         Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher5", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -544,14 +546,14 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 2);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
                         Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher6", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -559,14 +561,14 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 2);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
                     {
                         Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher3", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -574,7 +576,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 2);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 2 - NbrPlace(rocher); i++)
@@ -582,7 +584,7 @@ public class Recolte : MonoBehaviour
                         Instantiate(rocher, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                     }
-                }
+                }*/
             }
 
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher2", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -593,7 +595,7 @@ public class Recolte : MonoBehaviour
                     
                     AjouterInventaire(rocher, 4);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 4 - NbrPlace(rocher); i++)
@@ -601,7 +603,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Rocher") && cible.transform.name.IndexOf("Rocher1", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -609,7 +611,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 6);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 6 - NbrPlace(rocher); i++)
@@ -617,7 +619,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             //UpdateDurabilite();
 
@@ -632,7 +634,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 3);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 3 - NbrPlace(rocher); i++)
@@ -640,7 +642,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Roche2"))
             {
@@ -649,7 +651,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 5);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 5 - NbrPlace(rocher); i++)
@@ -657,7 +659,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Roche3"))
             {
@@ -665,7 +667,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 7); ;
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 7 - NbrPlace(rocher); i++)
@@ -673,7 +675,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
 
         }
@@ -687,7 +689,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 4);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 4 - NbrPlace(rocher); i++)
@@ -695,7 +697,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Roche2"))
             {
@@ -703,7 +705,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 6);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 6 - NbrPlace(rocher); i++)
@@ -711,7 +713,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
             if (cible.collider.CompareTag("Roche2"))
             {
@@ -719,7 +721,7 @@ public class Recolte : MonoBehaviour
                 {
                     AjouterInventaire(rocher, 8);
                 }
-                else //sinon, on remplit l'inventaire et le reste va par terre
+                /*else //sinon, on remplit l'inventaire et le reste va par terre
                 {
                     AjouterInventaire(rocher, NbrPlace(rocher));
                     for (int i = 0; i < 8 - NbrPlace(rocher); i++)
@@ -727,7 +729,7 @@ public class Recolte : MonoBehaviour
                         GameObject.Find("Popup").GetComponent<Popup>().popup("Inventaire plein");
                         Instantiate(rocher.prefab, cible.transform.position - new Vector3(UnityEngine.Random.Range(-5, 5), cible.transform.position.y / 2, UnityEngine.Random.Range(-5, 5)), Quaternion.Euler(90, 180, 0));
                     }
-                }
+                }*/
             }
 
         }

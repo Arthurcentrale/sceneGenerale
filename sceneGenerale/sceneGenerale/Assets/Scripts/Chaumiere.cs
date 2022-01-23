@@ -120,7 +120,7 @@ public class Chaumiere : MonoBehaviour
         foreach (Transform child in habitant.transform)
         {
             HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
-            if(Behaviour.isHoused == false)
+            if (Behaviour.isHoused == false && Behaviour.isVillager == true)
             {
                 ha.Add(child.gameObject);
             }

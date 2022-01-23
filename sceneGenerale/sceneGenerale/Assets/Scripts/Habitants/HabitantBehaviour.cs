@@ -25,7 +25,7 @@ public class HabitantBehaviour : MonoBehaviour
     private int ecoPointsMax = 101;
 
     //statut dans l'aventure
-    public bool isVillager = false;
+    public bool isVillager = true;
     public bool isHoused = false; // Boolen pour savoir si l'habitant possède sa chaumière
     public bool hasWorkplace = false;
     public bool isWorking = false; // Booleen pour savoir si l'habitant possède son batiment de travail
