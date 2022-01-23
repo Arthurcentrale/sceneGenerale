@@ -531,7 +531,7 @@ public class Pecherie : MonoBehaviour
         isOccupied = true;
         choixhabitant.SetActive(false);
         panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        panel.SetActive(true);
+        onPanel = false;
         InitVariete(habitant);
     }
     public void quitter2()
