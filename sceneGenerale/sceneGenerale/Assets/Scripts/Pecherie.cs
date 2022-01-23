@@ -48,8 +48,7 @@ public class Pecherie : MonoBehaviour
     public CompteurBouffe compteurbouffe;
     public Slider slider;
 
-
-
+    float qe;
     public FoodManager foodmanager;
     void Start()
     {
@@ -73,6 +72,7 @@ public class Pecherie : MonoBehaviour
         //test
         varietepecherie = 0;
         validerfirsttime = false;
+        qe = EnvironnementManager.instance.qualiteEau;
     }
 
     void Update()
@@ -170,22 +170,25 @@ public class Pecherie : MonoBehaviour
                 i++; // On incrémente la valeur de jour où on peche plus de 8 poissons
                 j = 0; // On remet a 0 le nombre de jour où on peche moins de 8 poissons
             }
-            else if(QuantitePoisson - MalusQualite() < 4)
+            else if(QuantitePoisson - MalusQualite(qe) < 4)
             {
                 i = 0;
                 j++;
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            SocialManager.instance.quantiteNourriture-= AnciennequantitePoisson - MalusQualite();
+            SocialManager.instance.quantiteNourriture-= AnciennequantitePoisson - MalusQualite(qe);
+            Debug.Log(MalusQualite(qe));
             UpdateQE();
             UpdateVariete();
-            SocialManager.instance.quantiteNourriture += QuantitePoisson - MalusQualite();
+            SocialManager.instance.quantiteNourriture += QuantitePoisson - MalusQualite(EnvironnementManager.instance.qualiteEau);
+            Debug.Log(MalusQualite(EnvironnementManager.instance.qualiteEau));
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
             compteurbouffe.CompteurVariete.text = SocialManager.instance.nombreAlimentsDifferents.ToString();
             compteurbouffe.CompteurQualiteEau.text = EnvironnementManager.instance.qualiteEau.ToString("F1");
         }
+        qe = EnvironnementManager.instance.qualiteEau;
         Debug.Log("qe" + EnvironnementManager.instance.qualiteEau);
         Debug.Log("qn" + SocialManager.instance.quantiteNourriture);
         Debug.Log("v" + SocialManager.instance.nombreAlimentsDifferents);
@@ -214,15 +217,19 @@ public class Pecherie : MonoBehaviour
         if (habitant.ecoLevel == 3 && levelactuel < 3 )
         {
             SocialManager.instance.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
         }
         if (habitant.ecoLevel == 5 && levelactuel < 5)
         {
             SocialManager.instance.nombreAlimentsDifferents += 1;
+            varietepecherie += 1;
         }
         if (!limite1 && QE < 60 && SocialManager.instance.nombreAlimentsDifferents >1 )
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
-            GameManager.Listevariete.Remove(foodmanager.Findinlist("Truite"));
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
+
+            SocialManager.instance.Listevariete.Remove(foodmanager.Findinlist("Truite"));
+            
             varietepecherie -= 1;
             menuinfo.transform.GetChild(13).gameObject.SetActive(false);
             limite1 = true;
@@ -235,16 +242,16 @@ public class Pecherie : MonoBehaviour
         }
         if(limite1 && QE > 70)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Truite"));
+            SocialManager.instance.nombreAlimentsDifferents += 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Truite"));
             menuinfo.transform.GetChild(13).gameObject.SetActive(true) ;
             varietepecherie += 1;
             limite1 = false;
         }
         if (!limite2 && QE < 40 && SocialManager.instance.nombreAlimentsDifferents > 1)
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
             varietepecherie -= 1;
             menuinfo.transform.GetChild(12).gameObject.SetActive(false);
             limite2 = true;
@@ -257,16 +264,16 @@ public class Pecherie : MonoBehaviour
         }
         if (limite2 && QE > 50)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            SocialManager.instance.nombreAlimentsDifferents += 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
             menuinfo.transform.GetChild(12).gameObject.SetActive(true); ;
             varietepecherie += 1;
             limite2 = false;
         }
         if (!limite3 && QE < 20 && SocialManager.instance.nombreAlimentsDifferents > 1)
         {
-            GameManager.socialManager.nombreAlimentsDifferents -= 1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.nombreAlimentsDifferents -= 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
             menuinfo.transform.GetChild(11).gameObject.SetActive(false);
             varietepecherie -= 1;
             limite3 = true;
@@ -279,8 +286,8 @@ public class Pecherie : MonoBehaviour
         }
         if (limite3 && QE > 30)
         {
-            GameManager.socialManager.nombreAlimentsDifferents += 1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.nombreAlimentsDifferents += 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
             menuinfo.transform.GetChild(11).gameObject.SetActive(true);
             varietepecherie += 1;
             limite3 = false;
@@ -292,23 +299,23 @@ public class Pecherie : MonoBehaviour
     {
         if (habitant.ecoLevel < 3)
         {
-            GameManager.socialManager.nombreAlimentsDifferents+=1;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.nombreAlimentsDifferents +=1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
             varietepecherie += 1;
         }
         if(habitant.ecoLevel <5 && habitant.ecoLevel >=3)
         {
-            GameManager.socialManager.nombreAlimentsDifferents+=2;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            SocialManager.instance.nombreAlimentsDifferents +=2;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
             varietepecherie += 2;
         }
         if(habitant.ecoLevel == 5)
         {
-            GameManager.socialManager.nombreAlimentsDifferents +=3;
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Carpe"));
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Brochet"));
-            GameManager.Listevariete.Add(foodmanager.Findinlist("Truite"));
+            SocialManager.instance.nombreAlimentsDifferents +=3;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Truite"));
             varietepecherie += 3;
         }
         levelactuel = habitant.ecoLevel;
@@ -347,9 +354,9 @@ public class Pecherie : MonoBehaviour
 
     } //Quantité max que le pecheur peut produire selon son level
 
-    int MalusQualite()
+    int MalusQualite(float QE)
     {
-        float QE = EnvironnementManager.instance.qualiteEau;
+        //float QE = EnvironnementManager.instance.qualiteEau;
         if(QE >= 80)
         {
             return 0;
@@ -452,6 +459,7 @@ public class Pecherie : MonoBehaviour
 
     public void FctInfo()
     {
+
         if (habitant == null)
         {
             menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = null;
@@ -489,6 +497,8 @@ public class Pecherie : MonoBehaviour
         }
         else
         {
+ 
+
             menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
             menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
             menuinfo.transform.GetChild(4).gameObject.SetActive(false);

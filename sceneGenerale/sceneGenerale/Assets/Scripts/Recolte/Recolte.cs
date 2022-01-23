@@ -429,7 +429,7 @@ public class Recolte : MonoBehaviour
                 Debug.Log("bouleau frêle");
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
                 if (UnityEngine.Random.Range(0, 1) > 0.5f) AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
-                Debug.Log(NbrPlace(Find))
+                //Debug.Log(NbrPlace(Find))
                 AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);

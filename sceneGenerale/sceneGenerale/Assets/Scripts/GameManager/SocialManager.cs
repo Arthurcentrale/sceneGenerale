@@ -25,6 +25,7 @@ public class SocialManager : MonoBehaviour
     public float qualiteDeVie;
 
     public int nombreAlimentsDifferents;
+    public List<Item> Listevariete;
 
     public List<GameObject> listeBatiment;  //copie de la liste des batiments de DeveloppementManager qu'on va update avec la fonction MajSocial()
     public List<GameObject> habitants;      //copie de la liste des habitants de HabitantManager qu'on va update avec la fonction MajSocial()
