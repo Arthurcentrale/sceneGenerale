@@ -20,8 +20,6 @@ public class Maladie : MonoBehaviour
     private bool maladieSurDouglas=false;
     private bool maladieSurBouleau=false;
     
-    //Prefabs kun
-    public GameObject CheneMalade;  //Je vais plutôt passer par l'arbre manager en fait
 
     //Scripts
     private ArbreManager arbreManager; 
@@ -57,7 +55,7 @@ public class Maladie : MonoBehaviour
             var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)");
             var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene");
             var objects= objects1.Concat(objects2);
-            if (objects.Count()!=0){ //Pour éviter d'avoir des erreurs qui empêchent d'effectuer la sauvegarde
+            if (objects.Count()!=0){ //Pour éviter d'avoir des erreurs qui empêchent d'effectuer la sgarde
                 premierArbreMalade=objects.ElementAt(0);
                 RendreArbreMalade(premierArbreMalade,"Chene");
                 //premierArbreMalade.name="Chene Malade";

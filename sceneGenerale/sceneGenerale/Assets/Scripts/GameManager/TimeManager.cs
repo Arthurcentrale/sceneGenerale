@@ -142,6 +142,7 @@ public class TimeManager : MonoBehaviour
         //on vérifie d'abord que ya encore la maladie
         maladie.VérifierMaladie();
         if (maladie.maladieEnCours){
+            Debug.Log("maladie en cours");
             arbreManager.contaminationArbresPlus();
             maladie.ActualisationMaladie(maladie.essenceMalade);
         }

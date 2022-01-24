@@ -132,8 +132,9 @@ public class ArbreManager : MonoBehaviour
         arbres = GameObject.FindGameObjectsWithTag("Arbre");
         foreach(var arbre in arbres)
         {
-            if (name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            if (arbre.name.IndexOf("Malade", StringComparison.OrdinalIgnoreCase) >= 0)
             {
+                Debug.Log("arbre malade détecté toutes les 3 heures");
                 arbre.GetComponent<ArbreComportement>().contamination += 3;
 
                 arbre.GetComponent<ArbreComportement>().tuerArbreMalade();
