@@ -29,7 +29,7 @@ public class Mairie : MonoBehaviour
     void Update()
     {
         //mise a jour constante des valeurs des managers sur le livre
-        valeursManagers = new List<float> { EnvironnementManager.instance.qualiteAir, EnvironnementManager.instance.qualiteSol, EnvironnementManager.instance.qualiteEau, SocialManager.instance.qualiteDeVie, SocialManager.instance.ecoSensibilisation, DeveloppementManager.instance.navireConstruit };
+        //valeursManagers = new List<float> { EnvironnementManager.instance.qualiteAir, EnvironnementManager.instance.qualiteSol, EnvironnementManager.instance.qualiteEau, SocialManager.instance.qualiteDeVie, SocialManager.instance.ecoSensibilisation, DeveloppementManager.instance.navireConstruit };
 
         //--------//
         var ray = camera.ScreenPointToRay(Input.mousePosition);

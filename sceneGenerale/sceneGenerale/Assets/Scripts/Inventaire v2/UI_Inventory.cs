@@ -703,7 +703,6 @@ public class UI_Inventory : MonoBehaviour
             List<bool> favList = inventory.GetFavList();
             int count = 0;  //on compte le nombre de true qu'on rencontre
             int slot = 0;   //vraie position de l'item dans favList
-            Debug.Log(slotEquipé.ToString());
             while (count < slotEquipé)
             {
                 if (favList[slot]) count++;

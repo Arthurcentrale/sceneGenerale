@@ -233,6 +233,7 @@ public class MairieRenov : MonoBehaviour
         ecartTime = (int)(timeDepart - time);
         ouvrierOccupe.enabled = false;
         bulleInfo.gameObject.SetActive(false);
+        Debug.Log("mairie rénovée");
         mairie.SetActive(true);
         panel.SetActive(false);
         isMairieRenovee = true;
