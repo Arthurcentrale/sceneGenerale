@@ -70,6 +70,7 @@ public class MissionManager : MonoBehaviour
     {
         missionsContent.GetChild(CurrentMissions.IndexOf(mission)).Find("checkmark").gameObject.SetActive(true);
         totalCurrency += mission.Reward.Currency;
+        GameObject.Find("Goal Manager").GetComponent<GoalManager>().pointsGoals = 0;
         manageMissions();
     }
 
@@ -161,6 +162,7 @@ public class MissionManager : MonoBehaviour
         nettoyageRaccourciMission();
         Vector3 position = lieuMissionRaccourci.transform.position;
         position.y += 80;
+        int i = 0;
         foreach (var goal in mission.Goals)
         {
             GameObject goalObj = Instantiate(goalPrefabEpingle, position, rotation, lieuMissionRaccourci.transform);
@@ -170,8 +172,10 @@ public class MissionManager : MonoBehaviour
 
             if (goal.Completed)
             {
-                missionHolder.GetComponent<MissionWindow>().pointsGoals += goal.points;
+                GameObject.Find("Goal Manager").GetComponent<GoalManager>().pointsGoals += goal.points;
+                Debug.Log(goal.points);
                 goal.points = 0;
+                Debug.Log(goal.points);
                 countObj.SetActive(false);
                 goalObj.transform.Find("Done").gameObject.SetActive(true);
             }
@@ -180,8 +184,9 @@ public class MissionManager : MonoBehaviour
             {
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
-
+            if (i > GameObject.Find("Goal Manager").GetComponent<GoalManager>().pointsGoals) goalObj.SetActive(false);
             position.y -= 90;
+            i++;
         }
     }
 

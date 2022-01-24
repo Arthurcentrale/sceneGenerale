@@ -15,8 +15,6 @@ public class MissionWindow : MonoBehaviour
     public GameObject pageDroite;
     public GameObject pageGauche;
 
-    public int pointsGoals = 0;
-
     //[HideInInspector] public MissionManager missionManager;
 
     public void Initialize(Mission mission)
@@ -39,8 +37,10 @@ public class MissionWindow : MonoBehaviour
             
             if (goal.Completed)
             {
-                pointsGoals += goal.points;
+                GameObject.Find("Goal Manager").GetComponent<GoalManager>().pointsGoals += goal.points;
+                Debug.Log(goal.points);
                 goal.points = 0;
+                Debug.Log(goal.points);
                 countObj.SetActive(false);
                 goalObj.transform.Find("Done").gameObject.SetActive(true);
             }
@@ -49,7 +49,7 @@ public class MissionWindow : MonoBehaviour
             {
                 countObj.GetComponent<Text>().text = goal.CurrentAmount + "/" + goal.RequiredAmount;
             }
-            if (i > pointsGoals) goalObj.SetActive(false);
+            if (i > GameObject.Find("Goal Manager").GetComponent<GoalManager>().pointsGoals) goalObj.SetActive(false);
             placement.y -= 110;
             i++;
         }
