@@ -7,7 +7,7 @@ public class Ferme : MonoBehaviour
 {
     //Ouvrir UI
     public GameObject panel;
-    bool open;
+    public bool open;
     bool onPanel;
     Vector2 mP;
     new public Camera camera;
@@ -28,6 +28,8 @@ public class Ferme : MonoBehaviour
     public GameObject choixhabitant;
     public HabitantBehaviour habitant;
 
+    public int niveauAgriculteur;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class Ferme : MonoBehaviour
         textBlé.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
+
+        niveauAgriculteur = 0;
     }
 
     // Update is called once per frame
@@ -97,15 +101,71 @@ public class Ferme : MonoBehaviour
         Deplacement.enMenu = false;
     }
 
-    //Fonction quand on clique sur le bouton du milieu
-    
-    public void RendreOccupe()
+    ////////////////////////////
+    //Habitant//
+    ////////////////////////////
+
+    public void RendreOccupe() //Attribue le gameObject agriculteur à la ferme et le rend occupé
     {
+        GameObject go = GameObject.Find("agriculteur");
+        habitant = go.GetComponent<HabitantBehaviour>();
+        habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
+        InitVariete(habitant);
     }
 
+    void InitVariete(HabitantBehaviour habitant)
+    {
+        //faire pareil mais pour les nourritures de la ferme
+        /*
+        if (habitant.ecoLevel < 3)
+        {
+            SocialManager.instance.nombreAlimentsDifferents += 1;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            varietepecherie += 1;
+        }
+        if (habitant.ecoLevel < 5 && habitant.ecoLevel >= 3)
+        {
+            SocialManager.instance.nombreAlimentsDifferents += 2;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            varietepecherie += 2;
+        }
+        if (habitant.ecoLevel == 5)
+        {
+            SocialManager.instance.nombreAlimentsDifferents += 3;
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
+            SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Truite"));
+            varietepecherie += 3;
+        }
+        */
 
-    //CHOIX HABITANT
+        niveauAgriculteur = habitant.ecoLevel;
+    }
+
+    int GetLevel(HabitantBehaviour habitant) //Récupérer le level de l'agriculteur
+    {
+        if (habitant != null) return habitant.ecoLevel;
+        else return 0;
+    }
+
+    public void FctInfo()
+    {
+        Recap recap = this.GetComponent<Recap>();
+
+        if (habitant == null)
+        {
+            recap.MajHabitant(null, "Vacant");
+        }
+        else
+        {
+            recap.MajHabitant(habitant.image, habitant.nom);
+        }
+
+        panel.SetActive(false);
+        recap.OuvertureMenuRecap();
+    }
 
     public void FctChoix()
     {
@@ -130,9 +190,9 @@ public class Ferme : MonoBehaviour
         foreach (Transform child in habitant.transform)
         {
             HabitantBehaviour Behaviour = child.GetComponent<HabitantBehaviour>();
-            if (Behaviour.transform.name == "fermier")
+            if (Behaviour.transform.name == "agriculteur")
             {
-                if (Behaviour.hasWorkplace == false)
+                if (!Behaviour.hasWorkplace)
                 {
                     ha = child.gameObject;
                 }
@@ -147,9 +207,9 @@ public class Ferme : MonoBehaviour
         habitant = fermierDispo.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         isOccupied = true;
-        choixhabitant.SetActive(false);
-        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        panel.SetActive(true);
+        InitVariete(habitant);
+
+        Quitter();
     }
 
     public void Quitter()
@@ -157,6 +217,6 @@ public class Ferme : MonoBehaviour
         choixhabitant.SetActive(false);
         panel.SetActive(false);
         open = false;
-        animator.SetTrigger("ouverture1BulleCouper");
+        Deplacement.enMenu = false;
     }
 }
