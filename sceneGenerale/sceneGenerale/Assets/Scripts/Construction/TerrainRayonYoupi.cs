@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems; // pour le bug avec les bouttons 
@@ -17,6 +17,8 @@ public class TerrainRayonYoupi : MonoBehaviour
     public GameObject MaisonPierreDéplaçable;
     public GameObject GardeMangerDéplaçable;
     public GameObject FermeDéplaçable;
+
+    public GameObject EtabliDéplaçable;
 
     private bool jeToucheUnBouton = false; //pour éviter de déplacer le bâti quand je veux valider sa construction
     public Camera cam;
@@ -47,10 +49,7 @@ public class TerrainRayonYoupi : MonoBehaviour
 
             ///////////////////////////////////////  CHAUMIERE //////////////////////////////////////////
             if (BoutonMenu2.en_construction && BoutonMenu2.en_construction_Chaumière) // + Un bool pour chacun des bâtiments? ( ;_________; ) Oui :) et du coup en_construction est obsolète :) 
-            {   // ici je prends le bool en_construction qui se situe dans le script construction
-                //print("oui");
-                //print("ohayo");
-                //print(dir.y);
+            {   
                 ChaumièreDéplaçable = GameObject.Find("nouvelleChaumière");
                 if (!EventSystem.current.IsPointerOverGameObject())    // On ne déplace pas la chaumière si on clique sur un bouton ou autre objet gui
                 {
@@ -66,7 +65,6 @@ public class TerrainRayonYoupi : MonoBehaviour
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     PêcherieDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
-                    
                     
                 }
             }
@@ -232,11 +230,17 @@ public class TerrainRayonYoupi : MonoBehaviour
             }
 
 
-
+             //////////////////////////////// ETABLI //////////////////////////////////////
+            if (BoutonMenu2.en_construction && BoutonMenu2.en_construction_Etabli)
+            {
+                EtabliDéplaçable = GameObject.Find("nouvelleEtabli");
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    EtabliDéplaçable.gameObject.transform.localPosition = new Vector3(dir.x, dir.y + 5f, dir.z);
+                }
+            }
 
         }
         //moving = true;
     }
-
-    
 }

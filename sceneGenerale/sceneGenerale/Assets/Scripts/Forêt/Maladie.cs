@@ -52,8 +52,8 @@ public class Maladie : MonoBehaviour
         if (rand<probaMaladieChêne){
             // maladieSurChêne=true;
              print("maladieSurChêne");
-            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene(Clone)");
-            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Chene");
+            var objects1 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Chene(Clone)");
+            var objects2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Chene");
             var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){ //Pour éviter d'avoir des erreurs qui empêchent d'effectuer la sgarde
                 premierArbreMalade=objects.ElementAt(0);
@@ -74,8 +74,8 @@ public class Maladie : MonoBehaviour
         if (probaMaladieChêne<rand && rand<probaMaladieChêne+probaMaladieHêtre){
             // maladieSurHêtre=true;
              print("maladieSurHêtre");
-            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre(Clone)");
-            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Hetre");
+            var objects1 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Hetre(Clone)");
+            var objects2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Hetre");
             var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
@@ -96,8 +96,8 @@ public class Maladie : MonoBehaviour
         if (rand>probaMaladieChêne+probaMaladieHêtre && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin){
             // maladieSurPin=true;
              print("maladieSurPin");
-            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin(Clone)");
-            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Pin");
+            var objects1 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Pin(Clone)");
+            var objects2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Pin");
             var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
@@ -118,8 +118,8 @@ public class Maladie : MonoBehaviour
         if (rand>probaMaladieChêne+probaMaladieHêtre+probaMaladiePin && rand<probaMaladieChêne+probaMaladieHêtre+probaMaladiePin+probaMaladieDouglas){
             // maladieSurDouglas=true;
              print("maladieSurDouglas");
-            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas(Clone)");
-            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Douglas");
+            var objects1 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Douglas(Clone)");
+            var objects2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Douglas");
             var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
@@ -140,8 +140,8 @@ public class Maladie : MonoBehaviour
         if (rand>1-probaMaladieBouleau){
             // maladieSurBouleau=true;
              print("maladieSurBouleau");
-            var objects1 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau(Clone)");
-            var objects2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Bouleau");
+            var objects1 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Bouleau(Clone)");
+            var objects2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == "Bouleau");
             var objects= objects1.Concat(objects2);
             if (objects.Count()!=0){
                 premierArbreMalade=objects.ElementAt(0);
@@ -227,11 +227,11 @@ public class Maladie : MonoBehaviour
     }
 
     private GameObject PlusProcheGameObjectAvecNom(GameObject caca, string name1, string name2, string name3, string name4){ //pardon
-        var objectsprout = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name1);
-        var objectspipi = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name2);
+        var objectsprout = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == name1);
+        var objectspipi = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == name2);
         var objectscaca1=objectsprout.Concat(objectspipi);
-        var objectsprout2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name3);
-        var objectspipi2 = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == name4);
+        var objectsprout2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == name3);
+        var objectspipi2 = UnityEngine.Object.FindObjectsOfType<GameObject>().Where(obj => obj.name == name4);
         var objectscaca2=objectsprout2.Concat(objectspipi2);
         var objectscaca=objectscaca1.Concat(objectscaca2);
         if (objectscaca.Count()<=1){
@@ -244,6 +244,7 @@ public class Maladie : MonoBehaviour
             if (distancemini>Vector3.Distance(caca.transform.position,objectscaca.ElementAt(i).transform.position)){
                 distancemini=Vector3.Distance(caca.transform.position,objectscaca.ElementAt(i).transform.position);
                 gameObjectProche=objectscaca.ElementAt(i);
+                print(gameObjectProche.name);
             }
         }
         return(gameObjectProche);
