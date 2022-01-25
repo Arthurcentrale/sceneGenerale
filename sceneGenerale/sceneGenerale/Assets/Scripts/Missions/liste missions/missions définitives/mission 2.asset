@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8594116809319609536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a8dbbbf17a27440a0b25a2b8b39456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Building: "chaumi\xE8re"
+--- !u!114 &-7950740759206630249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba16f571b36f9944a75102d34970c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  habitant: Lisa
+--- !u!114 &-6908833344441786637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba16f571b36f9944a75102d34970c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 2
+  points: 2
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  habitant: Julien
+--- !u!114 &-5011722349289543616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a8dbbbf17a27440a0b25a2b8b39456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Building: "\xE9tabli"
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61233fa4068846a4d8c3f7da5c61d4d6, type: 3}
+  m_Name: mission 2
+  m_EditorClassIdentifier: 
+  Information:
+    Name: L'artisane
+    Icon: {fileID: 21300000, guid: 7714de1b16acc6d48b76c1186cf65f20, type: 3}
+    Description: "Il est l\u2019heure d\u2019accueillir le premier habitant de notre
+      future communaut\xE9 ! Le premier habitant de notre future communaut\xE9 ne
+      sera autre que Lisa, mon amie forgeronne et artisane de renom. Pour l\u2019accueillir
+      comme il se doit, je devrai parler \xE0 Julien \xE0 nouveau. "
+  Reward:
+    Currency: 10
+    XP: 10
+  Goals:
+  - {fileID: 6392041625056798701}
+  - {fileID: -7950740759206630249}
+  - {fileID: -6908833344441786637}
+  - {fileID: -5011722349289543616}
+  - {fileID: -8594116809319609536}
+--- !u!114 &6392041625056798701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba16f571b36f9944a75102d34970c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  habitant: Julien
