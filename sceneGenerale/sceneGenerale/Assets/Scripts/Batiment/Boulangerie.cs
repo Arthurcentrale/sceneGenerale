@@ -29,6 +29,8 @@ public class Boulangerie : MonoBehaviour
     public HabitantBehaviour habitant;
     public GameObject go;
 
+    bool ProdPainBleAvant = false;
+    bool ProdPainMaisAvant = false;
     int QuantitePainMais;
     int QuantitePainMaisNonValide;
     int QuantitePainBle;
@@ -121,46 +123,46 @@ public class Boulangerie : MonoBehaviour
         {
             if (habitant.ecoLevel == 1)
             {
-                return Math.Max(3, MoulinVent.StockFarineBle);
+                return Math.Min(3, MoulinVent.StockFarineBle);
             }
             if (habitant.ecoLevel == 2)
             {
-                return Math.Max(6, MoulinVent.StockFarineBle);
+                return Math.Min(6, MoulinVent.StockFarineBle);
             }
             if (habitant.ecoLevel == 3)
             {
-                return Math.Max(9, MoulinVent.StockFarineBle);
+                return Math.Min(9, MoulinVent.StockFarineBle);
             }
             if (habitant.ecoLevel == 4)
             {
-                return Math.Max(12, MoulinVent.StockFarineBle);
+                return Math.Min(12, MoulinVent.StockFarineBle);
             }
             else
             {
-                return Math.Max(15, MoulinVent.StockFarineBle);
+                return Math.Min(15, MoulinVent.StockFarineBle);
             }
         }
         else
         {
             if (habitant.ecoLevel == 1)
             {
-                return Math.Max(2, MoulinVent.StockFarineMais);
+                return Math.Min(2, MoulinVent.StockFarineMais);
             }
             if (habitant.ecoLevel == 2)
             {
-                return Math.Max(4, MoulinVent.StockFarineMais);
+                return Math.Min(4, MoulinVent.StockFarineMais);
             }
             if (habitant.ecoLevel == 3)
             {
-                return Math.Max(6, MoulinVent.StockFarineMais);
+                return Math.Min(6, MoulinVent.StockFarineMais);
             }
             if (habitant.ecoLevel == 4)
             {
-                return Math.Max(8, MoulinVent.StockFarineMais);
+                return Math.Min(8, MoulinVent.StockFarineMais);
             }
             else
             {
-                return Math.Max(10, MoulinVent.StockFarineMais);
+                return Math.Min(10, MoulinVent.StockFarineMais);
             }
         }
     }
@@ -203,6 +205,26 @@ public class Boulangerie : MonoBehaviour
         {
             CompteurBouffe.Data.NbrBouffe += QuantitePainBle;
             CompteurBouffe.Data.NbrBouffe += QuantitePainMais * 3;
+            if ((QuantitePainBle >= 3) & (ProdPainBleAvant = false))
+            {
+                SocialManager.instance.nombreAlimentsDifferents += 1;
+                ProdPainBleAvant = true;
+            }
+            if ((QuantitePainBle < 3) & (ProdPainBleAvant))
+            {
+                SocialManager.instance.nombreAlimentsDifferents -= 1;
+                ProdPainBleAvant = false;
+            }
+            if ((QuantitePainMais >= 2) & (ProdPainMaisAvant = false))
+            {
+                SocialManager.instance.nombreAlimentsDifferents += 1;
+                ProdPainMaisAvant = true;
+            }
+            if ((QuantitePainMais < 2) & (ProdPainMaisAvant))
+            {
+                SocialManager.instance.nombreAlimentsDifferents -= 1;
+                ProdPainMaisAvant = false;
+            }
         }
     }
 
@@ -318,12 +340,9 @@ public class Boulangerie : MonoBehaviour
         habitant = artisandispo.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         choixhabitant.SetActive(false);
-        if (habitant.isHoused == false)
-        {
-            panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-
-        }
-        panel.SetActive(true);
+        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        onPanel = false;
+        Deplacement.enMenu = false;
     }
 
     public void quitter()

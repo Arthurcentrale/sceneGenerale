@@ -36,6 +36,8 @@ public class MoulinEau : MonoBehaviour
     bool isBle = true;
     int QuantiteFarineNonValide;
     int QuantiteFarine;
+    public static int FarineBle;
+    public static int FarineMais;
     bool isEmpty;
 
     public GameObject menuinfo;
@@ -80,7 +82,7 @@ public class MoulinEau : MonoBehaviour
                     
                     //Ajouter update valeur max du slider, etc..
                     panel.transform.position = new Vector2(mP.x + panel.GetComponent<RectTransform>().rect.width, mP.y);
-                    panel.gameObject.SetActive(true);
+                    panel.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
 
@@ -177,13 +179,17 @@ public class MoulinEau : MonoBehaviour
     public void ValiderValeur()    // Fonction sur bouton quand on valide la quantité qu'on veut produire
     {
         QuantiteFarine = QuantiteFarineNonValide;
+        FarineBle = 0;
+        FarineMais = 0;
         if (isBle)
         {
-            MoulinVent.StockFarineBle += QuantiteFarine;
+            FarineBle = QuantiteFarine;
+
         }
         else
         {
-            MoulinVent.StockFarineMais += QuantiteFarine;
+            FarineMais = QuantiteFarine;
+            //CompteurBouffe.Data.NbrBouffe -= QuantiteFarine;
         }
         valider = true;
         StartCoroutine(Coroutine());
@@ -351,11 +357,9 @@ public class MoulinEau : MonoBehaviour
         habitant.hasWorkplace = true;
         isEmpty = false;
         choixhabitant.SetActive(false);
-        if (habitant.isHoused == false)
-        {
-            panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        }
-        panel.SetActive(true);
+        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        onPanel = false;
+        Deplacement.enMenu = false;
     }
 
     public void quitter()

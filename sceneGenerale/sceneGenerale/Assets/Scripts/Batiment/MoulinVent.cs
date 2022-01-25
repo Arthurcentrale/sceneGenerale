@@ -187,11 +187,11 @@ public class MoulinVent : MonoBehaviour
             QuantiteFarine = QuantiteFarineNonValide;
             if (isBle)
             {
-                StockFarineBle += QuantiteFarine;
+                StockFarineBle = QuantiteFarine + MoulinEau.FarineBle;
             }
             else
             {
-                StockFarineMais += QuantiteFarine;
+                StockFarineMais = QuantiteFarine + MoulinEau.FarineMais;
             }
             valider = true;
             StartCoroutine(Coroutine());
@@ -347,11 +347,9 @@ public class MoulinVent : MonoBehaviour
         habitant.hasWorkplace = true;
         isEmpty = false;
         choixhabitant.SetActive(false);
-        if (habitant.isHoused == false)
-        {
-            panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        }
-        panel.SetActive(true);
+        panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        Deplacement.enMenu = false;
+        onPanel = false;
     }
 
     public void quitter()
