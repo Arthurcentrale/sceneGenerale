@@ -46,6 +46,7 @@ public class Dialogue : MonoBehaviour
     private DialogueOuvrier dialogueOuvrier;
     private DialoguePecheur dialoguePecheur;
     private DialogueArtisan dialogueArtisan;
+    private DialogueAgriculteur dialogueAgriculteur;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class Dialogue : MonoBehaviour
         dialogueOuvrier = GameObject.Find("DialogueManager").GetComponent<DialogueOuvrier>();
         dialoguePecheur = GameObject.Find("DialogueManager").GetComponent<DialoguePecheur>();
         dialogueArtisan = GameObject.Find("DialogueManager").GetComponent<DialogueArtisan>();
+        dialogueAgriculteur = GameObject.Find("DialogueManager").GetComponent<DialogueAgriculteur>();
     }
 
     // Update is called once per frame
@@ -79,21 +81,21 @@ public class Dialogue : MonoBehaviour
                     ItemAmount.durability = 1000; //hache indestructible du début de jeu
                 }
             }
-            else if(numConvOuvrier > 1)
+            else if (numConvOuvrier > 1)
             {
                 dialogueOuvrier.dialogueOuvrier(texteBoiteDialogue);
             }
             ouvrier = false;
-            
-        } 
-        
-        else if (agriculteur && numConvAgriculteur == 1)
+
+        }
+
+        else if (agriculteur) 
         {
             missionManager.Talk("Josephine");
             texteBoiteDialogue.text = "Bonjour ! Je suis agricultrice. Les plants de tomates, ça m'épate ! Ceux de bêteraves, j'en bave ! Quant au blé... je vais t'en procurer ! Sur cette île, tout pousse ! De l'autre côté de l'océan, les sols sont tellement desséchés que j'en ai la frousse ";
             agriculteur = false;
-            
         }
+
         else if (artisan)
         {
             missionManager.Talk("Lisa");
