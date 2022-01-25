@@ -28,6 +28,17 @@ public class DeveloppementManager : MonoBehaviour
     {
         progression = 0;
         listeBatiment = new List<GameObject>();
+        UpdateListeBatiments();
         navireConstruit = 0;
+    }
+
+    public void UpdateListeBatiments()
+    {
+        listeBatiment = new List<GameObject>();
+        foreach (Transform child in GameObject.Find("Batiments").transform)
+        {
+            GameObject go = child.gameObject;
+            if (go.activeSelf) listeBatiment.Add(go);
+        }
     }
 }

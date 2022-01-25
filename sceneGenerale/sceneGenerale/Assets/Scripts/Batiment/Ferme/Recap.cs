@@ -17,6 +17,10 @@ public class Recap : MonoBehaviour
     private Text tomateTxt;
     private Text raisinTxt;
 
+    private Image imageHabitant;
+    private Text textHabitant;
+
+
     void Start()
     {
         nbreParcelles = panelRecap.GetChild(0).gameObject.GetComponent<Text>();
@@ -28,6 +32,9 @@ public class Recap : MonoBehaviour
         saladeTxt = panelRecap.GetChild(4).GetChild(1).gameObject.GetComponent<Text>();
         tomateTxt = panelRecap.GetChild(5).GetChild(1).gameObject.GetComponent<Text>();
         raisinTxt = panelRecap.GetChild(6).GetChild(1).gameObject.GetComponent<Text>();
+
+        imageHabitant = panelRecap.GetChild(9).gameObject.GetComponent<Image>();
+        textHabitant = panelRecap.GetChild(10).gameObject.GetComponent<Text>();
     }
 
     public void MajMenuRecap(int parcellesUtilisees, int parcellesDispo, int CT, int CT_max, int ble, int mais, int salade, int tomate, int raisin)
@@ -44,6 +51,12 @@ public class Recap : MonoBehaviour
         raisinTxt.text = raisin.ToString();
     }
 
+    public void MajHabitant(Sprite img, string txt)
+    {
+        imageHabitant.sprite = img;
+        textHabitant.text = txt;
+    }
+
     public void OuvertureMenuRecap()
     {
         panelRecap.gameObject.SetActive(true);
@@ -52,5 +65,7 @@ public class Recap : MonoBehaviour
     public void FermetureMenuRecap()
     {
         panelRecap.gameObject.SetActive(false);
+        this.gameObject.GetComponent<Ferme>().open = false;
+        Deplacement.enMenu = false;
     }
 }

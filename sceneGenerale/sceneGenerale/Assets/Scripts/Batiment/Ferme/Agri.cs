@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Agri : MonoBehaviour
 {
-    public int niveauAgriculteur;
-
     //dimensions maxi du champ de parcelles autour de la ferme
     public static int xNbrParcelles;
     public static int yNbrParcelles;
@@ -17,12 +15,16 @@ public class Agri : MonoBehaviour
 
     private Animator animatorLivreActivite;
 
+    public int niveauAgriculteur;
+
     void Start()
     {
         xNbrParcelles = 7;
         yNbrParcelles = 5;
 
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
+
+        niveauAgriculteur = 2;
     }
 
     public void MajNiveau()
