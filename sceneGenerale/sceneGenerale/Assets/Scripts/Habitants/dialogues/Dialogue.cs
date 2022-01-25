@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    public Player player; //on veut recuperer le script inventaire sur le joueur
+    public RecetteCraft hache;
 
     private Text texteBoiteDialogue;
     private MissionManager missionManager;
@@ -43,15 +45,19 @@ public class Dialogue : MonoBehaviour
     //scripts de dialogues spécifiques de chaque PNJ
     private DialogueOuvrier dialogueOuvrier;
     private DialoguePecheur dialoguePecheur;
+    private DialogueArtisan dialogueArtisan;
+    private DialogueAgriculteur dialogueAgriculteur;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         missionManager = GameObject.Find("menuMissionsPageGauche").GetComponent<MissionManager>();
         texteBoiteDialogue = GameObject.Find("Boite").transform.GetChild(0).GetComponent<Text>();
         dialogueOuvrier = GameObject.Find("DialogueManager").GetComponent<DialogueOuvrier>();
-
-        dialoguePecheur = GameObject.Find("pecheur_OK").GetComponent<DialoguePecheur>();
+        dialoguePecheur = GameObject.Find("DialogueManager").GetComponent<DialoguePecheur>();
+        dialogueArtisan = GameObject.Find("DialogueManager").GetComponent<DialogueArtisan>();
+        dialogueAgriculteur = GameObject.Find("DialogueManager").GetComponent<DialogueAgriculteur>();
     }
 
     // Update is called once per frame
@@ -65,33 +71,41 @@ public class Dialogue : MonoBehaviour
     {
         if (ouvrier)
         {
+            missionManager.Talk("Julien");
             if (numConvOuvrier == 1)
             {
-                texteBoiteDialogue.text = " Tu en as mis du temps ! Cette île est vraiment merveilleuse, je n'avais pas vu autant d'arbres différents depuis... des années ! Regarde ce que j’ai trouvé au milieu de l’île. On pourrait en faire le centre du village si on la retape un peu. Apporte moi un peu de bois.";
-                
+                texteBoiteDialogue.text = " Tu en as mis du temps ! Cette île est vraiment merveilleuse, je n'avais pas vu autant d'arbres différents depuis... des années ! Regarde ce que j’ai trouvé au milieu de l’île. On pourrait en faire le centre du village si on la retape un peu. Prends cette hache et apporte moi un peu de bois.";
+                foreach (ItemAmount ItemAmount in hache.Results)
+                {
+                    player.inventory.AddItem(ItemAmount);
+                    ItemAmount.durability = 1000; //hache indestructible du début de jeu
+                }
             }
-            else if(numConvOuvrier > 1)
+            else if (numConvOuvrier > 1)
             {
                 dialogueOuvrier.dialogueOuvrier(texteBoiteDialogue);
             }
             ouvrier = false;
-            missionManager.Talk("ouvrier");
-        } 
-        
-        else if (agriculteur && numConvAgriculteur == 1)
+
+        }
+
+        else if (agriculteur) 
         {
+            missionManager.Talk("Josephine");
             texteBoiteDialogue.text = "Bonjour ! Je suis agricultrice. Les plants de tomates, ça m'épate ! Ceux de bêteraves, j'en bave ! Quant au blé... je vais t'en procurer ! Sur cette île, tout pousse ! De l'autre côté de l'océan, les sols sont tellement desséchés que j'en ai la frousse ";
             agriculteur = false;
-            missionManager.Talk("agriculteur");
         }
-        else if (artisan && numConvArtisan == 1)
+
+        else if (artisan)
         {
-            texteBoiteDialogue.text = "On a besoin d'un artisan ? ça tombe bien ! La responsable de l'établi, ici, c'est moi ! Si tu veux des outils faits maison, certifiés matériaux 100% naturels, sans colle chimique ou autre cochonnerie.. Viens me voir !";
+            missionManager.Talk("Lisa");
+            dialogueArtisan.dialogueArtisan(texteBoiteDialogue);
             artisan = false;
-            missionManager.Talk("artisan");
         }
+            
         else if (pecheur)
         {
+            missionManager.Talk("Gaetan");
             dialoguePecheur.animParler();
             if (numConvPecheur == 1)
             {
@@ -102,14 +116,15 @@ public class Dialogue : MonoBehaviour
                 dialoguePecheur.dialoguePecheur(texteBoiteDialogue);
             }
             pecheur = false;
-            missionManager.Talk("pêcheur");
+            
         }
         
         else if (boulanger && numConvBoulanger == 1)
         {
+            missionManager.Talk("Nicolas");
             texteBoiteDialogue.text = " Salut mon grand ! Pain au chocolat ou chocolatine ? Je plaisante ! Ce qui compte, c'est que mon pain est fait avec de la farine sans pesticide chimique ! Enfin... Je crois ?";
             boulanger = false;
-            missionManager.Talk("boulanger");
+            
         }
 
     }

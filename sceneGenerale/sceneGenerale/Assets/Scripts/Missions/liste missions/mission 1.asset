@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2992008709079807873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636cb25bd5d5ada4e8837b76c45c31fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RequiredAmount: 1
-  points: 3
-  GoalCompleted:
-    m_PersistentCalls:
-      m_Calls: []
-  Item: Hache
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,7 +21,6 @@ MonoBehaviour:
     XP: 10
   Goals:
   - {fileID: 8019791231116137154}
-  - {fileID: -2992008709079807873}
 --- !u!114 &8019791231116137154
 MonoBehaviour:
   m_ObjectHideFlags: 0

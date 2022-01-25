@@ -20,6 +20,8 @@ public class Crafting2 : MonoBehaviour
     public Button bFond;
     Button button; 
     public int Count;
+
+    [HideInInspector] public int dur = 5;
    
     // Start is called before the first frame update
     void Start()
@@ -125,7 +127,7 @@ public class Crafting2 : MonoBehaviour
             foreach (ItemAmount ItemAmount in recettecraft.Results)
             {
                 player.inventory.AddItem(ItemAmount);
-                ItemAmount.durability = 5;// on ajoute les résultats
+                ItemAmount.durability = dur;// on ajoute les résultats
             }
             Count = 0;
             text.text = Count.ToString() + " / " + maxCount(recettecraft).ToString();
