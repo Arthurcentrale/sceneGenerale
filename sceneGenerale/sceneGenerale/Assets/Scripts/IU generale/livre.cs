@@ -12,14 +12,16 @@ public class livre : MonoBehaviour
 
     //éléments principaux de l'IU
     private GameObject boutonConstruction;
-    private GameObject boutonInformations;
+    public GameObject boutonInformations;
     private GameObject boutonMissions;
     private GameObject boutonProgression;
     private GameObject menuConstruPageDroite;
     private GameObject menuConstruPageGauche;
     private GameObject menuMissionsPageGauche;
+    private GameObject menuMissionsPageDroite;
     private GameObject menuInfosPageGauche;
     private GameObject fermetureBouton;
+    private GameObject menuConstruction;
 
     //éléments plus spécifiques
     private Image nom;
@@ -36,6 +38,10 @@ public class livre : MonoBehaviour
     public Sprite nomPecherie;
     public Sprite nomMoulinEau;
     public Sprite nomBoulangerie;
+    public Sprite nomMoulinVent;
+    public Sprite nomPuit;
+    public Sprite nomVerrerie;
+    public Sprite nomDecharge;
 
     public Sprite descriptionChaumiere;
     public Sprite descriptionEtabli;
@@ -43,6 +49,10 @@ public class livre : MonoBehaviour
     public Sprite descriptionPecherie;
     public Sprite descriptionMoulinEau;
     public Sprite descriptionBoulangerie;
+    public Sprite descriptionMoulinVent;
+    public Sprite descriptionPuit;
+    public Sprite descriptionVerrerie;
+    public Sprite descriptionDecharge;
 
     //nombres
     public Sprite un;
@@ -71,20 +81,25 @@ public class livre : MonoBehaviour
     private bool info;
     private ScriptATHBatis athBati;
 
+    public GameObject boutonInventaire;
+    public GameObject favorisInventaire;
+
     // Start is called before the first frame update
     void Start()
     {
         animatorLivreFerme = GameObject.Find("LivreFerme").GetComponent<Animator>();
         animatorLivreOuvert = GameObject.Find("LivreOuvert").GetComponent<Animator>();
         boutonConstruction = GameObject.Find("ConstructionBouton");
-        boutonInformations = GameObject.Find("InformationBouton");
+
         boutonMissions = GameObject.Find("MissionBouton");
         boutonProgression = GameObject.Find("ProgressionBouton");
 
         menuConstruPageDroite = GameObject.Find("menuConstructionPageDroite");
         menuConstruPageGauche = GameObject.Find("menuConstructionPageGauche");
         menuMissionsPageGauche = GameObject.Find("menuMissionsPageGauche");
+        menuMissionsPageDroite = GameObject.Find("menuMissionsPageDroite");
         menuInfosPageGauche = GameObject.Find("menuInfosPageGauche");
+        menuConstruction = GameObject.Find("menuConstruction");
 
         fermetureBouton = GameObject.Find("FermetureBouton");
         nom = GameObject.Find("nom").GetComponent<Image>();
@@ -107,8 +122,10 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(true);
         boutonInformations.SetActive(true);
         menuConstruPageDroite.SetActive(false);
+        menuConstruction.SetActive(false);
         menuConstruPageGauche.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
+        menuMissionsPageDroite.SetActive(false);
         menuInfosPageGauche.SetActive(false);
         fermetureBouton.SetActive(true);
     }
@@ -116,35 +133,21 @@ public class livre : MonoBehaviour
     public void ouvertureMenuConstru()
     {
         menuConstruPageGauche.SetActive(true);
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        menuConstruction.SetActive(true);
+        ouvreNimporteQuelMenu();
         constru = true;
     }
 
     public void ouvertureMenuMissions()
     {
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        ouvreNimporteQuelMenu();
         menuMissionsPageGauche.SetActive(true);
         mission = true;
     }
 
     public void ouvertureMenuInfos()
     {
-        animatorLivreOuvert.SetTrigger("OuvertureComplete");
-        boutonConstruction.SetActive(false);
-        boutonMissions.SetActive(false);
-        boutonProgression.SetActive(false);
-        boutonInformations.SetActive(false);
-        fermetureBouton.SetActive(true);
+        ouvreNimporteQuelMenu();
         menuInfosPageGauche.SetActive(true);
         info = true;
     }
@@ -157,32 +160,31 @@ public class livre : MonoBehaviour
     public void fermetureLivre()
     {
         animatorLivreFerme.SetTrigger("Return");
-        if (constru || mission || info) 
+        if (constru || mission || info)
         {
             animatorLivreOuvert.SetTrigger("FermetureComplete");
         }
         else animatorLivreOuvert.SetTrigger("Fermeture");
 
         menuConstruPageGauche.SetActive(false);
+        menuConstruction.SetActive(false);
         menuMissionsPageGauche.SetActive(false);
+        menuMissionsPageDroite.SetActive(false);
         fermetureBouton.SetActive(false);
         constru = false;
         mission = false;
         info = false;
     }
 
-    //public void jeSuisUneMairieMalAimee()
-    //{
-    //    animatorLivreFerme.SetTrigger("Selected");
-    //    animatorLivreOuvert.SetTrigger("FermetureComplete");
 
-    //}
 
 
     public void construire()
     {
+        boutonInventaire.SetActive(false);
+        favorisInventaire.SetActive(false);
         if (constructeur == "chaumiere") fonctionsConstru.ConstruireChaumièreDepuisMenuConstruction();
-        else if (constructeur == "etabli") fonctionsConstru.ConstruireEtabliDepuisMenuConstruction();
+        else if (constructeur == "etabli") print("pas encore craftable");
         else if (constructeur == "ferme") fonctionsConstru.ConstruireFermeDepuisMenuConstruction();
         else if (constructeur == "pecherie") fonctionsConstru.ConstruirePêcherieDepuisMenuConstruction();
         else if (constructeur == "moulinEau") fonctionsConstru.ConstruireMoulinAEauDepuisMenuConstruction();
@@ -192,61 +194,137 @@ public class livre : MonoBehaviour
 
     public void chaumiere()
     {
+        affichagePageDroiteMenuConstru();
         print("chaumiere");
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
         selectivite(athBati.nombreItemOneChaumiere, athBati.nombreItemTwoChaumiere);
 
-
-
     }
 
     public void etabli()
     {
-        print("etabli");
-        nom.sprite = nomEtabli;
-        description.sprite = descriptionEtabli;
-        constructeur = "etabli";
-        
+        if (!athBati.etabliConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            print("etabli");
+            nom.sprite = nomEtabli;
+            description.sprite = descriptionEtabli;
+            constructeur = "etabli";
+        }
+
     }
 
     public void ferme()
     {
-        nom.sprite = nomFerme;
-        description.sprite = descriptionFerme;
-        constructeur = "ferme";
-        selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
+
+        if (!athBati.fermeConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomFerme;
+            description.sprite = descriptionFerme;
+            constructeur = "ferme";
+            selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
+        }
+
     }
 
     public void pecherie()
     {
-        nom.sprite = nomPecherie;
-        description.sprite = descriptionPecherie;
-        constructeur = "pecherie";
-        selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+        if (!athBati.pecherieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomPecherie;
+            description.sprite = descriptionPecherie;
+            constructeur = "pecherie";
+            selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+        }
+
     }
 
     public void moulinEau()
     {
-        nom.sprite = nomMoulinEau;
-        description.sprite = descriptionMoulinEau;
-        constructeur = "moulinEau";
-        selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+        if (!athBati.moulinEauConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomMoulinEau;
+            description.sprite = descriptionMoulinEau;
+            constructeur = "moulinEau";
+            selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+        }
+
     }
 
     public void boulangerie()
     {
-        nom.sprite = nomBoulangerie;
-        description.sprite = descriptionBoulangerie;
-        constructeur = "boulangerie";
-        selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+        if (!athBati.boulangerieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomBoulangerie;
+            description.sprite = descriptionBoulangerie;
+            constructeur = "boulangerie";
+            selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+        }
+
+    }
+
+    public void moulinVent()
+    {
+        if (!athBati.moulinVentConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomMoulinVent;
+            description.sprite = descriptionMoulinVent;
+            constructeur = "moulinVent";
+            selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+        }
+
+    }
+
+    public void puit()
+    {
+        if (athBati.puitConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomPuit;
+            description.sprite = descriptionPuit;
+            constructeur = "puit";
+            selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+        }
+
+    }
+
+    public void verrerie()
+    {
+        if (athBati.verrerieConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomVerrerie;
+            description.sprite = descriptionVerrerie;
+            constructeur = "verrerie";
+            selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
+        }
+
+    }
+
+    public void decharge()
+    {
+        if (athBati.dechargeConstruit)
+        {
+            affichagePageDroiteMenuConstru();
+            nom.sprite = nomDecharge;
+            description.sprite = descriptionDecharge;
+            constructeur = "decharge";
+            selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
+        }
+
     }
 
 
     public void selectivite(int premier, int second)
     {
-        if (premier == 1) qteR1.sprite = un; 
+        if (premier == 1) qteR1.sprite = un;
         else if (premier == 2) qteR1.sprite = deux;
         else if (premier == 3) qteR1.sprite = trois;
         else if (premier == 4) qteR1.sprite = quatre;
@@ -278,4 +356,16 @@ public class livre : MonoBehaviour
         else if (second == 14) qteR2.sprite = quatorze;
         else if (second == 15) qteR2.sprite = quinze;
     }
+
+    private void ouvreNimporteQuelMenu()
+    {
+        animatorLivreOuvert.SetTrigger("OuvertureComplete");
+        boutonConstruction.SetActive(false);
+        boutonMissions.SetActive(false);
+        boutonProgression.SetActive(false);
+        boutonInformations.SetActive(false);
+        fermetureBouton.SetActive(true);
+    }
+
+
 }
