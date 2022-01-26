@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: mission 2
   m_EditorClassIdentifier: 
   Information:
-    Name: mission 2
+    Name: "Fabriquons une chaumi\xE8re"
     Icon: {fileID: 21300000, guid: 7714de1b16acc6d48b76c1186cf65f20, type: 3}
-    Description: coucou je suis un test nul
+    Description: "L'heur est venue pour moi de construire les premi\xE8res maisons
+      de ma communaut\xE9. Je vais commencer par deux chaumi\xE8res, et puis apr\xE8s
+      on verra."
   Reward:
     Currency: 10
     XP: 10
@@ -34,6 +36,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RequiredAmount: 2
+  points: 0
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
