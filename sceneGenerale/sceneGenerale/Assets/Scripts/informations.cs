@@ -47,14 +47,11 @@ public class informations : MonoBehaviour
         qeau = EnvironnementManager.instance.qualiteEau;
         qair = EnvironnementManager.instance.qualiteAir;
         qsol = EnvironnementManager.instance.qualiteSol;
-        qeau = 100f;
-        qair = 100f;
         quantiténourriture = SocialManager.instance.quantiteNourriture;
         varietenourriture = SocialManager.instance.nombreAlimentsDifferents;
-        listeinfos.Push(Associer(boolenrien));
+        listeinfos = Ajouterliste(boolenrien);
         // ???? quantitéchauffage = GameManager.socialManager.chauffage
     }
-
     public void ClickInfo()
     {
         Stack<string> ancienneliste = new Stack<string>(listeinfos);
