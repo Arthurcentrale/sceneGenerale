@@ -715,13 +715,16 @@ public class GameHandler : MonoBehaviour
         List<string> listeNoms = gameData.listeNomsItems;
         List<int> listeQuantites = gameData.listeAmountItems;
 
+        /*
         for (int i = 0; i < gameData.listeAmountItems.Count; i++)
         {
             listeItems.Add(new ItemAmount(Item: Resources.Load("items/" + listeNoms[i], typeof(Item)) as Item, Amount: listeQuantites[i]));
         }
+        */
 
         // Demarrage de l'inventaire
-        player.createInventory(listeItems, gameData.listeFavoris);
+        //player.createInventory(listeItems, gameData.listeFavoris);
+        player.createInventory(listeItems, new List<bool>());
         inventory = player.inventory;
         BuildingLayerMag.updateBatLayers();
     }
