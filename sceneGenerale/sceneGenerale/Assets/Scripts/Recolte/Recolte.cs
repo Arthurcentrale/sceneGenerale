@@ -446,8 +446,14 @@ public class Recolte : MonoBehaviour
             else
             {
                 if (ui_inventory.NbrPlace(boisF) >= 5) AjouterInventaire(boisF, 5);
-                AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
+                if (ui_inventory.NbrPlace(FindIteminList("GraineBouleau")) > 1)
+                {
+                    Debug.Log("graine");
+                    AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                }
+
+
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
         }
@@ -855,10 +861,28 @@ public class Recolte : MonoBehaviour
         int i = 0;
         foreach(Item item in itemlist)
         {
-            if (item.name == itemname) return i;
+            if (item.name == itemname)
+            {
+                return i;;
+            }
             i++;
         }
         return itemlist.Count + 1;
+    }
+    Item FindIteminList(string itemname)
+    {
+        Item itemreturn = new Item();
+        foreach(Item item in itemlist)
+        {
+            if(item.name == itemname)
+            {
+                Debug.Log("trouvé" + item.name);
+                return item;
+            }
+        }
+        Debug.Log("pas trouvé");
+        return null;
+
     }
 
     int FindPrefabinList(string prefabname)

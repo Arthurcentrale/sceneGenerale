@@ -99,6 +99,7 @@ public class Inventory
                     itemList.Add(new ItemAmount(Item: item.Item, Amount: x % p));
                 }
             }
+            //Debug.Log("Ajouté" + item.Amount + "   " + item.Item.name);
             OnItemListChanged?.Invoke();
             return true;
         }

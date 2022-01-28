@@ -177,21 +177,23 @@ public class Pecherie : MonoBehaviour
             }
             // on doit enlever dans le compteur bouffe general l'ancienne valeur avant de rajouter la nouvelle
             //QuantitéPoisson vaut la valeur de la veille si on ne valide pas de nouvelle valeur donc c'est bon
-            SocialManager.instance.quantiteNourriture-= AnciennequantitePoisson - MalusQualite(qe);
-            Debug.Log(MalusQualite(qe));
+            int precedente = SocialManager.instance.quantiteNourriture;
+            SocialManager.instance.quantiteNourriture-= AnciennequantitePoisson + MalusQualite(qe);
+            Debug.Log("Précedente" + MalusQualite(qe)+"Quantité"+precedente);
             UpdateQE();
             UpdateVariete();
-            SocialManager.instance.quantiteNourriture += QuantitePoisson - MalusQualite(EnvironnementManager.instance.qualiteEau);
-            Debug.Log(MalusQualite(EnvironnementManager.instance.qualiteEau));
+            SocialManager.instance.quantiteNourriture += QuantitePoisson + MalusQualite(EnvironnementManager.instance.qualiteEau);
+            int nouvelle = QuantitePoisson - MalusQualite(EnvironnementManager.instance.qualiteEau);
+            Debug.Log("Nouvelle" + MalusQualite( EnvironnementManager.instance.qualiteEau)+"Quantité"+nouvelle);
             //On ne reinitialise aucune valeur car elle reste si le joueur décide de ne pas les modifier certains jours
             compteurbouffe.CBouffe.text = CompteurBouffe.Data.NbrBouffe.ToString();// On a pas changer la valeur de Quantité poisson par rapport à la veille, on doit juste vérifier la qualité de l'eau
             compteurbouffe.CompteurVariete.text = SocialManager.instance.nombreAlimentsDifferents.ToString();
             compteurbouffe.CompteurQualiteEau.text = EnvironnementManager.instance.qualiteEau.ToString("F1");
         }
         qe = EnvironnementManager.instance.qualiteEau;
-        Debug.Log("qe" + EnvironnementManager.instance.qualiteEau);
+        /*Debug.Log("qe" + EnvironnementManager.instance.qualiteEau);
         Debug.Log("qn" + SocialManager.instance.quantiteNourriture);
-        Debug.Log("v" + SocialManager.instance.nombreAlimentsDifferents);
+        Debug.Log("v" + SocialManager.instance.nombreAlimentsDifferents);*/
 
     }
     public void RendreOccupe() //A modifier quand le pecheur sera implémenté
@@ -201,7 +203,6 @@ public class Pecherie : MonoBehaviour
         habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
         InitVariete(habitant);
-        Debug.Log("coucouc");
 
         // Si non, on affiche que personne est disponible
     }
@@ -383,7 +384,7 @@ public class Pecherie : MonoBehaviour
         }
         else
         {
-            return -6;
+            return 0;
         }
     } //Malus sur la production selon la qualité de l'eau
 
@@ -497,8 +498,7 @@ public class Pecherie : MonoBehaviour
         }
         else
         {
- 
-
+            UpdateVariete();
             menuinfo.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = habitant.image;
             menuinfo.transform.GetChild(3).gameObject.GetComponent<Text>().text = habitant.nom;
             menuinfo.transform.GetChild(4).gameObject.SetActive(false);
@@ -511,8 +511,14 @@ public class Pecherie : MonoBehaviour
             panel.SetActive(false);
             for (int i = 1; i < 4; i++)
             {
-                if (i <= varietepecherie) menuinfo.transform.GetChild(10 + i).gameObject.SetActive(true);
-                else menuinfo.transform.GetChild(10 + i).gameObject.SetActive(false);
+                if (i <= varietepecherie)
+                {
+                    menuinfo.transform.GetChild(10 + i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    menuinfo.transform.GetChild(10 + i).gameObject.SetActive(false);
+                }
             }
             menuinfo.SetActive(true);
 
