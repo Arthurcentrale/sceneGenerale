@@ -82,7 +82,7 @@ public class Planter : MonoBehaviour
 
     public static bool isOccupied;
 
-    public int nombreDeMais;
+    public static int nombreDeMais;
 
     void Start()
     {

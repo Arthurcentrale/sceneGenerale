@@ -189,7 +189,7 @@ public class MoulinEau : MonoBehaviour
         else
         {
             FarineMais = QuantiteFarine;
-            //CompteurBouffe.Data.NbrBouffe -= QuantiteFarine;
+            Planter.nombreDeMais -= QuantiteFarine;
         }
         valider = true;
         StartCoroutine(Coroutine());
