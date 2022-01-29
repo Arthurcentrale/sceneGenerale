@@ -18,6 +18,7 @@ public class Batiment : MonoBehaviour
     void Start()
     {
         quantiteNourriture = 0;
+        ressourcesProduction = new List<Item>();
     }
 
     public int productionFood()  //on regarde tous les items de la liste ressourcesProduction pour savoir la quantité de nourriture produite par le bâtiment

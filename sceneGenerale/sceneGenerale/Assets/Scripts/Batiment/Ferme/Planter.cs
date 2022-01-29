@@ -87,6 +87,12 @@ public class Planter : MonoBehaviour
     public Text textNombrePaille;
     private Batiment batiment;
 
+    //------SUREXPLOITATION/QUALITE_SOL------//
+
+    public int[,] anciennesCultureParcelles;  //Tableau qui garde en mémoire les cultures qu'il y avait sur les parcelles le jour précédent pour voir si ça a changé
+    public int[,] nbrJoursMemeCulture;        //Tableau qui contient le nombre de jours depuis lesquels on a la même culture sur une parcelle
+    public int[,] nbrJoursCultureParcelles;   //Tableau qui commpte juste le nombre de jour depuis lesquels on a une culture tout court sur la parcelle
+
     void Awake()
     {
         nombreDeMais = 0;
@@ -122,6 +128,13 @@ public class Planter : MonoBehaviour
         engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
         engraisDispo = 5;
+
+        anciennesCultureParcelles = new int[xNbrParcelles, yNbrParcelles];
+        for (int i = 0; i < xNbrParcelles * yNbrParcelles; i++) anciennesCultureParcelles[i % xNbrParcelles, i / xNbrParcelles] = -1;
+        nbrJoursMemeCulture = new int[xNbrParcelles, yNbrParcelles];
+        nbrJoursCultureParcelles = new int[xNbrParcelles, yNbrParcelles];
+
+        //MajNiveau();
     }
 
     void Update()
@@ -245,6 +258,7 @@ public class Planter : MonoBehaviour
         MajCT();
         cultureParcelles[x, y] = planteSelectionnee;
         MajQuantiteNourriture();
+        UpdateVariete();
     }
 
     public void EnleverCulture(int x, int y)    //On enlève la plante sélectionnée d'une certaine parcelle
@@ -416,11 +430,10 @@ public class Planter : MonoBehaviour
         return nbPlantes;
     }
 
-    /*
     void UpdateVariete()
     {
-        List<Item> plantesProduites = new List<Item>();
-        int[] plantes = new int[6] { 0, 0, 0, 0, 0, 0 };
+        List<Item> plantesProduites = new List<Item>();   //liste de variete des cultures
+        int[] plantes = new int[6] { 0, 0, 0, 0, 0, 0 };  //tableau où on note qu'on a déjà rencontré une culture
         int q;
 
         for (int i = 0; i < xNbrParcelles; i++)
@@ -428,19 +441,18 @@ public class Planter : MonoBehaviour
             for (int j = 0; j < yNbrParcelles; j++)
             {
                 q = cultureParcelles[i, j];
-                if (q >= 0)
+                if (q >= 0) //si il y a une plante sur cette parcelles
                 {
-                    if (plantes[q] == 0)
+                    if (plantes[q] == 0) //si on l'a pas déja ajoutée
                     {
-                        plantes[q] += 1;
-                        batiment.ressourcesProduction.Add(new Item //histoire de enum)
+                        plantes[q] += 1;  //on notifie dans le tableau qu'on la ajoutée
+                        plantesProduites.Add(Item.Create_Instance(Enum.GetName(typeof(Culture), q), true));  //et on l'ajoute dans la liste de variété
                     }
                 }
             }
         }
         batiment.ressourcesProduction = plantesProduites;
     }
-    */
 
     public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
     {
@@ -453,9 +465,43 @@ public class Planter : MonoBehaviour
         }
     }
 
-    public void MajQS()   //La qualité du sol augmente tous les jours de 0.1 à minuit
+    public void MajQS()   //Mise à jour de la qualité du sol tout les jours à minuit
     {
+        //Elle augmente d'abord naturellement de 0.1
         EnvironnementManager.instance.qualiteSol += 0.1f;
+
+        int q; //stocke la culture en train d'être traitée
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                q = cultureParcelles[i, j];
+                if (q >= 0) //si la parcelle est cultivée
+                {
+                    nbrJoursCultureParcelles[i, j] += 1;
+                    if (q == anciennesCultureParcelles[i, j]) //si c'est la même que le jour précédent
+                    {
+                        nbrJoursMemeCulture[i, j] += 1;
+                    }
+                    //Conséquences sur la qualité du sol :
+                    int n = nbrJoursCultureParcelles[i, j];
+                    if ((n >= 20) && ((n-20) % 10 == 0)) EnvironnementManager.instance.qualiteSol -= 1f; //on enleve 1 de QS si ça fait plus de 20 jours (et un mutliple de 10 depuis (0 inclu)) qu'on a une culture
+                    int m = nbrJoursMemeCulture[i, j];
+                    if ((m >= 10) && ((m - 10) % 6 == 0)) EnvironnementManager.instance.qualiteSol -= 1f; //on enleve 1 de QS si ça fait plus de 10 jours (et un mutliple de 6 depuis (0 inclu)) qu'on a la meme culture
+                }
+                else //si elle n'est pas cultivée
+                {
+                    nbrJoursCultureParcelles[i, j] = 0; //on reset
+                    if (q == anciennesCultureParcelles[i, j]) //si c'est la même que le jour précédent
+                    {
+                        nbrJoursMemeCulture[i, j] += 1;
+                    }
+                    //Conséquence sur la qualité du sol :
+                    if (nbrJoursMemeCulture[i,j] == 3) EnvironnementManager.instance.qualiteSol += 0.5f;  //Quand ça fait 3 jours qu'on a pas cultivé
+                }
+            }
+        }
+       // Array.Copy(cultureParcelles, anciennesCultureParcelles); //on reset les anciennes cultures avec les nouvelles
     }
 
     public void ToutesMAJ()

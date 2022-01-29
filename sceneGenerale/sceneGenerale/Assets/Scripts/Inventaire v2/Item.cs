@@ -14,15 +14,16 @@ public class Item : ScriptableObject
     public int durability;
 
 
-    public void Init(string ItemName)
+    public void Init(string ItemName, bool isFood)
     {
         this.ItemName = ItemName;
+        this.isFood = isFood;
     }
 
-    public static Item Create_Instance(string ItemName)
+    public static Item Create_Instance(string ItemName, bool isFood)
     {
         var data = ScriptableObject.CreateInstance<Item>();
-        data.Init(ItemName);
+        data.Init(ItemName, isFood);
         return data;
     }
 
