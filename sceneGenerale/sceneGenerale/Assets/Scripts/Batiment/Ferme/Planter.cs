@@ -87,6 +87,13 @@ public class Planter : MonoBehaviour
     public Text textNombrePaille;
     private Batiment batiment;
 
+    void Awake()
+    {
+        nombreDeMais = 0;
+        compteurPaille = 0;
+        batiment = this.GetComponent<Batiment>();
+    }
+
     void Start()
     {
         arrayCT = new int[7] { 10, 12, 15, 17, 20, 20, 0 };   //on met un 0 à la fin pour que quand planteSelectionee == 6, ça update la CT de 0 en appellant arrayCT[6]
@@ -115,10 +122,6 @@ public class Planter : MonoBehaviour
         engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
         engraisDispo = 5;
-
-        nombreDeMais = 0;
-        compteurPaille = 0;
-        batiment = this.GetComponent<Batiment>();
     }
 
     void Update()
@@ -195,7 +198,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
                 plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -205,7 +208,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -215,7 +218,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -225,7 +228,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -235,7 +238,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -322,6 +325,7 @@ public class Planter : MonoBehaviour
                 if (q == (int)Culture.Ble)
                 {
                     //coder un truc pour mettre de la paille dans le coffre
+                    //Debug.Log("ajout paille");
                     compteurPaille += 1;
                     MajCompteurPaille();
                 }
@@ -390,9 +394,11 @@ public class Planter : MonoBehaviour
         else textNombrePaille.text = "25";
     }
 
-    public void RecuperePaille()
+    public void RecuperePaille()  //quand on clique sur le bouton pour récupérer la paille
     {
-        
+        player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25)));   //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
+        compteurPaille = 0;  //on reset le compteur
+        MajCompteurPaille();
     }
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles
@@ -409,6 +415,32 @@ public class Planter : MonoBehaviour
         }
         return nbPlantes;
     }
+
+    /*
+    void UpdateVariete()
+    {
+        List<Item> plantesProduites = new List<Item>();
+        int[] plantes = new int[6] { 0, 0, 0, 0, 0, 0 };
+        int q;
+
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                q = cultureParcelles[i, j];
+                if (q >= 0)
+                {
+                    if (plantes[q] == 0)
+                    {
+                        plantes[q] += 1;
+                        batiment.ressourcesProduction.Add(new Item //histoire de enum)
+                    }
+                }
+            }
+        }
+        batiment.ressourcesProduction = plantesProduites;
+    }
+    */
 
     public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
     {
@@ -438,7 +470,7 @@ public class Planter : MonoBehaviour
         if (engraisSelectionne == 0) //chimique
         {
             engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
-            EnvironnementManager.instance.qualiteSol -= 0.5f;
+            EnvironnementManager.instance.qualiteSol -= 1f;
             EnvironnementManager.instance.qualiteEau -= 0.5f;
             return true;
         }

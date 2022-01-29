@@ -124,7 +124,7 @@ public class TimeManager : MonoBehaviour
         }
 
         //Mise à jour de la quantité de nourriture en fonction de ce qui est planté dans la ferme
-        planter.MajQuantiteNourriture();
+        planter.ToutesMAJ();
 
         //Garde Forestier
         //gfforet.graineDéjàDonnée=false;  //on reset la graine que donne le garde forestier
@@ -132,7 +132,7 @@ public class TimeManager : MonoBehaviour
         SocialManager.instance.MajSocial();
 
         //finir par maj le nbre de jours passés
-        nombreDeJoursPassés ++;
+        nombreDeJoursPassés++;
     }
 
     void Fonctions3Heures(){

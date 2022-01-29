@@ -9,7 +9,7 @@ public class Batiment : MonoBehaviour
     private List<ItemAmount> ressourcesDeposees;
     private bool ouvrierHere;
     private bool isWorking;
-    public List<ItemAmount> ressourcesProduction;
+    public List<Item> ressourcesProduction;
     public int quantiteNourriture;
     private string worker;
     public int chauffageNeed;

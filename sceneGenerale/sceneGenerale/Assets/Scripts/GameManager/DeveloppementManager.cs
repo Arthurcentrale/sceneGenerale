@@ -38,7 +38,7 @@ public class DeveloppementManager : MonoBehaviour
         foreach (Transform child in GameObject.Find("Batiments").transform)
         {
             GameObject go = child.gameObject;
-            if (go.activeSelf) listeBatiment.Add(go);
+            if (go.activeSelf && go.name != "PrefabDesBâtiments") listeBatiment.Add(go);
         }
     }
 }
