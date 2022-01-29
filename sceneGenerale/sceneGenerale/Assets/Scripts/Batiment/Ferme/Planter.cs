@@ -83,6 +83,9 @@ public class Planter : MonoBehaviour
     public static bool isOccupied;
 
     public int nombreDeMais;
+    private int compteurPaille;
+    public Text textNombrePaille;
+    private Batiment batiment;
 
     void Start()
     {
@@ -114,6 +117,8 @@ public class Planter : MonoBehaviour
         engraisDispo = 5;
 
         nombreDeMais = 0;
+        compteurPaille = 0;
+        batiment = this.GetComponent<Batiment>();
     }
 
     void Update()
@@ -236,6 +241,7 @@ public class Planter : MonoBehaviour
         }
         MajCT();
         cultureParcelles[x, y] = planteSelectionnee;
+        MajQuantiteNourriture();
     }
 
     public void EnleverCulture(int x, int y)    //On enlève la plante sélectionnée d'une certaine parcelle
@@ -247,6 +253,7 @@ public class Planter : MonoBehaviour
         Destroy(arrayPrefabsPlantes[x, y]);
         
         SelectionAucunePlante();
+        MajQuantiteNourriture();
     }
 
     private void MajCT()     //mise à jour de la quantité de travail, en fonction de la plante sélectionnée
@@ -297,8 +304,11 @@ public class Planter : MonoBehaviour
 
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
+        //D'abord on reset la quantité de nourriture produite dans le manager du batiement ferme
+        batiment.quantiteNourriture = 0;
+
         //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
-        SocialManager.instance.quantiteNourriture += nombreDeMais;
+        batiment.quantiteNourriture += nombreDeMais;
         //puis on reset cette variable et on va l'augmenter par la suite
         nombreDeMais = 0;
 
@@ -312,20 +322,21 @@ public class Planter : MonoBehaviour
                 if (q == (int)Culture.Ble)
                 {
                     //coder un truc pour mettre de la paille dans le coffre
-                    player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: 1));
+                    compteurPaille += 1;
+                    MajCompteurPaille();
                 }
 
                 // On regarde ensuite si il y a de l'engrais 
                 else if (engraisParcelles[i,j] > 0)
                 {
-                    SocialManager.instance.quantiteNourriture += arrayQN_max[q];
+                    batiment.quantiteNourriture += arrayQN_max[q];
                 }
 
                 else // Sinon on met les autres valeurs en prenant compte la pluriculture
                 {
                     if (q == (int)Culture.Ble)   //Blé sur parcelle
                     {
-                        SocialManager.instance.quantiteNourriture += q;
+                        batiment.quantiteNourriture += q;
 
                     }
                     else if (q == (int)Culture.Mais)   //Mais
@@ -352,9 +363,9 @@ public class Planter : MonoBehaviour
                         || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
                            )
                         {
-                            SocialManager.instance.quantiteNourriture += q + 1;
+                            batiment.quantiteNourriture += q + 1;
                         }
-                        else SocialManager.instance.quantiteNourriture += q;
+                        else batiment.quantiteNourriture += q;
                     }
                     else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
                     {
@@ -364,12 +375,24 @@ public class Planter : MonoBehaviour
                         else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
                         else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
 
-                        if (n > 1) SocialManager.instance.quantiteNourriture = q + 1;
-                        else SocialManager.instance.quantiteNourriture = q;
+                        if (n > 1) batiment.quantiteNourriture = q + 1;
+                        else batiment.quantiteNourriture = q;
                     }
                 }
             }
         }
+        SocialManager.instance.MajNourriture(); //on met a jour la quantité dans le manager global
+    }
+
+    void MajCompteurPaille()
+    {
+        if (compteurPaille <= 25) textNombrePaille.text = compteurPaille.ToString();
+        else textNombrePaille.text = "25";
+    }
+
+    public void RecuperePaille()
+    {
+        
     }
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles

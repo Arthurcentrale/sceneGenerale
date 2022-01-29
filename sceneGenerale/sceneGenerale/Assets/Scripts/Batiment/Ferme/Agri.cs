@@ -25,6 +25,8 @@ public class Agri : MonoBehaviour
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         niveauAgriculteur = 2;
+
+        MajNiveau();
     }
 
     public void MajNiveau()
