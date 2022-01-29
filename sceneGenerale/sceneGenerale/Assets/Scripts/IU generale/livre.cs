@@ -84,6 +84,8 @@ public class livre : MonoBehaviour
     public GameObject boutonInventaire;
     public GameObject favorisInventaire;
 
+    public GameObject dejaConstuit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -209,119 +211,146 @@ public class livre : MonoBehaviour
 
     public void etabli()
     {
-        if (!athBati.etabliConstruit)
+        affichagePageDroiteMenuConstru();
+        print("etabli");
+        nom.sprite = nomEtabli;
+        description.sprite = descriptionEtabli;
+        constructeur = "etabli";
+
+        if (athBati.etabliConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            print("etabli");
-            nom.sprite = nomEtabli;
-            description.sprite = descriptionEtabli;
-            constructeur = "etabli";
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void ferme()
     {
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomFerme;
+        description.sprite = descriptionFerme;
+        constructeur = "ferme";
+        selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
 
-        if (!athBati.fermeConstruit)
+        if (athBati.fermeConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomFerme;
-            description.sprite = descriptionFerme;
-            constructeur = "ferme";
-            selectivite(athBati.nombreItemOneFerme, athBati.nombreItemTwoFerme);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void pecherie()
     {
-        if (!athBati.pecherieConstruit)
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomPecherie;
+        description.sprite = descriptionPecherie;
+        constructeur = "pecherie";
+        selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+
+        if (athBati.pecherieConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomPecherie;
-            description.sprite = descriptionPecherie;
-            constructeur = "pecherie";
-            selectivite(athBati.nombreItemOnePecherie, athBati.nombreItemTwoPecherie);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void moulinEau()
     {
-        if (!athBati.moulinEauConstruit)
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomMoulinEau;
+        description.sprite = descriptionMoulinEau;
+        constructeur = "moulinEau";
+        selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+
+        if (athBati.moulinEauConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomMoulinEau;
-            description.sprite = descriptionMoulinEau;
-            constructeur = "moulinEau";
-            selectivite(athBati.nombreItemOneMoulinEau, athBati.nombreItemTwoMoulinEau);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void boulangerie()
     {
-        if (!athBati.boulangerieConstruit)
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomBoulangerie;
+        description.sprite = descriptionBoulangerie;
+        constructeur = "boulangerie";
+        selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+
+        if (athBati.boulangerieConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomBoulangerie;
-            description.sprite = descriptionBoulangerie;
-            constructeur = "boulangerie";
-            selectivite(athBati.nombreItemOneBoulangerie, athBati.nombreItemTwoBoulangerie);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void moulinVent()
     {
-        if (!athBati.moulinVentConstruit)
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomMoulinVent;
+        description.sprite = descriptionMoulinVent;
+        constructeur = "moulinVent";
+
+        selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+        if (athBati.moulinVentConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomMoulinVent;
-            description.sprite = descriptionMoulinVent;
-            constructeur = "moulinVent";
-            selectivite(athBati.nombreItemOneMoulinVent, athBati.nombreItemTwoMoulinVent);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void puit()
     {
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomPuit;
+        description.sprite = descriptionPuit;
+        constructeur = "puit";
+        selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+
         if (athBati.puitConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomPuit;
-            description.sprite = descriptionPuit;
-            constructeur = "puit";
-            selectivite(athBati.nombreItemOnePuit, athBati.nombreItemTwoPuit);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
+
 
     }
 
     public void verrerie()
     {
+
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomVerrerie;
+        description.sprite = descriptionVerrerie;
+        constructeur = "verrerie";
+        selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
         if (athBati.verrerieConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomVerrerie;
-            description.sprite = descriptionVerrerie;
-            constructeur = "verrerie";
-            selectivite(athBati.nombreItemOneVerrerie, athBati.nombreItemTwoVerrerie);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
     public void decharge()
     {
+
+        affichagePageDroiteMenuConstru();
+        nom.sprite = nomDecharge;
+        description.sprite = descriptionDecharge;
+        constructeur = "decharge";
+        selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
         if (athBati.dechargeConstruit)
         {
-            affichagePageDroiteMenuConstru();
-            nom.sprite = nomDecharge;
-            description.sprite = descriptionDecharge;
-            constructeur = "decharge";
-            selectivite(athBati.nombreItemOneDecharge, athBati.nombreItemTwoDecharge);
+            dejaConstruit();
         }
+        else GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = true;
 
     }
 
@@ -369,6 +398,13 @@ public class livre : MonoBehaviour
         boutonProgression.SetActive(false);
         boutonInformations.SetActive(false);
         fermetureBouton.SetActive(true);
+    }
+
+    private void dejaConstruit()
+    {
+        GameObject.Find("boutonConstruireMenuConstru").GetComponent<Button>().interactable = false;
+        dejaConstuit.SetActive(true);
+
     }
 
 

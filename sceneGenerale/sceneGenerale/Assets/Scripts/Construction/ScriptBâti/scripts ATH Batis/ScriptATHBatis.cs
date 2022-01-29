@@ -129,7 +129,7 @@ public class ScriptATHBatis : MonoBehaviour
 
     private Text ouvrierOccupe;
     private BoutonMenu2 Emptyscriptconstru;
-    public bool fermeConstruit = false;
+    [HideInInspector] public bool fermeConstruit = false;
     [HideInInspector] public bool pecherieConstruit = false;
     [HideInInspector] public bool moulinEauConstruit = false;
     [HideInInspector] public bool moulinVentConstruit = false;
