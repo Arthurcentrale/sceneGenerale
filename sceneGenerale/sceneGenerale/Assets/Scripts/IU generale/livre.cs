@@ -7,8 +7,8 @@ public class livre : MonoBehaviour
 {
 
     //animators du livre fermé et ouvert
-    private Animator animatorLivreFerme;
-    private Animator animatorLivreOuvert;
+    [HideInInspector] public Animator animatorLivreFerme;
+    [HideInInspector] public Animator animatorLivreOuvert;
 
     //éléments principaux de l'IU
     private GameObject boutonConstruction;
@@ -176,6 +176,10 @@ public class livre : MonoBehaviour
         info = false;
     }
 
+    public void cacherLivre()
+    {
+            animatorLivreOuvert.SetTrigger("FermetureComplete");
+    }
 
 
 

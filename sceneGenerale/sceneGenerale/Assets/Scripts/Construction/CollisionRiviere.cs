@@ -11,7 +11,7 @@ public class CollisionRiviere : MonoBehaviour
     public bool autorisation = false;
     // Start is called before the first frame update
 
-    /*
+    
     void Start()
     {
         if (name == "DetecteurRiviere")
@@ -68,7 +68,7 @@ public class CollisionRiviere : MonoBehaviour
     IEnumerator attendrelautre()
     {
         yield return new WaitForSeconds(0.1f);
-    }*/
+    }
 
     
 }

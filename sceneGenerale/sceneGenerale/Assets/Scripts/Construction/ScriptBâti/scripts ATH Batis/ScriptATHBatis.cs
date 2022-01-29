@@ -176,7 +176,7 @@ public class ScriptATHBatis : MonoBehaviour
             ConstructionInProgress();
         }
 
-        if ((int) (tempsConstruChaumiere - ecartTime) == 0) finirConstruction();
+        if ((int) (tempsConstruChaumiere - ecartTime) == 0 && !constructionTerminee) finirConstruction();
     }
 
     public void affectation()
@@ -351,7 +351,7 @@ public class ScriptATHBatis : MonoBehaviour
 
         else if (bati.CompareTag("BatiPêcherie"))
         {
-            Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z), pecherie.transform.rotation, dossierbatiments);
+            Instantiate(pecherie, new Vector3(bati.transform.position.x, 3.82f, bati.transform.position.z + 7), pecherie.transform.rotation, dossierbatiments);
             missionManager.Build("pêcherie");
             pecherieConstruit = true;
             nombreDeBâtimentsConstruits+=1;

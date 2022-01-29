@@ -191,12 +191,14 @@ public class BoutonMenu2 : MonoBehaviour
     // Dossier des batiments
     // Permet d'instantier chque batiment dedans
     private Transform dossierBatiments;
+    [HideInInspector] public livre livre;
 
     void Start()
     {
         dossierBatiments = GameObject.Find("Batiments").transform;
         ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
         batimentsConstruBoutons = GameObject.Find("menuConstructionPageGauche");
+        livre = GameObject.Find("Camera").GetComponent<livre>();
     }
 
     // Update is called once per frame
@@ -329,6 +331,7 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionChaumière.SetActive(true);
+        
 
 
 
@@ -373,6 +376,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -445,6 +449,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
+            livre.animatorLivreFerme.SetTrigger("Return");
 
         }
         
@@ -521,6 +526,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
+            livre.animatorLivreFerme.SetTrigger("Return");
         }
 
     }
@@ -599,6 +605,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -673,6 +680,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -751,6 +759,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -827,6 +836,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -902,6 +912,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -975,6 +986,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -1043,6 +1055,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -1112,6 +1125,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -1180,6 +1194,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
@@ -1245,6 +1260,7 @@ public class BoutonMenu2 : MonoBehaviour
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
+        livre.animatorLivreFerme.SetTrigger("Return");
     }
 
 
