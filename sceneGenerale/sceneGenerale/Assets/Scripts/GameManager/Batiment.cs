@@ -23,11 +23,11 @@ public class Batiment : MonoBehaviour
     public int productionFood()  //on regarde tous les items de la liste ressourcesProduction pour savoir la quantité de nourriture produite par le bâtiment
     {
         int prod = 0;
-        foreach(ItemAmount item in ressourcesProduction)
+        foreach(Item item in ressourcesProduction)
         {
-            if (item.Item.isFood)
+            if (item.isFood)
             {
-                prod += item.Item.GetPoints();
+                prod += item.GetPoints();
             }
         }
         return prod;
