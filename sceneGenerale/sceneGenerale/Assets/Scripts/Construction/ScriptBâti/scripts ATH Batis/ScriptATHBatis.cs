@@ -371,7 +371,8 @@ public class ScriptATHBatis : MonoBehaviour
             moulinEauConstruit = true;
             nombreDeBâtimentsConstruits+=1;
         }
-        
+        permettreConstru();
+        Emptyscriptconstru.acBoutonsConstru();
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z -6);
@@ -381,8 +382,6 @@ public class ScriptATHBatis : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int) (timeDepart - time);
-        permettreConstru();
-        Emptyscriptconstru.acBoutonsConstru();
         panel.SetActive(false);
 
 
@@ -390,6 +389,8 @@ public class ScriptATHBatis : MonoBehaviour
 
     public void abandonnerConstruction()
     {
+        permettreConstru();
+        Emptyscriptconstru.acBoutonsConstru();
         Destroy(bati.gameObject);
         ouvrier.GetComponent<Animator>().SetFloat("Construction", 0);
         ouvrier.transform.position = new Vector3(ouvrier.transform.position.x, ouvrier.transform.position.y, ouvrier.transform.position.z - 6);
@@ -400,9 +401,7 @@ public class ScriptATHBatis : MonoBehaviour
         BuildingLayerMag.updateBatLayers();
         timeDepart = time;
         ecartTime = (int)(timeDepart - time);
-        permettreConstru();
-        Emptyscriptconstru.acBoutonsConstru();
-        
+               
     }
 
     
@@ -410,6 +409,7 @@ public class ScriptATHBatis : MonoBehaviour
     public void permettreConstru()
     {
         ouvrierOccupe.enabled = false;
+        Debug.Log("permettreConstru");
     }
 
     //fonction pour ajouter un item à l'inventaire
