@@ -59,7 +59,7 @@ public class GFForet : MonoBehaviour
         textDialogue.text="Bonjour mon grand, je suis le garde forestier. J'adore les arbres! Sur ton île, il y a " +nombreChenes.ToString() + " chênes, "
         + nombreHetres.ToString()+ " hêtres, " +nombrePins.ToString() + " pins, " +nombreDouglas.ToString() + " douglas, et " +nombreBouleaux.ToString() + " bouleaux!";
         if (maladie.maladieEnCours){
-            textDialogue.text+= " Au fait, j'ai apperçu quelques " +maladie.essenceMalade+ "s malades ce matin. Débarasse-t-en le plus vite possible avant qu'ils ne disparaissent tous'!";
+            textDialogue.text+= " Au fait, j'ai apperçu quelques " +"arbre"+ "s malades ce matin. Débarasse-t-en le plus vite possible avant qu'ils ne disparaissent tous'!";  //maladie.essenceMalade
         }
         if (!graineDéjàDonnée){
             textDialogue.text+= " Tiens! Voilà une graine que j'ai trouvée tout à l'heure, j'espère qu'elle te sera utile! ";

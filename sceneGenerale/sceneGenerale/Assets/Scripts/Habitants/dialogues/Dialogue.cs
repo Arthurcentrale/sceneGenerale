@@ -12,6 +12,8 @@ public class Dialogue : MonoBehaviour
     private Text texteBoiteDialogue;
     private MissionManager missionManager;
 
+    public GFForet gfforet;
+
     //booléens pour savoir qui parle
     public bool ouvrier;
     public bool agriculteur;
@@ -125,6 +127,10 @@ public class Dialogue : MonoBehaviour
             texteBoiteDialogue.text = " Salut mon grand ! Pain au chocolat ou chocolatine ? Je plaisante ! Ce qui compte, c'est que mon pain est fait avec de la farine sans pesticide chimique ! Enfin... Je crois ?";
             boulanger = false;
             
+        }
+
+        else if (gardeForestier){
+            //gfforet.LancementDialogueGardeForestier();
         }
 
     }
