@@ -127,7 +127,7 @@ public class Utils : MonoBehaviour
 
         else
         {
-            return "Hetre arbuste";
+            return "Hetre Arbuste";
         }
     }
 }
