@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class scriptRepousse : MonoBehaviour
 {
-    public int debug = 0;
-
     // les deux prochaines variables sont en public pour l'instant (pour les tests) mais seront privées à terme
     private int nbArbresSurTerrain = 0;
     private int nbArbres; // correspond au nombre d'arbres qui pousseront à minuit
@@ -31,15 +29,12 @@ public class scriptRepousse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (debug == 1)
-        {
-            majMinuit();
-            debug = 2;
-        }
+
     }
 
     public void majMinuit()
     {
+        print("maj minuit");
         // On stocke tous les Arbres du terrain dans une liste
         GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
 
@@ -66,10 +61,10 @@ public class scriptRepousse : MonoBehaviour
         foreach (GameObject arbre in liste)
         {
             string name = arbre.name;
-            if (name.IndexOf("souche", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
+            /*if (name.IndexOf("souche", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("arbuste", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 continue;
-            }
+            }*/
 
             resTmp[index] = arbre;
             index++;
@@ -84,32 +79,26 @@ public class scriptRepousse : MonoBehaviour
     }
 
 
-    // Fonction qui prend en argument le nombre d'arbre sur le terrain et renvoie le nombre d'arbre qui pousseront à minuit de la prochaine nuit
+    // Fonction qui prend en argument le nombre d'arbres sur le terrain et renvoie le nombre d'arbres qui pousseront à minuit de la prochaine nuit
     private int fonctionRepousse(int nbArbresSurLeTerrain)
     {
-        if (nbArbresSurLeTerrain >= nbArbreMax)
-            return 0;
+        if (nbArbresSurLeTerrain >= 1 && nbArbresSurLeTerrain <= 25)
+        {
+            return 1;
+        }
+
+        else if (nbArbresSurLeTerrain >= 26 && nbArbresSurLeTerrain <= 50)
+        {
+            return 2;
+        }
+
+        else if (nbArbresSurLeTerrain >= 51 && nbArbresSurLeTerrain <= 75)
+        {
+            return 3;
+        }
 
         else
-        {
-            if (nbArbresSurLeTerrain >= 1 && nbArbresSurLeTerrain <= 25)
-            {
-                return 1;
-            }
-
-            else if (nbArbresSurLeTerrain >= 26 && nbArbresSurLeTerrain <= 50)
-            {
-                return 2;
-            }
-
-            else if (nbArbresSurLeTerrain >= 51 && nbArbresSurLeTerrain <= 75)
-            {
-                return 3;
-            }
-
-            else
-                return 0;
-        }
+            return 0;        
     }
 
     // Fonction qui fait pousser un arbre de manière cohérente par rapport à la forêt
@@ -137,7 +126,7 @@ public class scriptRepousse : MonoBehaviour
         // On choisit un élément de la liste au hasard (= procheObjet) et on place le nouvel objet à une distance (=dx et dy) au hasard également
 
         // On met des valeurs par défaut sinon la suite ne fonctionne pas mais ces valeurs peuvent être changées
-        int numProcheObjet = 3;
+        int numProcheObjet = 0;
         bool test = false;
         int dx = distanceDensite, dy = distanceDensite;
 
