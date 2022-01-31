@@ -10,32 +10,46 @@ public class ChangeSceneMairie : MonoBehaviour
     public GameObject loadingScreen;
     Player player;
     public Vector3 positiondevantmairie;
-    static Vector3 positionactuelle;
+    public Vector3 positiondansmairie;
+    bool inMairie;
     // Start is called before the first frame update
     void Start()
     {
+        inMairie = false;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //positionactuelle = player.transform.position;
-        if(positionactuelle != new Vector3(0, 0, 0))
-        {
-            player.transform.position = positionactuelle;
-        }
-        positionactuelle = new Vector3(0, 0, 0);
     }
 
+
+    public void  Changermentscene()
+    {
+        if (!inMairie)
+        {
+            StartCoroutine(FadeToBlackCoroutine());
+            player.transform.position = positiondansmairie;
+            inMairie =!inMairie;
+        }
+        else
+        {
+            StartCoroutine(FadeToBlackCoroutine());
+            player.transform.position = positiondevantmairie;
+            inMairie = !inMairie;
+        }
+    }
     public void EnterMairie()
     {
-        positiondevantmairie = player.transform.position;
+        
         StartCoroutine(FadeToBlackCoroutine());
-        loadingOperation = SceneManager.LoadSceneAsync("Mer i");
+        player.transform.position = positiondansmairie;
+        //loadingOperation = SceneManager.LoadSceneAsync("Mer i");
         //SceneManager.LoadScene("Mer i");
     }
 
     public void EnterIsland()
     {
-        positionactuelle = positiondevantmairie;
         StartCoroutine(FadeToBlackCoroutine());
-        loadingOperation = SceneManager.LoadSceneAsync("Island");
+        player.transform.position = positiondevantmairie;
+        //loadingOperation = SceneManager.LoadSceneAsync("Island");
 
         //SceneManager.LoadScene("Island");
     }
