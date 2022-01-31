@@ -333,6 +333,7 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionChaumière.SetActive(true);
+        boutonAnnulerConstruction.SetActive(true);
         
 
 
@@ -355,7 +356,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionChaumière.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
     }
 
 
@@ -400,7 +402,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionPêcherie.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -421,7 +424,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionPêcherie.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -478,7 +482,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMoulinAEau.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -499,7 +504,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMoulinAEau.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -560,7 +566,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMoulinAVent.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -581,7 +588,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMoulinAVent.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -635,7 +643,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionBoulangerie.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -656,7 +665,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionBoulangerie.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -714,7 +724,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionCabanon.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -735,7 +746,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionCabanon.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -791,7 +803,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionPuits.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -812,7 +825,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionPuits.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -867,7 +881,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionForge.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -888,7 +903,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionForge.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -941,7 +957,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionFosse.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -962,7 +979,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionFosse.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1010,7 +1028,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMaisonPierre.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1031,7 +1050,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionMaisonPierre.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1080,7 +1100,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionGardeManger.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1101,7 +1122,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionGardeManger.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1149,7 +1171,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionFerme.SetActive(true);
-
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1170,6 +1193,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionFerme.SetActive(true);
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1215,6 +1240,8 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionEtabli.SetActive(true);
+        boutonAnnulerConstruction.SetActive(true);
+        
 
 
 
@@ -1236,6 +1263,7 @@ public class BoutonMenu2 : MonoBehaviour
         boutonMenu.SetActive(true);
         boutonMenuEstAffiche = true;
         boutonValiderConstructionEtabli.SetActive(true);
+        boutonAnnulerConstruction.SetActive(true);
         
 
 

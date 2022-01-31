@@ -130,7 +130,8 @@ public class Dialogue : MonoBehaviour
         }
 
         else if (gardeForestier){
-            //gfforet.LancementDialogueGardeForestier();
+            gfforet.LancementDialogueGardeForestier();
+            gardeForestier=false;
         }
 
     }
