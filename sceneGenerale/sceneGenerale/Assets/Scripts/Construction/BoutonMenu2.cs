@@ -140,6 +140,8 @@ public class BoutonMenu2 : MonoBehaviour
 
 
     public GameObject player;
+
+    public GameObject boutonAnnulerConstruction;
     public bool boutonMenuEstAffiche = true;
     public bool MenuEstAffiche = false;
     public bool MenuConstructionEstAffiche = false;
@@ -1261,6 +1263,193 @@ public class BoutonMenu2 : MonoBehaviour
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+    }
+
+
+
+    public void AnnulerConstruction(){ //j'en fais qu'un seul
+        if (en_construction_Boulangerie){
+            Destroy(nouvelleBoulangerie);
+            en_construction=false;
+            en_construction_Boulangerie=false;
+            boutonValiderConstructionBoulangerie.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Cabanon){
+            Destroy(nouvelleCabanon);
+            en_construction=false;
+            en_construction_Cabanon=false;
+            boutonValiderConstructionCabanon.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Chaumière){
+            Destroy(nouvelleChaumière);
+            en_construction=false;
+            en_construction_Chaumière=false;
+            boutonValiderConstructionChaumière.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Etabli){
+            Destroy(nouvelleEtabli);
+            en_construction=false;
+            en_construction_Etabli=false;
+            boutonValiderConstructionEtabli.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Ferme){
+            Destroy(nouvelleFerme);
+            en_construction=false;
+            en_construction_Ferme=false;
+            boutonValiderConstructionFerme.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Forge){
+            Destroy(nouvelleForge);
+            en_construction=false;
+            en_construction_Forge=false;
+            boutonValiderConstructionForge.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Fosse){
+            Destroy(nouvelleFosse);
+            en_construction=false;
+            en_construction_Fosse=false;
+            boutonValiderConstructionFosse.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_GardeManger){
+            Destroy(nouvelleGardeManger);
+            en_construction=false;
+            en_construction_GardeManger=false;
+            boutonValiderConstructionGardeManger.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_MaisonPierre){
+            Destroy(nouvelleMaisonPierre);
+            en_construction=false;
+            en_construction_MaisonPierre=false;
+            boutonValiderConstructionMaisonPierre.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_MoulinAEau){
+            Destroy(nouvelleMoulinAEau);
+            en_construction=false;
+            en_construction_MoulinAEau=false;
+            boutonValiderConstructionMoulinAEau.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_MoulinAVent){
+            Destroy(nouvelleMoulinAVent);
+            en_construction=false;
+            en_construction_MoulinAVent=false;
+            boutonValiderConstructionMoulinAVent.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Puits){
+            Destroy(nouvellePuits);
+            en_construction=false;
+            en_construction_Puits=false;
+            boutonValiderConstructionPuits.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
+        if (en_construction_Pêcherie){
+            Destroy(nouvellePêcherie);
+            en_construction=false;
+            en_construction_Pêcherie=false;
+            boutonValiderConstructionPêcherie.SetActive(false);
+            boutonAnnulerConstruction.SetActive(false);
+            Deplacement.enMenu = false;
+            desacBoutonsConstru();
+            boutonInventaire.SetActive(true);
+            favorisInventaire.SetActive(true);
+            BuildingLayerMag.updateBatLayers();
+            livre.animatorLivreFerme.SetTrigger("Return");
+        }
+
     }
 
 
