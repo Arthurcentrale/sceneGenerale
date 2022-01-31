@@ -65,6 +65,7 @@ public class ChangeSceneMairie : MonoBehaviour
             fade -= 1.5f * Time.deltaTime;
             yield return null;
         } while (fade >= 0.0f);
+        loadingScreen.SetActive(false);
 
     }
     /*private void Awake()
