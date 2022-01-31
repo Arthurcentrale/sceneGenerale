@@ -23,11 +23,21 @@ public class BuildingLayerMag : MonoBehaviour
     {
         foreach (string nom in listeNomsBat)
         {
-            GameObject[] bats = GameObject.FindGameObjectsWithTag(nom);
+            GameObject[] bats = GameObject.FindGameObjectsWithTag(nom);            
+
             foreach (GameObject go in bats) {
 
                 if (go != null)
                 {
+                    if (nom == "Ferme")
+                    {
+                        int z = (int)go.transform.position[2];
+                        int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
+                        Renderer rend = go.GetComponent<SpriteRenderer>();
+                        rend.sortingOrder = abscisse + z;
+                        continue;
+                    }
+
                     if (nom == "MoulinVent")
                     {
                         GameObject bat = go.transform.GetChild(1).gameObject;
@@ -38,7 +48,9 @@ public class BuildingLayerMag : MonoBehaviour
                         {
                             Transform child = bat.transform.GetChild(i);
                             Renderer renderer = child.GetComponent<SpriteRenderer>();
+                            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
 
+                            /*
                             // Les bones n'ont pas de sprite renderer
                             if (child.name.IndexOf("bone", StringComparison.OrdinalIgnoreCase) >= 0)
                             {
@@ -56,7 +68,8 @@ public class BuildingLayerMag : MonoBehaviour
                             {
                                 renderer.sortingOrder = 880;
                             }
-                            renderer.sortingOrder -= posZ;
+                            */
+                            renderer.sortingOrder = abscisse + posZ;
                         }
 
                     }
@@ -64,15 +77,17 @@ public class BuildingLayerMag : MonoBehaviour
                     else if (nom == "Pecherie")
                     {
                         int z = (int)go.transform.position[2];
-                        Renderer rend = go.transform.GetComponent<SpriteRenderer>();
-                        rend.sortingOrder = 877 - z;
+                        int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
+                        Renderer rend = go.GetComponent<SpriteRenderer>();
+                        rend.sortingOrder = abscisse + z;
                     }
 
                     else
                     {
                         int z = (int)go.transform.position[2];
-                        Renderer rend = go.transform.GetChild(0).GetComponent<SpriteRenderer>();
-                        rend.sortingOrder = 877 - z;
+                        int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
+                        Renderer rend = go.GetComponent<SpriteRenderer>();
+                        rend.sortingOrder = abscisse + z;
                     }
                 }
             }
