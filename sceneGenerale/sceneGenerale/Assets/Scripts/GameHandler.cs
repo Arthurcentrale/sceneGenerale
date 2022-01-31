@@ -90,11 +90,11 @@ public class GameHandler : MonoBehaviour
 
         InitSauvegarde.initSauvegarde();
 
-        path = Application.persistentDataPath + "/Assets/sauvegarde";
+        path = Application.dataPath;
 
         Load();
         treeLayersMag.updateTreeLayers();
-        StartCoroutine(SaveGame());
+        //StartCoroutine(SaveGame());
     }
 
     // Update is called once per frame

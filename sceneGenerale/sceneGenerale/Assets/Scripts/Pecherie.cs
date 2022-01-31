@@ -225,7 +225,7 @@ public class Pecherie : MonoBehaviour
             SocialManager.instance.nombreAlimentsDifferents += 1;
             varietepecherie += 1;
         }
-        if (!limite1 && QE < 60 && SocialManager.instance.nombreAlimentsDifferents >1 )
+        if (!limite1 && QE < 60 && levelactuel ==5)
         {
             SocialManager.instance.nombreAlimentsDifferents -= 1;
 
@@ -249,7 +249,7 @@ public class Pecherie : MonoBehaviour
             varietepecherie += 1;
             limite1 = false;
         }
-        if (!limite2 && QE < 40 && SocialManager.instance.nombreAlimentsDifferents > 1)
+        if (!limite2 && QE < 40 && levelactuel >=3)
         {
             SocialManager.instance.nombreAlimentsDifferents -= 1;
             SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Brochet"));
@@ -271,7 +271,7 @@ public class Pecherie : MonoBehaviour
             varietepecherie += 1;
             limite2 = false;
         }
-        if (!limite3 && QE < 20 && SocialManager.instance.nombreAlimentsDifferents > 1)
+        if (!limite3 && QE < 20 && levelactuel>=1)
         {
             SocialManager.instance.nombreAlimentsDifferents -= 1;
             SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Carpe"));
