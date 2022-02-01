@@ -27,7 +27,7 @@ public class TimeManager : MonoBehaviour
     void Start()
     {
         arbreManager = GetComponent<ArbreManager>();
-        planter = GameObject.Find("Ferme").GetComponent<Planter>();
+        planter = GameObject.Find("Batiments").transform.GetChild(2).gameObject.GetComponent<Planter>();
         agri = GameObject.Find("Ferme").GetComponent<Agri>();
         maladie=GameObject.Find("Game Manager").GetComponent<Maladie>();
         //gfforet=GameObject.Find("Garde Forestier").transform.GetChild(2).GetComponent<GFForet>();

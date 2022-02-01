@@ -27,7 +27,6 @@ public class DeveloppementManager : MonoBehaviour
     private void Start()
     {
         progression = 0;
-        listeBatiment = new List<GameObject>();
         UpdateListeBatiments();
         navireConstruit = 0;
     }
