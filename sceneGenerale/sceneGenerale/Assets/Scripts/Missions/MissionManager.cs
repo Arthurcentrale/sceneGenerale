@@ -17,7 +17,7 @@ public class MissionManager : MonoBehaviour
 
     public int nombreMissions = 1;
     public int totalCurrency = 0;
-    private int gap = 7;
+    private int gap = 4;
 
     //objets liés au système d'épingle des missions
     public GameObject punaise;
@@ -119,7 +119,6 @@ public class MissionManager : MonoBehaviour
 
     private void updateMissionsWindow(Mission mission)
     {
-        print("heho");
         mission.Initialize();
         mission.MissionCompleted.AddListener(OnMissionCompleted);
 
