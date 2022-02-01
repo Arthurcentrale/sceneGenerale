@@ -23,6 +23,8 @@ public class Agri : MonoBehaviour
 
     public int niveauAgriculteur;
 
+    public bool menuOuvert;
+
     void Start()
     {
         xNbrParcelles = 7;
@@ -37,7 +39,8 @@ public class Agri : MonoBehaviour
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         //niveauAgriculteur = 2;
-
+        menuOuvert = false;
+        
         MajNiveau();
     }
 
@@ -79,6 +82,7 @@ public class Agri : MonoBehaviour
         lab.MajPrefabsLabourage();
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 
     public void EntreePlantage()
@@ -88,6 +92,7 @@ public class Agri : MonoBehaviour
         plan.enabled = true;
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 
     public void EntreeEngrais()
@@ -98,5 +103,6 @@ public class Agri : MonoBehaviour
         Planter.modeEngrais = true;
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 }

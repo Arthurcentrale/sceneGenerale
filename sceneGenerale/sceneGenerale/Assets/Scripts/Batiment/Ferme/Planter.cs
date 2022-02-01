@@ -539,6 +539,7 @@ public class Planter : MonoBehaviour
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 
     public void SortieEngrais()  //bouton vert
@@ -547,5 +548,6 @@ public class Planter : MonoBehaviour
         modeEngrais = false;
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 }

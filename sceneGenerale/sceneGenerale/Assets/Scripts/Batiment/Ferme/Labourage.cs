@@ -248,6 +248,7 @@ public class Labourage : MonoBehaviour
         //On cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
+        this.GetComponent<Agri>().menuOuvert = false;
 
     }
 
@@ -265,6 +266,6 @@ public class Labourage : MonoBehaviour
         //Puis on cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
-
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 }
