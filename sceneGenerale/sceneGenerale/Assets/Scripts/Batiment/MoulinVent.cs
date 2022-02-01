@@ -192,6 +192,7 @@ public class MoulinVent : MonoBehaviour
             else
             {
                 StockFarineMais = QuantiteFarine + MoulinEau.FarineMais;
+                Planter.nombreDeMais -= QuantiteFarine;
             }
             valider = true;
             StartCoroutine(Coroutine());
