@@ -64,7 +64,6 @@ public class Ferme : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
 
                 {
-                    Debug.Log("on a cliqué sur le panel ferme");
                     panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
@@ -219,5 +218,18 @@ public class Ferme : MonoBehaviour
         panel.SetActive(false);
         open = false;
         Deplacement.enMenu = false;
+        AfficherNouveauxBoutons();
+    }
+
+    private void AfficherNouveauxBoutons()
+    {
+        Transform infoBulle = panel.transform.GetChild(0);
+        //Le bouton allouer disparait et on affiche les autres
+        infoBulle.GetChild(0).gameObject.SetActive(true);
+        infoBulle.GetChild(1).gameObject.SetActive(true);
+        infoBulle.GetChild(2).gameObject.SetActive(true);
+        infoBulle.GetChild(3).gameObject.SetActive(true);
+        infoBulle.GetChild(4).gameObject.SetActive(true);
+        infoBulle.GetChild(5).gameObject.SetActive(false);
     }
 }

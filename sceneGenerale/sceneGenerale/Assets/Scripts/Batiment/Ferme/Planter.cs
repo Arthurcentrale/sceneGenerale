@@ -109,7 +109,6 @@ public class Planter : MonoBehaviour
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
 
-        capaciteTravail = 50;
         capaciteTravailUtilisee = 0;
 
         culture = 1;
