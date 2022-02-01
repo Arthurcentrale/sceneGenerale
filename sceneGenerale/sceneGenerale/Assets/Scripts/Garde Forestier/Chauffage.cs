@@ -80,7 +80,7 @@ public class Chauffage : MonoBehaviour
         textBesoinJournalier.text=scriptATHBatis.nombreDeBâtimentsConstruits.ToString(); //On va dire que ça marche je peux pas test je peux pas construire de bâtiment :)
         livreChauffage.SetActive(true);
         textNombreBoisChauffage.text=NombreBoisStockage().ToString();
-        Debug.Log(player.transform.name);
+        //Debug.Log(player.transform.name);
         //AjouterInventaire(boisR,1);
         nombreBoisFrêle=player.uiInventory.CountItem("Bois Frele");
         nombreBoisRobuste=player.uiInventory.CountItem("Bois");
@@ -99,6 +99,8 @@ public class Chauffage : MonoBehaviour
             RetirerInventaire(boisR,((int)(sliderBoisRobuste.value)));
             RetirerInventaire(boisF,((int)(sliderBoisFrêle.value)));
             livreChauffage.SetActive(false);
+            sliderBoisFrêle.value=0;
+            sliderBoisRobuste.value=0;
         }
         else{
             GameObject.Find("Popup").GetComponent<Popup>().popup("Vous n'avez pas assez d'espace de stockage");
@@ -107,6 +109,8 @@ public class Chauffage : MonoBehaviour
 
     public void boutonAnnuler(){
         livreChauffage.SetActive(false);
+        sliderBoisFrêle.value=0;
+        sliderBoisRobuste.value=0;
     }
 
         
