@@ -12,9 +12,10 @@ public class Mairie : MonoBehaviour
     private Animator animator;
     Player player;
     public GameObject PanelTableau;
+    public GameObject PanelBureau;
     List<float> valeursManagers;
 
-
+    TimeManager timemanager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Mairie : MonoBehaviour
         open = false;
         onPanel = false;
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
+        timemanager = GameObject.Find("GameManager").GetComponent<TimeManager>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,13 @@ public class Mairie : MonoBehaviour
                 {
                     FctTableau();
                     PanelTableau.gameObject.SetActive(true);
+                    open = true;
+                    Deplacement.enMenu = true;
+                }
+                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Bureau2"))
+                {
+                    FctBureau();
+                    PanelBureau.gameObject.SetActive(true);
                     open = true;
                     Deplacement.enMenu = true;
                 }
@@ -108,6 +117,18 @@ public class Mairie : MonoBehaviour
                 slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
             }
         }
+        Text text2 = jauges.GetChild(7).gameObject.GetComponent<Text>();
+
+        text2.text = timemanager.nombreDeJoursPassés.ToString();
         PanelTableau.SetActive(true);
+    }
+    public void FctBureau()
+    {
+        GameObject habitants = GameObject.Find("habitants");
+        foreach(Transform child in habitants.transform)
+        {
+            HabitantBehaviour behaviour = child.GetComponent<HabitantBehaviour>();
+
+        }
     }
 }
