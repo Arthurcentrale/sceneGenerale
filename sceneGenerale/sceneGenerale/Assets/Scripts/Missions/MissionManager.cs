@@ -17,7 +17,7 @@ public class MissionManager : MonoBehaviour
 
     public int nombreMissions = 1;
     public int totalCurrency = 0;
-    private int gap = 105;
+    private int gap = 7;
 
     //objets liés au système d'épingle des missions
     public GameObject punaise;
@@ -27,7 +27,7 @@ public class MissionManager : MonoBehaviour
     public GameObject lieuMissionRaccourci;
 
     //variables spatiales pour placer les missions dans le livre
-    private Vector3 placement = new Vector3(- 1440, 808, 0);
+    private Vector3 placement = new Vector3(0, 8, 0);
     private Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
 
@@ -119,10 +119,12 @@ public class MissionManager : MonoBehaviour
 
     private void updateMissionsWindow(Mission mission)
     {
+        print("heho");
         mission.Initialize();
         mission.MissionCompleted.AddListener(OnMissionCompleted);
 
         GameObject missionObj = Instantiate(missionPrefab, placement, rotation, missionsContent);
+        missionObj.transform.localPosition = placement;
         missionObj.transform.GetChild(0).GetComponent<Text>().text = mission.Information.Name;
         missionObj.transform.Find("Icon").GetComponent<Image>().sprite = mission.Information.Icon;
 
