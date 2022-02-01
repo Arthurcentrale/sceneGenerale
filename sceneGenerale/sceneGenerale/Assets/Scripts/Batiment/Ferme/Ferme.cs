@@ -64,6 +64,7 @@ public class Ferme : MonoBehaviour
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
 
                 {
+                    Debug.Log("on a cliqué sur le panel ferme");
                     panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
