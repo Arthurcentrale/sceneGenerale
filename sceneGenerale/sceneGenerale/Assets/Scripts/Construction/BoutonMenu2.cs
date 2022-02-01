@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -374,13 +374,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Chaumière = false;
         boutonValiderConstructionChaumière.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -449,13 +450,14 @@ public class BoutonMenu2 : MonoBehaviour
             en_construction_Pêcherie = false;
             boutonValiderConstructionPêcherie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
             Deplacement.enMenu = false;
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
 
             empecherConstru();
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
             livre.animatorLivreFerme.SetTrigger("Return");
+            boutonAnnulerConstruction.SetActive(false);
 
         }
         
@@ -528,13 +530,14 @@ public class BoutonMenu2 : MonoBehaviour
             en_construction_MoulinAEau = false;
             boutonValiderConstructionMoulinAEau.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
             Deplacement.enMenu = false;
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
 
             empecherConstru();
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
             livre.animatorLivreFerme.SetTrigger("Return");
+            boutonAnnulerConstruction.SetActive(false);
         }
 
     }
@@ -609,13 +612,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_MoulinAVent = false;
         boutonValiderConstructionMoulinAVent.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -686,13 +690,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Boulangerie = false;
         boutonValiderConstructionBoulangerie.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -767,13 +772,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Cabanon = false;
         boutonValiderConstructionCabanon.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -846,13 +852,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Puits = false;
         boutonValiderConstructionPuits.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -924,13 +931,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Forge = false;
         boutonValiderConstructionForge.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1000,13 +1008,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Fosse = false;
         boutonValiderConstructionFosse.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1071,13 +1080,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_MaisonPierre = false;
         boutonValiderConstructionMaisonPierre.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1143,13 +1153,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_GardeManger = false;
         boutonValiderConstructionGardeManger.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1215,13 +1226,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Ferme = false;
         boutonValiderConstructionFerme.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         empecherConstru();
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1284,13 +1296,14 @@ public class BoutonMenu2 : MonoBehaviour
         en_construction_Etabli = false;
         boutonValiderConstructionEtabli.SetActive(false); // on enlève le menu valider (oui yen a un pour chaque bâtiment oui :) :) :) :) )
         Deplacement.enMenu = false;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
 
         ouvrierOccupe.enabled = true;
         desacBoutonsConstru();
         boutonInventaire.SetActive(true);
         favorisInventaire.SetActive(true);
         livre.animatorLivreFerme.SetTrigger("Return");
+        boutonAnnulerConstruction.SetActive(false);
     }
 
 
@@ -1306,7 +1319,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1320,8 +1333,9 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
+            //prefabMoulinAVentDéplaçable("oui");
         }
 
         if (en_construction_Chaumière){
@@ -1334,7 +1348,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1348,7 +1362,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1362,7 +1376,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1376,7 +1390,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1390,7 +1404,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1404,7 +1418,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1418,7 +1432,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1432,7 +1446,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1446,7 +1460,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1460,7 +1474,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
@@ -1474,7 +1488,7 @@ public class BoutonMenu2 : MonoBehaviour
             desacBoutonsConstru();
             boutonInventaire.SetActive(true);
             favorisInventaire.SetActive(true);
-            BuildingLayerMag.updateBatLayers();
+            //BuildingLayerMag.updateBatLayers();
             livre.animatorLivreFerme.SetTrigger("Return");
         }
 
