@@ -186,6 +186,7 @@ public class BoutonMenu2 : MonoBehaviour
 
     private Text ouvrierOccupe;
     private GameObject batimentsConstruBoutons;
+    private ConstructionDebloquage construDeblocage;
 
     public GameObject boutonInventaire;
     public GameObject favorisInventaire;
@@ -201,6 +202,7 @@ public class BoutonMenu2 : MonoBehaviour
         ouvrierOccupe = GameObject.Find("TextOuvrierOccupe").GetComponent<Text>();
         batimentsConstruBoutons = GameObject.Find("menuConstructionPageGauche");
         livre = GameObject.Find("Camera").GetComponent<livre>();
+        construDeblocage = GameObject.Find("Camera").GetComponent<ConstructionDebloquage>();
     }
 
     // Update is called once per frame
@@ -305,14 +307,7 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void acBoutonsConstru()
     {
-        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(2))
-        {
-            child.gameObject.GetComponent<Button>().interactable = true;
-        }
-        foreach (Transform child in batimentsConstruBoutons.transform.GetChild(3))
-        {
-            child.gameObject.GetComponent<Button>().interactable = true;
-        }
+        construDeblocage.majConstruTotale();
     }
 
 
