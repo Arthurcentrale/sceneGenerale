@@ -72,7 +72,7 @@ public class GFForet : MonoBehaviour
         if(chauffage.boisDeChauffage>0){
             textDialogue.text+="Il reste encore des bûches pour nous chauffer. Surveillez le stock pour que nous ne tombions pas à court!";
         }
-        chauffage.AfficherChauffage();
+        //chauffage.AfficherChauffage();
         
     }
 

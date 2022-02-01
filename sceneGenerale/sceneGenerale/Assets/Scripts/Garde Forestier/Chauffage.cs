@@ -41,7 +41,7 @@ public class Chauffage : MonoBehaviour
         //ui_inventory = player.uiInventory; //à réécrire quand on ouvre le menu chauffage
         ui_inventory = ui_inventory.GetComponent<UI_Inventory>();
         scriptATHBatis=scriptATHBatis.GetComponent<ScriptATHBatis>() ;
-        AfficherChauffage();
+        //AfficherChauffage();
         
     }
 
@@ -103,6 +103,10 @@ public class Chauffage : MonoBehaviour
         else{
             GameObject.Find("Popup").GetComponent<Popup>().popup("Vous n'avez pas assez d'espace de stockage");
         }
+    }
+
+    public void boutonAnnuler(){
+        livreChauffage.SetActive(false);
     }
 
         

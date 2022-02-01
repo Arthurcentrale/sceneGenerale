@@ -130,6 +130,7 @@ public class Dialogue : MonoBehaviour
         }
 
         else if (gardeForestier){
+            print("oui");
             gfforet.LancementDialogueGardeForestier();
             gardeForestier=false;
         }
@@ -162,6 +163,12 @@ public class Dialogue : MonoBehaviour
         {
             boulanger = true;
             numConvBoulanger += 1;
+        }
+        else if (nomPanel.IndexOf("GardeForestier", StringComparison.OrdinalIgnoreCase) >= 0)
+        {
+            gardeForestier = true;
+            print("pipi");
+            //numConvBoulanger += 1;
         }
 
     }
