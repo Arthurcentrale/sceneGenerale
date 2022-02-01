@@ -66,6 +66,7 @@ public class Planter : MonoBehaviour
     public GameObject zoneBleuePf;    //on recupère aussi le prefab d'une parcelle juste pour avoir sa taille
     public Transform fermeTransform;   //Transform de la ferme
     private Vector3 sizeParcelle;      //taille des prefabs des parcelles
+    public float bordure;              //taille des bordures entre les parcelles
 
     public GameObject panelPlantage;
     public Slider slider;
@@ -122,7 +123,9 @@ public class Planter : MonoBehaviour
 
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
-        planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+        bordure = 2f;
+        sizeParcelle += new Vector3(bordure, 0f, bordure);
+        planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 3f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f)) + new Vector3(4f,0f,2f);
 
         engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
