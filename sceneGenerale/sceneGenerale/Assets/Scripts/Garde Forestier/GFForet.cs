@@ -111,6 +111,117 @@ public class GFForet : MonoBehaviour
         return(source);
     }
 
+    public int[] CompterLesArbresRobustes()
+    { //cette fonction compte tout ce qui a pour tag "arbre" donc les arbustes aussi il me semble (mais pas les souches!)
+        // On stocke tous les Arbres du terrain dans une liste
+        GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
+        //on initialise le nombre d'arbres à 0
+        int nombreChenesRobustes = 0;
+        int nombreHetresRobustes = 0;
+        int nombrePinsRobustes = 0;
+        int nombreDouglasRobustes = 0;
+        int nombreBouleauxRobustes = 0;
+        foreach (GameObject item in ListeGO)
+        {
+            if (item.name.IndexOf("chene", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) < 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) <0)
+            { //normalement on compte pas les souches puisqu'elles ont pas le tag arbre (à vérifier)
+                nombreChenesRobustes += 1;
+            }
+            if (item.name.IndexOf("hetre", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) < 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                nombreHetresRobustes += 1;
+            }
+            if (item.name.IndexOf("pin", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) < 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                nombrePinsRobustes += 1;
+            }
+            if (item.name.IndexOf("douglas", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) < 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                nombreDouglasRobustes += 1;
+            }
+            if (item.name.IndexOf("bouleau", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) < 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                nombreBouleauxRobustes += 1;
+            }
+
+        }
+        int[] source = { nombreChenesRobustes, nombreHetresRobustes, nombrePinsRobustes, nombreDouglasRobustes, nombreBouleauxRobustes};
+        return (source);
+    }
+    public int[] CompterLesArbresMalades()
+    { //cette fonction compte tout ce qui a pour tag "arbre" donc les arbustes aussi il me semble (mais pas les souches!)
+        // On stocke tous les Arbres du terrain dans une liste
+        GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
+        //on initialise le nombre d'arbres à 0
+        int nombreChenesMalade = 0;
+        int nombreHetresMalade = 0;
+        int nombrePinsMalade = 0;
+        int nombreDouglasMalade = 0;
+        int nombreBouleauxMalade = 0;
+        foreach (GameObject item in ListeGO)
+        {
+            if (item.name.IndexOf("chene", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >= 0 )
+            { //normalement on compte pas les souches puisqu'elles ont pas le tag arbre (à vérifier)
+                nombreChenesMalade += 1;
+            }
+            if (item.name.IndexOf("hetre", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                nombreHetresMalade += 1;
+            }
+            if (item.name.IndexOf("pin", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                nombrePinsMalade += 1;
+            }
+            if (item.name.IndexOf("douglas", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >=0)
+            {
+                nombreDouglasMalade += 1;
+            }
+            if (item.name.IndexOf("bouleau", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("malade", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                nombreBouleauxMalade += 1;
+            }
+
+        }
+        int[] source = { nombreChenesMalade, nombreHetresMalade, nombrePinsMalade, nombreDouglasMalade, nombreBouleauxMalade };
+        return (source);
+    }
+    public int[] CompterLesArbresFrele()
+    { //cette fonction compte tout ce qui a pour tag "arbre" donc les arbustes aussi il me semble (mais pas les souches!)
+        // On stocke tous les Arbres du terrain dans une liste
+        GameObject[] ListeGO = GameObject.FindGameObjectsWithTag("Arbre");
+        //on initialise le nombre d'arbres à 0
+        int nombreChenesMalade = 0;
+        int nombreHetresMalade = 0;
+        int nombrePinsMalade = 0;
+        int nombreDouglasMalade = 0;
+        int nombreBouleauxMalade = 0;
+        foreach (GameObject item in ListeGO)
+        {
+            if (item.name.IndexOf("chene", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            { //normalement on compte pas les souches puisqu'elles ont pas le tag arbre (à vérifier)
+                nombreChenesMalade += 1;
+            }
+            if (item.name.IndexOf("hetre", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                nombreHetresMalade += 1;
+            }
+            if (item.name.IndexOf("pin", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) >+ 0)
+            {
+                nombrePinsMalade += 1;
+            }
+            if (item.name.IndexOf("douglas", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) >+ 0)
+            {
+                nombreDouglasMalade += 1;
+            }
+            if (item.name.IndexOf("bouleau", StringComparison.OrdinalIgnoreCase) >= 0 && item.name.IndexOf("frele", StringComparison.OrdinalIgnoreCase) >+ 0)
+            {
+                nombreBouleauxMalade += 1;
+            }
+
+        }
+        int[] source = { nombreChenesMalade, nombreHetresMalade, nombrePinsMalade, nombreDouglasMalade, nombreBouleauxMalade };
+        return (source);
+    }
 
 
 
