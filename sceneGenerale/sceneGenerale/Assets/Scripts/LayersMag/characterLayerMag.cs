@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class characterLayerMag : MonoBehaviour
 {
@@ -23,8 +24,9 @@ public class characterLayerMag : MonoBehaviour
         foreach (GameObject go in characterParts)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int) Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] characterForward = GameObject.FindGameObjectsWithTag("characterForward");
@@ -32,8 +34,9 @@ public class characterLayerMag : MonoBehaviour
         foreach (GameObject go in characterForward)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] characterBack = GameObject.FindGameObjectsWithTag("characterBack");
@@ -41,8 +44,9 @@ public class characterLayerMag : MonoBehaviour
         foreach (GameObject go in characterBack)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z - 3;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] ombres = GameObject.FindGameObjectsWithTag("ombre");
@@ -50,8 +54,9 @@ public class characterLayerMag : MonoBehaviour
         foreach (GameObject go in ombres)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z - 50;
+            rend.sortingOrder = abscisse + z;
         }
 
     }

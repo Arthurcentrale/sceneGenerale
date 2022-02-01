@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class treeLayersMag : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class treeLayersMag : MonoBehaviour
         foreach (GameObject go in treeList)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] treeForward = GameObject.FindGameObjectsWithTag("treeForward");
@@ -26,8 +28,9 @@ public class treeLayersMag : MonoBehaviour
         foreach (GameObject go in treeForward)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] treeBack = GameObject.FindGameObjectsWithTag("treeBack");
@@ -35,8 +38,9 @@ public class treeLayersMag : MonoBehaviour
         foreach (GameObject go in treeBack)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z;
+            rend.sortingOrder = abscisse + z;
         }
 
         GameObject[] ombres = GameObject.FindGameObjectsWithTag("ombre");
@@ -44,8 +48,9 @@ public class treeLayersMag : MonoBehaviour
         foreach (GameObject go in ombres)
         {
             int z = (int)go.transform.position[2];
+            int abscisse = (int)Math.Cos(180 - go.transform.rotation[0]);
             Renderer rend = go.GetComponent<SpriteRenderer>();
-            rend.sortingOrder = 868 - z-50;
+            rend.sortingOrder = abscisse + z;
         }
     }        
 }

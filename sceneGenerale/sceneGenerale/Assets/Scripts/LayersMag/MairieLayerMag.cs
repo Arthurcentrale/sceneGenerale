@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MairieLayerMag : MonoBehaviour
 {
@@ -8,8 +9,9 @@ public class MairieLayerMag : MonoBehaviour
     void Start()
     {
         int z = (int)this.transform.position[2];
+        int abscisse = (int)Math.Cos(180 - this.transform.rotation[0]);
         Renderer rend = this.GetComponent<SpriteRenderer>();
-        rend.sortingOrder = 880 - z;
+        rend.sortingOrder = abscisse + z;
     }
 
     // Update is called once per frame
