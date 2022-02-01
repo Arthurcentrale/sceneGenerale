@@ -130,6 +130,7 @@ public class livre : MonoBehaviour
         menuMissionsPageDroite.SetActive(false);
         menuInfosPageGauche.SetActive(false);
         fermetureBouton.SetActive(true);
+        Deplacement.enMenu = true;
     }
 
     public void ouvertureMenuConstru()
@@ -176,6 +177,7 @@ public class livre : MonoBehaviour
         constru = false;
         mission = false;
         info = false;
+        Deplacement.enMenu = false;
     }
 
     public void cacherLivre()
