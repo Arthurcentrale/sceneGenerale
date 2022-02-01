@@ -15,7 +15,7 @@ public class Mairie : MonoBehaviour
     public GameObject PanelBureau;
     List<float> valeursManagers;
 
-    TimeManager timemanager;
+    public TimeManager timemanager;
     GFForet gf;
 
     // Start is called before the first frame update
@@ -121,6 +121,7 @@ public class Mairie : MonoBehaviour
         }
 
         Text text2 = jauges.GetChild(7).gameObject.GetComponent<Text>();
+        timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
         text2.text = timemanager.nombreDeJoursPassés.ToString();
         PanelTableau.SetActive(true);
         Deplacement.enMenu = true;
