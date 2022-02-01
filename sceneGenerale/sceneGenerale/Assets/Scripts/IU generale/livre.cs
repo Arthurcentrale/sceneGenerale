@@ -203,7 +203,6 @@ public class livre : MonoBehaviour
     public void chaumiere()
     {
         affichagePageDroiteMenuConstru();
-        print("chaumiere");
         nom.sprite = nomChaumiere;
         description.sprite = descriptionChaumiere;
         constructeur = "chaumiere";
@@ -214,7 +213,6 @@ public class livre : MonoBehaviour
     public void etabli()
     {
         affichagePageDroiteMenuConstru();
-        print("etabli");
         nom.sprite = nomEtabli;
         description.sprite = descriptionEtabli;
         constructeur = "etabli";

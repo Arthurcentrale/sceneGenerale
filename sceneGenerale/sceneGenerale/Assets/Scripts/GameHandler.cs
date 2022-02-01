@@ -723,7 +723,7 @@ public class GameHandler : MonoBehaviour
         // Demarrage de l'inventaire
         player.createInventory(listeItems, gameData.listeFavoris);
         inventory = player.inventory;
-        BuildingLayerMag.updateBatLayers();
+        //BuildingLayerMag.updateBatLayers();
     }
 
     
