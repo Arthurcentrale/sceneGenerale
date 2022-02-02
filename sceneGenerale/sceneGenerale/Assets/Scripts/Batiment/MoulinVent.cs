@@ -359,7 +359,6 @@ public class MoulinVent : MonoBehaviour
         panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         Deplacement.enMenu = false;
         onPanel = false;
-        farineBle.SetActive(true);
     }
 
     public void quitter()
