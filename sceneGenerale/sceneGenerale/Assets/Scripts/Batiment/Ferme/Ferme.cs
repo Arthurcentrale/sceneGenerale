@@ -20,7 +20,6 @@ public class Ferme : MonoBehaviour
     float timer = 0f;
     public float delai = 5f;
     public int productivité = 1;
-    public Player player;
     public static int compteurBlé = 0;
     public Text textBlé;
 
@@ -41,7 +40,6 @@ public class Ferme : MonoBehaviour
         livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         niveauAgriculteur = 0;
-        player = GameObject.Find("Principal_OK").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -53,15 +51,14 @@ public class Ferme : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            if ((onPanel == false) || (this.GetComponent<Agri>().menuOuvert))
+            if (onPanel == false)
             {
                 panel.SetActive(false);
                 open = false;
-                player.uiInventory.AfficheBoutonInventaire();
                 
             }
 
-            if ((open == false) && (!this.GetComponent<Agri>().menuOuvert))
+            if ((open == false) && !this.GetComponent<Agri>().menuOuvert)
             {
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
 
@@ -70,14 +67,11 @@ public class Ferme : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
-
-                    player.uiInventory.FermeBoutonInventaire();
                 }
 
             }
-
-
         }
+
         if (isOccupied && habitant != null && habitant.isHoused)
         {
             timer += Time.deltaTime;
@@ -167,6 +161,7 @@ public class Ferme : MonoBehaviour
         }
 
         panel.SetActive(false);
+        open = true;
         recap.OuvertureMenuRecap();
     }
 

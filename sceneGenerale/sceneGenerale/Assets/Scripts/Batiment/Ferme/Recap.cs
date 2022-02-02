@@ -68,5 +68,6 @@ public class Recap : MonoBehaviour
         this.gameObject.GetComponent<Ferme>().open = false;
         Deplacement.enMenu = false;
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
     }
 }

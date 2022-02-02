@@ -540,6 +540,7 @@ public class Planter : MonoBehaviour
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
     }
 
     public void SortieEngrais()  //bouton vert
@@ -549,5 +550,6 @@ public class Planter : MonoBehaviour
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
     }
 }

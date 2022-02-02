@@ -23,6 +23,7 @@ public class Agri : MonoBehaviour
 
     public int niveauAgriculteur;
 
+    public Player player;
     public bool menuOuvert;
 
     void Start()
@@ -39,9 +40,22 @@ public class Agri : MonoBehaviour
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         //niveauAgriculteur = 2;
+        player = GameObject.Find("Principal_OK").GetComponent<Player>();
         menuOuvert = false;
-        
+
         MajNiveau();
+    }
+
+    void Update()
+    {
+        if (menuOuvert)
+        {
+            player.uiInventory.FermeBoutonInventaire();
+        }
+        else
+        {
+            player.uiInventory.AfficheBoutonInventaire();
+        }
     }
 
     public void MajNiveau()
@@ -83,6 +97,8 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
     }
 
     public void EntreePlantage()
@@ -93,6 +109,8 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
     }
 
     public void EntreeEngrais()
@@ -104,5 +122,7 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
     }
 }
