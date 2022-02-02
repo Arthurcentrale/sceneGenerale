@@ -16,6 +16,8 @@ public class MoulinVent : MonoBehaviour
     public Button validation;
     public Text textslider;
     public Text textType;
+    public GameObject farineBle;
+    public GameObject farineMais;
 
     //Gestion des paramètres globaux
 
@@ -56,6 +58,8 @@ public class MoulinVent : MonoBehaviour
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         validation = validation.GetComponent<Button>();
         textType.text = "Blé";
+        farineBle.SetActive(false);
+        farineMais.SetActive(false);
     }
 
     void Update()
@@ -116,10 +120,14 @@ public class MoulinVent : MonoBehaviour
         if (isBle)
         {
             textType.text = "Blé";
+            farineBle.SetActive(true);
+            farineMais.SetActive(false);
         }
         else
         {
             textType.text = "Maïs";
+            farineBle.SetActive(false);
+            farineMais.SetActive(true);
         }
         }
 
@@ -351,6 +359,7 @@ public class MoulinVent : MonoBehaviour
         panel.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         Deplacement.enMenu = false;
         onPanel = false;
+        farineBle.SetActive(true);
     }
 
     public void quitter()
