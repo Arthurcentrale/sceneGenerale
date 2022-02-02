@@ -16,6 +16,8 @@ public class MoulinEau : MonoBehaviour
     public Button validation;
     public Text textslider;
     public Text textType;
+    public GameObject farineBle;
+    public GameObject farineMais;
 
     //Gestion des paramètres globaux
 
@@ -43,6 +45,8 @@ public class MoulinEau : MonoBehaviour
     public GameObject menuinfo;
     public GameObject choixhabitant;
 
+
+
     void Start()
     {
         onPanel = false;
@@ -54,6 +58,8 @@ public class MoulinEau : MonoBehaviour
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         validation = validation.GetComponent<Button>();
         textType.text = "Blé";
+        farineBle.SetActive(false);
+        farineMais.SetActive(false);
     }
 
     void Update()
@@ -115,10 +121,14 @@ public class MoulinEau : MonoBehaviour
         if (isBle)
         {
             textType.text = "Blé";
+            farineBle.SetActive(true);
+            farineMais.SetActive(false);
         }
         else
         {
             textType.text = "Maïs";
+            farineBle.SetActive(false);
+            farineMais.SetActive(true);
         }
     }
     int QuantiteMax(HabitantBehaviour habitant)
