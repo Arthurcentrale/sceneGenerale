@@ -67,5 +67,6 @@ public class Recap : MonoBehaviour
         panelRecap.gameObject.SetActive(false);
         this.gameObject.GetComponent<Ferme>().open = false;
         Deplacement.enMenu = false;
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 }

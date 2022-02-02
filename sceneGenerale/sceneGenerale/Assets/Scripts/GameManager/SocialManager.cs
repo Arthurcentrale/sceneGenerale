@@ -42,12 +42,18 @@ public class SocialManager : MonoBehaviour
 
     public void MajSocial()
     {
-        //On met à jour quantiteNourriture
+        MajNourriture();
+        MajEco();
+        MajQualite();
+    }
+
+    public void MajNourriture() //On met à jour quantiteNourriture
+    {
         listeBatiment = DeveloppementManager.instance.listeBatiment;
         quantiteNourriture = 0;
-        foreach(GameObject batimentGO in listeBatiment)
+        foreach (GameObject batimentGO in listeBatiment)
         {
-            quantiteNourriture += batimentGO.GetComponent<Batiment>().productionFood(); //on ajoute la production de nourriture de chaque batiment de la liste lors d'une maj
+            quantiteNourriture += batimentGO.GetComponent<Batiment>().quantiteNourriture; //on ajoute la production de nourriture de chaque batiment de la liste lors d'une maj
         }
         habitants = GameObject.Find("Habitant Manager").GetComponent<HabitantManager>().habitants;
         float conso = 0f;
@@ -55,21 +61,25 @@ public class SocialManager : MonoBehaviour
         {
             conso += habitantGO.GetComponent<HabitantBehaviour>().foodQuantity; //on somme la consommation de nourriture de chaque habitant
         }
-        quantiteNourriture -= (int) conso; //on la retire de la quantite totale restante
+        quantiteNourriture -= (int)conso; //on la retire de la quantite totale restante
+    }
 
-        //On met à jour l'écosensibilisation
+    public void MajEco() //On met à jour l'écosensibilisation
+    {
         int sommmeEcoLevel = 0;
         foreach (GameObject habitantGO in habitants)
         {
             sommmeEcoLevel += habitantGO.GetComponent<HabitantBehaviour>().ecoLevel; //on fait la somme des ecoLevels
         }
         ecoSensibilisation = sommmeEcoLevel / (habitants.Count * 5) * 100;
+    }
 
-        //On met à jour la qualité de vie
+    public void MajQualite() //On met à jour la qualité de vie
+    { 
         int sommeSatisfactionNourriture = nombreAlimentsDifferents * habitants.Count;
         foreach (GameObject habitantGO in habitants)
         {
-            sommeSatisfactionNourriture -= (int) habitantGO.GetComponent<HabitantBehaviour>().foodVariety.Count; //on fait la somme des satisfaction pour chaque habitant
+            sommeSatisfactionNourriture -= (int)habitantGO.GetComponent<HabitantBehaviour>().foodVariety.Count; //on fait la somme des satisfaction pour chaque habitant
         }
         int sommeChauffage = 0;
         foreach (GameObject batimentGO in listeBatiment)

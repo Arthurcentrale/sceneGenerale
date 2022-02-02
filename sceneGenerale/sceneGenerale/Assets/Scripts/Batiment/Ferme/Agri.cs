@@ -13,18 +13,35 @@ public class Agri : MonoBehaviour
     public GameObject panelPlantage;
     public GameObject panelEngrais;
 
+    public GameObject boutonBle;
+    public GameObject boutonMais;
+    public GameObject boutonSalade;
+    public GameObject boutonTomate;
+    public GameObject boutonRaisin;
+
     private Animator animatorLivreActivite;
 
     public int niveauAgriculteur;
+
+    public bool menuOuvert;
 
     void Start()
     {
         xNbrParcelles = 7;
         yNbrParcelles = 5;
 
+        boutonBle = panelPlantage.transform.GetChild(1).gameObject;
+        boutonMais = panelPlantage.transform.GetChild(2).gameObject;
+        boutonSalade = panelPlantage.transform.GetChild(3).gameObject;
+        boutonTomate = panelPlantage.transform.GetChild(4).gameObject;
+        boutonRaisin = panelPlantage.transform.GetChild(5).gameObject;
+
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
-        niveauAgriculteur = 2;
+        //niveauAgriculteur = 2;
+        menuOuvert = false;
+        
+        MajNiveau();
     }
 
     public void MajNiveau()
@@ -35,21 +52,25 @@ public class Agri : MonoBehaviour
         {
             Labourage.nbreParcellesPlacables = 10;
             Planter.capaciteTravail = 100;
+            boutonMais.SetActive(true);
         }
         else if (niveauAgriculteur == 3)
         {
             Labourage.nbreParcellesPlacables = 15;
             Planter.capaciteTravail = 200;
+            boutonSalade.SetActive(true);
         }
         else if (niveauAgriculteur == 4)
         {
             Labourage.nbreParcellesPlacables = 20;
             Planter.capaciteTravail = 350;
+            boutonTomate.SetActive(true);
         }
         else if (niveauAgriculteur > 4)
         {
             Labourage.nbreParcellesPlacables = 25;
             Planter.capaciteTravail = 500;
+            boutonRaisin.SetActive(true);
         }
     }
 
@@ -61,6 +82,7 @@ public class Agri : MonoBehaviour
         lab.MajPrefabsLabourage();
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 
     public void EntreePlantage()
@@ -70,6 +92,7 @@ public class Agri : MonoBehaviour
         plan.enabled = true;
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 
     public void EntreeEngrais()
@@ -80,5 +103,6 @@ public class Agri : MonoBehaviour
         Planter.modeEngrais = true;
 
         animatorLivreActivite.SetTrigger("Selected");
+        menuOuvert = true;
     }
 }

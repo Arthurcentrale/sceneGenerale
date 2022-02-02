@@ -201,7 +201,7 @@ public class MoulinVent : MonoBehaviour
             {
                 StockFarineMais = QuantiteFarine + MoulinEau.FarineMais;
                 Planter.nombreDeMais -= QuantiteFarine;
-        }
+            }
             valider = true;
             StartCoroutine(Coroutine());
             //Lancer le blocage de la valeur jusqu'à minuit

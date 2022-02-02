@@ -151,6 +151,18 @@ public class UI_Inventory : MonoBehaviour
         return val;
     }
 
+    public void AfficheBoutonInventaire()
+    {
+        BouttonOuvertureGO.SetActive(true);
+        favSlotContainerDepliement.gameObject.SetActive(true);
+    }
+
+    public void FermeBoutonInventaire()
+    {
+        BouttonOuvertureGO.SetActive(false);
+        favSlotContainerDepliement.gameObject.SetActive(false);
+    }
+
     public void BouttonOuverture()   //on clique sur le bouton inventaire
     {
         if (stadeAffichage == 0)   //inventaire fermé

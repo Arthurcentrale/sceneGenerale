@@ -11,6 +11,7 @@ public class Labourage : MonoBehaviour
     public GameObject zoneVertePf;   //prefab de la zone verte de prévisualisation d'un champ labouré
     public GameObject parcelleLaboureePf;   //prefab d'une parcelle placée et confirmée
     private Vector3 sizeParcelle;     //taille de ces prefabs
+    public float bordure;             //taile de la bordure qui sépare les champs
 
     public Transform fermeTransform;       //Transform de la ferme
     private Vector2 sizeFerme;             //Sa taille
@@ -48,6 +49,8 @@ public class Labourage : MonoBehaviour
         //On place parcelleContainer à l'origine de l'endroit à partir duquel seront placées les parcelles
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
+        bordure = 2f;
+        sizeParcelle += new Vector3(bordure, 0f, bordure);
         sizeFerme = fermeTransform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().size;
         //parcelleContainer.position = fermeTransform.position - (new Vector3((sizeParcelle.x * xNbrParcelles / 2) - sizeFerme.x, 4.40f, (sizeParcelle.z * yNbrParcelles / 2) - sizeFerme.y));
         parcelleContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 4.40f, sizeParcelle.z * (yNbrParcelles - 1) / 2));
@@ -245,6 +248,7 @@ public class Labourage : MonoBehaviour
         //On cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
+        this.GetComponent<Agri>().menuOuvert = false;
 
     }
 
@@ -262,6 +266,6 @@ public class Labourage : MonoBehaviour
         //Puis on cache l'UI et on re-désactive le script
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
-
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 }

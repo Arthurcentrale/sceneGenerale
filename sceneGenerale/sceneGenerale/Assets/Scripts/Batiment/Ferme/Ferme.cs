@@ -41,6 +41,7 @@ public class Ferme : MonoBehaviour
         livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         niveauAgriculteur = 0;
+        player = GameObject.Find("Principal_OK").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -52,14 +53,15 @@ public class Ferme : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            if (onPanel == false)
+            if ((onPanel == false) || (this.GetComponent<Agri>().menuOuvert))
             {
                 panel.SetActive(false);
                 open = false;
+                player.uiInventory.AfficheBoutonInventaire();
                 
             }
 
-            if (open == false)
+            if ((open == false) && (!this.GetComponent<Agri>().menuOuvert))
             {
                 if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
 
@@ -68,7 +70,8 @@ public class Ferme : MonoBehaviour
                     panel.gameObject.SetActive(true);
                     animator.SetTrigger("ouverture1BulleCouper");
                     open = true;
-                    
+
+                    player.uiInventory.FermeBoutonInventaire();
                 }
 
             }
@@ -218,5 +221,18 @@ public class Ferme : MonoBehaviour
         panel.SetActive(false);
         open = false;
         Deplacement.enMenu = false;
+        AfficherNouveauxBoutons();
+    }
+
+    private void AfficherNouveauxBoutons()
+    {
+        Transform infoBulle = panel.transform.GetChild(0);
+        //Le bouton allouer disparait et on affiche les autres
+        infoBulle.GetChild(0).gameObject.SetActive(true);
+        infoBulle.GetChild(1).gameObject.SetActive(true);
+        infoBulle.GetChild(2).gameObject.SetActive(true);
+        infoBulle.GetChild(3).gameObject.SetActive(true);
+        infoBulle.GetChild(4).gameObject.SetActive(true);
+        infoBulle.GetChild(5).gameObject.SetActive(false);
     }
 }

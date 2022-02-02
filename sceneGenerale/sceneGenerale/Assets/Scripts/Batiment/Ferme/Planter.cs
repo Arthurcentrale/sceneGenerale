@@ -66,6 +66,7 @@ public class Planter : MonoBehaviour
     public GameObject zoneBleuePf;    //on recupère aussi le prefab d'une parcelle juste pour avoir sa taille
     public Transform fermeTransform;   //Transform de la ferme
     private Vector3 sizeParcelle;      //taille des prefabs des parcelles
+    public float bordure;              //taille des bordures entre les parcelles
 
     public GameObject panelPlantage;
     public Slider slider;
@@ -83,6 +84,22 @@ public class Planter : MonoBehaviour
     public static bool isOccupied;
 
     public static int nombreDeMais;
+    private int compteurPaille;
+    public Text textNombrePaille;
+    private Batiment batiment;
+
+    //------SUREXPLOITATION/QUALITE_SOL------//
+
+    public int[,] anciennesCultureParcelles;  //Tableau qui garde en mémoire les cultures qu'il y avait sur les parcelles le jour précédent pour voir si ça a changé
+    public int[,] nbrJoursMemeCulture;        //Tableau qui contient le nombre de jours depuis lesquels on a la même culture sur une parcelle
+    public int[,] nbrJoursCultureParcelles;   //Tableau qui commpte juste le nombre de jour depuis lesquels on a une culture tout court sur la parcelle
+
+    void Awake()
+    {
+        nombreDeMais = 0;
+        compteurPaille = 0;
+        batiment = this.GetComponent<Batiment>();
+    }
 
     void Start()
     {
@@ -93,7 +110,6 @@ public class Planter : MonoBehaviour
         xNbrParcelles = Agri.xNbrParcelles;
         yNbrParcelles = Agri.yNbrParcelles;
 
-        capaciteTravail = 50;
         capaciteTravailUtilisee = 0;
 
         culture = 1;
@@ -107,13 +123,20 @@ public class Planter : MonoBehaviour
 
         sizeParcelle = zoneBleuePf.GetComponent<Renderer>().bounds.size;
         sizeParcelle.y = 0f;
-        planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 1.14f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f));
+        bordure = 2f;
+        sizeParcelle += new Vector3(bordure, 0f, bordure);
+        planteContainer.position = fermeTransform.position - (new Vector3(sizeParcelle.x * (xNbrParcelles - 1) / 2, 3f, sizeParcelle.z * (yNbrParcelles - 1) / 2 - 1.5f)) + new Vector3(4f,0f,2f);
 
         engraisParcelles = new int[xNbrParcelles, yNbrParcelles];
         modeEngrais = false;
         engraisDispo = 5;
 
-        nombreDeMais = 0;
+        anciennesCultureParcelles = new int[xNbrParcelles, yNbrParcelles];
+        for (int i = 0; i < xNbrParcelles * yNbrParcelles; i++) anciennesCultureParcelles[i % xNbrParcelles, i / xNbrParcelles] = -1;
+        nbrJoursMemeCulture = new int[xNbrParcelles, yNbrParcelles];
+        nbrJoursCultureParcelles = new int[xNbrParcelles, yNbrParcelles];
+
+        //MajNiveau();
     }
 
     void Update()
@@ -190,7 +213,7 @@ public class Planter : MonoBehaviour
             if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
                 plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -200,7 +223,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -210,7 +233,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -220,7 +243,7 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
@@ -230,12 +253,14 @@ public class Planter : MonoBehaviour
             {
                 plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
                 plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol -= 1;
+                EnvironnementManager.instance.qualiteSol += 0.1f;
                 arrayPrefabsPlantes[x, y] = plante;
             }
         }
         MajCT();
         cultureParcelles[x, y] = planteSelectionnee;
+        MajQuantiteNourriture();
+        UpdateVariete();
     }
 
     public void EnleverCulture(int x, int y)    //On enlève la plante sélectionnée d'une certaine parcelle
@@ -247,6 +272,7 @@ public class Planter : MonoBehaviour
         Destroy(arrayPrefabsPlantes[x, y]);
         
         SelectionAucunePlante();
+        MajQuantiteNourriture();
     }
 
     private void MajCT()     //mise à jour de la quantité de travail, en fonction de la plante sélectionnée
@@ -297,8 +323,11 @@ public class Planter : MonoBehaviour
 
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
+        //D'abord on reset la quantité de nourriture produite dans le manager du batiement ferme
+        batiment.quantiteNourriture = 0;
+
         //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
-        SocialManager.instance.quantiteNourriture += nombreDeMais;
+        batiment.quantiteNourriture += nombreDeMais;
         //puis on reset cette variable et on va l'augmenter par la suite
         nombreDeMais = 0;
 
@@ -312,20 +341,22 @@ public class Planter : MonoBehaviour
                 if (q == (int)Culture.Ble)
                 {
                     //coder un truc pour mettre de la paille dans le coffre
-                    player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: 1));
+                    //Debug.Log("ajout paille");
+                    compteurPaille += 1;
+                    MajCompteurPaille();
                 }
 
                 // On regarde ensuite si il y a de l'engrais 
                 else if (engraisParcelles[i,j] > 0)
                 {
-                    SocialManager.instance.quantiteNourriture += arrayQN_max[q];
+                    batiment.quantiteNourriture += arrayQN_max[q];
                 }
 
                 else // Sinon on met les autres valeurs en prenant compte la pluriculture
                 {
                     if (q == (int)Culture.Ble)   //Blé sur parcelle
                     {
-                        SocialManager.instance.quantiteNourriture += q;
+                        batiment.quantiteNourriture += q;
 
                     }
                     else if (q == (int)Culture.Mais)   //Mais
@@ -352,9 +383,9 @@ public class Planter : MonoBehaviour
                         || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
                            )
                         {
-                            SocialManager.instance.quantiteNourriture += q + 1;
+                            batiment.quantiteNourriture += q + 1;
                         }
-                        else SocialManager.instance.quantiteNourriture += q;
+                        else batiment.quantiteNourriture += q;
                     }
                     else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
                     {
@@ -364,12 +395,26 @@ public class Planter : MonoBehaviour
                         else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
                         else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
 
-                        if (n > 1) SocialManager.instance.quantiteNourriture = q + 1;
-                        else SocialManager.instance.quantiteNourriture = q;
+                        if (n > 1) batiment.quantiteNourriture = q + 1;
+                        else batiment.quantiteNourriture = q;
                     }
                 }
             }
         }
+        SocialManager.instance.MajNourriture(); //on met a jour la quantité dans le manager global
+    }
+
+    void MajCompteurPaille()
+    {
+        if (compteurPaille <= 25) textNombrePaille.text = compteurPaille.ToString();
+        else textNombrePaille.text = "25";
+    }
+
+    public void RecuperePaille()  //quand on clique sur le bouton pour récupérer la paille
+    {
+        player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25)));   //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
+        compteurPaille = 0;  //on reset le compteur
+        MajCompteurPaille();
     }
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles
@@ -387,6 +432,30 @@ public class Planter : MonoBehaviour
         return nbPlantes;
     }
 
+    void UpdateVariete()
+    {
+        List<Item> plantesProduites = new List<Item>();   //liste de variete des cultures
+        int[] plantes = new int[6] { 0, 0, 0, 0, 0, 0 };  //tableau où on note qu'on a déjà rencontré une culture
+        int q;
+
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                q = cultureParcelles[i, j];
+                if (q >= 0) //si il y a une plante sur cette parcelles
+                {
+                    if (plantes[q] == 0) //si on l'a pas déja ajoutée
+                    {
+                        plantes[q] += 1;  //on notifie dans le tableau qu'on la ajoutée
+                        plantesProduites.Add(Item.Create_Instance(Enum.GetName(typeof(Culture), q), true));  //et on l'ajoute dans la liste de variété
+                    }
+                }
+            }
+        }
+        batiment.ressourcesProduction = plantesProduites;
+    }
+
     public void MajEngrais()   //fonction qui enlève un jour d'engrais dans toutes les parcelles ou il y en a
     {
         for (int i = 0; i < xNbrParcelles; i++)
@@ -398,9 +467,43 @@ public class Planter : MonoBehaviour
         }
     }
 
-    public void MajQS()   //La qualité du sol augmente tous les jours de 0.1 à minuit
+    public void MajQS()   //Mise à jour de la qualité du sol tout les jours à minuit
     {
+        //Elle augmente d'abord naturellement de 0.1
         EnvironnementManager.instance.qualiteSol += 0.1f;
+
+        int q; //stocke la culture en train d'être traitée
+        for (int i = 0; i < xNbrParcelles; i++)
+        {
+            for (int j = 0; j < yNbrParcelles; j++)
+            {
+                q = cultureParcelles[i, j];
+                if (q >= 0) //si la parcelle est cultivée
+                {
+                    nbrJoursCultureParcelles[i, j] += 1;
+                    if (q == anciennesCultureParcelles[i, j]) //si c'est la même que le jour précédent
+                    {
+                        nbrJoursMemeCulture[i, j] += 1;
+                    }
+                    //Conséquences sur la qualité du sol :
+                    int n = nbrJoursCultureParcelles[i, j];
+                    if ((n >= 20) && ((n-20) % 10 == 0)) EnvironnementManager.instance.qualiteSol -= 1f; //on enleve 1 de QS si ça fait plus de 20 jours (et un mutliple de 10 depuis (0 inclu)) qu'on a une culture
+                    int m = nbrJoursMemeCulture[i, j];
+                    if ((m >= 10) && ((m - 10) % 6 == 0)) EnvironnementManager.instance.qualiteSol -= 1f; //on enleve 1 de QS si ça fait plus de 10 jours (et un mutliple de 6 depuis (0 inclu)) qu'on a la meme culture
+                }
+                else //si elle n'est pas cultivée
+                {
+                    nbrJoursCultureParcelles[i, j] = 0; //on reset
+                    if (q == anciennesCultureParcelles[i, j]) //si c'est la même que le jour précédent
+                    {
+                        nbrJoursMemeCulture[i, j] += 1;
+                    }
+                    //Conséquence sur la qualité du sol :
+                    if (nbrJoursMemeCulture[i,j] == 3) EnvironnementManager.instance.qualiteSol += 0.5f;  //Quand ça fait 3 jours qu'on a pas cultivé
+                }
+            }
+        }
+       // Array.Copy(cultureParcelles, anciennesCultureParcelles); //on reset les anciennes cultures avec les nouvelles
     }
 
     public void ToutesMAJ()
@@ -415,7 +518,7 @@ public class Planter : MonoBehaviour
         if (engraisSelectionne == 0) //chimique
         {
             engraisParcelles[x, y] += 8;  //De l'engrais pendant huit jours
-            EnvironnementManager.instance.qualiteSol -= 0.5f;
+            EnvironnementManager.instance.qualiteSol -= 1f;
             EnvironnementManager.instance.qualiteEau -= 0.5f;
             return true;
         }
@@ -436,6 +539,7 @@ public class Planter : MonoBehaviour
         panelPlantage.SetActive(false);
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 
     public void SortieEngrais()  //bouton vert
@@ -444,5 +548,6 @@ public class Planter : MonoBehaviour
         modeEngrais = false;
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
+        this.GetComponent<Agri>().menuOuvert = false;
     }
 }
