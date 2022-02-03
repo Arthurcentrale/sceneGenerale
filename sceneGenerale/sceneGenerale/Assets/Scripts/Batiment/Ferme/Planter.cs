@@ -202,62 +202,66 @@ public class Planter : MonoBehaviour
     {
         GameObject plante;
         float taillePlante = 0.2f;
-        if (planteSelectionnee == 6)
+
+        switch (planteSelectionnee)
         {
-            Debug.Log("Aucune plante sélectionnée"); 
-            cultureParcelles[x, y] = -1; 
-            return;
+            case 6:
+                Debug.Log("Aucune plante sélectionnée");
+                cultureParcelles[x, y] = -1;
+                return;
+                break;
+            case 0:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 1:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 2:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 3:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 5:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
         }
-        else if (planteSelectionnee == 0)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
-                plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 1)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 2)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 3)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 5)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        MajCT();
+
         cultureParcelles[x, y] = planteSelectionnee;
         MajQuantiteNourriture();
         UpdateVariete();
@@ -412,9 +416,11 @@ public class Planter : MonoBehaviour
 
     public void RecuperePaille()  //quand on clique sur le bouton pour récupérer la paille
     {
-        player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25)));   //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
-        compteurPaille = 0;  //on reset le compteur
-        MajCompteurPaille();
+        if (player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25))))  //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
+        {
+            compteurPaille = 0;  //on reset le compteur si la paille a bien été ajoutée
+            MajCompteurPaille();
+        }
     }
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles

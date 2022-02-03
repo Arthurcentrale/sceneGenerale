@@ -27,8 +27,6 @@ public class Ferme : MonoBehaviour
     public GameObject choixhabitant;
     public HabitantBehaviour habitant;
 
-    public int niveauAgriculteur;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +36,6 @@ public class Ferme : MonoBehaviour
         textBlé.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
-
-        niveauAgriculteur = 0;
     }
 
     // Update is called once per frame
@@ -109,13 +105,14 @@ public class Ferme : MonoBehaviour
         habitant = go.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
-        InitVariete(habitant);
+        //InitVariete(habitant);
     }
 
+    /*
     void InitVariete(HabitantBehaviour habitant)
     {
         //faire pareil mais pour les nourritures de la ferme
-        /*
+        
         if (habitant.ecoLevel < 3)
         {
             SocialManager.instance.nombreAlimentsDifferents += 1;
@@ -137,10 +134,10 @@ public class Ferme : MonoBehaviour
             SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Truite"));
             varietepecherie += 3;
         }
-        */
-
+        
         niveauAgriculteur = habitant.ecoLevel;
     }
+    */
 
     int GetLevel(HabitantBehaviour habitant) //Récupérer le level de l'agriculteur
     {
@@ -207,7 +204,7 @@ public class Ferme : MonoBehaviour
         habitant = fermierDispo.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         isOccupied = true;
-        InitVariete(habitant);
+        //InitVariete(habitant);
 
         Quitter();
     }

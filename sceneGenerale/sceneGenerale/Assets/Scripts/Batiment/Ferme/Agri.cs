@@ -62,35 +62,43 @@ public class Agri : MonoBehaviour
     {
         Planter.culture = niveauAgriculteur;
 
-        if (niveauAgriculteur == 2)
+        switch (niveauAgriculteur)
         {
-            Labourage.nbreParcellesPlacables = 10;
-            Planter.capaciteTravail = 100;
-            boutonMais.SetActive(true);
-        }
-        else if (niveauAgriculteur == 3)
-        {
-            Labourage.nbreParcellesPlacables = 15;
-            Planter.capaciteTravail = 200;
-            boutonMais.SetActive(true);
-            boutonSalade.SetActive(true);
-        }
-        else if (niveauAgriculteur == 4)
-        {
-            Labourage.nbreParcellesPlacables = 20;
-            Planter.capaciteTravail = 350;
-            boutonMais.SetActive(true);
-            boutonSalade.SetActive(true);
-            boutonTomate.SetActive(true);
-        }
-        else if (niveauAgriculteur > 4)
-        {
-            Labourage.nbreParcellesPlacables = 25;
-            Planter.capaciteTravail = 500;
-            boutonMais.SetActive(true);
-            boutonSalade.SetActive(true);
-            boutonTomate.SetActive(true);
-            boutonRaisin.SetActive(true);
+            case 1:
+                Labourage.nbreParcellesPlacables = 5;
+                Planter.capaciteTravail = 50;
+                boutonBle.SetActive(true);
+                break;
+            case 2:
+                Labourage.nbreParcellesPlacables = 10;
+                Planter.capaciteTravail = 100;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                break;
+            case 3:
+                Labourage.nbreParcellesPlacables = 15;
+                Planter.capaciteTravail = 200;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                break;
+            case 4:
+                Labourage.nbreParcellesPlacables = 20;
+                Planter.capaciteTravail = 350;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                boutonTomate.SetActive(true);
+                break;
+            default:
+                Labourage.nbreParcellesPlacables = 25;
+                Planter.capaciteTravail = 500;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                boutonTomate.SetActive(true);
+                boutonRaisin.SetActive(true);
+                break;
         }
     }
 

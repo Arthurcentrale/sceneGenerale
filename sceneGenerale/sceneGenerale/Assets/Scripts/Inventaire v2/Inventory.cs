@@ -61,6 +61,8 @@ public class Inventory
 
         if (player.uiInventory.NbrPlace(item.Item) < x) // Pas assez de place
         {
+            Popup popup = GameObject.Find("Popup").GetComponent<Popup>();
+            popup.popup("Inventaire Plein");
             return false;
         }
         else
