@@ -223,8 +223,9 @@ public class Chaumiere : MonoBehaviour
         }
         if (page == 0)
         {
-            droite.gameObject.SetActive(true);
             gauche.gameObject.SetActive(false);
+            droite.gameObject.SetActive(true);
+
         }
         if (page == maxpage)
         {
@@ -291,7 +292,7 @@ public class Chaumiere : MonoBehaviour
         animator.SetTrigger("ouverture1BulleCouper");
     }
 
-    void quitterchoix()
+    public void quitterchoix()
     {
         panelmenu.SetActive(false);
         panel.gameObject.SetActive(true);
