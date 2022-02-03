@@ -227,9 +227,14 @@ public class Chaumiere : MonoBehaviour
             droite.gameObject.SetActive(true);
 
         }
-        if (page == maxpage)
+        else if (page == maxpage)
         {
             droite.gameObject.SetActive(false);
+            gauche.gameObject.SetActive(true);
+        }
+        else
+        {
+            droite.gameObject.SetActive(true);
             gauche.gameObject.SetActive(true);
         }
     }
