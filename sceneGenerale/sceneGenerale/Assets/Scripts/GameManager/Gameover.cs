@@ -14,7 +14,7 @@ public class Gameover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EnvironnementManager.instance.qualiteAir == 0 || EnvironnementManager.instance.qualiteEau == 0 || EnvironnementManager.instance.qualiteSol == 0 || SocialManager.instance.qualiteDeVie == 0)
+        if (EnvironnementManager.instance.qualiteAir == 0 || EnvironnementManager.instance.qualiteEau == 0 || EnvironnementManager.instance.qualiteSol ==0 || SocialManager.instance.qualiteDeVie == 0)
         {
             ChangerScene();
         }

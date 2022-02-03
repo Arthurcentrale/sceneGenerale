@@ -12,9 +12,11 @@ public class Mairie : MonoBehaviour
     private Animator animator;
     Player player;
     public GameObject PanelTableau;
+    public GameObject PanelBureau;
     List<float> valeursManagers;
 
-
+    public TimeManager timemanager;
+    GFForet gf;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class Mairie : MonoBehaviour
         open = false;
         onPanel = false;
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
+        timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
+        gf = GameObject.Find("PlaneDialogueGardeForestier").GetComponent<GFForet>();
     }
 
     // Update is called once per frame
@@ -62,6 +66,13 @@ public class Mairie : MonoBehaviour
                 {
                     FctTableau();
                     PanelTableau.gameObject.SetActive(true);
+                    open = true;
+                    Deplacement.enMenu = true;
+                }
+                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Bureau2"))
+                {
+                    FctBureau();
+                    PanelBureau.gameObject.SetActive(true);
                     open = true;
                     Deplacement.enMenu = true;
                 }
@@ -108,6 +119,58 @@ public class Mairie : MonoBehaviour
                 slider.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Image>().color = Color.red;
             }
         }
+
+        Text text2 = jauges.GetChild(7).gameObject.GetComponent<Text>();
+        timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
+        text2.text = timemanager.nombreDeJoursPassés.ToString();
         PanelTableau.SetActive(true);
+        Deplacement.enMenu = true;
+        open = true;
+    }
+    public void FctBureau()
+    {
+
+        // On recupère le nom des habitants présents sur l'ile
+        List<string> nomshabitants = new List<string>();
+        GameObject habitants = GameObject.Find("habitants");
+        foreach(Transform child in habitants.transform)
+        {
+            HabitantBehaviour behaviour = child.GetComponent<HabitantBehaviour>();
+            if (behaviour.isVillager) nomshabitants.Add(behaviour.nom);
+        }
+        // On affiche les noms des habitants
+
+
+        //On recupère les batiments construits
+        List<GameObject> listesbatiments = DeveloppementManager.instance.listeBatiment;
+        GameObject batiments = GameObject.Find("BatimentsBureau");
+        //On affiche les batiments construits
+        int j = 0;
+        while (j < batiments.transform.childCount)
+        {
+            if (j < listesbatiments.Count)
+            {
+                batiments.transform.GetChild(j).GetComponent<Text>().text = listesbatiments[j].name.ToString();
+                batiments.transform.GetChild(j).gameObject.SetActive(true);
+                j++;
+            }
+            else batiments.transform.GetChild(j).gameObject.SetActive(false);
+        }
+
+        // On construit les tableaux des infos à rentrer dans le tableau ui
+        int[] arbresrobustes = gf.CompterLesArbresRobustes();
+        int[] arbresmalades = gf.CompterLesArbresMalades();
+        int[] arbresfreles = gf.CompterLesArbresFrele();
+        // On fait l'affichage
+        GameObject Tableau = GameObject.Find("Tableau");
+        for(int i =3;i<8;i++)
+        {
+            Tableau.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text = arbresrobustes[i].ToString();
+            Tableau.transform.GetChild(i).GetChild(1).gameObject.GetComponent<Text>().text = arbresfreles[i].ToString();
+            Tableau.transform.GetChild(i).GetChild(2).gameObject.GetComponent<Text>().text = arbresmalades[i].ToString();
+        }
+        PanelBureau.SetActive(true);
+        open = true;
+        Deplacement.enMenu = true;
     }
 }

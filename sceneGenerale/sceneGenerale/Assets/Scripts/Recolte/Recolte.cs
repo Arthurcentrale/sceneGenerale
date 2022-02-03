@@ -315,7 +315,11 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 6)  AjouterInventaire(boisF, 6);
-                if(UnityEngine.Random.Range(0,1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5)
+                {
+                    AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                    ui_inventory.Inventory_OnItemListChanged();
+                }
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
             }
@@ -333,6 +337,7 @@ public class Recolte : MonoBehaviour
                 if (ui_inventory.NbrPlace(boisR) >= 4) AjouterInventaire(boisR, 4);
                 if (ui_inventory.NbrPlace(boisF) >= 3) AjouterInventaire(boisF, 3);
                 AjouterInventaire(itemlist[FindInlist("GraineChene")], 1);
+                ui_inventory.Inventory_OnItemListChanged();
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Chene")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0),dossierArbres);
             }
@@ -343,7 +348,11 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 5)  AjouterInventaire(boisF, 5);
-                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5)
+                {
+                    AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                    ui_inventory.Inventory_OnItemListChanged();
+                }
                 Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z - 5.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
             }
@@ -361,6 +370,7 @@ public class Recolte : MonoBehaviour
                 if (ui_inventory.NbrPlace(boisR) >= 3) AjouterInventaire(boisR, 3);
                 if (ui_inventory.NbrPlace(boisF) >= 3) AjouterInventaire(boisF, 3);
                 AjouterInventaire(itemlist[FindInlist("GraineHetre")], 1);
+                ui_inventory.Inventory_OnItemListChanged();
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Hetre")], new Vector3(cible.transform.position.x, cible.transform.position.y - 3.01f, cible.transform.position.z -5.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -370,8 +380,11 @@ public class Recolte : MonoBehaviour
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
-                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
-                AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5)
+                {
+                    AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+                    ui_inventory.Inventory_OnItemListChanged();
+                }
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -389,6 +402,7 @@ public class Recolte : MonoBehaviour
                 if (ui_inventory.NbrPlace(boisR) >= 4) AjouterInventaire(boisR, 4);
                 if (ui_inventory.NbrPlace(boisF) >= 1) AjouterInventaire(boisF, 1);
                 AjouterInventaire(itemlist[FindInlist("GrainePinM")], 1);
+                ui_inventory.Inventory_OnItemListChanged();
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Pin")], new Vector3(cible.transform.position.x, cible.transform.position.y - 4.37f, cible.transform.position.z - 5.89f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -398,8 +412,11 @@ public class Recolte : MonoBehaviour
             if(cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 if (ui_inventory.NbrPlace(boisF) >= 3) AjouterInventaire(boisF, 3);
-                if (UnityEngine.Random.Range(0, 1) > 0.5) AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
-                AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5) 
+                {
+                    AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+                    ui_inventory.Inventory_OnItemListChanged(); 
+                }
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y, cible.transform.position.z + 1.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -417,6 +434,7 @@ public class Recolte : MonoBehaviour
                 if (ui_inventory.NbrPlace(boisR) >= 1) AjouterInventaire(boisR, 1);
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
                 AjouterInventaire(itemlist[FindInlist("GraineDouglas")], 1);
+                ui_inventory.Inventory_OnItemListChanged();
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Douglas")], new Vector3(cible.transform.position.x, cible.transform.position.y , cible.transform.position.z+1.0f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -426,11 +444,12 @@ public class Recolte : MonoBehaviour
         {
             if (cible.transform.name.IndexOf("Frele", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                Debug.Log("bouleau frêle");
                 if (ui_inventory.NbrPlace(boisF) >= 4) AjouterInventaire(boisF, 4);
-                if (UnityEngine.Random.Range(0, 1) > 0.5f) AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
-                //Debug.Log(NbrPlace(Find))
-                AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                if (UnityEngine.Random.Range(0, 1) > 0.5f)
+                {
+                    AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                    ui_inventory.Inventory_OnItemListChanged();
+                }
                 animerItems(boisF.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
@@ -449,11 +468,9 @@ public class Recolte : MonoBehaviour
                 animerItems(boisR.Icon, new Vector2(mP.x - width / 3, mP.y + height));
                 if (ui_inventory.NbrPlace(FindIteminList("GraineBouleau")) > 1)
                 {
-                    Debug.Log("graine");
                     AjouterInventaire(itemlist[FindInlist("GraineBouleau")], 1);
+                    ui_inventory.Inventory_OnItemListChanged();
                 }
-
-
                 Instantiate(prefablist[FindPrefabinList("Souche Bouleau")], new Vector3(cible.transform.position.x, cible.transform.position.y - 5.08f, cible.transform.position.z - 6.75f), Quaternion.Euler(0, 0, 0), dossierArbres);
             }
         }
