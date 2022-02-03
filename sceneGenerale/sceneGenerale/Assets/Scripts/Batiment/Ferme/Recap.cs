@@ -23,18 +23,18 @@ public class Recap : MonoBehaviour
 
     void Start()
     {
-        nbreParcelles = panelRecap.GetChild(0).gameObject.GetComponent<Text>();
+        nbreParcelles = panelRecap.GetChild(1).gameObject.GetComponent<Text>();
 
-        slider = panelRecap.GetChild(1).gameObject.GetComponent<Slider>();
+        slider = panelRecap.GetChild(2).gameObject.GetComponent<Slider>();
 
-        bleTxt = panelRecap.GetChild(2).GetChild(1).gameObject.GetComponent<Text>();
-        maisTxt = panelRecap.GetChild(3).GetChild(1).gameObject.GetComponent<Text>();
-        saladeTxt = panelRecap.GetChild(4).GetChild(1).gameObject.GetComponent<Text>();
-        tomateTxt = panelRecap.GetChild(5).GetChild(1).gameObject.GetComponent<Text>();
-        raisinTxt = panelRecap.GetChild(6).GetChild(1).gameObject.GetComponent<Text>();
+        bleTxt = panelRecap.GetChild(3).GetChild(1).gameObject.GetComponent<Text>();
+        maisTxt = panelRecap.GetChild(4).GetChild(1).gameObject.GetComponent<Text>();
+        saladeTxt = panelRecap.GetChild(5).GetChild(1).gameObject.GetComponent<Text>();
+        tomateTxt = panelRecap.GetChild(6).GetChild(1).gameObject.GetComponent<Text>();
+        raisinTxt = panelRecap.GetChild(7).GetChild(1).gameObject.GetComponent<Text>();
 
-        imageHabitant = panelRecap.GetChild(9).gameObject.GetComponent<Image>();
-        textHabitant = panelRecap.GetChild(10).gameObject.GetComponent<Text>();
+        imageHabitant = panelRecap.GetChild(10).gameObject.GetComponent<Image>();
+        textHabitant = panelRecap.GetChild(11).gameObject.GetComponent<Text>();
     }
 
     public void MajMenuRecap(int parcellesUtilisees, int parcellesDispo, int CT, int CT_max, int ble, int mais, int salade, int tomate, int raisin)

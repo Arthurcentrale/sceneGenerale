@@ -327,7 +327,7 @@ public class Planter : MonoBehaviour
 
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
-        //D'abord on reset la quantité de nourriture produite dans le manager du batiement ferme
+        //D'abord on reset la quantité de nourriture produite dans le manager du batiment ferme
         batiment.quantiteNourriture = 0;
 
         //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
@@ -344,7 +344,6 @@ public class Planter : MonoBehaviour
 
                 if (q == (int)Culture.Ble)
                 {
-                    //coder un truc pour mettre de la paille dans le coffre
                     //Debug.Log("ajout paille");
                     compteurPaille += 1;
                     MajCompteurPaille();
