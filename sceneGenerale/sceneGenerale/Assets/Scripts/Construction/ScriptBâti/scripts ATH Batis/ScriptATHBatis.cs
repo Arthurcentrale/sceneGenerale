@@ -29,6 +29,13 @@ public class ScriptATHBatis : MonoBehaviour
     public int nombreItemOneChaumiere;
     public int nombreItemTwoChaumiere;
 
+    //etabli
+    public GameObject etabli;
+    public Item itemOneEtabli;
+    public Item itemTwoEtabli;
+    public int nombreItemOneEtabli;
+    public int nombreItemTwoEtabli;
+
     //ferme
     public GameObject ferme;
     public Item itemOneFerme;
@@ -223,6 +230,14 @@ public class ScriptATHBatis : MonoBehaviour
             nombreItemTwoNécessaire = nombreItemTwoMoulinEau;
         }
 
+        else if (bati.CompareTag("BatiEtabli"))
+        {
+            itemOne = itemOneEtabli;
+            itemTwo = itemTwoEtabli;
+            nombreItemOneNécessaire = nombreItemOneEtabli;
+            nombreItemTwoNécessaire = nombreItemTwoEtabli;
+        }
+
         textItemOne.text = nombreItemOneNécessaire.ToString();
         textItemTwo.text = nombreItemTwoNécessaire.ToString();
 
@@ -370,6 +385,13 @@ public class ScriptATHBatis : MonoBehaviour
             missionManager.Build("moulin à eau");
             moulinEauConstruit = true;
             nombreDeBâtimentsConstruits+=1;
+        }
+        else if (bati.CompareTag("BatiEtabli"))
+        {
+            etabli.transform.position = new Vector3(bati.transform.position.x, moulinEau.transform.position.y, bati.transform.position.z);
+            missionManager.Build("établi");
+            etabliConstruit = true;
+            nombreDeBâtimentsConstruits += 1;
         }
         permettreConstru();
         Emptyscriptconstru.acBoutonsConstru();
