@@ -58,17 +58,18 @@ public class Ferme : MonoBehaviour
                 
             }
 
-            if ((open == false) && !this.GetComponent<Agri>().menuOuvert)
+            if (!open)
             {
-                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
-
+                if (!this.GetComponent<Agri>().menuOuvert)
                 {
-                    panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
-                    panel.gameObject.SetActive(true);
-                    animator.SetTrigger("ouverture1BulleCouper");
-                    open = true;
+                    if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
+                    {
+                        panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
+                        panel.gameObject.SetActive(true);
+                        animator.SetTrigger("ouverture1BulleCouper");
+                        open = true;
+                    }
                 }
-
             }
         }
 
@@ -162,6 +163,7 @@ public class Ferme : MonoBehaviour
 
         panel.SetActive(false);
         open = true;
+        this.GetComponent<Agri>().menuOuvert = true;
         recap.OuvertureMenuRecap();
     }
 

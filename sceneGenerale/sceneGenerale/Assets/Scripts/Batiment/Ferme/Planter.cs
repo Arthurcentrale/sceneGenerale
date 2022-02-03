@@ -541,6 +541,7 @@ public class Planter : MonoBehaviour
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
         this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
     }
 
     public void SortieEngrais()  //bouton vert
@@ -551,5 +552,6 @@ public class Planter : MonoBehaviour
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
         this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
     }
 }

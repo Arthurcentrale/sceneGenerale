@@ -72,18 +72,24 @@ public class Agri : MonoBehaviour
         {
             Labourage.nbreParcellesPlacables = 15;
             Planter.capaciteTravail = 200;
+            boutonMais.SetActive(true);
             boutonSalade.SetActive(true);
         }
         else if (niveauAgriculteur == 4)
         {
             Labourage.nbreParcellesPlacables = 20;
             Planter.capaciteTravail = 350;
+            boutonMais.SetActive(true);
+            boutonSalade.SetActive(true);
             boutonTomate.SetActive(true);
         }
         else if (niveauAgriculteur > 4)
         {
             Labourage.nbreParcellesPlacables = 25;
             Planter.capaciteTravail = 500;
+            boutonMais.SetActive(true);
+            boutonSalade.SetActive(true);
+            boutonTomate.SetActive(true);
             boutonRaisin.SetActive(true);
         }
     }
@@ -99,6 +105,7 @@ public class Agri : MonoBehaviour
         menuOuvert = true;
         this.GetComponent<Ferme>().open = true;
         this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 
     public void EntreePlantage()
@@ -111,6 +118,7 @@ public class Agri : MonoBehaviour
         menuOuvert = true;
         this.GetComponent<Ferme>().open = true;
         this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 
     public void EntreeEngrais()
@@ -124,5 +132,6 @@ public class Agri : MonoBehaviour
         menuOuvert = true;
         this.GetComponent<Ferme>().open = true;
         this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 }
