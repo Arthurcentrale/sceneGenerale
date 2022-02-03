@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 4756643233601618665, guid: 878c8a49865bd05469b126bfef8b0a8e,
         type: 3}
       propertyPath: m_Name
-      value: PrefabBatiBoulangerie
+      value: PrefabBatiEtabli
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756643233601618665, guid: 878c8a49865bd05469b126bfef8b0a8e,
+        type: 3}
+      propertyPath: m_TagString
+      value: BatiEtabli
       objectReference: {fileID: 0}
     - target: {fileID: 4756643233601618670, guid: 878c8a49865bd05469b126bfef8b0a8e,
         type: 3}
@@ -56,6 +61,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756643233601618670, guid: 878c8a49865bd05469b126bfef8b0a8e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.93056
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756643233601618670, guid: 878c8a49865bd05469b126bfef8b0a8e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.93056
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756643233601618670, guid: 878c8a49865bd05469b126bfef8b0a8e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.46528
       objectReference: {fileID: 0}
     - target: {fileID: 4756643233601618670, guid: 878c8a49865bd05469b126bfef8b0a8e,
         type: 3}

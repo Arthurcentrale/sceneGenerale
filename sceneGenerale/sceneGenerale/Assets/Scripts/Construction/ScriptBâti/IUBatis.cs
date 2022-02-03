@@ -47,7 +47,7 @@ public class IUBatis : MonoBehaviour
 
             if (open == false && (((Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4) * (Input.mousePosition.x - Screen.width / 2) / (Screen.width / 4)) + ((Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4) * (Input.mousePosition.y - Screen.height / 2) / (Screen.height / 4)) < 1))
             {
-                if ((Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiChaumière") || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiFerme"))
+                if ((Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiChaumière") || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiFerme")) || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiEtabli"))
                     || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiPêcherie")) || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiBoulangerie"))
                     || (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("BatiMoulinAEau"))))
 

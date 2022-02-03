@@ -192,7 +192,7 @@ public class livre : MonoBehaviour
         boutonInventaire.SetActive(false);
         favorisInventaire.SetActive(false);
         if (constructeur == "chaumiere") fonctionsConstru.ConstruireChaumièreDepuisMenuConstruction();
-        else if (constructeur == "etabli") print("pas encore craftable");
+        else if (constructeur == "etabli") fonctionsConstru.ConstruireEtabliDepuisMenuConstruction();
         else if (constructeur == "ferme") fonctionsConstru.ConstruireFermeDepuisMenuConstruction();
         else if (constructeur == "pecherie") fonctionsConstru.ConstruirePêcherieDepuisMenuConstruction();
         else if (constructeur == "moulinEau") fonctionsConstru.ConstruireMoulinAEauDepuisMenuConstruction();

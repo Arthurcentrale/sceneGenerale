@@ -358,6 +358,7 @@ public class BoutonMenu2 : MonoBehaviour
 
     public void ValiderConstructionChaumière()
     {
+        Debug.Log("on rentre dedans");
         ChaumièreDéplaçable = GameObject.Find("nouvelleChaumière");
         //print(MoulinDéplaçable.transform.position.x);
         //print(MoulinDéplaçable.transform.position.y);
