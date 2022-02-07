@@ -24,11 +24,14 @@ public class DeveloppementManager : MonoBehaviour
     public List<GameObject> listeBatiment;
     public int navireConstruit;
 
+    public int nombreBatDispo;
+
     private void Start()
     {
         progression = 0;
         UpdateListeBatiments();
         navireConstruit = 0;
+        nombreBatDispo = 101;
     }
 
     public void UpdateListeBatiments()
@@ -39,5 +42,11 @@ public class DeveloppementManager : MonoBehaviour
             GameObject go = child.gameObject;
             if (go.activeSelf && go.name != "PrefabDesBâtiments") listeBatiment.Add(go);
         }
+    }
+
+    public void MajProgression()
+    {
+        UpdateListeBatiments();
+        progression = 100 / (nombreBatDispo - listeBatiment.Count);
     }
 }

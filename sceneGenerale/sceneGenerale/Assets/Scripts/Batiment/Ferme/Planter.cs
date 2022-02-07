@@ -364,12 +364,12 @@ public class Planter : MonoBehaviour
                     }
                     else if (q == (int)Culture.Mais)   //Mais
                     {
-                        //on check les 4 parcelles autour si il y a au moins une culture
+                        //on check les 4 parcelles autour si il y a au moins une culture différente du mais
                         if (
-                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
-                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
-                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
-                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q))
                            )
                         {
                             nombreDeMais += q + 1;
@@ -378,12 +378,12 @@ public class Planter : MonoBehaviour
                     }
                     else if (q == (int)Culture.Salade)  //Salade..
                     {
-                        //on check les 4 parcelles autour si il y a au moins une culture
+                        //on check les 4 parcelles autour si il y a au moins une culture différent de la salade
                         if (
-                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
-                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
-                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
-                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q))
                            )
                         {
                             batiment.quantiteNourriture += q + 1;
@@ -392,14 +392,32 @@ public class Planter : MonoBehaviour
                     }
                     else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
                     {
-                        int n = 0; //on compte le nombre de cultures qu'il y a sur les parcelles autour
-                        if ((i > 0) && (cultureParcelles[i - 1, j] > -1)) n++;
-                        else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1)) n++;
-                        else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
-                        else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
+                        int n = 0; //on compte le nombre de cultures différentes qu'il y a sur les parcelles autour
+                        int q2 = -1; //stocke la valeur de la première culture rencontrée sur les parcelles autours
 
-                        if (n > 1) batiment.quantiteNourriture = q + 1;
-                        else batiment.quantiteNourriture = q;
+                        if ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i - 1, j];
+                        }
+                        else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q) && (cultureParcelles[i + 1, j] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i + 1, j];
+                        }
+                        else if ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q) && (cultureParcelles[i, j - 1] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i, j - 1];
+                        }
+                        else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q) && (cultureParcelles[i, j + 1] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i, j + 1];
+                        }
+
+                        if (n > 1) batiment.quantiteNourriture += q + 1; //si on a rencontré au moins 2 cultures différentes autour
+                        else batiment.quantiteNourriture += q;
                     }
                 }
             }
