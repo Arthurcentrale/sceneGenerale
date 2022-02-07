@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61233fa4068846a4d8c3f7da5c61d4d6, type: 3}
+  m_Name: mission
+  m_EditorClassIdentifier: 
+  Information:
+    Name: Fabriquer un pont
+    Icon: {fileID: 21300000, guid: aa952d6ae4d9aa84d9d07f71086f5403, type: 3}
+    Description: "Il faut construire un pont au dessus de la rivi\xE8re pour pouvoir
+      acc\xE9der \xE0 la for\xEAt. Le charpentier m'a propos\xE9 de me donner un
+      coup de main pour \xE7a."
+  Reward:
+    Currency: 10
+    XP: 10
+  Goals:
+  - {fileID: 1066722514374548702}
+  - {fileID: 1557657010930727653}
+--- !u!114 &1066722514374548702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636cb25bd5d5ada4e8837b76c45c31fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 10
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Item: Pierre
+--- !u!114 &1557657010930727653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a8dbbbf17a27440a0b25a2b8b39456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  Building: Pont en bois
