@@ -24,7 +24,19 @@ public class Agri : MonoBehaviour
     public int niveauAgriculteur;
 
     public Player player;
-    public bool menuOuvert;
+
+    [SerializeField]
+    bool _menuOuvert;
+
+    public bool menuOuvert
+    {
+        get => _menuOuvert;
+        set
+        {
+            _menuOuvert = value;
+            OnMenuOuvertOuFerme(value);
+        }
+    }
 
     void Start()
     {
@@ -46,9 +58,9 @@ public class Agri : MonoBehaviour
         MajNiveau();
     }
 
-    void Update()
+    private void OnMenuOuvertOuFerme(bool b)
     {
-        if (menuOuvert)
+        if (b)
         {
             player.uiInventory.FermeBoutonInventaire();
         }
