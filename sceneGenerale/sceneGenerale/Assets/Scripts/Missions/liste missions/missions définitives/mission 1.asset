@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5746555285393097681
+--- !u!114 &-7357711789996346461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17,8 +17,8 @@ MonoBehaviour:
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  habitant: Julien
---- !u!114 &-5397125774072490806
+  habitant: ouvrier
+--- !u!114 &-6031474366685422212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35,53 +35,8 @@ MonoBehaviour:
   GoalCompleted:
     m_PersistentCalls:
       m_Calls: []
-  habitant: Julien
---- !u!114 &-5005703981935080750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b222be178eda044eaf12f8735136b88, type: 3}
-  m_Name: mission 1
-  m_EditorClassIdentifier: 
-  RequiredAmount: 1
-  points: 1
-  GoalCompleted:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61233fa4068846a4d8c3f7da5c61d4d6, type: 3}
-  m_Name: mission
-  m_EditorClassIdentifier: 
-  Information:
-    Name: La mairie
-    Icon: {fileID: 21300000, guid: 7714de1b16acc6d48b76c1186cf65f20, type: 3}
-    Description: "Enfin arriv\xE9 ! Cette \xEEle est notre dernier espoir. Je vois
-      des arbres, des fleurs, des papillons\u2026 Je n\u2019ai pas vu \xE7a depuis
-      si longtemps... Il y a du travail ici. Je devrais rejoindre Julien, mon ami
-      ouvrier. Il doit \xEAtre quelque part sur cette \xEEle. Peut-\xEAtre qu\u2019en
-      suivant ce chemin\u2026 "
-  Reward:
-    Currency: 10
-    XP: 10
-  Goals:
-  - {fileID: -5746555285393097681}
-  - {fileID: 5251950118956706232}
-  - {fileID: -5397125774072490806}
-  - {fileID: -5005703981935080750}
---- !u!114 &5251950118956706232
+  habitant: ouvrier
+--- !u!114 &-758058486970997627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,3 +54,48 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Item: Bois
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61233fa4068846a4d8c3f7da5c61d4d6, type: 3}
+  m_Name: mission 1
+  m_EditorClassIdentifier: 
+  Information:
+    Name: La Mairie
+    Icon: {fileID: 21300000, guid: aa952d6ae4d9aa84d9d07f71086f5403, type: 3}
+    Description: "Enfin arriv\xE9 ! Cette \xEEle est notre dernier espoir. Je vois
+      des arbres, des fleurs, des papillons\u2026 Je n\u2019ai pas vu \xE7a depuis
+      si longtemps... Il y a du travail ici. Je devrais rejoindre Julien, mon ami
+      ouvrier. Il doit \xEAtre quelque part sur cette \xEEle. Peut-\xEAtre qu\u2019en
+      suivant ce chemin\u2026 "
+  Reward:
+    Currency: 10
+    XP: 10
+  Goals:
+  - {fileID: -7357711789996346461}
+  - {fileID: -758058486970997627}
+  - {fileID: -6031474366685422212}
+  - {fileID: 7257987175107093656}
+--- !u!114 &7257987175107093656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b222be178eda044eaf12f8735136b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RequiredAmount: 1
+  points: 1
+  GoalCompleted:
+    m_PersistentCalls:
+      m_Calls: []
