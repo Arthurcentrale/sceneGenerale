@@ -20,15 +20,12 @@ public class Ferme : MonoBehaviour
     float timer = 0f;
     public float delai = 5f;
     public int productivité = 1;
-    public Player player;
     public static int compteurBlé = 0;
     public Text textBlé;
 
     //Gestion habitant
     public GameObject choixhabitant;
     public HabitantBehaviour habitant;
-
-    public int niveauAgriculteur;
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +36,6 @@ public class Ferme : MonoBehaviour
         textBlé.text = 0.ToString();
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         livreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
-
-        niveauAgriculteur = 0;
-        player = GameObject.Find("Principal_OK").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -53,31 +47,28 @@ public class Ferme : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             mP = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            if ((onPanel == false) || (this.GetComponent<Agri>().menuOuvert))
+            if (onPanel == false)
             {
                 panel.SetActive(false);
                 open = false;
-                player.uiInventory.AfficheBoutonInventaire();
                 
             }
 
-            if ((open == false) && (!this.GetComponent<Agri>().menuOuvert))
+            if (!open)
             {
-                if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
-
+                if (!this.GetComponent<Agri>().menuOuvert)
                 {
-                    panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
-                    panel.gameObject.SetActive(true);
-                    animator.SetTrigger("ouverture1BulleCouper");
-                    open = true;
-
-                    player.uiInventory.FermeBoutonInventaire();
+                    if (Physics.Raycast(ray, out Hit) && Hit.collider.CompareTag("Ferme"))
+                    {
+                        panel.transform.position = mP;//camera.ScreenToWorldPoint(mP);
+                        panel.gameObject.SetActive(true);
+                        animator.SetTrigger("ouverture1BulleCouper");
+                        open = true;
+                    }
                 }
-
             }
-
-
         }
+
         if (isOccupied && habitant != null && habitant.isHoused)
         {
             timer += Time.deltaTime;
@@ -114,13 +105,14 @@ public class Ferme : MonoBehaviour
         habitant = go.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         isOccupied = !isOccupied;
-        InitVariete(habitant);
+        //InitVariete(habitant);
     }
 
+    /*
     void InitVariete(HabitantBehaviour habitant)
     {
         //faire pareil mais pour les nourritures de la ferme
-        /*
+        
         if (habitant.ecoLevel < 3)
         {
             SocialManager.instance.nombreAlimentsDifferents += 1;
@@ -142,10 +134,10 @@ public class Ferme : MonoBehaviour
             SocialManager.instance.Listevariete.Add(foodmanager.Findinlist("Truite"));
             varietepecherie += 3;
         }
-        */
-
+        
         niveauAgriculteur = habitant.ecoLevel;
     }
+    */
 
     int GetLevel(HabitantBehaviour habitant) //Récupérer le level de l'agriculteur
     {
@@ -167,6 +159,8 @@ public class Ferme : MonoBehaviour
         }
 
         panel.SetActive(false);
+        open = true;
+        this.GetComponent<Agri>().menuOuvert = true;
         recap.OuvertureMenuRecap();
     }
 
@@ -210,7 +204,7 @@ public class Ferme : MonoBehaviour
         habitant = fermierDispo.GetComponent<HabitantBehaviour>();
         habitant.hasWorkplace = true;
         isOccupied = true;
-        InitVariete(habitant);
+        //InitVariete(habitant);
 
         Quitter();
     }

@@ -202,62 +202,66 @@ public class Planter : MonoBehaviour
     {
         GameObject plante;
         float taillePlante = 0.2f;
-        if (planteSelectionnee == 6)
+
+        switch (planteSelectionnee)
         {
-            Debug.Log("Aucune plante sélectionnée"); 
-            cultureParcelles[x, y] = -1; 
-            return;
+            case 6:
+                Debug.Log("Aucune plante sélectionnée");
+                cultureParcelles[x, y] = -1;
+                return;
+                break;
+            case 0:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 1:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 2:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 3:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
+            case 5:
+                if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
+                {
+                    plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
+                    plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
+                    EnvironnementManager.instance.qualiteSol += 0.1f;
+                    arrayPrefabsPlantes[x, y] = plante;
+                    MajCT();
+                }
+                break;
         }
-        else if (planteSelectionnee == 0)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail) {
-                plante = Instantiate(blePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 1)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(maisPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 2)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(saladePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 3)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(tomatePf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        else if (planteSelectionnee == 5)
-        {
-            if (capaciteTravailUtilisee + arrayCT[planteSelectionnee] <= capaciteTravail)
-            {
-                plante = Instantiate(raisinPf, planteContainer.position + new Vector3((x - taillePlante) * sizeParcelle.x, 0f, (y - taillePlante) * sizeParcelle.z), Quaternion.identity, planteContainer);
-                plante.name = x.ToString() + y.ToString() + Enum.GetName(typeof(Culture), planteSelectionnee);
-                EnvironnementManager.instance.qualiteSol += 0.1f;
-                arrayPrefabsPlantes[x, y] = plante;
-            }
-        }
-        MajCT();
+
         cultureParcelles[x, y] = planteSelectionnee;
         MajQuantiteNourriture();
         UpdateVariete();
@@ -323,7 +327,7 @@ public class Planter : MonoBehaviour
 
     public void MajQuantiteNourriture()  //Fonction qui met à jour la quantité de nourriture tous les jours et qui met paille et blé produite dans le coffre,  on met pas encore à jour la variété
     {
-        //D'abord on reset la quantité de nourriture produite dans le manager du batiement ferme
+        //D'abord on reset la quantité de nourriture produite dans le manager du batiment ferme
         batiment.quantiteNourriture = 0;
 
         //D'abord on augmente la quantité de nourriture du manager avec la quantité de maîs non consommée pour faire de la farine 
@@ -340,7 +344,6 @@ public class Planter : MonoBehaviour
 
                 if (q == (int)Culture.Ble)
                 {
-                    //coder un truc pour mettre de la paille dans le coffre
                     //Debug.Log("ajout paille");
                     compteurPaille += 1;
                     MajCompteurPaille();
@@ -361,12 +364,12 @@ public class Planter : MonoBehaviour
                     }
                     else if (q == (int)Culture.Mais)   //Mais
                     {
-                        //on check les 4 parcelles autour si il y a au moins une culture
+                        //on check les 4 parcelles autour si il y a au moins une culture différente du mais
                         if (
-                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
-                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
-                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
-                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q))
                            )
                         {
                             nombreDeMais += q + 1;
@@ -375,12 +378,12 @@ public class Planter : MonoBehaviour
                     }
                     else if (q == (int)Culture.Salade)  //Salade..
                     {
-                        //on check les 4 parcelles autour si il y a au moins une culture
+                        //on check les 4 parcelles autour si il y a au moins une culture différent de la salade
                         if (
-                           ((i > 0) && (cultureParcelles[i - 1, j] > -1))
-                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1))
-                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1))
-                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1))
+                           ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        || ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q))
+                        || ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q))
+                        || ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q))
                            )
                         {
                             batiment.quantiteNourriture += q + 1;
@@ -389,14 +392,32 @@ public class Planter : MonoBehaviour
                     }
                     else if (((int)Culture.Tomate <= q) && (q <= (int)Culture.Raisin))  //Tomate ou Raisin
                     {
-                        int n = 0; //on compte le nombre de cultures qu'il y a sur les parcelles autour
-                        if ((i > 0) && (cultureParcelles[i - 1, j] > -1)) n++;
-                        else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1)) n++;
-                        else if ((j > 0) && (cultureParcelles[i, j - 1] > -1)) n++;
-                        else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1)) n++;
+                        int n = 0; //on compte le nombre de cultures différentes qu'il y a sur les parcelles autour
+                        int q2 = -1; //stocke la valeur de la première culture rencontrée sur les parcelles autours
 
-                        if (n > 1) batiment.quantiteNourriture = q + 1;
-                        else batiment.quantiteNourriture = q;
+                        if ((i > 0) && (cultureParcelles[i - 1, j] > -1) && (cultureParcelles[i - 1, j] != q))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i - 1, j];
+                        }
+                        else if ((i < xNbrParcelles - 1) && (cultureParcelles[i + 1, j] > -1) && (cultureParcelles[i + 1, j] != q) && (cultureParcelles[i + 1, j] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i + 1, j];
+                        }
+                        else if ((j > 0) && (cultureParcelles[i, j - 1] > -1) && (cultureParcelles[i, j - 1] != q) && (cultureParcelles[i, j - 1] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i, j - 1];
+                        }
+                        else if ((j < yNbrParcelles - 1) && (cultureParcelles[i, j + 1] > -1) && (cultureParcelles[i, j + 1] != q) && (cultureParcelles[i, j + 1] != q2))
+                        {
+                            n++;
+                            q2 = cultureParcelles[i, j + 1];
+                        }
+
+                        if (n > 1) batiment.quantiteNourriture += q + 1; //si on a rencontré au moins 2 cultures différentes autour
+                        else batiment.quantiteNourriture += q;
                     }
                 }
             }
@@ -412,9 +433,11 @@ public class Planter : MonoBehaviour
 
     public void RecuperePaille()  //quand on clique sur le bouton pour récupérer la paille
     {
-        player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25)));   //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
-        compteurPaille = 0;  //on reset le compteur
-        MajCompteurPaille();
+        if (player.inventory.AddItem(new ItemAmount(Item: Paille, Amount: Math.Min(compteurPaille,25))))  //on ajoute dans l'inventaire le nombre de paille stocké limité à 25
+        {
+            compteurPaille = 0;  //on reset le compteur si la paille a bien été ajoutée
+            MajCompteurPaille();
+        }
     }
 
     int[] CalculeNbrePlantes()  //fonction qui retourne un array contenant le nombre de chaque plante dans l'array cultureParcelles
@@ -540,6 +563,8 @@ public class Planter : MonoBehaviour
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
     }
 
     public void SortieEngrais()  //bouton vert
@@ -549,5 +574,7 @@ public class Planter : MonoBehaviour
         this.GetComponent<Planter>().enabled = false;
         animatorLivreActivite.SetTrigger("Return");
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
     }
 }

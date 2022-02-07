@@ -18,7 +18,7 @@ public class Popup : MonoBehaviour
     private IEnumerator wait()
     {
         yield return new WaitForSeconds(tempsPopupVisible);
-        Debug.Log("coucou");
+        //Debug.Log("coucou");
         GetComponent<Animator>().SetTrigger("fermer");
     }
 }

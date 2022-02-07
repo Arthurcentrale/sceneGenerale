@@ -23,7 +23,20 @@ public class Agri : MonoBehaviour
 
     public int niveauAgriculteur;
 
-    public bool menuOuvert;
+    public Player player;
+
+    [SerializeField]
+    bool _menuOuvert;
+
+    public bool menuOuvert
+    {
+        get => _menuOuvert;
+        set
+        {
+            _menuOuvert = value;
+            OnMenuOuvertOuFerme(value);
+        }
+    }
 
     void Start()
     {
@@ -39,38 +52,65 @@ public class Agri : MonoBehaviour
         animatorLivreActivite = GameObject.Find("LivreFerme").GetComponent<Animator>();
 
         //niveauAgriculteur = 2;
+        player = GameObject.Find("Principal_OK").GetComponent<Player>();
         menuOuvert = false;
-        
+
         MajNiveau();
+    }
+
+    private void OnMenuOuvertOuFerme(bool b)
+    {
+        if (b)
+        {
+            player.uiInventory.FermeBoutonInventaire();
+        }
+        else
+        {
+            player.uiInventory.AfficheBoutonInventaire();
+        }
     }
 
     public void MajNiveau()
     {
         Planter.culture = niveauAgriculteur;
 
-        if (niveauAgriculteur == 2)
+        switch (niveauAgriculteur)
         {
-            Labourage.nbreParcellesPlacables = 10;
-            Planter.capaciteTravail = 100;
-            boutonMais.SetActive(true);
-        }
-        else if (niveauAgriculteur == 3)
-        {
-            Labourage.nbreParcellesPlacables = 15;
-            Planter.capaciteTravail = 200;
-            boutonSalade.SetActive(true);
-        }
-        else if (niveauAgriculteur == 4)
-        {
-            Labourage.nbreParcellesPlacables = 20;
-            Planter.capaciteTravail = 350;
-            boutonTomate.SetActive(true);
-        }
-        else if (niveauAgriculteur > 4)
-        {
-            Labourage.nbreParcellesPlacables = 25;
-            Planter.capaciteTravail = 500;
-            boutonRaisin.SetActive(true);
+            case 1:
+                Labourage.nbreParcellesPlacables = 5;
+                Planter.capaciteTravail = 50;
+                boutonBle.SetActive(true);
+                break;
+            case 2:
+                Labourage.nbreParcellesPlacables = 10;
+                Planter.capaciteTravail = 100;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                break;
+            case 3:
+                Labourage.nbreParcellesPlacables = 15;
+                Planter.capaciteTravail = 200;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                break;
+            case 4:
+                Labourage.nbreParcellesPlacables = 20;
+                Planter.capaciteTravail = 350;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                boutonTomate.SetActive(true);
+                break;
+            default:
+                Labourage.nbreParcellesPlacables = 25;
+                Planter.capaciteTravail = 500;
+                boutonBle.SetActive(true);
+                boutonMais.SetActive(true);
+                boutonSalade.SetActive(true);
+                boutonTomate.SetActive(true);
+                boutonRaisin.SetActive(true);
+                break;
         }
     }
 
@@ -83,6 +123,9 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 
     public void EntreePlantage()
@@ -93,6 +136,9 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 
     public void EntreeEngrais()
@@ -104,5 +150,8 @@ public class Agri : MonoBehaviour
 
         animatorLivreActivite.SetTrigger("Selected");
         menuOuvert = true;
+        this.GetComponent<Ferme>().open = true;
+        this.GetComponent<Ferme>().panel.SetActive(false);
+        Camera.main.fieldOfView = 70;
     }
 }

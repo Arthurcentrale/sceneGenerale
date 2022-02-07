@@ -249,6 +249,8 @@ public class Labourage : MonoBehaviour
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
 
     }
 
@@ -267,5 +269,7 @@ public class Labourage : MonoBehaviour
         panelLabourage.SetActive(false);
         this.GetComponent<Labourage>().enabled = false;
         this.GetComponent<Agri>().menuOuvert = false;
+        this.GetComponent<Ferme>().open = false;
+        Camera.main.fieldOfView = 45;
     }
 }
