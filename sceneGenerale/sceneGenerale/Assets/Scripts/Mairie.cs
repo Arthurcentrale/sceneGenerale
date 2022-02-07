@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class Mairie : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class Mairie : MonoBehaviour
         onPanel = false;
         animator = panel.transform.GetChild(0).GetComponent<Animator>();
         timemanager = GameObject.Find("Game Manager").GetComponent<TimeManager>();
-        prog = prog.GetComponent<Button>();
-        prog.onClick.AddListener(FctBureau);
+        /*prog = prog.GetComponent<Button>();
+        prog.onClick.AddListener(FctBureau*/
 
     }
 
@@ -160,14 +161,18 @@ public class Mairie : MonoBehaviour
         {
             if (j < listesbatiments.Count)
             {
-                batiments.transform.GetChild(j).GetComponent<Text>().text = SimplifierNom(listesbatiments[j].name.ToString());
-                batiments.transform.GetChild(j).gameObject.SetActive(true);
+                if (listesbatiments[j].name.IndexOf("Déplaçable", StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    batiments.transform.GetChild(j).GetComponent<Text>().text = SimplifierNom(listesbatiments[j].name.ToString());
+                    batiments.transform.GetChild(j).gameObject.SetActive(true);
+                    j++;
+                }
             }
             else
             {
                 batiments.transform.GetChild(j).gameObject.SetActive(false);
+                j++;
             }
-            j++;
         }
 
         // On construit les tableaux des infos à rentrer dans le tableau ui
